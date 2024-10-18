@@ -25,6 +25,5 @@ catch (PDOException $e) {
     echo '<p style="color: red">' . "db user " . $db_user . '</p>';
     echo '<p style="color: red">' . "db pass " . $db_pass . '</p>';
     echo '<p style="color: red">' . "db root pass " . $db_rootpass . '</p>';
-    
 }
 ?>

@@ -13,9 +13,9 @@ services:
       - ROOT_PASSWORD_FILE_PATH=/run/secrets/db-root-password
       - APP_USER_PASSWORD_FILE_PATH=/run/secrets/db-app-user-password
       - DB_HOST=db
-      - DB_NAME=antiage_db
-      - DB_USER=app_user
-  
+      - DB_NAME=${MYSQL_DATABASE}
+      - DB_USER=${MYSQL_USER}
+      
   php:
     image: php:8.0-fpm
     build: services/php
@@ -45,6 +45,7 @@ services:
       - MYSQL_DATABASE=${MYSQL_DATABASE}
       - MYSQL_USER=${MYSQL_USER}
       - MYSQL_PASSWORD_FILE=/run/secrets/db-app-user-password
+      
   phpmyadmin:
     image: phpmyadmin
     ports:
@@ -61,4 +62,5 @@ secrets:
     file: secrets/root_password.txt
   db-app-user-password:
     file: secrets/app_user_password.txt
+
 
