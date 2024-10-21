@@ -1,0 +1,374 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">  
+    <link rel="icon" href="dc3.png" type="image/png">  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White Book</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">
+    <!-- Estilos para dispositivos móviles -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (max-width: 768px)">
+    <!-- Estilos para pantallas de PC -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (min-width: 769px)">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+
+    <!-- Metadatos Open Graph -->
+    <meta property="og:title" content="YOU TOMORROW">
+    <meta property="og:description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta property="og:image" content="https://drive.google.com/file/d/1ZZI3G6Fit_kovvVZolrvchtXQQDrnWYI/view?usp=sharing">
+    <meta property="og:url" content="https://ytomorrow.com/">
+    <meta property="og:type" content="website">
+
+    <!-- Otros metadatos -->
+    <meta name="description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta name="keywords" content="you, YOU TOMORROW, TOMORROW, TOMORR, TOM, web">
+
+    <style>
+
+   body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 17px;
+    line-height: 1.4;
+    margin: 20px;
+    font-weight: 500; /* Grosor medio de la negrita */
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1, h2, h3 {
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+p {
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.section {
+    margin-bottom: 30px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    width: 100%;
+}
+
+.chart-row {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+    width: 50%; /* Ajusta el ancho para que se adapte al contenido */
+}
+
+.chart-box {
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    min-width: 150px; /* Asegura que las tarjetas tengan un ancho mínimo */
+    max-width: 300px; /* Limita el ancho máximo para tarjetas largas */
+    word-wrap: break-word; /* Permite que el texto se ajuste dentro de la tarjeta */
+    flex: 1; /* Permite que las tarjetas se expandan uniformemente */
+}
+
+.chart-box:hover {
+    transform: scale(1.05);
+}
+
+.chart-box.ceo {
+    background: linear-gradient(135deg, #ff6f61, #e53935);
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.chart-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transform: rotate(45deg);
+}
+
+.chart-box:hover::before {
+    opacity: 1;
+}
+
+.chart-box.ceo::before {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.connector {
+    width: 2px;
+    height: 20px;
+    background-color: #1b3a7a;
+    margin: 0 auto;
+}
+
+.horizontal-connector {
+    height: 2px;
+    width: 100%;
+    background-color: #1b3a7a;
+}
+
+.horizontal-connector.long {
+    width: 50%;
+}
+
+.chart-box i {
+    margin-right: 8px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #1b5e20;
+    color: #1b5e20;
+    font-weight: bold;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+
+  caption {
+    caption-side: top;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+    </style>
+
+</head>
+<body>
+<div class="container">
+REFERENCES
+    <ol>
+        REFERENCES
+
+1.Abe K, Itoyama Y, Sobue G, et al. Confirmatory double-blind, parallel-group, placebo-controlled study of efficacy and safety of edaravone (MCI-186) in amyotrophic lateral sclerosis patients. Amyotroph Lateral Scler Frontotemporal Degener. 2014; 15(7-8):610-7.
+2.ALS Association (ALSA). Available at: http://www.alsa.org/about-als/ Accessed 3/14/2012
+3.Andersen PM, Borasio GD, Dengler R, et al. EFNS task force on management of amyotrophic lateral sclerosis: guidelines for diagnosing and clinical care of patients and relatives. Eur J Neurol 2005; 12:921.
+4.Andersen PM. Amyotrophic lateral sclerosis associated with mutations in the CuZn superoxide dismutase gene. CurrNeurolNeurosci Rep 2006; 6:37.
+5.Andreassen OA, Dedeoglu A, et al. Effects of an inhibitor of poly(ADP-ribose) polymerase, desmethylselegiline, trientine, and lipoic acid in transgenic ALS mice. Exp Neurol. 2001b;168(2):419–424.
+6.Andreassen OA, Dedeoglu A, et al. N-acetyl-L-cysteine improves survival and preserves motor performance in an animal model of familial amyotrophic lateral sclerosis. Neuroreport. 2000;11(11):2491–2493.
+7.Andreassen OA, Jenkins BG, et al. Increases in cortical glutamate concentrations in transgenic amyotrophic lateral sclerosis mice are attenuated by creatine supplementation. J Neurochem. 2001a; 77(2):383–390.
+8.Atassi N, Ratai EM, et al. A phase I, pharmacokinetic, dosage escalation study of creatine monohydrate in subjects with amyotrophic lateral sclerosis. Amyotroph Lateral Scler. 2010 December;11(6): 508–513.
+9.Babu GN, Kumar A, et al. Chronic Pretreatment with Acetyl-l-Carnitine and ±DL-α-Lipoic Acid Protects Against Acute Glutamate-Induced Neurotoxicity in Rat Brain by Altering Mitochondrial Function. Neurotoxicity Research, 2009;19(2).
+10.Baillet A, Chantepedrix V, et al. The Role of Oxidative Stress in Amyotrophic Lateral Sclerosis and Parkinson’s Disease. Neurochem Res (2010) 35:1530–1537.
+11.Banack SA, Caller TA, et al. The Cyanobacteria Derived Toxin Beta-N-Methylamino-L-Alanine and Amyotrophic Lateral Sclerosis. Toxins (Basel), 2010;2(12).
+12.Beal MF. Mitochondria take center stage in aging and neurodegeneration. Ann Neurol. 2005;58:495.
+13.Beal MF. Neuroprotective Effects of Creatine. Amino Acids (2011) 40:1305–1313.
+14.Benkler C, Offen D, et al. Recent advances in amyotrophic lateral sclerosis research: perspectives for personalized clinical application. EPMA Journal (2010) 1:343–361.
+15.Bigini P, Larini S, et al. Acetyl-l-carnitine shows neuroprotective and neurotrophic activity in primary culture of rat embryo motoneurons. Neuroscience Letters 329 (2002) 334–338.
+16.Borasio GD, Voltz R, Miller RG. Palliative care in amyotrophic lateral sclerosis. NeurolClin 2001;19:829.
+17.Bozik ME, Mather JL, Kramer WG, et al. Safety, tolerability, and pharmacokinetics of KNS-760704 (dexpramipexole) in healthy adult subjects. J ClinPharmacol 2011;51:1177.
+18.Brand MD and Nicholls DG. Assessing mitochondrial dysfunction in cells. Biochem J. 2011 Apr 15;435(2):297-312.
+19.Caban-Holt A, Mattingly M, et al. Neurodegenerative memory disorders: a potential role of environmental toxins. NeurolClin. 2005;23(2):485–521.
+20.Callaghan B, Feldman D, et al. The Association of Exposure to Lead, Mercury, and Selenium and the Development of Amyotrophic Lateral Sclerosis and the Epigenetic Implications. Neurodegenerative Dis 2011;8:1–8.
+21.Cameron A, Rosenfeld J. Nutritional issues and supplements in amyotrophic lateral sclerosis and other neurodegenerative disorders. CurrOpinClinNutrMetab Care. 2002;5(6):631–643.
+22.Carlesi C, et al. Strategies for clinical approach to neurodegeneration in Amyotrophic lateral sclerosis. Arch Ital Biol. 2011 Mar;149(1):151-67.
+23.Carmeli C, Knyazeva MG, et al. Glutathione Precursor N-Acetyl-Cysteine Modulates EEG Synchronization in Schizophrenia Patients: A Double-Blind, Randomized, Placebo-Controlled Trial. PLos One, 2012;7(2).
+24.Carta A, Calvani M, et al. Acetyl-L-carnitine and Alzheimer's disease: pharmacological considerations beyond the cholinergic sphere. Ann N Y Acad Sci. 1993;695:324–326.
+25.Carvalho-Silva LB, Mourao LF, et al. Effect of nutritional supplementation with milk whey proteins in amyotrophic lateral sclerosis patients. Arquivos de Neuro-Psiquiatria, 2010; 68(2).
+26.Cassarino DS, Bennett JP Jr. An evaluation of the role of mitochondria in neurodegenerative diseases: mitochondrial mutations and oxidative pathology, protective nuclear responses, and cell death in neurodegeneration. Brain Res Brain Res Rev 1999;29:1.
+27.Cheah BC and Kiernan MC. Dexpramipexole, the R(+) enantiomer of pramipexole, for the potential treatment of amyotrophic lateral sclerosis. IDrugs. 2010 Dec;13(12):911-20.
+28.Chio A, Calva A, et al. ALS in Italian professional soccer players: The risk is still present and could be soccer-specific. Amyotrophic Lateral Sclerosis, 2009.
+29.Chiò  A, Traynor BJ, Lombardo F, et al. Prevalence of SOD1 mutations in the Italian ALS population. Neurology 2008; 70:533.
+30.Cleveland DW. From Charcot to SOD1: mechanisms of selective motor neuron death in ALS. Neuron. 1999;24(3):515–520.
+31.ClinicalTrials.gov. Safety and Efficacy of TRO19622 as add-on Therapy to Riluzole Versus Placebo in Treatment of Patients Suffering From Amyotrophic Lateral Sclerosis (ALS) (MITOTARGET). Updated 05/2010: http://clinicaltrials.gov/ct2/show/NCT00868166. Accessed 03/06/2012.
+32.Colombo ML. An update on vitamin E, tocopherol and tocotrienol-perspectives. Molecules. 2010 Mar 24;15(4):2103-13.
+33.Cozzolino M and Carri MT. Mitochondrial Dysfunction in ALS. Progress in Neurobiology, 2011.
+34.Crugnola V, Lamperti C, et al. Mitochondrial Respiratory Chain Dysfunction in Muscle From Patients With Amyotrophic Lateral Sclerosis. Arch Neurol. 2010;67(7):849-854.
+35.D’Alessandro G, Calcagno E, et al. Glutamate and glutathione interplay in a motor neuronal model of amyotrophic lateral sclerosis reveals altered energy metabolism. Neurobiology of Disease 2011; 43.
+36.Dawson MI. The importance of vitamin A in nutrition. Curr Pharm Des. 2000 Feb;6(3):311-25.
+37.De Vos KJ, Chapman AL, et al. Familial amyotrophic lateral sclerosis-linked SOD1 mutants perturb fast axonal transport to reduce axonal mitochondria content. Human Molecular Genetics, 2007; 16(22).
+38.Dunlop J, Beal McIlvain H, She Y, Howland DS. Impaired spinal cord glutamate transport capacity and reduced sensitivity to riluzole in a transgenic superoxide dismutase mutant rat model of amyotrophic lateral sclerosis. J Neurosci 2003; 23:1688.
+39.Edaravone (MCI-186) ALS 16 Study Group. A post-hoc subgroup analysis of outcomes in the first phase III clinical study of edaravone (MCI-186) in amyotrophic lateral sclerosis. Amyotroph Lateral Scler Frontotemporal Degener. 2017; 18(sup1):11-19.
+40.Ermilova IP, Ermilov VB, et al. Protection by dietary zinc in ALS mutant G93A SOD transgenic mice. NeurosciLett. 2005;379(1):42–46.
+41.Ernst E. The risk-benefit profile of commonly used herbal therapies: Ginkgo, St. John's Wort, Ginseng, Echinacea, Saw Palmetto, and Kava. Ann Intern Med. 2002;136(1):42–53.
+42.Exner R, Wessner B, et al. Therapeutic potential of glutathione. Wien KlinWochenschr. 2000;112(14):610–616.
+43.Faes L and Callewaert G. Mitochondrial Dysfunction in Familial Amyotrophic Lateral Sclerosis. Journal of Bioenergetics and Biomembranes, 2011; 43(6).
+44.Fang F, Kwee LC, et al. Association Between Blood Lead and the Risk of Amyotrophic Lateral Sclerosis. American Journal of Epidemiology, 2010; 171(10).
+45.FDA. Food and Drug Administration. News & Events page. FDA approves drug to treat ALS. https://www.fda.gov/newsevents/newsroom/pressannouncements/ucm557102.htm. 5/5/2017. Accessed 5/2017.
+46.Ferrante KL, Shefner J, et al. Tolerance of high-dose (3,000 mg/day) coenzyme Q10 in ALS. Neurology December 13, 2005 vol. 65 no. 11: 1834-1836.
+47.Ferrante RJ, Klein AM, et al. Therapeutic efficacy of EGb761 (Gingko biloba extract) in a transgenic mouse model of amyotrophic lateral sclerosis. J MolNeurosci. 2001;17(1):89–96.
+48.Fosslien E. Mitochondrial medicine—molecular pathology of defective oxidative phosphorylation. Ann Clin Lab Sci. 2001;31(1):25–67.
+49.Franz CK, Federici T, Yang J, et al. Intraspinal cord delivery of IGF-1 mediated by adeno-associated virus 2 is neuroprotective in a rat model of familial ALS. Neurobiol Dis. 2009 ;33(3):473-81.
+50.Ganji V and Kafal MR. Population prevalence, attributable risk, and attributable risk percentage for high methylmalonic acid concentrations in the post-folic acid fortification period in the US. Nutrition & Metabolism 2012, 9:2.
+51.Giess  R, Naumann M, Werner E, et al. Injections of botulinum toxin A into the salivary glands improve sialorrhoea in amyotrophic lateral sclerosis. J NeurolNeurosurg Psychiatry 2000; 69:121.
+52.Grabrucker AM, Rowan M, et al. Brain-Delivery of Zinc-Ions as Potential Treatment for Neurological Diseases: Mini Review. Drug DelivLett. 2011 September;1(1): 13–23.
+53.Gresham LS, Molgaard CA , et al. Amyotrophic lateral sclerosis and occupational heavy metal exposure: a case-control study. Neuroepidemiology. 1986;5(1):29–38.
+54.Hagen TM, Liu J, et al. Feeding acetyl-L-carnitine and lipoic acid to old rats significantly improves metabolic function while decreasing oxidative stress. ProcNatlAcadSci USA. 2002;99(4):1870–1875.
+55.Henderson JT, Javaheri M, et al. Reduction of lower motor neuron degeneration in wobbler mice by N-acetyl-L-cysteine. J Neurosci. 1996;16(23):7574–7582.
+56.Hensley K, Mhatre M, et al. On the Relation of Oxidative Stress to Neuroinflammation: Lessons Learned from the G93A-SOD1 Mouse Model of Amyotrophic Lateral Sclerosis. Antioxidants & Redox Signaling, 2006; 8(11-12).
+57.Hester ME, FouseKD, et al. AAV as a Gene Transfer Vector for the Treatment of Neurological Disorders: Novel Treatment Thoughts for ALS. Current Gene Therapy, Volume 9, Number 5, October 2009, pp. 428-433(6).
+58.Hong JT, Ryu SR, et al. Neuroprotective effect of green tea extract in experimental ischemia-reperfusion brain injury. Brain Res Bull. 2000;53(6):743–749.
+59.Hu M, SkibstedLH. Kinetics of reduction of ferrylmyoglobin by (-)-epigallocatechingallate and green tea extract. J Agric Food Chem. 2002;50(10):2998–3003.
+60.Ilieva EV, Ayala V, et al. Oxidative and endoplasmic reticulum stress interplay in sporadic amyotrophic lateral sclerosis Brain (2007), 130.
+61.Izumi Y and Kaji R. [Clinical trials of ultra-high-dose methylcobalamin in ALS]. Brain Nerve. 2007 Oct;59(10):1141-7.
+62.Jiang F, DeSilva S, et al. Beneficial effect of ginseng root in SOD-1 (G93A) transgenic mice. J NeurolSci, 2000;180(1–2):52–54.
+63.Jin HW, Flatters SJ, et al. Prevention of paclitaxel-evoked painful peripheral neuropathy by acetyl-L-carnitine: Effects on axonal mitochondria, sensory nerve fiber terminal arbors, and cutaneous Langerhans cells. Experimental Neurology 210 (2008) 229–237.
+64.Johnson FO and Atchison WD. The role of environmental mercury, lead and pesticide exposure in development of amyotrophic lateral sclerosis. NeuroToxicology 30 (2009) 761–765.
+65.Kanekura K, Suzuki H, et al. ER Stress and Unfolded Protein Response in Amyotrophic Lateral Sclerosis. MolNeurobiol (2009) 39:81–89.
+66.Karch CM, Prudencio M, Winkler DD, et al. Role of mutant SOD1 disulfide oxidation and aggregation in the pathogenesis of familial ALS. ProcNatlAcadSci USA 2009; 106:7774.
+67.Kauffman P, Thompson JL, et al. Phase II Trial of CoQ10 for ALS Finds Insufficient Evidence to Justify Phase III. Ann Neurol. 2009;66:235–244.
+68.Kawamata K and Manfredi G. Mitochondrial Dysfunction and Intracellular Calcium Dysregulation in ALS. Mechanisms of Ageing and Development, 2011; 131(7-8).
+69.Kim D, Nguyen MD, et al. SIRT1deacetylase protects against neurodegeneration in models for Alzheimer’s disease and amyotrophic lateral sclerosis. The EMBO Journal (2007) 26, 3169–3179.
+70.Kim YH, Park KH, et al. Transcriptional Activation of the Cu,Zn-Superoxide Dismutase gene through the AP2 site by ginsenosideRb2 extracted from a medicinal plant, Panax ginseng. J Biol Chem. 1996 Oct 4;271(40):24539-43.
+71.Kira Y, Nishikawa M, et al. L-Carnitine suppresses the onset of neuromuscular degeneration and increases the life span of mice with familial amyotrophic lateral sclerosis. Brain Research, 2006; 1070.
+72.Klopstock T, Elstner M, et al. Creatine in mouse models of neurodegeneration and aging. Amino Acids (2011) 40:1297–1303.
+73.Kobayashi MS, Han D, Packer L. Antioxidants and herbal extracts protect HT-4 neuronal cells against glutamate-induced cytotoxicity. Free Radic Res. 2000;32(2):115–124.
+74.Kokkalis ZT, SoucacosPN, et al. Effect of Acetyl-L-Carnitine on Axonal Sprouting Following Donor Nerve Injury Distal to an End-to-Side Neurorrhaphy Model. Journal of reconstructive Microsurgery, 2009; 25(8).
+75.Kolacek M, Muchova J, et al. Effect of Natural Polyphenols, Pycnogenol® on Superoxide Dismutase and Nitric Oxide Synthase in Diabetic Rats. Prague Medical Report, 2010; 111 (4).
+76.Kong J, Xu Z. Massive mitochondrial degeneration in motor neurons triggers the onset of amyotrophic lateral sclerosis in mice expressing a mutant SOD1. J Neurosci 1998; 18:3241.
+77.Kuhnlein P, Gdynia HJ, et al. Diagnosis and treatment of bulbar symptoms in amyotrophic lateral sclerosis. Nature Clinical Practice, 2008; 4(7).
+78.Kwiatkowski TJ, et al. Mutations in the FUS/TLS gene on chromosome 16 cause familial amyotrophic lateral sclerosis. Science. 2009 Feb 27;323(5918):1205-8.
+79.Lagier-Tourenne C and Cleveland DW. Rethinking ALS: The FUS about TDP-43. Cell 136, March 20, 2009.
+80.Leishear K, Lucci F, et al. Vitamin B12 and Homocysteine Levels and 6-Year Change in Peripheral Nerve Function and Neurological Signs. Journal of Gerentology, 2011.
+81.Lepore AC, Haenggeli C, et al. Intraparenchymal spinal cord delivery of adeno-associated virus IGF-1 is protective in the SOD1G93A model of ALS. Brain Research, 2007; 1185.
+82.Lin CL, Bristol LA, Jin L, et al. Aberrant RNA processing in a neurodegenerative disease: the cause for absent EAAT2, a glutamate transporter, in amyotrophic lateral sclerosis. Neuron 1998; 20:589.
+83.Lindberg MJ, Tibell L, Oliveberg M. Common denominator of Cu/Zn superoxide dismutase mutants associated with amyotrophic lateral sclerosis: decreased stability of the apo state. ProcNatlAcadSci USA 2002; 99:16607.
+84.Lipp A, Trottenberg T, Schink T, et al. A randomized trial of botulinum toxin A for treatment of drooling. Neurology 2003; 61:1279.
+85.Liu J, Lillo C, Jonsson PA, et al. Toxicity of familial ALS-linked SOD1 mutants from selective recruitment to spinal mitochondria. Neuron 2004; 43:5.
+86.Liu J. The Effects and Mechanisms of Mitochondrial Nutrient α-Lipoic Acid on Improving Age-Associated Mitochondrial and Cognitive Dysfunction: An Overview. Biomedical and Life Sciences, 2008; 33(1).
+87.Lo Coco D, Marchese S, Pesco MC, et al. Noninvasive positive-pressure ventilation in ALS: predictors of tolerance and survival. Neurology 2006; 67:761.
+88.Lunn JS, Hefferan MP, et al. Stem cells: comprehensive treatments for amyotrophic lateral sclerosis in conjunction with growth factor delivery. Growth Factors, June 2009; 27(3): 133–140.
+89.Mackenzie IR, Bigio EH, et al. Pathological TDP-43 distinguishes sporadic amyotrophic lateral sclerosis from amyotrophic lateral sclerosis with SOD1 mutations. Annals of Neurology, 2007; 61(5).
+90.Mancuso M, Orsucci D, et al. Coenzyme Q10 in Neuromuscular and Neurodegenerative Disorders. Current Drug Targets, 2010 , 11, 111-121.
+91.Mandel SA, Amit T, et al. Targeting Multiple Neurodegenerative Diseases Etiologies with Multimodal-Acting Green Tea Catechins. The Journal of Nutrition, 2008.
+92.Mandel SA, Amit T, et al. Understanding the Broad-Spectrum Neuroprotective Action Profile of Green Tea Polyphenols in Aging and Neurodegenerative Diseases. Journal of Alzheimer’s Disease, 2011; 25(2).
+93.Mandl J, et al.Vitamin C: update on physiology and pharmacology. Br J Pharmacol. 2009 Aug;157(7):1097-110. Epub 2009 Jun 5.
+94.Mano Y, Takayanagi T, et al. [Amyotrophic lateral sclerosis and mercury—preliminary report]. RinshoShinkeigaku. 1990;30(11):1275–1277.
+95.Martin LJ. Mitochondrial pathobiology in ALS. J Bioenerg Biomembr. 2011;43(6):569-79.
+96.Martinez HR, et al. Stem cell transplantation in amyotrophic lateral sclerosis patients. Methodological approach, safety, and feasibility. Cell Transplant. 2012 Feb 13. [Epub ahead of print]
+97.Martinez HR, et al. Stem-cell transplantation into the frontal motor cortex in amyotrophic lateral sclerosis patients. Cytotherapy. 2009;11(1):26-34.
+98.Matsumoto Y, et al. Nizofenone, a neuroprotective drug, suppresses glutamate release and lactate accumulation. Eur J Pharmacol. 1994 Sep 1;262(1-2):157-61.
+99.Matthews RT, Yang L, et al. Coenzyme Q10 administration increases brain mitochondrial concentrations and exerts neuroprotective effects. ProcNatlAcadSci USA. 1998;95(15):8892–8897.
+100.Mazzini L, Balzarini C, et al. Effects of creatine supplementation on exercise performance and muscular strength in amyotrophic lateral sclerosis: preliminary results. J Neurol Sci. 2001;191(1–2):139–144.
+101.Miana-Mena FJ, Gonzalez-Mingot C, et al. Monitoring systemic oxidative stress in an animal model of amyotrophic lateral sclerosis J Neurol (2011) 258:762–769.
+102.Miller RG, et al. Riluzole for amyotrophic lateral sclerosis (ALS)/motor neuron disease (MND). Cochrane Database Syst Rev. 2007 Jan 24;(1):CD001447.
+103.Mitchell J. Amyotrophic lateral sclerosis: toxins and environment. Amyotroph Lateral Scler Other Motor Neuron Disord. 2000;1(4):235–250.
+104.Moore E, Mander A, et al. Cognitive impairment and vitamin B12: a review. International Psycogeriatrics, 2012.
+105.Morozova N, Weisskopf MG, et al. Diet and Amytorophic Lateral Sclerosis. Epidemiology, 2008; 19(2).
+106.Morselli LL, et al. Growth hormone secretion is impaired in amyotrophic lateral sclerosis. ClinEndocrinol (Oxf). 2006 Sep;65(3):385-8.
+107.Muller U, Krieglstein J. Prolonged pretreatment with alpha-lipoic acid protects cultured neurons against hypoxic, glutamate-, or iron-induced injury. J Cereb Blood Flow Metab. 1995;15(4):624–630.
+108.Mustfa N, Walsh E, Bryant V, et al. The effect of noninvasive ventilation on ALS patients and their caregivers. Neurology 2006; 66:1211.
+109.Nagano I, Shiote M, et al. Beneficial effects of intrathecalIGF-1 administration in patients with amyotrophic lateral sclerosis. Neurological Research, 2005; 27(7).
+110.Packer L, Rimbach G, et al. Antioxidant activity and biologic properties of a procyanidin-rich extract from pine (Pinusmaritima) bark, pycnogenol. Free RadicBiol Med. 1999;27(5–6):704–724.
+111.Palma A, de Carvalho M, et al. Biochemical characterization of plasma in amyotrophic lateral sclerosis: amino acid and protein composition. Amyotoph Lateral Scler Other Motor Neuron Disord. 2005;6(2):104–110.
+112.PastulaDM, Moore DH, et al. Creatine for amyotrophic lateral sclerosis/motor neuron disease. The Cochrane Collaboration, 2010.
+113.Persky AM, Brazeau GA. Clinical pharmacology of the dietary supplement creatine monohydrate. Pharmacol Rev. 2001;53(2):161–176.
+114.Phukan J. Arimoclomol, a coinducer of heat shock proteins for the potential treatment of amyotrophic lateral sclerosis. IDrugs. 2010;13(7):482-96.
+115.Pott JW, Wassink-Ruiter JS, et al. Methylmalonic acid and homocysteine assessment in the detection of vitamin B12 deficiency in patients with bilateral visual loss. Acta Opthamologica, 2012.
+116.Radad K, Moldzio R, et al. Ginsenosides and their CNS Targets. CNS Neuroscience and Therapeutics, 2011; 17.
+117.Rooney J. Further Thoughts on Mercury, Epigenetics, Genetics and Amyotrophic Lateral Sclerosis. Neurodegenerative Dis 2011;8:523–524.
+118.Ross E, Wilkins H, et al. A non-denatured whey protein supplement (Immunocal®) protects neurons from mitochondrial oxidative stress and delays disease onset in the mutant SOD1 mouse model of ALS. http://www.immunotec.com/IRL/Public/en/CAN/Research_KeystoneConf_ALS_2011.pdf. 2011.
+119.Rothstein JD, et al. Beta-lactam antibiotics offer neuroprotection by increasing glutamate transporter expression. Nature. 2005 Jan 6;433(7021):73-7.
+120.Rothstein JD, Kuncl RW. Neuroprotective strategies in the model of chronic glutamate-mediated motor neuron toxicity. J Neurochem. 1995b;65(2):643-51.
+121.Rothstein JD, Tsai G, Kuncl RW, et al. Abnormal excitatory amino acid metabolism in amyotrophic lateral sclerosis. Ann Neurol 1990; 28:18.
+122.Rothstein JD, Van Kammen M, Levey AI, et al. Selective loss of glial glutamate transporter GLT-1 in amyotrophic lateral sclerosis. Ann Neurol 1995; 38:73.
+123.Rothstein JD. Current hypotheses for the underlying biology of amyotrophic lateral sclerosis. Ann Neurol. 2009 Jan;65Suppl1:S3-9.
+124.Rowland L. Amyotrophic lateral sclerosis: theories and therapies. J Neorol Sci. 1994;31(169):126–127.
+125.Rowland LP, Shneider NA. Amyotrophic lateral sclerosis. N Engl J Med. 2001;344(22):1688–1700.
+126.Sacca F, et al. A randomized controlled clinical trial of growth hormone in amyotrophic lateral sclerosis: clinical, neuroimaging, and hormonal results. J Neurol. 2012 Jan;259(1):132-8. Epub 2011 Jun 25.
+127.Sakowski SA, Schuyler AD, et al. Insulin-like growth factor-I for the treatment of amyotrophic lateral sclerosis. Amyotrophic Lateral Sclerosis, 2009; 10(2).
+128.Sanmartin C, et al. Selenium and clinical trials: new therapeutic evidence for multiple diseases. Curr Med Chem. 2011;18(30):4635-50.
+129.Schroeder EK, Keley NA, et al. Green Tea Epigallocatechin 3-Gallate Accumulates in Mitochondria and Displays a Selective Antiapoptotic Effect Against Inducers of Mitochondrial Oxidative Stress in Neurons. Antioxidants & Redox Signaling. March 2009, 11(3): 469-480.
+130.Shaw PJ, Forrest V, Ince PG, et al. CSF and plasma amino acid levels in motor neuron disease: elevation of CSF glutamate in a subset of patients. Neurodegeneration 1995; 4:209.
+131.Shi C, Zhao L, et al. Dosage Effects of EGb761 on Hydrogen Peroxide-Induced Cell Death in SH-SY5Y Cells. ChemBiol Interact, 2009; 180(3):389-97.
+132.Shi P, Gal J, et al. Mitochondrial Dysfunction in Amyotrophic Lateral Sclerosis. Biochimica et BiophysicaActa 1802 (2010) 45–51.
+133.Sohmiya M, Tanaka M, et al. An increase of oxidized coenzyme Q-10 occurs in the plasma of sporadic ALS patients. J Neurol Sci. 2005;228(1):49–53.
+134.Sorenson EJ, WindbankAJ, et al. Subcutaneous IGF-1 is not beneficial in 2-year ALS trial. Neurology, 2008; 71(22).
+135.Stone CA, O'Leary N. Systematic review of the effectiveness of botulinum toxin or radiotherapy for sialorrhea in patients with amyotrophic lateral sclerosis. J Pain Symptom Manage 2009; 37:246.
+136.Suh JH, Moreau R, Heath SH, Hagen TM. Dietary supplementation with (R)-alpha-lipoic acid reverses the age-related accumulation of iron and depletion of antioxidants in the rat cerebral cortex. Redox Rep.2005;10:52–60.
+137.Suh JH, Shenvi SV, et al. Decline in transcriptional activity of Nrf2 causes age-related loss of glutathione synthesis, which is reversible with lipoic acid. PNAS, 2004a; 101(10).
+138.Suh JH, Zhu BZ, DeSzoeke E, et al. Dihydrolipoic acid lowers the redox activity of transition metal ions but does not remove them from the active site of enzymes. Redox Rep.2004b;9:57–61.
+139.Sun AY, Wang Q, et al. Resveratrol as a Therapeutic Agent for Neurodegenerative Diseases. MolNeurobiol (2010) 41:375–383.
+140.Sung JJ, Kim HJ, et al. Homocysteine induces oxidative cytotoxicity in Cu, Zn-superoxide dismutase mutant motor neuronal cell. Neuroreport. 2002;13(4):377–381.
+141.Suzuki M and SvendsenCN. Combining growth factor and stem cell therapy for amyotrophic lateral sclerosis. Trends in Neurosciences, 2008; 31(4).
+142.Trophos.com Therapeutic Pipeline Accessed 3/16/2012 http://www.easybib.com/reference/guide/apa/website
+143.Trumbull KA and Beckman JS. A Role for Copper in the Toxicity of Zinc-Deficient Superoxide Dismutase to Motor Neurons in Amyotrophic Lateral Sclerosis. Antioxid Redox Signal. 2009 Jul;11(7):1627-39.
+144.Turnbull J. Is edaravone harmful? (A placebo is not a control). Amyotroph Lateral Scler Frontotemporal Degener. 2018;19(7-8): 477-482
+145.VadakkadathMeethal S and Atwood CS. e dyscrasia: a novel explanation for amyotrophic lateral sclerosis. Neurobiol Aging. 2012 Mar;33(3):569-81.
+146.Vance C, et al. Mutations in FUS, an RNA processing protein, cause familial amyotrophic lateral sclerosis type 6. Science. 2009 Feb 27;323(5918):1208-11.
+147.Vargas MR, Johnson DA, et al. Nrf2 Activation in Astrocytes Protects against Neurodegeneration in Mouse Models of Familial Amyotrophic Lateral Sclerosis. The Journal of Neuroscience, December 10, 2008; 28(50):13574 –13581.
+148.Vielhaber S, Kaufmann J, et al. Effect of creatine supplementation on metabolite levels in ALS motor cortices. Exp Neurol. 2001;172(2):377–382.
+149.Virmani A, Gaetani F, et al. The Protective Role of L-Carnitine against Neurotoxicity Evoked by Drug of Abuse, Methamphetamine, Could Be Related to Mitochondrial Dysfunction. Ann. N.Y. Acad. Sci. 965: 225–232 (2002).
+150.Wang J, Zhang Y, et al. Protective effects of resveratrol through the up-regulation of SIRT1 expression in the mutant hSOD1-G93A-bearing motor neuron-like cell culture model of amyotrophic lateral sclerosis. Neuroscience Letters 503 (2011) 250– 255.
+151.Wilson AD, Hart A, et al. Acetyl-l-carnitine increases nerve regeneration and target organ reinnervation – a morphological study. The Journal of Plastic, Reconstructive and Aesthetic Surgery, 2010; 63(7).
+152.Woodall CJ and Graham DI. Evidence for neuronal localisation of enteroviral sequences in motor neurone disease/amyotrophic lateral sclerosis by in situ hybridization. The European Journal of Histochemistry, 2004; 48(2).
+153.Writing Group. Edaravone (MCI-186) ALS 19 Study Group. Safety and efficacy of edaravone in well defined patients with amyotrophic lateral sclerosis: a randomised, double-blind, placebo-controlled trial. Lancet Neurol. 2017; 16(7):505.
+154.Wu SN. Large-conductance Ca2+- activated K+ channels: physiological role and pharmacology. Curr Med Chem. 2003;10(8):649–661.
+155.Yamada T, Hashida K, et al. α-Lipoic acid (LA) enantiomers protect SH-SY5Y cells against glutathione depletion. Neurochemistry International, 2011; 59(7).
+156.Yamashita M, Nonaka T, et al. Methylene blue and dimebon inhibit aggregation of TDP-43 in cellular models FEBS Letters, 2009; 583(14).
+157.Yanez M, Galan L, et al. CSF from amyotrophic lateral sclerosis patients produces glutamate independent death of rat motor brain cortical neurons: Protection by resveratrol but not riluzole. Brain Research, 2011; 1423.
+158.Yoon DH, Kwon OY, et al. Protective potential of resveratrol against oxidative stress and apoptosis in Batten disease lymphoblast cells. Biochemical and Biophysical Research Communications 414 (2011) 49–52.
+159.Yu J, Jia Y, et al. Epigallocatechin-3-gallate Protects Motor Neurons and Regulates Glutamate Levels. FEBS Letters 584 (2010) 2921–2925.
+        </p>
+
+</div>
+<script>
+        
+    </script>
+</body>
+</html>

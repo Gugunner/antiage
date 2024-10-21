@@ -1,0 +1,392 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">  
+    <link rel="icon" href="dc3.png" type="image/png">  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White Book</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">
+    <!-- Estilos para dispositivos móviles -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (max-width: 768px)">
+    <!-- Estilos para pantallas de PC -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (min-width: 769px)">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+
+    <!-- Metadatos Open Graph -->
+    <meta property="og:title" content="YOU TOMORROW">
+    <meta property="og:description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta property="og:image" content="https://drive.google.com/file/d/1ZZI3G6Fit_kovvVZolrvchtXQQDrnWYI/view?usp=sharing">
+    <meta property="og:url" content="https://ytomorrow.com/">
+    <meta property="og:type" content="website">
+
+    <!-- Otros metadatos -->
+    <meta name="description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta name="keywords" content="you, YOU TOMORROW, TOMORROW, TOMORR, TOM, web">
+
+    <style>
+
+   body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 17px;
+    line-height: 1.4;
+    margin: 20px;
+    font-weight: 500; /* Grosor medio de la negrita */
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1, h2, h3 {
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+p {
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.section {
+    margin-bottom: 30px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    width: 100%;
+}
+
+.chart-row {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+    width: 50%; /* Ajusta el ancho para que se adapte al contenido */
+}
+
+.chart-box {
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    min-width: 150px; /* Asegura que las tarjetas tengan un ancho mínimo */
+    max-width: 300px; /* Limita el ancho máximo para tarjetas largas */
+    word-wrap: break-word; /* Permite que el texto se ajuste dentro de la tarjeta */
+    flex: 1; /* Permite que las tarjetas se expandan uniformemente */
+}
+
+.chart-box:hover {
+    transform: scale(1.05);
+}
+
+.chart-box.ceo {
+    background: linear-gradient(135deg, #ff6f61, #e53935);
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.chart-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transform: rotate(45deg);
+}
+
+.chart-box:hover::before {
+    opacity: 1;
+}
+
+.chart-box.ceo::before {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.connector {
+    width: 2px;
+    height: 20px;
+    background-color: #1b3a7a;
+    margin: 0 auto;
+}
+
+.horizontal-connector {
+    height: 2px;
+    width: 100%;
+    background-color: #1b3a7a;
+}
+
+.horizontal-connector.long {
+    width: 50%;
+}
+
+.chart-box i {
+    margin-right: 8px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #1b5e20;
+    color: #1b5e20;
+    font-weight: bold;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+
+  caption {
+    caption-side: top;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+    </style>
+
+</head>
+<body>
+<div class="container">
+REFERENCES
+    <ol>
+        REFERENCES.
+1.Strohle A, Gensichen J, Domschke K. The Diagnosis and Treatment of Anxiety Disorders. Deutsches Arzteblatt international. 2018;155(37):611-620.
+2.Craske MG, Stein MB. Anxiety. Lancet. 2016;388(10063):3048-3059.
+3.Chand SP, Marwaha R. Anxiety. In: StatPearls. Treasure Island (FL): StatPearls Publishing Copyright © 2020, StatPearls Publishing LLC.; 2020.
+4.Remes O, Brayne C, van der Linde R, Lafortune L. A systematic review of reviews on the prevalence of anxiety disorders in adult populations. Brain and behavior. 2016;6(7):e00497.
+5.Locke AB, Kirst N, Shultz CG. Diagnosis and management of generalized anxiety disorder and panic disorder in adults. American family physician. 2015;91(9):617-624.
+6.Thibaut F. Anxiety disorders: a review of current literature. Dialogues in clinical neuroscience. 2017;19(2):87-88.
+7.Katzman MA, Bleau P, Blier P, et al. Canadian clinical practice guidelines for the management of anxiety, posttraumatic stress and obsessive-compulsive disorders. BMC psychiatry. 2014;14 Suppl 1:S1.
+8.Aggarwal R, Kunik M, Asghar-Ali A. Anxiety in Later Life. Focus (Am Psychiatr Publ). 2017;15(2):157-161.
+9.Lin E, Tsai SJ. Gene-Environment Interactions and Role of Epigenetics in Anxiety Disorders. Adv Exp Med Biol. 2020;1191:93-102.
+10.Juruena MF, Eror F, Cleare AJ, Young AH. The Role of Early Life Stress in HPA Axis and Anxiety. Adv Exp Med Biol. 2020;1191:141-153.
+11.Stein DJ, Scott KM, de Jonge P, Kessler RC. Epidemiology of anxiety disorders: from surveys to nosology and back. Dialogues in clinical neuroscience. 2017;19(2):127-136.
+12.Moller HJ, Bandelow B, Volz HP, Barnikol UB, Seifritz E, Kasper S. The relevance of 'mixed anxiety and depression' as a diagnostic category in clinical practice. European archives of psychiatry and clinical neuroscience. 2016;266(8):725-736.
+13.Niles AN, O'Donovan A. Comparing anxiety and depression to obesity and smoking as predictors of major medical illnesses and somatic symptoms. Health Psychol. 2019;38(2):172-181.
+14.Meuret AE, Tunnell N, Roque A. Anxiety Disorders and Medical Comorbidity: Treatment Implications. Adv Exp Med Biol. 2020;1191:237-261.
+15.Zimmermann M, Chong AK, Vechiu C, Papa A. Modifiable risk and protective factors for anxiety disorders among adults: A systematic review. Psychiatry research. 2020;285:112705.
+16.Masana MF, Tyrovolas S, Kolia N, et al. Dietary Patterns and Their Association with Anxiety Symptoms among Older Adults: The ATTICA Study. Nutrients. 2019;11(6).
+17.Maness DL, Khan M. Nonpharmacologic Management of Chronic Insomnia. American family physician. 2015;92(12):1058-1064.
+18.Kim HS, Kim EJ. Effects of Relaxation Therapy on Anxiety Disorders: A Systematic Review and Meta-analysis. Archives of psychiatric nursing. 2018;32(2):278-284.
+19.Zamorski MA, Albucher RC. What to do when SSRIs fail: eight strategies for optimizing treatment of panic disorder. American family physician. 2002;66(8):1477-1484.
+20.Uppsala University. Patients' expectations influence the effectiveness of SSRI antidepressants. https://www.sciencedaily.com/releases/2017/10/171003111125.htm. Published 2017. Updated October 3. Accessed July 14, 2020.
+21.de Vries YA, Roest AM, Burgerhof JGM, de Jonge P. Initial severity and antidepressant efficacy for anxiety disorders, obsessive-compulsive disorder, and posttraumatic stress disorder: An individual patient data meta-analysis. Depression and anxiety. 2018;35(6):515-522.
+22.Fernández-Rodríguez M, Rodríguez-Legorburu I, López-Ibor Alcocer MI. Nutritional supplements in Anxiety Disorder. Actas espanolas de psiquiatria. 2017;45(Supplement):1-7.
+23.Yeung KS, Hernandez M, Mao JJ, Haviland I, Gubili J. Herbal medicine for depression and anxiety: A systematic review with assessment of potential psycho-oncologic relevance. Phytother Res. 2018;32(5):865-891.
+24.Crocq MA. The history of generalized anxiety disorder as a diagnostic category. Dialogues in clinical neuroscience. 2017;19(2):107-116.
+25.Koyuncu A, Ince E, Ertekin E, Tukel R. Comorbidity in social anxiety disorder: diagnostic and therapeutic challenges. Drugs in context. 2019;8:212573.
+26.Rose GM, Tadi P. Social Anxiety Disorder. In: StatPearls. Treasure Island (FL): StatPearls Publishing LLC.; 2020.
+27.Thng CEW, Lim-Ashworth NSJ, Poh BZQ, Lim CG. Recent developments in the intervention of specific phobia among adults: a rapid review. F1000Research. 2020;9.
+28.NIMH. National Institute of Mental Health: Anxiety Disorders. Available at https://www.nimh.nih.gov/health/topics/anxiety-disorders/index.shtml. Last updated 07/2018. Accessed 07/15/2020. 2018.
+29.NIMH. National Institute of Mental Health: Generalized Anxiety Disorder. Available at https://www.nimh.nih.gov/health/statistics/generalized-anxiety-disorder.shtml. Last updated 11/2017. Accessed 05/14/2020. 2017.
+30.ADAA. Anxiety and Depression Association of America. Facts & Statistics. https://adaa.org/about-adaa/press-room/facts-statistics. Accessed June 19, 2020.
+31.DeMartini J, Patel G, Fancher TL. Generalized Anxiety Disorder. Ann Intern Med. 2019;170(7):Itc49-itc64.
+32.NIH. National Institutes of Health. Panic Disorder: When Fear Overwhelms. Available at https://www.nimh.nih.gov/health/publications/panic-disorder-when-fear-overwhelms/index.shtml. Updated 2016. Accessed 06/25/2020. 2016.
+33.Baldwin DS, Gordon R, Abelli M, Pini S. The separation of adult separation anxiety disorder. CNS spectrums. 2016;21(4):289-294.
+34.Holka-Pokorska J, Pirog-Balcerzak A, Jarema M. The controversy around the diagnosis of selective mutism - a critical analysis of three cases in the light of modern research and diagnostic criteria. Psychiatria polska. 2018;52(2):323-343.
+35.French JH, Hameed S. Illness Anxiety Disorder. In: StatPearls. Treasure Island (FL): StatPearls Publishing LLC.; 2020.
+36.Hellwig S, Domschke K. Anxiety in Late Life: An Update on Pathomechanisms. Gerontology. 2019;65(5):465-473.
+37.Subramanyam AA, Kedare J, Singh OP, Pinto C. Clinical practice guidelines for Geriatric Anxiety Disorders. Indian journal of psychiatry. 2018;60(Suppl 3):S371-S382.
+38.Peeters G, Feeney J, Carey D, Kennelly S, Kenny RA. Fear of falling: A manifestation of executive dysfunction? International journal of geriatric psychiatry. 2019;34(8):1275-1282.
+39.Wetherell JL, Johnson K, Chang D, et al. Activity, balance, learning, and exposure (ABLE): a new intervention for fear of falling. International journal of geriatric psychiatry. 2016;31(7):791-798.
+40.Tannenbaum C. Inappropriate benzodiazepine use in elderly patients and its reduction. Journal of psychiatry & neuroscience : JPN. 2015;40(3):E27-E28.
+41.Sharma S, Powers A, Bradley B, Ressler KJ. Gene x Environment Determinants of Stress- and Anxiety-Related Disorders. Annual review of psychology. 2016;67:239-261.
+42.Dabkowska M, Dabkowska-Mika A. Risk Factors of Anxiety Disorders in Children. IntechOpen. https://www.intechopen.com/books/a-fresh-look-at-anxiety-disorders/risk-factors-of-anxiety-disorders-in-children. Published 2015. Accessed August 17, 2020.
+43.Widiger TA, Oltmanns JR. Neuroticism is a fundamental domain of personality with enormous public health implications. World psychiatry : official journal of the World Psychiatric Association (WPA). 2017;16(2):144-145.
+44.Lijster JM, Dierckx B, Utens EM, et al. The Age of Onset of Anxiety Disorders. Can J Psychiatry. 2017;62(4):237-246.
+45.Russell AL, Tasker JG, Lucion AB, et al. Factors promoting vulnerability to dysregulated stress reactivity and stress-related disease. J Neuroendocrinol. 2018;30(10):e12641.
+46.Andolina D, Borreca A. The Key Role of the Amygdala in Stress. IntechOpen. https://www.intechopen.com/books/the-amygdala-where-emotions-shape-perception-learning-and-memories/the-key-role-of-the-amygdala-in-stress. Published 2017. Accessed August 17, 2020.
+47.Schmidt CK, Khalid S, Loukas M, Tubbs RS. Neuroanatomy of Anxiety: A Brief Review. Cureus. 2018;10(1):e2055.
+48.Agoglia AE, Herman MA. The center of the emotional universe: Alcohol, stress, and CRF1 amygdala circuitry. Alcohol (Fayetteville, NY). 2018;72:61-73.
+49.Daviu N, Bruchas MR, Moghaddam B, Sandi C, Beyeler A. Neurobiological links between stress and anxiety. Neurobiology of stress. 2019;11:100191.
+50.Dedic N, Chen A, Deussing JM. The CRF Family of Neuropeptides and their Receptors - Mediators of the Central Stress Response. Current molecular pharmacology. 2018;11(1):4-31.
+51.Hupalo S, Bryce CA, Bangasser DA, Berridge CW, Valentino RJ, Floresco SB. Corticotropin-Releasing Factor (CRF) circuit modulation of cognition and motivation. Neuroscience and biobehavioral reviews. 2019;103:50-59.
+52.Michopoulos V, Powers A, Gillespie CF, Ressler KJ, Jovanovic T. Inflammation in Fear- and Anxiety-Based Disorders: PTSD, GAD, and Beyond. Neuropsychopharmacology. 2017;42(1):254-270.
+53.Felger JC. Imaging the Role of Inflammation in Mood and Anxiety-related Disorders. Curr Neuropharmacol. 2018;16(5):533-558.
+54.Costello H, Gould RL, Abrol E, Howard R. Systematic review and meta-analysis of the association between peripheral inflammatory cytokines and generalised anxiety disorder. BMJ open. 2019;9(7):e027925.
+55.Mehta ND, Haroon E, Xu X, Woolwine BJ, Li Z, Felger JC. Inflammation negatively correlates with amygdala-ventromedial prefrontal functional connectivity in association with anxiety in patients with depression: Preliminary results. Brain Behav Immun. 2018;73:725-730.
+56.Cowan CSM, Hoban AE, Ventura-Silva AP, Dinan TG, Clarke G, Cryan JF. Gutsy Moves: The Amygdala as a Critical Node in Microbiota to Brain Signaling. BioEssays : news and reviews in molecular, cellular and developmental biology. 2018;40(1).
+57.Sun LJ, Li JN, Nie YZ. Gut hormones in microbiota-gut-brain cross-talk. Chin Med J (Engl). 2020;133(7):826-833.
+58.Zhu S, Jiang Y, Xu K, et al. The progress of gut microbiome research related to brain disorders. Journal of neuroinflammation. 2020;17(1):25.
+59.Frankiensztajn LM, Elliott E, Koren O. The microbiota and the hypothalamus-pituitary-adrenocortical (HPA) axis, implications for anxiety and stress disorders. Current opinion in neurobiology. 2020;62:76-82.
+60.Simpson CA, Mu A, Haslam N, Schwartz OS, Simmons JG. Feeling down? A systematic review of the gut microbiota in anxiety/depression and irritable bowel syndrome. J Affect Disord. 2020;266:429-446.
+61.Peirce JM, Alvina K. The role of inflammation and the gut microbiome in depression and anxiety. Journal of neuroscience research. 2019;97(10):1223-1241.
+62.Butler MI, Morkl S, Sandhu KV, Cryan JF, Dinan TG. The Gut Microbiome and Mental Health: What Should We Tell Our Patients?: Le microbiote Intestinal et la Sante Mentale : que Devrions-Nous dire a nos Patients? Can J Psychiatry. 2019;64(11):747-760.
+63.Maeng LY, Milad MR. Sex differences in anxiety disorders: Interactions between fear, stress, and gonadal hormones. Hormones and behavior. 2015;76:106-117.
+64.Hantsoo L, Epperson CN. Anxiety Disorders Among Women: A Female Lifespan Approach. Focus (Am Psychiatr Publ). 2017;15(2):162-172.
+65.Rocca WA, Grossardt BR, Geda YE, et al. Long-term risk of depressive and anxiety symptoms after early bilateral oophorectomy. Menopause (New York, NY). 2018;25(11):1275-1285.
+66.Slowik A, Lammerding L, Hoffmann S, Beyer C. Brain inflammasomes in stroke and depressive disorders: Regulation by oestrogen. J Neuroendocrinol. 2018;30(2).
+67.Ðoković DD, Jović JJ, Ðoković JD, Knežević M, Djukić-Dejanović S, Ristić-Ignjatović DI. Effects of hormone replacement therapy on depressive and anxiety symptoms after oophorectomy. Med Glas (Zenica). 2015;12(1):79-85.
+68.Yazici K, Pata O, Yazici A, Aktaş A, Tot S, Kanik A. [The effects of hormone replacement therapy in menopause on symptoms of anxiety and depression]. Turk Psikiyatri Derg. 2003;14(2):101-105.
+69.De Leo V, La Marca A, Lanzetta D, et al. [Assessment of the association of Kava-Kava extract and hormone replacement therapy in the treatment of postmenopause anxiety]. Minerva ginecologica. 2000;52(6):263-267.
+70.De Leo V, la Marca A, Morgante G, Lanzetta D, Florio P, Petraglia F. Evaluation of combining kava extract with hormone replacement therapy in the treatment of postmenopausal anxiety. Maturitas. 2001;39(2):185-188.
+71.Latas M, Vucinic Latas D, Spasic Stojakovic M. Anxiety disorders and medical illness comorbidity and treatment implications. Current opinion in psychiatry. 2019;32(5):429-434.
+72.Nel C, Augustyn L, Bartman N, et al. Anxiety disorders: Psychiatric comorbidities and psychosocial stressors among adult outpatients. S Afr J Psychiatr. 2018;24:1138-1138.
+73.Too LS, Spittal MJ, Bugeja L, Reifels L, Butterworth P, Pirkis J. The association between mental disorders and suicide: A systematic review and meta-analysis of record linkage studies. J Affect Disord. 2019;259:302-313.
+74.De Hert M, Detraux J, Vancampfort D. The intriguing relationship between coronary heart disease and mental disorders. Dialogues in clinical neuroscience. 2018;20(1):31-40.
+75.Celano CM, Millstein RA, Bedoya CA, Healy BC, Roest AM, Huffman JC. Association between anxiety and mortality in patients with coronary artery disease: A meta-analysis. Am Heart J. 2015;170(6):1105-1115.
+76.Davidson KW, Alcantara C, Miller GE. Selected psychological comorbidities in coronary heart disease: Challenges and grand opportunities. Am Psychol. 2018;73(8):1019-1030.
+77.Pelgrim CE, Peterson JD, Gosker HR, et al. Psychological co-morbidities in COPD: Targeting systemic inflammation, a benefit for both? European journal of pharmacology. 2019;842:99-110.
+78.Becker E, Orellana Rios CL, Lahmann C, Rucker G, Bauer J, Boeker M. Anxiety as a risk factor of Alzheimer's disease and vascular dementia. Br J Psychiatry. 2018;213(5):654-660.
+79.Sturgeon JA, Finan PH, Zautra AJ. Affective disturbance in rheumatoid arthritis: psychological and disease-related pathways. Nature reviews Rheumatology. 2016;12(9):532-542.
+80.Bachen EA, Chesney MA, Criswell LA. Prevalence of mood and anxiety disorders in women with systemic lupus erythematosus. Arthritis and rheumatism. 2009;61(6):822-829.
+81.Holtmann G, Shah A, Morrison M. Pathophysiology of Functional Gastrointestinal Disorders: A Holistic Overview. Digestive diseases (Basel, Switzerland). 2017;35 Suppl 1:5-13.
+82.Mohammad S, Chandio B, Soomro AA, et al. Depression and Anxiety in Patients with Gastroesophageal Reflux Disorder With and Without Chest Pain. Cureus. 2019;11(11):e6103.
+83.Pohl D, Van Oudenhove L, Tornblom H, Le Neve B, Tack J, Simren M. Functional Dyspepsia and Severity of Psychologic Symptoms Associate With Postprandial Symptoms in Patients With Irritable Bowel Syndrome. Clinical gastroenterology and hepatology : the official clinical practice journal of the American Gastroenterological Association. 2018;16(11):1745-1753.e1741.
+84.Koloski NA, Jones M, Talley NJ. Evidence that independent gut-to-brain and brain-to-gut pathways operate in the irritable bowel syndrome and functional dyspepsia: a 1-year population-based prospective study. Alimentary pharmacology & therapeutics. 2016;44(6):592-600.
+85.Ochoa-Repáraz J, Kasper LH. The Second Brain: Is the Gut Microbiota a Link Between Obesity and Central Nervous System Disorders? Current obesity reports. 2016;5(1):51-64.
+86.ATS. American Thoracic Society. What is Acute Respiratory Distress Syndrome? ATS Patient Education Series Web site. https://www.thoracic.org/patients/patient-resources/resources/acute-respiratory-distress-syndrome.pdf. Published 2017. Accessed August 13, 2020.
+87.Oliveira RP, Teixeira C, Rosa RG. Acute respiratory distress syndrome: how do patients fare after the intensive care unit? Rev Bras Ter Intensiva. 2019;31(4):555-560.
+88.Hopkins RO, Weaver LK, Chan KJ, Orme JF, Jr. Quality of life, emotional, and cognitive function following acute respiratory distress syndrome. Journal of the International Neuropsychological Society : JINS. 2004;10(7):1005-1017.
+89.Bienvenu OJ, Friedman LA, Colantuoni E, et al. Psychiatric symptoms after acute respiratory distress syndrome: a 5-year longitudinal study. Intensive care medicine. 2018;44(1):38-47.
+90.Huang M, Parker AM, Bienvenu OJ, et al. Psychiatric Symptoms in Acute Respiratory Distress Syndrome Survivors: A 1-Year National Multicenter Study. Critical care medicine. 2016;44(5):954-965.
+91.Davydow DS, Desai SV, Needham DM, Bienvenu OJ. Psychiatric morbidity in survivors of the acute respiratory distress syndrome: a systematic review. Psychosomatic medicine. 2008;70(4):512-519.
+92.McDonald MD, Lane-Fall M, Miano TA, et al. The Effect of Sedation on Long-Term Psychological Impairment After Extracorporeal Life Support. Journal of cardiothoracic and vascular anesthesia. 2020;34(3):663-667.
+93.Spencer-Segal JL, Hyzy RC, Iwashyna TJ, Standiford TJ. Psychiatric Symptoms in Survivors of Acute Respiratory Distress Syndrome. Effects of Age, Sex, and Immune Modulation. Annals of the American Thoracic Society. 2017;14(6):960-967.
+94.Lee AM, Wong JG, McAlonan GM, et al. Stress and psychological distress among SARS survivors 1 year after the outbreak. Can J Psychiatry. 2007;52(4):233-240.
+95.Nalleballe K, Reddy Onteddu S, Sharma R, et al. Spectrum of neuropsychiatric manifestations in COVID-19. Brain Behav Immun. 2020.
+96.Shuja KH, Aqeel M, Jaffar A, Ahmed A. COVID-19 Pandemic and Impending Global Mental Health Implications. Psychiatr Danub. 2020;32(1):32-35.
+97.Troyer EA, Kohn JN, Hong S. Are we facing a crashing wave of neuropsychiatric sequelae of COVID-19? Neuropsychiatric symptoms and potential immunologic mechanisms. Brain Behav Immun. 2020;87:34-39.
+98.Sajadi-Ernazarova KR, Anderson J, Hamilton RJ. Caffeine Withdrawal. In: StatPearls. Treasure Island (FL): StatPearls Publishing Copyright © 2020, StatPearls Publishing LLC.; 2020.
+99.Becker HC. Influence of stress associated with chronic alcohol exposure on drinking. Neuropharmacology. 2017;122:115-126.
+101.Sawyer DR, Conner CS, Rumack BH. Managing acute toxicity from nonprescription stimulants. Clin Pharm. 1982;1(6):529-533.
+102.Henssler J, Heinz A, Brandt L, Bschor T. Antidepressant Withdrawal and Rebound Phenomena. Deutsches Arzteblatt international. 2019;116(20):355-361.
+103.Huffman JC, Stern TA. Neuropsychiatric consequences of cardiovascular medications. Dialogues in clinical neuroscience. 2007;9(1):29-45.
+104.de Ronde W, Smit DL. Anabolic androgenic steroid abuse in young males. Endocr Connect. 2020;9(4):R102-111.
+105.Cazzola M, Rogliani P, Calzetta L, Matera MG. Bronchodilators in subjects with asthma-related comorbidities. Respiratory medicine. 2019;151:43-48.
+106.Nirenberg MJ. Dopamine agonist withdrawal syndrome: implications for patient care. Drugs Aging. 2013;30(8):587-592.
+107.Wiersinga WM. Paradigm shifts in thyroid hormone replacement therapies for hypothyroidism. Nature reviews Endocrinology. 2014;10(3):164-174.
+108.Welsh JW, Tretyak V, McHugh RK, Weiss RD, Bogunovic O. Review: Adjunctive pharmacologic approaches for benzodiazepine tapers. Drug and alcohol dependence. 2018;189:96-107.
+109.Evans CJ, Cahill CM. Neurobiology of opioid dependence in creating addiction vulnerability. F1000Research. 2016;5.
+110.Baker A, Simon N, Keshaviah A, et al. Anxiety Symptoms Questionnaire (ASQ): development and validation. Gen Psychiatr. 2019;32(6):e100144.
+111.Creswell C, Waite P, Cooper PJ. Assessment and management of anxiety disorders in children and adolescents. Archives of disease in childhood. 2014;99(7):674-678.
+112.Bighelli I, Castellazzi M, Cipriani A, et al. Antidepressants versus placebo for panic disorder in adults. The Cochrane database of systematic reviews. 2018;4:Cd010676.
+113.Slee A, Nazareth I, Bondaronek P, Liu Y, Cheng Z, Freemantle N. Pharmacological treatments for generalised anxiety disorder: a systematic review and network meta-analysis. Lancet. 2019;393(10173):768-777.
+114.Jakubovski E, Johnson JA, Nasir M, Müller-Vahl K, Bloch MH. Systematic review and meta-analysis: Dose-response curve of SSRIs and SNRIs in anxiety disorders. Depression and anxiety. 2019;36(3):198-212.
+115.Carpenter JK, Andrews LA, Witcraft SM, Powers MB, Smits JAJ, Hofmann SG. Cognitive behavioral therapy for anxiety and related disorders: A meta-analysis of randomized placebo-controlled trials. Depression and anxiety. 2018;35(6):502-514.
+116.Bandelow B, Sagebiel A, Belz M, Görlich Y, Michaelis S, Wedekind D. Enduring effects of psychological treatments for anxiety disorders: meta-analysis of follow-up studies. Br J Psychiatry. 2018;212(6):333-338.
+117.Hengartner MP, Davies J, Read J. Antidepressant withdrawal - the tide is finally turning. Epidemiol Psychiatr Sci. 2019;29:e52.
+118.Cosci F, Chouinard G. Acute and Persistent Withdrawal Syndromes Following Discontinuation of Psychotropic Medications. Psychotherapy and psychosomatics. 2020:1-24.
+119.Whiteside SPH, Sim LA, Morrow AS, et al. A Meta-analysis to Guide the Enhancement of CBT for Childhood Anxiety: Exposure Over Anxiety Management. Clin Child Fam Psychol Rev. 2020;23(1):102-121.
+120.Schwartz C, Barican JL, Yung D, Zheng Y, Waddell C. Six decades of preventing and treating childhood anxiety disorders: a systematic review and meta-analysis to inform policy and practice. Evid Based Ment Health. 2019;22(3):103-110.
+121.Rith-Najarian LR, Mesri B, Park AL, Sun M, Chavira DA, Chorpita BF. Durability of Cognitive Behavioral Therapy Effects for Youth and Adolescents With Anxiety, Depression, or Traumatic Stress:A Meta-Analysis on Long-Term Follow-Ups. Behav Ther. 2019;50(1):225-240.
+122.Kreuze LJ, Pijnenborg GHM, de Jonge YB, Nauta MH. Cognitive-behavior therapy for children and adolescents with anxiety disorders: A meta-analysis of secondary outcomes. J Anxiety Disord. 2018;60:43-57.
+123.Springer KS, Levy HC, Tolin DF. Remission in CBT for adult anxiety disorders: A meta-analysis. Clin Psychol Rev. 2018;61:1-8.
+124.Sanada K, Montero-Marin J, Barcelo-Soler A, et al. Effects of Mindfulness-Based Interventions on Biomarkers and Low-Grade Inflammation in Patients with Psychiatric Disorders: A Meta-Analytic Review. International journal of molecular sciences. 2020;21(7).
+125.Apolinario-Hagen J, Druge M, Fritsche L. Cognitive Behavioral Therapy, Mindfulness-Based Cognitive Therapy and Acceptance Commitment Therapy for Anxiety Disorders: Integrating Traditional with Digital Treatment Approaches. Adv Exp Med Biol. 2020;1191:291-329.
+126.Marker I, Norton PJ. The efficacy of incorporating motivational interviewing to cognitive behavior therapy for anxiety disorders: A review and meta-analysis. Clin Psychol Rev. 2018;62:1-10.
+127.Tolin DF. Can Cognitive Behavioral Therapy for Anxiety and Depression Be Improved with Pharmacotherapy? A Meta-analysis. The Psychiatric clinics of North America. 2017;40(4):715-738.
+128.Kirsch I. Placebo Effect in the Treatment of Depression and Anxiety. Frontiers in psychiatry. 2019;10(407).
+129.Sugarman MA, Loree AM, Baltes BB, Grekin ER, Kirsch I. The efficacy of paroxetine and placebo in treating anxiety and depression: a meta-analysis of change on the Hamilton Rating Scales. PloS one. 2014;9(8):e106337-e106337.
+130.Bandelow B. Current and Novel Psychopharmacological Drugs for Anxiety Disorders. Adv Exp Med Biol. 2020;1191:347-365.
+131.Strawn JR, Geracioti L, Rajdev N, Clemenza K, Levine A. Pharmacotherapy for generalized anxiety disorder in adult and pediatric patients: an evidence-based treatment review. Expert opinion on pharmacotherapy. 2018;19(10):1057-1070.
+132.Santarsieri D, Schwartz TL. Antidepressant efficacy and side-effect burden: a quick guide for clinicians. Drugs in context. 2015;4:212290.
+133.Mayo Clinic. Monoamine Oxidase Inhibitors (MAOIs). Available at https://www.mayoclinic.org/diseases-conditions/depression/in-depth/maois/art-20043992. Last updated 09/12/2019. Accessed 05/21/2020. 2019.
+134.Quagliato LA, Freire RC, Nardi AE. Risks and benefits of medications for panic disorder: a comparison of SSRIs and benzodiazepines. Expert opinion on drug safety. 2018;17(3):315-324.
+135.Gomez AF, Barthel AL, Hofmann SG. Comparing the efficacy of benzodiazepines and serotonergic anti-depressants for adults with generalized anxiety disorder: a meta-analytic review. Expert opinion on pharmacotherapy. 2018;19(8):883-894.
+136.Shinfuku M, Kishimoto T, Uchida H, Suzuki T, Mimura M, Kikuchi T. Effectiveness and safety of long-term benzodiazepine use in anxiety disorders: a systematic review and meta-analysis. International clinical psychopharmacology. 2019;34(5):211-221.
+137.Rissardo JP, Caprara ALF. Buspirone-associated Movement Disorder: A Literature Review. Prague medical report. 2020;121(1):5-24.
+138.Guaiana G, Barbui C, Cipriani A. Hydroxyzine for generalised anxiety disorder. The Cochrane database of systematic reviews. 2010(12):Cd006815.
+139.Murrough JW, Yaqubi S, Sayed S, Charney DS. Emerging drugs for the treatment of anxiety. Expert opinion on emerging drugs. 2015;20(3):393-406.
+140.Greenblatt HK, Greenblatt DJ. Gabapentin and Pregabalin for the Treatment of Anxiety Disorders. Clinical pharmacology in drug development. 2018;7(3):228-232.
+141.Bandelow B, Michaelis S, Wedekind D. Treatment of anxiety disorders. Dialogues in clinical neuroscience. 2017;19(2):93-107.
+142.Gautam CS, Mahajan SS, Sharma J, Singh H, Singh J. Repurposing Potential of Ketamine: Opportunities and Challenges. Indian journal of psychological medicine. 2020;42(1):22-29.
+143.Rasmussen KG. Has psychiatry tamed the "ketamine tiger?" Considerations on its use for depression and anxiety. Progress in neuro-psychopharmacology & biological psychiatry. 2016;64:218-224.
+144.Sartori SB, Singewald N. Novel pharmacological targets in drug development for the treatment of anxiety and anxiety-related disorders. Pharmacology & therapeutics. 2019;204:107402.
+145.De Berardis D, Fornaro M, Serroni N, et al. Agomelatine beyond borders: current evidences of its efficacy in disorders other than major depression. International journal of molecular sciences. 2015;16(1):1111-1130.
+146.Buoli M, Grassi S, Serati M, Altamura AC. Agomelatine for the treatment of generalized anxiety disorder. Expert opinion on pharmacotherapy. 2017;18(13):1373-1379.
+147.Santos P, Herrmann AP, Elisabetsky E, Piato A. Anxiolytic properties of compounds that counteract oxidative stress, neuroinflammation, and glutamatergic dysfunction: a review. Braz J Psychiatry. 2019;41(2):168-178.
+148.Yoon S, Kim YK. The Role of the Oxytocin System in Anxiety Disorders. Adv Exp Med Biol. 2020;1191:103-120.
+149.Nuss P, Ferreri F, Bourin M. An update on the anxiolytic and neuroprotective properties of etifoxine: from brain GABA modulation to a whole-body mode of action. Neuropsychiatr Dis Treat. 2019;15:1781-1795.
+150.Choi YM, Kim KH. Etifoxine for pain patients with anxiety. Korean J Pain. 2015;28(1):4-10.
+151.Nutt D. Psychedelic drugs-a new era inpsychiatry?. Dialogues in clinical neuroscience. 2019;21(2):139-147.
+152.Chi T, Gold JA. A review of emerging therapeutic potential of psychedelic drugs in the treatment of psychiatric illnesses. J Neurol Sci. 2020;411:116715.
+153.Gasser P. ClinicalTrials.gov [Internet]. Bethesda (MD): National Library of Medicine (US). Identifier NCT03153579. LSD Treatment in Persons Suffering From Anxiety Symptoms in Severe Somatic Diseases or in Psychiatric Anxiety Disorders: a Randomized, Double-blind, Placebo-controlled Phase II Study. 2020 Mar 13 [cited 2020 June 22]; Available from: https://clinicaltrials.gov/ct2/show/NCT03153579. Accessed.
+154.Center for Psychedelic & Consciousness Research. Research. Johns Hopkins. https://hopkinspsychedelic.org/index/#research. Accessed August 17, 2020.
+155.Muttoni S, Ardissino M, John C. Classical psychedelics for the treatment of depression and anxiety: A systematic review. J Affect Disord. 2019;258:11-24.
+156.Guzmán G, Allen JW, Gartz J. A worldwide geographical distribution of the neurotropic fungi, an analysis and discussion. Annali dei Museo civico, Rovereto. 1998;14:189-280.
+157.Ross S, Bossis A, Guss J, et al. Rapid and sustained symptom reduction following psilocybin treatment for anxiety and depression in patients with life-threatening cancer: a randomized controlled trial. Journal of psychopharmacology (Oxford, England). 2016;30(12):1165-1180.
+158.Griffiths RR, Johnson MW, Carducci MA, et al. Psilocybin produces substantial and sustained decreases in depression and anxiety in patients with life-threatening cancer: A randomized double-blind trial. Journal of psychopharmacology (Oxford, England). 2016;30(12):1181-1197.
+159.Gasser P, Kirchner K, Passie T. LSD-assisted psychotherapy for anxiety associated with a life-threatening disease: a qualitative study of acute and sustained subjective effects. Journal of psychopharmacology (Oxford, England). 2015;29(1):57-68.
+160.Mithoefer MC, Feduccia AA, Jerome L, et al. MDMA-assisted psychotherapy for treatment of PTSD: study design and rationale for phase 3 trials based on pooled analysis of six phase 2 randomized controlled trials. Psychopharmacology. 2019;236(9):2735-2745.
+161.Aday JS, Mitzkovitz CM, Bloesch EK, Davoli CC, Davis AK. Long-term effects of psychedelic drugs: A systematic review. Neuroscience and biobehavioral reviews. 2020;113:179-189.
+162.Millán-Guerrero RO, Isais-Millán S. Cannabis and the exocannabinoid and endocannabinoid systems. Their use and controversies. Gaceta medica de Mexico. 2019;155(5):471-474.
+163.Hindley G, Beck K, Borgan F, et al. Psychiatric symptoms caused by cannabis constituents: a systematic review and meta-analysis. The lancet Psychiatry. 2020;7(4):344-353.
+164.Prospéro-García O, Ruiz Contreras AE, Ortega Gómez A, Herrera-Solís A, Méndez-Díaz M. Endocannabinoids as Therapeutic Targets. Arch Med Res. 2019;50(8):518-526.
+165.Alger BE. Getting high on the endocannabinoid system. Cerebrum. 2013;2013:14-14.
+166.Mackie K. Cannabinoid Receptors: Where They are and What They do. Journal of Neuroendocrinology. 2008;20(s1):10-14.
+167.Morena M, Patel S, Bains JS, Hill MN. Neurobiological Interactions Between Stress and the Endocannabinoid System. Neuropsychopharmacology. 2016;41(1):80-102.
+168.Chayasirisobhon S. Cannabis and Neuropsychiatric Disorders: An Updated Review. Acta Neurol Taiwan. 2019;28(2):27-39.
+169.Black N, Stockings E, Campbell G, et al. Cannabinoids for the treatment of mental disorders and symptoms of mental disorders: a systematic review and meta-analysis. The lancet Psychiatry. 2019;6(12):995-1010.
+170.Bonaccorso S, Ricciardi A, Zangani C, Chiappini S, Schifano F. Cannabidiol (CBD) use in psychiatric disorders: A systematic review. Neurotoxicology. 2019;74:282-298.
+171.Skelley JW, Deas CM, Curren Z, Ennis J. Use of cannabidiol in anxiety and anxiety-related disorders. Journal of the American Pharmacists Association : JAPhA. 2020;60(1):253-261.
+172.Soares VP, Campos AC. Evidences for the Anti-panic Actions of Cannabidiol. Curr Neuropharmacol. 2017;15(2):291-299.
+173.Hser YI, Mooney LJ, Huang D, et al. Reductions in cannabis use are associated with improvements in anxiety, depression, and sleep quality, but not quality of life. J Subst Abuse Treat. 2017;81:53-58.
+174.Gobbi G, Atkin T, Zytynski T, et al. Association of Cannabis Use in Adolescence and Risk of Depression, Anxiety, and Suicidality in Young Adulthood: A Systematic Review and Meta-analysis. JAMA Psychiatry. 2019;76(4):426-434.
+175.Sideli L, Quigley H, La Cascia C, Murray RM. Cannabis Use and the Risk for Psychosis and Affective Disorders. J Dual Diagn. 2020;16(1):22-42.
+176.Iffland K, Grotenhermen F. An Update on Safety and Side Effects of Cannabidiol: A Review of Clinical Data and Relevant Animal Studies. Cannabis Cannabinoid Res. 2017;2(1):139-154.
+177.Freire RC, Cabrera-Abreu C, Milev R. Neurostimulation in Anxiety Disorders, Post-traumatic Stress Disorder, and Obsessive-Compulsive Disorder. Adv Exp Med Biol. 2020;1191:331-346.
+178.Rudebeck PH, Rich EL, Mayberg HS. From bed to bench side: Reverse translation to optimize neuromodulation for mood disorders. Proceedings of the National Academy of Sciences. 2019;116(52):26288-26296.
+179.Mayo Clinic. Transcranial magnetic stimulation. Updated 11/27/2018. Accessed 8/13, 2020.
+        </p>
+
+</div>
+<script>
+        
+    </script>
+</body>
+</html>

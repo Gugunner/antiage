@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">  
+    <link rel="icon" href="dc3.png" type="image/png">  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White Book</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">
+    <!-- Estilos para dispositivos móviles -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (max-width: 768px)">
+    <!-- Estilos para pantallas de PC -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (min-width: 769px)">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+
+    <!-- Metadatos Open Graph -->
+    <meta property="og:title" content="YOU TOMORROW">
+    <meta property="og:description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta property="og:image" content="https://drive.google.com/file/d/1ZZI3G6Fit_kovvVZolrvchtXQQDrnWYI/view?usp=sharing">
+    <meta property="og:url" content="https://ytomorrow.com/">
+    <meta property="og:type" content="website">
+
+    <!-- Otros metadatos -->
+    <meta name="description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta name="keywords" content="you, YOU TOMORROW, TOMORROW, TOMORR, TOM, web">
+
+    <style>
+
+   body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 17px;
+    line-height: 1.4;
+    margin: 20px;
+    font-weight: 500; /* Grosor medio de la negrita */
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1, h2, h3 {
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+p {
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.section {
+    margin-bottom: 30px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    width: 100%;
+}
+
+.chart-row {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+    width: 50%; /* Ajusta el ancho para que se adapte al contenido */
+}
+
+.chart-box {
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    min-width: 150px; /* Asegura que las tarjetas tengan un ancho mínimo */
+    max-width: 300px; /* Limita el ancho máximo para tarjetas largas */
+    word-wrap: break-word; /* Permite que el texto se ajuste dentro de la tarjeta */
+    flex: 1; /* Permite que las tarjetas se expandan uniformemente */
+}
+
+.chart-box:hover {
+    transform: scale(1.05);
+}
+
+.chart-box.ceo {
+    background: linear-gradient(135deg, #ff6f61, #e53935);
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.chart-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transform: rotate(45deg);
+}
+
+.chart-box:hover::before {
+    opacity: 1;
+}
+
+.chart-box.ceo::before {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.connector {
+    width: 2px;
+    height: 20px;
+    background-color: #1b3a7a;
+    margin: 0 auto;
+}
+
+.horizontal-connector {
+    height: 2px;
+    width: 100%;
+    background-color: #1b3a7a;
+}
+
+.horizontal-connector.long {
+    width: 50%;
+}
+
+.chart-box i {
+    margin-right: 8px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #1b5e20;
+    color: #1b5e20;
+    font-weight: bold;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+
+  caption {
+    caption-side: top;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+    </style>
+
+</head>
+<body>
+  
+    
+<div class="container">
+
+<!-- Publicaciones -->
+    <h2 style="border-bottom: 2px solid #1b5e20;">
+        <i class="fas fa-book" style="margin-right: 10px; color: #1b5e20;"></i>Publicaciones
+    </h2>
+    <ul>
+    <li>Marrero-Ponce, Y. Total and Local Quadratic Indices of the Molecular Pseudograph’s Atom Adjacency Matrix: Applications to the Prediction of Physical Properties of Organic Compounds. Molecules. 2003, 8, 687-726.</li>
+    <li>Marrero-Ponce, Y.; Cabrera, M., A.; Romero, V.; Ofori, E.; Montero, L. A. Total and Local Quadratic Indices of the “Molecular Pseudograph’s Atom Adjacency Matrix”. Application to Prediction of Caco-2 Permeability of Drugs. Int. J. Mol. Sci. 2003, 4, 512-536.</li>
+    <li>González-Díaz, H; Marrero-Ponce, Y.; Hernández, I; Bastida, I; Tenorio, E; Nasco, O; Uriarte, U; Castañedo, N.; Cabrera, M.A.; Aguila, E.; Marrero, O.; Morales, A.; Pérez, M. 3D-MEDNEs: An Alternative “In Silico” Technique for Chemical Research in Toxicology. 1. Prediction of Chemically Induced Agranulocytosis. Chem. Res. Toxicol. 2003, 16, 1318-1327.</li>
+    <li>Marrero-Ponce, Y.; Cabrera, M. A.; Romero, V.; González, D. H.; Torrens, F. A New Topological Descriptors Based Model for Predicting Intestinal Epithelial Transport of Drugs in Caco-2 Cell Culture. J. Pharm. Pharm. Sci. 2004, 7, 186-199.</li>
+    <li>Marrero-Ponce, Y.; González-Díaz, H.; Romero-Zaldivar, V.; Torrens, F.; Castro, E. A. 3D-Chiral Quadratic Indices of the “Molecular Pseudograph’s Atom Adjacency Matrix” and their Application to Central Chirality Codification: Classification of ACE Inhibitors and Prediction of s-Receptor Antagonist Activities. Bioorg. Med. Chem. 2004, 12, 5331-5342.</li>
+    <li>Marrero-Ponce, Y. Total and Local (Atom and Atom-Type) Molecular Quadratic Indices: Significance-Interpretation, Comparison to Other Molecular Descriptors and QSPR/QSAR Applications. Bioorg. Med. Chem. 2004, 12, 6351-6369.</li>
+    <li>Marrero-Ponce, Y.; Nodarse, D.; González-Díaz, H.; Ramos de Armas, R.; Romero-Zaldivar, V.; Torrens, F.; Castro, E. Nucleic Acid Quadratic Indices of the “Macromolecular Graph’s Nucleotides Adjacency Matrix”. Modeling of Footprints after the Interaction of Paromomycin with the HIV-1 Y-RNA Packaging Region. Int. J. Mol. Sci. 2004, 5, 276-293 (see also CPS: physchem/0401004.)</li>
+    <li>Marrero-Ponce, Y. Linear Indices of the “Molecular Pseudograph’s Atom Adjacency Matrix”: Definition, Significance-Interpretation and Application to QSAR Analysis of Flavone Derivatives as HIV-1 Integrase Inhibitors. J. Chem. Inf. Comput. Sci. 2004, 44, 2010-2026.</li>
+    <li>Marrero-Ponce, Y.; Castillo-Garit, J. A.; Torrens, F.; Romero-Zaldivar, V.; Castro, E. Atom, Atom-Type and Total Linear Indices of the “Molecular Pseudograph’s Atom Adjacency Matrix”: Application to QSPR/QSAR Studies of Organic Compounds. Molecules. 2004, 9, 1100-1123.</li>
+    <li>Marrero-Ponce, Y.; Medina, R.; Castro, E. A.; de Armas, R.; González, H.; Romero, V.; Torrens, F. Protein Quadratic Indices of the “Macromolecular Pseudograph’s a-Carbon Atom Adjacency Matrix”. 1. Prediction of Arc Repressor Alanine-mutant’s Stability. Molecules. 2004, 9, 1124–1147.</li>
+    <li>Marrero-Ponce, Y.; Castillo-Garit, J.A.; Olazabal, E.; Serrano, H. S.; Morales, A.; Castañedo, N.; Ibarra-Velarde, F.; Huesca-Guillen, A.; Jorge, E.; del Valle, A.; Torrens, F.; Castro, E. A. TOMOCOMD-CARDD, a Novel Approach for Computer-Aided “Rational” Drug Design: I. Theoretical and Experimental Assessment of a Promising Method for Computational Screening and in silico Design of New Anthelmintic Compounds. J. Comput. Aided Mol. Des. 2004, 18, 615-633.</li>
+    <li>Marrero-Ponce, Y.; Montero-Torres, A.; Romero-Zaldivar, C.; Iyarreta-Veitía, I.; Mayón Peréz, M.; García Sánchez, R. Non-Stochastic and Stochastic Linear Indices of the “Molecular Pseudograph’s Atom Adjacency Matrix”: Application to “in silico” Studies for the Rational Discovery of New Antimalarial Compounds. Bioorg. Med. Chem. 2005, 13, 1293-1304.</li>
+    <li>Marrero-Ponce, Y.; Castillo-Garit, J.A.; Olazabal, E.; Serrano, H. S.; Morales, A.; Castañedo, N.; Ibarra-Velarde, F.; Huesca-Guillen, A.; Jorge, E.; Sánchez, A. M.; Torrens, F.; Castro, E. A. Atom, Atom-Type and Total Molecular Linear Indices as a Promising Approach for Bioorganic & Medicinal Chemistry: Theoretical and Experimental Assessment of a Novel Method for Virtual Screening and Rational Design of New Lead Anthelmintic. Bioorg. Med. Chem. 2005, 13, 1005-1020.</li>
+    <li>Marrero-Ponce, Y.; Huesca-Guillen, A.; Ibarra-Velarde, F. Quadratic Indices of the “Molecular Pseudograph’s Atom Adjacency Matrix” and Their Stochastic Forms: A Novel Approach for Virtual Screening and in silico Discovery of New Lead Paramphistomicide Drugs-like Compounds. J. Theor. Chem. (THEOCHEM). 2005, 717, 67-79.</li>
+    <li>Alvares-Ginarte, Y., M.; Crespo, R.; Montero-Cabrera, L., A.; Ruiz-Garcia, J., A.; Marrero-Ponce, Y.; Santana, R.; Pardillo-Fontdevilla, E.; Alonso-Becerra, E. A Novel in-silico Approach for QSAR Studies of Anabolic and Androgenic Activities in the 17β-hydroxy-5a-androstane Steroid Family. QSAR Comb. Sci. 2005, 24, 218-226.</li>
+    <li>Marrero-Ponce, Y.; Cabrera, M. A.; Romero-Zaldivar, V.; Bermejo, M.; Siverio, D.; Torrens, F. Prediction of Intestinal Epithelial Transport of Drug in (Caco-2) Cell Culture from Molecular Structure using ‘in silico’ Approaches During Early Drug Discovery. Internet Electronic J. Mol. Des. 2005, 4, 124-150.</li>
+    <li>Marrero-Ponce, Y.; Medina-Marrero, R.; Castillo-Garit, J.A.; Romero-Zaldivar, V.; Torrens, F.; Castro, E. A. Protein Linear Indices of the “Macromolecular Pseudograph’s a-Carbon Atom Adjacency Matrix” in Bioinformatics. Part 1. Prediction of Protein Stability Effects of a Complete Set of Alanine Substitutions in Arc Repressor. Bioorg. Med. Chem. 2005, 13, 3003-3015.</li>
+    <li>Marrero-Ponce, Y.; Medina-Marrero, R.; Torrens, F.; Martinez, Y.; Romero-Zaldivar, V.; Castro, E. A. Atom, Atom-type, and Total Non-Stochastic and Stochastic Quadratic Fingerprints: A promising approach for modeling of antibacterial activity. Bioorg. Med. Chem. 2005, 13, 2881-2899.</li>
+    <li>Marrero-Ponce, Y.; Castillo-Garit, J.A.; Nodarse, D. Linear Indices of the “Macromolecular Graph’s Nucleotides Adjacency Matrix” as a Promising Approach for Bioinformatics Studies. 1. Prediction of Paromomycin’s Affinity Constant with HIV-1 Y-RNA Packaging Region. Bioorg. Med. Chem. 2005, 13, 3397-3404.</li>
+    <li>Marrero-Ponce, Y.; Castillo-Garit, J. A. 3D-Chiral Atom, Atom-type, and Total Non-Stochastic and Stochastic Molecular Linear Indices and their Application to Central Chirality Codification. J. Comput. Aided.-Mol. Des. 2005, 19, 369–383.</li>
+    <li>Marrero-Ponce, Y.; Iyarreta, M.; Montero, A.; Romero, C.; Brandt, C. A.; Ávila, P. E.; Kirchgatter, K. A.; Machado, Y. Ligand-Based Virtual Screening and in silico Design of New Antimalarial Compounds Using Non-Stochastic and Stochastic Total and Atom-type Quadratic Maps. J. Chem. Inf. Comput. Sci. 2005, 45, 1082-1100.</li>
+    <li>Meneses-Marcel, A.; Marrero-Ponce, Y.; Machado-Tugores, Y.; Montero Pereira, D.; Escario, J. A.; Nogal-Ruiz, J. J.; Ochoa, C.; Arán, V. J.; Martínez-Fernández, A. R., García Sánchez, R. N. A Linear Discrimination Analysis Based Virtual Screening of Trichomonacidal Lead-Like Compounds. Outcomes of in silico Studies Supported by Experimental Results. Bioorg. Med. Chem Lett. 2005, 17, 3838-3843.</li>
+    <li>Montero-Torres, A.; Celeste Vega, A.; Marrero-Ponce, Y.; Rolón, M.; Gómez-Barrio, A.; Escario, J. A.; Arán, V. J.; Martínez-Fernández, A. R.; Meneses-Marcel, A. A Novel Non-Stochastic Quadratic Fingerprints-based Approach for the “in silico” Discovery of New Antitrypanosomal Compounds. Bioorg. Med. Chem. 2005, 13, 6264-6275.</li>
+    <li>Casañola-Martin, G. M.; Khan, M. T. H.; Marrero-Ponce, Y.; Ather, A.; Sultankhodzhaev, M. N.; Torrens, F. New Tyrosinase Inhibitors Selected by Atomic Linear Indices-Based Classification Models. Bioorg. Med. Chem. Letter. 2006, 16, 324-330.</li>
+    <li>Marrero-Ponce, Y.; Meneses-Marcel, A.; Machado-Tugores, Y.; Montero Pereira, D.; Escario, J. A.; Nogal-Ruiz, J. J.; Ochoa, C.; Arán, V. J.; Martínez-Fernández, A. R., García Sánchez, R. N.; Montero-Torres, A.; Francisco Torrens. A Computer-Based Approach to the Rational Discovery of New Antitrichomonas Drugs by Atom-Type Linear Indices. Current Drug Discovery Technologies. 2005, 2, 245-265.</li>
+    <li>Marrero-Ponce, Y.; Medina-Marrero, R.; Martinez, Y.; Torrens, F.; Romero-Zaldivar, V.; Castro, E. A. Non-Stochastic and Stochastic Linear Indices of the Molecular Pseudograph’s Atom Adjacency Matrix: A Novel Approach for Computational –in silico- Screening and “Rational” Selection of New Lead Antibacterial Agents. J. Mol. Mod. 2006, 12, 255–271.</li>
+    <li>Castillo-Garit, J. A.; Marrero-Ponce, Y.; Torrens, F. Atom-based 3D-Chiral Quadratic Indices: 2. Prediction of the Corticosteroid-Binding Globulin Binding Affinity of the Thirty-one Benchmark Steroids data set. Bioorg. Med. Chem. 2006, 14, 2398-2408.</li>
+    <li>Celeste-Vega, M.; Montero-Torres, A.; Marrero-Ponce, Y.; Rolón, M.; Gómez-Barrio, A.; Escario, J. A.; Arán, V. J.; Martínez-Fernández, A. R., Meneses-Marcel, A. New Ligand-Based Approach for the Discovery of Antitrypanosomal Compounds. Bioorg. Med. Chem. Letter. 2006, 16, 1898–1904.</li>
+    <li>Montero-Torres, A.; García, R. N.; Marrero-Ponce, Y.; Machado-Tugores, Y.; Nogal, J. J.; Martínez, A. R.; Arán, V. J.; Ochoa, C.; Meneses-Marcel, A.; Torrens, F. Non-stochastic Quadratic Fingerprints and LDA-Based QSAR Models in Hit and Lead Generation Through Virtual Screening: Theoretical and Experimental Assessment of a Promising Method for the Discovery of New Antimalarial Compounds. Eur. J. Med. Chem. 2006, 41, 483-493.</li>
+    <li>Marrero-Ponce, Y.; Meneses-Marcel, A.; Machado-Tugores, Y.; Escario, J. A.; Gómez-Barrio, A; Montero Pereira, D.; Nogal-Ruiz, J. J.; Arán, V. J.; Martínez-Fernández, A. R.; Torrens, F.; Rotondo, R. Predicting Antitrichomonal Activity: A Computational Screening Using Atom-Based Bilinear Indices and Experimental Proofs. Bioorg. Med. Chem. 2006, 14, 6502–6524.</li>
+    <li>Alvarez-Ginarte, Y.; Crespo-Otero, R.; Marrero-Ponce, Y.; Padrón-García, A.; Montero-Cabrera, L. A.; Ruiz-García, J. A.; Torrens, F. Quantitative Structure-Activity Relationship and Diversity Analysis of the 4,5a-dihydrotestosterone Steroid Family: Computational Molecular Models To Test The Anabolic/Androgenic Receptor. QSAR Comb. Sci. 2006, 25, 881–894.</li>
+    <li>Castillo-Garit, J. A.; Marrero-Ponce, Y.; Torrens, F.; Rotondo, R. Atom-based Stochastic and non-Stochastic 3D-Chiral Bilinear Indices and their Applications to Central Chirality Codification. J. Mol. Graph. Model. DOI:10.1016/j.jmgm.2006.09.007</li>
+</ul>
+
+
+
+</div>
+
+</body>
+</html>

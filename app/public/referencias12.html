@@ -1,0 +1,467 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">  
+    <link rel="icon" href="dc3.png" type="image/png">  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White Book</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">
+    <!-- Estilos para dispositivos móviles -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (max-width: 768px)">
+    <!-- Estilos para pantallas de PC -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (min-width: 769px)">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+
+    <!-- Metadatos Open Graph -->
+    <meta property="og:title" content="YOU TOMORROW">
+    <meta property="og:description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta property="og:image" content="https://drive.google.com/file/d/1ZZI3G6Fit_kovvVZolrvchtXQQDrnWYI/view?usp=sharing">
+    <meta property="og:url" content="https://ytomorrow.com/">
+    <meta property="og:type" content="website">
+
+    <!-- Otros metadatos -->
+    <meta name="description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta name="keywords" content="you, YOU TOMORROW, TOMORROW, TOMORR, TOM, web">
+
+    <style>
+
+   body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 17px;
+    line-height: 1.4;
+    margin: 20px;
+    font-weight: 500; /* Grosor medio de la negrita */
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1, h2, h3 {
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+p {
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.section {
+    margin-bottom: 30px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    width: 100%;
+}
+
+.chart-row {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+    width: 50%; /* Ajusta el ancho para que se adapte al contenido */
+}
+
+.chart-box {
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    min-width: 150px; /* Asegura que las tarjetas tengan un ancho mínimo */
+    max-width: 300px; /* Limita el ancho máximo para tarjetas largas */
+    word-wrap: break-word; /* Permite que el texto se ajuste dentro de la tarjeta */
+    flex: 1; /* Permite que las tarjetas se expandan uniformemente */
+}
+
+.chart-box:hover {
+    transform: scale(1.05);
+}
+
+.chart-box.ceo {
+    background: linear-gradient(135deg, #ff6f61, #e53935);
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.chart-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transform: rotate(45deg);
+}
+
+.chart-box:hover::before {
+    opacity: 1;
+}
+
+.chart-box.ceo::before {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.connector {
+    width: 2px;
+    height: 20px;
+    background-color: #1b3a7a;
+    margin: 0 auto;
+}
+
+.horizontal-connector {
+    height: 2px;
+    width: 100%;
+    background-color: #1b3a7a;
+}
+
+.horizontal-connector.long {
+    width: 50%;
+}
+
+.chart-box i {
+    margin-right: 8px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #1b5e20;
+    color: #1b5e20;
+    font-weight: bold;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+
+  caption {
+    caption-side: top;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+    </style>
+
+</head>
+<body>
+<div class="container">
+REFERENCES
+    <ol>
+        REFERENCES
+
+1.Abe R, Ogawa K, Maruyama Y, Nakamura N, Abe M. Spontaneous regression ofdiffuse large B-cell lymphoma harbouring Epstein-Barr virus: a case report andreview of the literature. J Clin Exp Hematop. 2007 Apr;47(1):23-6. Review. PubMedPMID: 17510535
+2.Abramson JS. T-cell/histiocyte-rich B-cell lymphoma: biology, diagnosis, and management. The oncologist. Apr 2006;11(4):384-392
+3.ACS. American Cancer Society. Learn About Cancer. Non-Hodgkin Lymphoma. Treating specific types of non-Hodgkin lymphoma. Available at: http://www.cancer.org/cancer/non-hodgkinlymphoma/detailedguide/non-hodgkin-lymphoma-treating-specific-lymphomas. Last updated 11/14/2013. Accessed 12/13/2013
+4.Adhvaryu MR, Reddy N, Parabia MH. Anti-tumor activity of four Ayurvedic herbs in Dalton lymphoma ascites bearing mice and their short-term in vitrocytotoxicity on DLA-cell-line. Afr J Tradit Complement Altern Med. 2008 Jun18;5(4):409-18. PubMed PMID: 20161965; PubMed Central PMCID: PMC2816583
+5.Ageberg M, Rydström K, Relander T, Drott K. The histone deacetylase inhibitor valproic acid sensitizes diffuse large B-cell lymphoma cell lines to CHOP-inducedcell death. Am J Transl Res. 2013;5(2):170-83. Epub 2013 Mar 28. PubMed PMID:23573362; PubMed Central PMCID: PMC3612513
+6.Agmon-Levin N, Kivity S, Tzioufas AG, Lopez Hoyos M, Rozman B, Efes I, . . . Shoenfeld Y. Low levels of vitamin-D are associated with neuropathy and lymphoma among patients with Sjogren's syndrome. Journal of autoimmunity. Sep 2012;39(3):234-239
+7.Aksoy S, Harputluoglu H, Kilickap S, Dede DS, Dizdar O, Altundag K, Barista I. Rituximab-related viral infections in lymphoma patients. Leukemia & lymphoma. Jul 2007;48(7):1307-1312
+8.Aleman BM, van Leeuwen FE. Are we improving the long-term burden of Hodgkin's lymphoma patients with modern treatment? Hematology/oncology clinics of North America. Oct 2007;21(5):961-975
+9.Alexander DD, Mink PJ, Adami HO, Chang ET, Cole P, Mandel JS, Trichopoulos D. The non-Hodgkin lymphomas: a review of the epidemiologic literature. Int JCancer. 2007;120 Suppl 12:1-39. Review. PubMed PMID: 17405121
+10.Al-Humood SA, Al-Qallaf AS, Alshemmari SH, Francis IM, Junaid TA, Marouf RA, Al-Mulla F. Genotypic and phenotypic differences between nodal and extranodal diffuse large B-Cell lymphomas. The journal of histochemistry and cytochemistry : official journal of the Histochemistry Society. Oct 2011;59(10):918-931
+11.Alshemmari S, Sreedharan PS, Krishnan Y. MALT lymphomas -Treated withchemotherapy or radiotherapy: Clinical Features, Prognostic factors and Survival. Gulf J Oncolog. 2013 Jul;1(14):76-80. PubMed PMID: 23996871
+12.Armitage JO, Greer JP, Levine AM, Weisenburger DD, Formenti SC, Bast M, . . . et al. Peripheral T-cell lymphoma. Cancer. Jan 1 1989;63(1):158-163
+13.Aschebrook-Kilfoy B, Ward MH, Dave BJ, Smith SM, Weisenburger DD, Chiu BC. Dietary nitrate and nitrite intake and risk of non-Hodgkin lymphoma. Leuk Lymphoma. 2013 May;54(5):945-50. doi: 10.3109/10428194.2012.734613. Epub 2012 Oct 24. PubMed PMID: 23013327
+14.Asfour IA, El Shazly S, Fayek MH, Hegab HM, Raouf S, Moussa MA. Effect ofhigh-dose sodium selenite therapy on polymorphonuclear leukocyte apoptosis innon-Hodgkin's lymphoma patients. Biol Trace Elem Res. 2006 Apr;110(1):19-32 PubMed PMID: 16679545
+15.Baird RD, van Zyl-Smit RN, Dilke T, Scott SE, Rassam SM. Spontaneousremission of low-grade B-cell non-Hodgkin's lymphoma following withdrawal ofmethotrexate in a patient with rheumatoid arthritis: case report and review ofthe literature. Br J Haematol. 2002 Aug;118(2):567-8. Review. PubMed PMID:12139747
+16.Baker JA, Weiss JR, Czuczman MS, Menezes RJ, Ambrosone CB, Moysich KB. Regular use of aspirin or acetaminophen and risk of non-Hodgkin lymphoma. Cancer causes & control : CCC. Apr 2005;16(3):301-308.
+17.Bell JT, Spector TD. A twin approach to unraveling epigenetics. Trends in genetics : TIG. Mar 2011;27(3):116-125
+18.Ben-Arye E, Attias S, Tadmor T, et al. Herbs in hemato-oncological care: an evidence-based review of data on efficacy, safety, and drug interactions. Leuk Lymphoma. 2010;51(8):1414-23
+19.Bertolini F, Fusetti L, Rabascio C, Cinieri S, Martinelli G, Pruneri G Inhibition of angiogenesis and induction of endothelial and tumor cell apoptosis by green tea in animal models of human high-grade non-Hodgkin's lymphoma Leukemia. 2000 Aug;14(8):1477-82. PubMed PMID: 10942245
+20.Bokelmann I, Mahlknecht U. Valproic acid sensitizes chronic lymphocytic leukemia cells to apoptosis and restores the balance between pro- and antiapoptotic proteins. Molecular medicine (Cambridge, Mass.). Jan-Feb 2008;14(1-2):20-27
+21.Braun FK, Al-Yacoub N, Plötz M, Möbs M, Sterry W, Eberle J. Nonsteroidalanti-inflammatory drugs induce apoptosis in cutaneous T-cell lymphoma cells andenhance their sensitivity for TNF-related apoptosis-inducing ligand. J InvestDermatol. 2012 Feb;132(2):429-39. doi: 10.1038/jid.2011.316. Epub 2011 Oct 20 PubMed PMID: 22011910
+22.Bryant J, Picot J, Levitt G, Sullivan I, Baxter L, Clegg A. Cardioprotection against the toxic effects of anthracyclines given to children with cancer: asystematic review. Health Technol Assess. 2007 Jul;11(27):iii, ix-x, 1-84 Review. PubMed PMID: 17610809
+23.Buglio D, Younes A. Histone deacetylase inhibitors in Hodgkin lymphoma Invest New Drugs. 2010 Dec;28 Suppl 1:S21-7. doi: 10.1007/s10637-010-9588-y. Epub2010 Dec 3. Review. PubMed PMID: 21127943; PubMed Central PMCID: PMC3003791
+24.Caligaris-Cappio F. Autoimmune disorders and lymphoma. Ann Oncol. 2008 Jun;19Suppl 4:iv31-4. doi: 10.1093/annonc/mdn190. Review. PubMed PMID: 18519398
+25.Campbell BA. The Role of Radiation Therapy in the Treatment of Stage I-IIDiffuse Large B-Cell Lymphoma. Curr Hematol Malig Rep. 2013 Sep;8(3):236-42. doi:10.1007/s11899-013-0170-5. PubMed PMID: 23901002
+26.Campbell PT, Campbell KL, Wener MH, Wood BL, Potter JD, McTiernan A, Ulrich CM. A yearlong exercise intervention decreases CRP among obese postmenopausal women. Medicine and science in sports and exercise. Aug 2009;41(8):1533-1539
+27.Castillo JJ, Echenique IA. Rituximab in combination with chemotherapy versus chemotherapy alone in HIV-associated non-Hodgkin lymphoma: a pooled analysis of 15 prospective studies. American journal of hematology. Mar 2012;87(3):330-333
+28.Catassi C, Fabiani E, Corrao G, Barbato M, De Renzo A, Carella AM, . . . Corazza GR. Risk of non-Hodgkin lymphoma in celiac disease. JAMA : the journal of the American Medical Association. Mar 20 2002;287(11):1413-1419
+29.Chang ET, Cronin-Fenton DP, Friis S, Hjalgrim H, Sorensen HT, Pedersen L. Aspirin and other nonsteroidal anti-inflammatory drugs in relation to Hodgkin lymphoma risk in northern Denmark. Cancer epidemiology, biomarkers & prevention: a publication of the American Association for Cancer Research, cosponsored by the American Society of Preventive Oncology. Jan 2010;19(1):59-64.
+30.Chang ET, Froslev T, Sorensen HT, Pedersen L. A nationwide study of aspirin, other non-steroidal anti-inflammatory drugs, and Hodgkin lymphoma risk in Denmark. British journal of cancer. Nov 22 2011;105(11):1776-1782.
+31.Chang ET, Zheng T, Weir EG, Borowitz M, Mann RB, Spiegelman D, Mueller NE. Aspirin and the risk of Hodgkin's lymphoma in a population-based case-control study. Journal of the National Cancer Institute. Feb 18 2004;96(4):305-315.
+32.Charbonneau B, O'Connor HM, Wang AH, Liebow M, Thompson CA, Fredericksen ZS, Macon WR, Slager SL, Call TG, Habermann TM, Cerhan JR. Trans fatty acid intake isassociated with increased risk and n3 fatty acid intake with reduced risk ofnon-hodgkin lymphoma. J Nutr. 2013 May;143(5):672-81. doi: 10.3945/jn.112.168658. Epub 2013 Mar 13. PubMed PMID: 23486982; PubMed Central PMCID: PMC3738236
+33.Chen GC, Lv DB, Pang Z, Liu QF. Fruits and vegetables consumption and risk ofnon-Hodgkin's lymphoma: a meta-analysis of observational studies. Int J Cancer 2013 Jul;133(1):190-200. doi: 10.1002/ijc.27992. Epub 2013 Jan 18. PubMed PMID:23238796
+34.Chua I, Quinti I, Grimbacher B. Lymphoma in common variable immunodeficiency:interplay between immune dysregulation, infection and genetics. Curr OpinHematol. 2008 Jul;15(4):368-74. doi: 10.1097/MOH.0b013e328302c7b6. Review. PubMedPMID: 18536576
+35.Clarke CA, Undurraga DM, Harasty PJ, Glaser SL, Morton LM, Holly EA. Changes in cancer registry coding for lymphoma subtypes: reliability over time and relevance for surveillance and study. Cancer epidemiology, biomarkers & prevention : a publication of the American Association for Cancer Research, cosponsored by the American Society of Preventive Oncology. Apr 2006;15(4):630-638
+36.CLS. Cell Lines Service. MOLT-4. Copyright © 2013. Available at: http://www.cell-lines-service.de/content/e3969/e4304/e4329/index_eng.html. Accessed 12/17/2013.
+37.Cohen JI. Epstein-Barr Virus: An Oncogenic Human Herpesvirus. In: Kufe DW, Pollock RE, Weichselbaum RR, et al., editors. Hamilton (ON): BC Decker; 2003. Available at: http://www.ncbi.nlm.nih.gov/books/NBK12886/. Accessed 11/26/2013. 2003
+38.Conklin KA. Coenzyme q10 for prevention of anthracycline-inducedcardiotoxicity. Integr Cancer Ther. 2005 Jun;4(2):110-30. Review. PubMed PMID: 15911925
+39.Cotto M, Cabanillas F, Tirado M, García MV, Pacheco E. Epigenetic therapy of lymphoma using histone deacetylase inhibitors. Clin Transl Oncol. 2010Jun;12(6):401-9. doi: 10.1007/s12094-010-0527-3. Review. PubMed PMID: 20534395
+40.CTCA. Cancer Treatment Centers of America. Non-Hodgkin Lymphoma. Learning page. Non-Hodgkin lymphoma symptoms. Available at: http://www.cancercenter.com/non-hodgkin-lymphoma/symptoms/. Accessed 12/13/2013
+41.Dalia S, Chavez J, Castillo JJ, Sokol L. Hepatitis B infection increases the risk of non-Hodgkin lymphoma: a meta-analysis of observational studies. Leukemia research. Sep 2013;37(9):1107-1115
+42.Das L, Vinayak M. Anti-carcinogenic action of curcumin by activation ofantioxidant defence system and inhibition of NF-κB signalling in lymphoma-bearingmice. Biosci Rep. 2012 Apr 1;32(2):161-70. doi: 10.1042/BSR20110043. PubMed PMID:21831045
+43.De Falco G, Rogena EA, Leoncini L. Infectious agents and lymphoma. SeminDiagn Pathol. 2011 May;28(2):178-87. Review. PubMed PMID: 21842703
+44.Descamps O, Riondel J, Ducros V, Roussel AM. Mitochondrial production ofreactive oxygen species and incidence of age-associated lymphoma in OF1 mice:effect of alternate-day fasting. Mech Ageing Dev. 2005 Nov;126(11):1185-91 PubMed PMID: 16126250
+45.Drake MT, Maurer MJ, Link BK, Habermann TM, Ansell SM, Micallef IN, Kelly JL,Macon WR, Nowakowski GS, Inwards DJ, Johnston PB, Singh RJ, Allmer C, Slager SL, Weiner GJ, Witzig TE, Cerhan JR. Vitamin D insufficiency and prognosis innon-Hodgkin's lymphoma. J Clin Oncol. 2010 Sep 20;28(27):4191-8. doi:10.1200/JCO.2010.28.6674. Epub 2010 Aug 16. PubMed PMID: 20713849; PubMed CentralPMCID: PMC2953973
+46.Ekström Smedby K, Vajdic CM, Falster M, Engels EA, Martínez-Maza O, Turner J,Hjalgrim H, Vineis P, Seniori Costantini A, Bracci PM, Holly EA, Willett E,Spinelli JJ, La Vecchia C, Zheng T, Becker N, De Sanjosé S, Chiu BC, Dal Maso L, Cocco P, Maynadié M, Foretova L, Staines A, Brennan P, Davis S, Severson R,Cerhan JR, Breen EC, Birmann B, Grulich AE, Cozen W. Autoimmune disorders andrisk of non-Hodgkin lymphoma subtypes: a pooled analysis within the InterLymphConsortium. Blood. 2008 Apr 15;111(8):4029-38. doi: 10.1182/blood-2007-10-119974 Epub 2008 Feb 8. PubMed PMID: 18263783; PubMed Central PMCID: PMC2288717
+47.El-Helw LM, Hancock BW. Pixantrone: a novel aza-anthracenedione in the treatment of non-Hodgkin's lymphomas. Expert opinion on investigational drugs. Oct 2007;16(10):1683-1691
+48.Emrich HM, von Zerssen D, Kissling W, Moller HJ. Therapeutic effect of valproate in mania. The American journal of psychiatry. Feb 1981;138(2):256
+49.Engels EA. Infectious agents as causes of non-Hodgkin lymphoma. Cancer epidemiology, biomarkers & prevention: a publication of the American Association for Cancer Research, cosponsored by the American Society of Preventive Oncology. Mar 2007;16(3):401-404
+50.Erta M, Quintana A, Hidalgo J. Interleukin-6, a major cytokine in the centralnervous system. Int J Biol Sci. 2012;8(9):1254-66. doi: 10.7150/ijbs.4679. Epub2012 Oct 25. Review. PubMed PMID: 23136554; PubMed Central PMCID: PMC3491449
+51.Even-Sapir E, Israel O. Gallium-67 scintigraphy: a cornerstone in functional imaging of lymphoma. European journal of nuclear medicine and molecular imaging. Jun 2003;30 Suppl 1:S65-81
+52.Fast Stats [SEER] (2013). Fast Stats: An interactive tool for access to SEER cancer statistics. Surveillance Research Program, National Cancer Institute. Available at: http://seer.cancer.gov/faststats. Accessed on 9-24-2013.  
+53.FDA. Food and Drug Administration. Oncologic Drugs Advisory Committee Meeting Briefing Document. Pixantrone dimaleate (BBR 2778) Injection for the treatment of patients with relapsed or refractory aggressive Non-Hodgkin's Lymphoma who have received 2 or more prior lines of therapy. NDA No. 22-481. 1/6/2010. Available at: http://www.fda.gov/downloads/advisorycommittees/committeesmeetingmaterials/drugs/oncologicdrugsadvisorycommittee/ucm199560.pdf. Accessed 11/26/2013. 2010
+54.Ferreri AJM, Ernberg I, Copie-Bergman C. Infectious agents and lymphoma development: molecular and clinical aspects. Journal Of Internal Medicine. 2009;265(4):421-438
+55.Fiebich BL, Lieb K, Hüll M, Berger M, Bauer J. Effects of NSAIDs on IL-1beta-induced IL-6 mRNA and protein synthesis in human astrocytoma cells Neuroreport. 1996 Apr 26;7(6):1209-13. PubMed PMID: 8817534
+56.Fiebich BL, Muñoz E, Rose T, Weiss G, McGregor GP. Molecular targets of theantiinflammatory Harpagophytum procumbens (devil's claw): inhibition of TNFα and COX-2 gene expression by preventing activation of AP-1. Phytother Res. 2012Jun;26(6):806-11. doi: 10.1002/ptr.3636. Epub 2011 Nov 10. PubMed PMID: 22072539
+57.Fields PA, Taylor GP. "Antivirals" in the treatment of adult T cell leukaemia- lymphoma (ATLL). Current hematologic malignancy reports. Dec 2012;7(4):267-275
+58.Fischbach W, Goebeler-Kolve ME, Dragosics B, Greiner A, Stolte M. Long term outcome of patients with gastric marginal zone B cell lymphoma of mucosa associated lymphoid tissue (MALT) following exclusive Helicobacter pylori eradication therapy: experience from a large prospective series. Gut. Jan 2004;53(1):34-37
+59.Fischbach W. Gastric mucosal-associated lymphoid tissue lymphoma Gastroenterol Clin North Am. 2013 Jun;42(2):371-80. doi:10.1016/j.gtc.2013.01.008. Epub 2013 Mar 15. PubMed PMID: 23639646
+60.Flescher E, Rotem R, Kwon P, Azare J, Jaspers I, Cohen D. Aspirin enhances multidrug resistance gene 1 expression in human Molt-4 T lymphoma cells. Anticancer research. Nov-Dec 2000;20(6b):4441-4444.
+61.Frankenfeld CL, Cerhan JR, Cozen W, Davis S, Schenk M, Morton LM, . . . Ward MH. Dietary flavonoid intake and non-Hodgkin lymphoma risk. The American journal of clinical nutrition. May 2008;87(5):1439-1445
+62.Frazzi R, Valli R, Tamagnini I, Casali B, Latruffe N, Merli F Resveratrol-mediated apoptosis of hodgkin lymphoma cells involves SIRT1inhibition and FOXO3a hyperacetylation. Int J Cancer. 2013 Mar 1;132(5):1013-21. doi: 10.1002/ijc.27748. Epub 2012 Aug 7. PubMed PMID: 22833338
+63.Freeman GJ, Freedman AS, Rabinowe SN, Segil JM, Horowitz J, Rosen K, Whitman JF, Nadler LM. Interleukin 6 gene expression in normal and neoplastic B cells. J Clin Invest. 1989 May;83(5):1512-8. PubMed PMID: 2785119; PubMed Central PMCID:PMC303855
+64.Fühler M, Ottmann KW, Tronnier M. [Cutaneous marginal zone lymphoma (SALT)and infection with Borrelia burgdorferi]. Hautarzt. 2010 Feb;61(2):145-7. doi:10.1007/s00105-009-1766-5. German. PubMed PMID: 19399378
+65.Gajra A. B-Cell Lymphoma. Medscape web page. Practice Essentials page. Available at: http://emedicine.medscape.com/article/202677-overview. Last updated 11/19/2013. Accessed 11/26/2013
+66.Garfin PM. Posttransplant Lymphoproliferative Disease. Medscape web page. Available at: http://emedicine.medscape.com/article/431364-overview. Last updated 7/15/2013. Accessed 11/26/2013.
+67.Gavrilina OA, Gabeeva NG, Morozova AK, et al. [Role of high-dose chemotherapy and autologous blood stem cell transplantation in patients with diffuse large B-cell lymphoma]. Terapevticheskii arkhiv. 2013;85(7):90-97.
+68.Gelfand JM, Shin DB, Neimann AL, Wang X, Margolis DJ, Troxel AB. The risk of lymphoma in patients with psoriasis. J Invest Dermatol. 2006Oct;126(10):2194-201. Epub 2006 Jun 1. PubMed PMID: 16741509
+69.Georgiev MI, Ivanovska N, Alipieva K, Dimitrova P, Verpoorte R. Harpagoside: from Kalahari Desert to pharmacy shelf. Phytochemistry. 2013 Aug;92:8-15. doi:10.1016/j.phytochem.2013.04.009. Epub 2013 May 1. PubMed PMID: 23642455
+70.Gerhauser C. Cancer chemoprevention and nutriepigenetics: state of the art and future challenges. Topics in current chemistry. 2013;329:73-132
+71.Giachelia M, Voso MT, Tisi MC, Martini M, Bozzoli V, Massini G, D'Aló F,Larocca LM, Leone G, Hohaus S. Interleukin-6 plasma levels are modulated by apolymorphism in the NF-κB1 gene and are associated with outcome followingrituximab-combined chemotherapy in diffuse large B-cell non-Hodgkin lymphoma. Leuk Lymphoma. 2012 Mar;53(3):411-6. doi: 10.3109/10428194.2011.621566. Epub 2011Oct 24. PubMed PMID: 21902578
+72.Gill S, Porter DL. CAR-modified anti-CD19 T cells for the treatment of B-cell malignancies: rules of the road. Expert opinion on biological therapy. Jan 2014;14(1):37-49.
+73.Glass C. Role of the primary care physician in Hodgkin lymphoma. American family physician. Sep 1 2008;78(5):615-622
+74.Goel A, Aggarwal BB. Curcumin, the golden spice from Indian saffron, is achemosensitizer and radiosensitizer for tumors and chemoprotector andradioprotector for normal organs. Nutr Cancer. 2010;62(7):919-30. doi:10.1080/01635581.2010.509835. Review. PubMed PMID: 20924967
+75.Goenaga-Infante H, Kassam S, Stokes E, Hopley C, Joel SP. Capabilities ofHPLC with APEX-Q nebulisation ICP-MS and ESI MS/MS to compare selenium uptake andspeciation of non-malignant with different B cell lymphoma lines. Anal BioanalChem. 2011 Feb;399(5):1789-97. doi: 10.1007/s00216-010-4474-1. Epub 2010 Dec 8 PubMed PMID: 21140135
+76.Gopee NV, Johnson VJ, Sharma RP. Sodium selenite-induced apoptosis in murine B-lymphoma cells is associated with inhibition of protein kinase C-delta, nuclear factor kappaB, and inhibitor of apoptosis protein. Toxicological sciences: an official journal of the Society of Toxicology. Apr 2004;78(2):204-214
+77.Gottfried E, Lang SA, Renner K, Bosserhoff A, Gronwald W, Rehli M, Einhell S,Gedig I, Singer K, Seilbeck A, Mackensen A, Grauer O, Hau P, Dettmer K, AndreesenR, Oefner PJ, Kreutz M. New aspects of an old drug--diclofenac targets MYC andglucose metabolism in tumor cells. PLoS One. 2013 Jul 9;8(7):e66987. doi:10.1371/journal.pone.0066987. Print 2013. PubMed PMID: 23874405; PubMed CentralPMCID: PMC3706586
+78.Grudeva-Popova J, Nenova I, Mateva N, Ananoshtev N, Popov V, Atanasova M Non-Hodgkin lymphomas and carrier state of viral hepatitis B and C. J BUON. 2013 Jan-Mar;18(1):239-44. PubMed PMID: 23613411
+79.Gu J, Song ZP, Gui DM, Hu W, Chen YG, Zhang DD. Resveratrol attenuatesdoxorubicin-induced cardiomyocyte apoptosis in lymphoma nude mice by hemeoxygenase-1 induction. Cardiovasc Toxicol. 2012 Dec;12(4):341-9. doi:10.1007/s12012-012-9178-7. PubMed PMID: 22763982
+80.Guo SQ, Zhang YZ. Histone deacetylase inhibition: an important mechanism inthe treatment of lymphoma. Cancer Biol Med. 2012 Jun;9(2):85-9. doi:10.3969/j.issn.2095-3941.2012.02.001. PubMed PMID: 23691460; PubMed CentralPMCID: PMC3643654
+81.Gupta SC, Patchva S, Koh W, Aggarwal BB. Discovery of curcumin, a componentof golden spice, and its miraculous biological activities. Clin Exp PharmacolPhysiol. 2012 Mar;39(3):283-99. doi: 10.1111/j.1440-1681.2011.05648.x. Review PubMed PMID: 22118895; PubMed Central PMCID: PMC3288651
+82.Güven M, Oztürk B, Sayal A, Ozet A. Lipid peroxidation and antioxidant system in the blood of patients with Hodgkin's disease. Clin Biochem. 2000 Apr;33(3):209-12
+83.Han X, Zheng T, Foss F, Holford TR, Ma S, Zhao P, Dai M, Kim C, Zhang Y, Bai Y, Zhang Y. Vegetable and fruit intake and non-Hodgkin lymphoma survival inConnecticut women. Leuk Lymphoma. 2010 Jun;51(6):1047-54. doi:10.3109/10428191003690364. PubMed PMID: 20350273; PubMed Central PMCID:PMC3110752
+84.Hermine O, Allard I, Lévy V, et al. A prospective phase II clinical trial with the use of zidovudeine and interferon-alpha in the acute and lymphoma forms of adult T-cell leukemia/lymphoma. Hematol J. 2002;3(6):276-82
+85.Hershman DL, McBride RB, Eisenberger A, Tsai WY, Grann VR, Jacobson JS Doxorubicin, cardiac risk factors, and cardiac toxicity in elderly patients with diffuse B-cell non-Hodgkin's lymphoma. J Clin Oncol. 2008 Jul 1;26(19):3159-65 doi: 10.1200/JCO.2007.14.1242. PubMed PMID: 18591554
+86.Hirano T. Interleukin 6 in autoimmune and inflammatory diseases: a personalmemoir. Proc Jpn Acad Ser B Phys Biol Sci. 2010;86(7):717-30. Review. PubMedPMID: 20689230; PubMed Central PMCID: PMC3066534
+87.Hjalgrim H. On the aetiology of Hodgkin lymphoma. Dan Med J. 2012Jul;59(7):B4485. Review. PubMed PMID: 22759852
+88.Hofbauer GF, Kessler B, Kempf W, Nestle FO, Burg G, Dummer R. Multilesional primary cutaneous diffuse large B-cell lymphoma responsive to antibiotic treatment. Dermatology (Basel, Switzerland). 2001;203(2):168-170
+89.Holmberg L, Maloney DG. The role of autologous and allogeneic hematopoietic stem cell transplantation for Hodgkin lymphoma. Journal of National Comprehensive Cancer Network: JNCCN. Sep 1 2011;9(9):1060-1071.
+90.Horneber MA, Bueschel G, Huber R, Linde K, Rostock M. Mistletoe therapy inoncology. Cochrane Database Syst Rev. 2008 Apr 16;(2):CD003297. doi:10.1002/14651858.CD003297.pub2. Review. PubMed PMID: 18425885
+91.Hou S, Yang W. A meta-analysis on Rituximab combined CHOP chemotherapy for non-Hodgkin lymphoma in China. Saudi medical journal. Jul 2011;32(7):675-678
+92.Howells LM, Berry DP, Elliott PJ, Jacobson EW, Hoffmann E, Hegarty B, BrownK, Steward WP, Gescher AJ. Phase I randomized, double-blind pilot study ofmicronized resveratrol (SRT501) in patients with hepatic metastases--safety,pharmacokinetics, and pharmacodynamics. Cancer Prev Res (Phila). 2011Sep;4(9):1419-25. doi: 10.1158/1940-6207.CAPR-11-0148. Epub 2011 Jun 16. PubMedPMID: 21680702; PubMed Central PMCID: PMC3173869
+93.Howman RA, Prince HM. New drug therapies in peripheral T-cell lymphoma. Expert review of anticancer therapy. Mar 2011;11(3):457-472
+94.Hu XZ. [Effects of selenium deficiency and supplementation on tumor immuneresponse in mice]. Zhonghua Zhong Liu Za Zhi. 1990 Sep;12(5):328-31. Chinese PubMed PMID: 2276320
+95.Hugo F, Dittmar T, Treutler EK, Zänker KS, Kuehn JJ. The Viscum album extractIscador P does not cause an autocrine interleukin-6 loop in B-Non-Hodgkin'sLymphoma cell lines. Onkologie. 2005 Aug;28(8-9):415-20. Epub 2005 Aug 29. PubMedPMID: 16160404
+96.Hussain AR, Ahmed M, Al-Jomah NA, Khan AS, Manogaran P, Sultana M, AbubakerJ, Platanias LC, Al-Kuraya KS, Uddin S. Curcumin suppresses constitutiveactivation of nuclear factor-kappa B and requires functional Bax to induceapoptosis in Burkitt's lymphoma cell lines. Mol Cancer Ther. 2008Oct;7(10):3318-29. doi: 10.1158/1535-7163.MCT-08-0541. PubMed PMID: 18852135
+97.Iarussi D, Auricchio U, Agretto A, Murano A, Giuliano M, Casale F, Indolfi P,Iacono A. Protective effect of coenzyme Q10 on anthracyclines cardiotoxicity:control study in children with acute lymphoblastic leukemia and non-Hodgkinlymphoma. Mol Aspects Med. 1994;15 Suppl:s207-12. PubMed PMID: 7752832
+98.Ignatova TM, Mukhin NA. [Current possibilities for treatment for hepatitis C virus-induced cryoglobulinemic vasculitis and B-cell lymphoma]. Ter Arkh 2012;84(11):81-8. Review. Russian. PubMed PMID: 23252255
+99.Iurescia S, Fioretti D, Fazio VM, Rinaldi M. Epitope-driven DNA vaccine design employing immunoinformatics against B-cell lymphoma: a biotech's challenge. Biotechnology advances. Jan-Feb 2012;30(1):372-383
+100.Jagetia GC, Rao SK. Evaluation of the antineoplastic activity of guduchi(Tinospora cordifolia) in Ehrlich ascites carcinoma bearing mice. Biol PharmBull. 2006 Mar;29(3):460-6. PubMed PMID: 16508146
+101.Jiang XR, Macey MG, Lin HX, Newland AC. The anti-leukaemic effects and themechanism of sodium selenite. Leuk Res. 1992;16(4):347-52. PubMed PMID: 1314317
+102.Johansson E, Wilson B, Brunton L, Tishelman C, Molassiotis A. Symptomsbefore, during, and 14 months after the beginning of treatment as perceived bypatients with lymphoma. Oncol Nurs Forum. 2010 Mar;37(2):E105-13. doi:10.1188/10.ONF.E105-E113. PubMed PMID: 20189909
+103.Jüliger S, Goenaga-Infante H, Lister TA, Fitzgibbon J, Joel SP Chemosensitization of B-cell lymphomas by methylseleninic acid involves nuclearfactor-kappaB inhibition and the rapid generation of other selenium species Cancer Res. 2007 Nov 15;67(22):10984-92. PubMed PMID: 18006844
+104.Kabat GC, Kim MY, Wactawski-Wende J, Shikany JM, Vitolins MZ, Rohan TE Intake of antioxidant nutrients and risk of non-Hodgkin's Lymphoma in the Women'sHealth Initiative. Nutr Cancer. 2012;64(2):245-54. doi:10.1080/01635581.2012.642454. Epub 2012 Jan 2. PubMed PMID: 22211937
+105.Kameda G, Kempf W, Oschlies I, Michael K, Seifert G, Längler A. Nodalanaplastic large-cell lymphoma ALK-1- with CD30+ cutaneous lymphoproliferationtreated with mistletoe: spontaneous remission or treatment response? KlinPadiatr. 2011 Nov;223(6):364-7. doi: 10.1055/s-0031-1285914. Epub 2011 Nov 3. PubMed PMID: 22052633
+106.Kanai M, Otsuka Y, Otsuka K, Sato M, Nishimura T, Mori Y, Kawaguchi M,Hatano E, Kodama Y, Matsumoto S, Murakami Y, Imaizumi A, Chiba T, Nishihira J,Shibata H. A phase I study investigating the safety and pharmacokinetics ofhighly bioavailable curcumin (Theracurmin) in cancer patients. Cancer ChemotherPharmacol. 2013 Jun;71(6):1521-30. doi: 10.1007/s00280-013-2151-8. Epub 2013 Mar 30. PubMed PMID: 23543271
+107.Kanakry JA, Ambinder RF. EBV-related lymphomas: new approaches to treatment. Current treatment options in oncology. Jun 2013;14(2):224-236
+108.Kapil A, Sharma S. Immunopotentiating compounds from Tinospora cordifolia. J Ethnopharmacol. 1997 Oct;58(2):89-95
+109.Kelaidi C, Rollot F, Park S, Tulliez M, Christoforov B, Calmus Y, Podevin P,Bouscary D, Sogni P, Blanche P, Dreyfus F. Response to antiviral treatment inhepatitis C virus-associated marginal zone lymphomas. Leukemia. 2004Oct;18(10):1711-6. PubMed PMID: 15284859
+110.Kennedy AR, Ware JH, Carlton W, Davis JG. Suppression of the later stages ofradiation-induced carcinogenesis by antioxidant dietary formulations. Radiat Res 2011 Jul;176(1):62-70. Epub 2011 Apr 26. PubMed PMID: 21520997
+111.Khan G, Norton AJ, Slavin G. Epstein-Barr virus in Reed-Sternberg-like cells in non-Hodgkin's lymphomas. The Journal of pathology. Jan 1993;169(1):9-14
+112.Khan MA, Gahlot S, Majumdar S. Oxidative stress induced by curcumin promotesthe death of cutaneous T-cell lymphoma (HuT-78) by disrupting the function ofseveral molecular targets. Mol Cancer Ther. 2012 Sep;11(9):1873-83. doi:10.1158/1535-7163.MCT-12-0141. Epub 2012 May 31. PubMed PMID: 22653966
+113.Klempner MS, Hu LT, Evans J, Schmid CH, Johnson GM, Trevino RP, Norton D,Levy L, Wall D, McCall J, Kosinski M, Weinstein A. Two controlled trials ofantibiotic treatment in patients with persistent symptoms and a history of Lymedisease. N Engl J Med. 2001 Jul 12;345(2):85-92. PubMed PMID: 11450676
+114.Kim SR, Bae MK, Kim JY, Wee HJ, Yoo MA, Bae SK. Aspirin induces apoptosis through the blockade of IL-6-STAT3 signaling pathway in human glioblastoma A172 cells. Biochemical and biophysical research communications. Sep 18 2009;387(2):342-347.
+115.Kobrinsky B, Hymes KB (2012). Epocrates Online. Non-Hodgkin Lymphoma. Available at: https://online.epocrates.com/noFrame/showPage.do?method=diseases&MonographId=312&ActiveSectionId=11 Accessed: 9/24/2013.
+116.Kochenderfer JN, Dudley ME. American Society of Hematology 55th Annual Meeting and exposition. Oral and Poster Abstracts. Effective Treatment Of Chemotherapy-Refractory Diffuse Large B-Cell Lymphoma With Autologous T Cells Genetically-Engineered To Express An Anti-CD19 Chimeric Antigen ReceptorClinically Relevant Abstract. 12/8/2013. Available at: https://ash.confex.com/ash/2013/webprogram/Paper62867.html
+117.Kochenderfer JN, Rosenberg SA. Treating B-cell cancer with T cells expressing anti-CD19 chimeric antigen receptors. Nature reviews. Clinical oncology. May 2013;10(5):267-276.
+118.Kovacs E, Kuehn JJ. Measurements of IL-6, soluble IL-6 receptor and soluble gp130 in sera of B-cell lymphoma patients. Does viscum album treatment affectthese parameters? Biomed Pharmacother. 2002 May;56(3):152-8. PubMed PMID:12046687
+119.Kovacs E, Link S, Toffol-Schmidt U. Comparison of Viscum album QuFrF extractwith vincristine in an in vitro model of human B cell lymphoma WSU-1 Arzneimittelforschung. 2008;58(11):592-7. doi: 10.1055/s-0031-1296562. PubMedPMID: 19137911
+120.Kovacs E, Link S, Toffol-Schmidt U. Cytostatic and cytocidal effects ofmistletoe (Viscum album L.) quercus extract Iscador. Arzneimittelforschung. 2006 Jun;56(6A):467-73. PubMed PMID: 16927528
+121.Kuehn JJ. [Favorable long-term outcome with mistletoe therapy in a patientwith centroblastic-centrocytic non-Hodgkin lymphoma]. Dtsch Med Wochenschr. 1999 Nov 26;124(47):1414-8. German. PubMed PMID: 10605421
+122.Küppers R, Hansmann ML. The Hodgkin and Reed/Sternberg cell. Int J BiochemCell Biol. 2005 Mar;37(3):511-7. Review. PubMed PMID: 15618006
+123.Kurzrock R, Redman J, Cabanillas F, et al. Serum interleukin 6 levels are elevated in lymphoma patients and correlate with survival in advanced Hodgkin’s disease and with B symptoms. Cancer Res. 1993;53(9):2118-22
+124.Lakka TA, Lakka HM, Rankinen T, Leon AS, Rao DC, Skinner JS, . . . Bouchard C. Effect of exercise training on plasma levels of C-reactive protein in healthy adults: the HERITAGE Family Study. European heart journal. Oct 2005;26(19):2018-2025
+125.Larsson SC, Wolk A. Obesity and risk of non-Hodgkin's lymphoma: a meta-analysis. International journal of cancer. Journal international du cancer. Oct 1 2007;121(7):1564-1570
+126.Larsson SC, Wolk A.. Eur J Cancer. 2011Nov;47(16):2422-30. doi: 10.1016/j.ejca.2011.06.029. Epub 2011 Jul 4. Review PubMed PMID: 21733676
+127.Lash BW, Dessain SK, Argiris A, Besa EC. Medscape Reference. Hodgkin Lymphoma. Updated 9/16/2013. Available at: http://emedicine.medscape.com/article/201886-overview#aw2aab6b2b4 Accessed 12/17/2013.
+128.Lavabre-Bertrand T, Exbrayat C, Liautard J, Gaillard JP, Baskevitch PP, Poujol N, . . . Brochier J. Detection of membrane and soluble interleukin-6 receptor in lymphoid malignancies. British journal of haematology. Dec 1995;91(4):871-877
+129.Lee BJ, Huang YC, Chen SJ, Lin PT. Effects of coenzyme Q10 supplementationon inflammatory markers (high-sensitivity C-reactive protein, interleukin-6, and homocysteine) in patients with coronary artery disease. Nutrition. 2012Jul;28(7-8):767-72. doi: 10.1016/j.nut.2011.11.008. Epub 2012 Feb 17. PubMedPMID: 22342390
+130.Leechawengwongs E, Shearer WT. Lymphoma complicating primaryimmunodeficiency syndromes. Curr Opin Hematol. 2012 Jul;19(4):305-12. doi:10.1097/MOH.0b013e328353fa13. Review. PubMed PMID: 22525579
+131.Leukemia & Lymphoma Society (2011a). Non-Hodgkin Lymphoma. Available at: http://www.lls.org/content/nationalcontent/resourcecenter/freeeducationmaterials/lymphoma/pdf/nhl.pdf. Accessed 9/25/2013.
+132.Leukemia & Lymphoma Society (2011b). Hodgkin Lymphoma. Available at: http://www.lls.org/content/nationalcontent/resourcecenter/freeeducationmaterials/lymphoma/pdf/hodgkinlymphoma.pdf. Accessed 9/24/2013.
+133.Leukemia & Lymphoma Society. 2013a. Disease Information & support page. Non-Hodgkin Lymphoma. Available at: http://www.lls.org/diseaseinformation/getinformationsupport/factsstatistics/nonhodgkinlymphoma/. Accessed 12/13/2013
+134.Leukemia & Lymphoma Society. 2013b. Hodgkin Lymphoma. Available at: http://www.lls.org/content/nationalcontent/resourcecenter/freeeducationmaterials/lymphoma/pdf/hodgkinlymphoma.pdf. Accessed 12/9/2013
+135.Li Y, Liu L, Tollefsbol TO. Glucose restriction can extend normal cell lifespan and impair precancerous cell growth through epigenetic control of hTERT and p16 expression. FASEB journal: official publication of the Federation of American Societies for Experimental Biology. May 2010;24(5):1442-1453
+136.Li ZX, Ouyang KQ, Jiang X, Wang D, Hu Y. Curcumin induces apoptosis andinhibits growth of human Burkitt's lymphoma in xenograft mouse model. Mol Cells. 2009 Mar 31;27(3):283-9. doi: 10.1007/s10059-009-0036-9. Epub 2009 Mar 19. PubMedPMID: 19326074
+137.Lim ST, Fei G, Quek R, Lim LC, Lee LH, Yap SP, . . . Tao M. The relationship of hepatitis B virus infection and non-Hodgkin's lymphoma and its impact on clinical characteristics and prognosis. European journal of haematology. Aug 2007;79(2):132-137
+138.Lim ST, Levine AM. Recent advances in acquired immunodeficiency syndrome(AIDS)-related lymphoma. CA Cancer J Clin. 2005 Jul-Aug;55(4):229-41; 260-1, 264 Review. PubMed PMID: 16020424
+139.Lin WC, Tsai HF, Kuo SH, Wu MS, Lin CW, Hsu PI, Cheng AL, Hsu PN Translocation of Helicobacter pylori CagA into Human B lymphocytes, the origin ofmucosa-associated lymphoid tissue lymphoma. Cancer Res. 2010 Jul15;70(14):5740-8. doi: 10.1158/0008-5472.CAN-09-4690. Epub 2010 Jun 29. PubMedPMID: 20587516
+140.Lin YT, Wu YH, Tseng CK, Lin CK, Chen WC, Hsu YC, Lee JC. Green tea phenolic epicatechins inhibit hepatitis C virus replication via cycloxygenase-2 andattenuate virus-induced inflammation. PLoS One. 2013;8(1):e54466. doi:10.1371/journal.pone.0054466. Epub 2013 Jan 24. PubMed PMID: 23365670; PubMedCentral PMCID: PMC3554764
+141.Linos A, Blair A, Gibson RW, Everett G, Van Lier S, Cantor KP, Schuman L,Burmeister L. Leukemia and non-Hodgkin's lymphoma and residential proximity toindustrial plants. Arch Environ Health. 1991 Mar-Apr;46(2):70-4. Erratum in: ArchEnviron Health 1991 Sep-Oct;46(5):305. PubMed PMID: 2006896
+142.Lissoni P, Bolis S, Brivio F, Fumagalli L. A phase II study ofneuroimmunotherapy with subcutaneous low-dose IL-2 plus the pineal hormonemelatonin in untreatable advanced hematologic malignancies. Anticancer Res. 2000 May-Jun;20(3B):2103-5. PubMed PMID: 10928160
+143.LRF. Lymphoma Research Foundation. Copyright © 2012. Common Types of T-cell Lymphoma. Available at: http://www.lymphoma.org/site/pp.asp?c=bkLTKaOQLmK8E&b=6300161#TypesMoreCommon. Accessed 12/13/2013
+144.Luminari S, Bellei M, Biasoli I, Federico M. Follicular lymphoma - treatmentand prognostic factors. Rev Bras Hematol Hemoter. 2012;34(1):54-9. doi:10.5581/1516-8484.20120015. PubMed PMID: 23049385; PubMed Central PMCID:PMC3459616
+145.Mackenzie GG, Queisser N, Wolfson ML, Fraga CG, Adamo AM, Oteiza PI Curcumin induces cell-arrest and apoptosis in association with the inhibition of constitutively active NF-kappaB and STAT3 pathways in Hodgkin's lymphoma cells Int J Cancer. 2008 Jul 1;123(1):56-65. doi: 10.1002/ijc.23477. PubMed PMID:18386790
+146.MacKenzie P, Kamili QU, Menter A, Cooper B. Lymphoma and immunosuppression: a report of a case associated with efalizumab therapy. Clin Lymphoma MyelomaLeuk. 2010 Feb;10(1):E14-6. doi: 10.3816/CLML.2010.n.011. PubMed PMID: 20223722
+147.Mahdy AM, Galley HF, Abdel-Wahed MA, el-Korny KF, Sheta SA, Webster NR Differential modulation of interleukin-6 and interleukin-10 by diclofenac inpatients undergoing major surgery. Br J Anaesth. 2002 Jun;88(6):797-802. PubMedPMID: 12173196
+148.Mahieux R, Gessain A. Adult T-cell leukemia/lymphoma and HTLV-1. Current hematologic malignancy reports. Oct 2007;2(4):257-264
+149.Marcucci F, Mele A. Hepatitis viruses and non-Hodgkin lymphoma: epidemiology, mechanisms of tumorigenesis, and therapeutic opportunities. Blood. Feb 10 2011;117(6):1792-1798
+150.Marcus R, Hagenbeek A. The therapeutic use of rituximab in non-Hodgkin's lymphoma. European journal of haematology. Supplementum. Jan 2007(67):5-14
+151.Mathus-Vliegen EM. Lymphoma in coeliac disease. J R Soc Med. 1995Dec;88(12):672-7. Review. PubMed PMID: 8786586; PubMed Central PMCID: PMC1295407
+152.Mellemkjaer L, Pfeiffer RM, Engels EA, Gridley G, Wheeler W, Hemminki K, . . . Landgren O. Autoimmune disease in individuals and close family members and susceptibility to non-Hodgkin's lymphoma. Arthritis and rheumatism. Mar 2008;58(3):657-666
+153.Mercurio C, Minucci S, Pelicci PG. Histone deacetylases and epigenetic therapies of hematological malignancies. Pharmacological research: the official journal of the Italian Pharmacological Society. Jul 2010;62(1):18-34
+154.Meynet O, Zunino B, Happo L, Pradelli LA, Chiche J, Jacquin MA, Mondragón L,Tanti JF, Taillan B, Garnier G, Reverso-Meinietti J, Mounier N, Michiels JF,Michalak EM, Carles M, Scott CL, Ricci JE. Caloric restriction modulates Mcl-1expression and sensitizes lymphomas to BH3 mimetic in mice. Blood. 2013 Oct3;122(14):2402-2411. Epub 2013 Aug 21. PubMed PMID: 23966420
+155.Minauchi K, Koizumi K, Kondo M, Takigami M, Harada H, Fujita H, Mukai M [Remission induced by dose-reduction of immunosuppressants alone in a patientwith post-transplant lymphoproliferative disorder of central nervous systemorigin]. Rinsho Ketsueki. 2011 May;52(5):272-7. Review. Japanese. PubMed PMID:21646772
+156.Mncwangi N, Chen W, Vermaak I, Viljoen AM, Gericke N. Devil's Claw-a review of the ethnobotany, phytochemistry and biological activity of Harpagophytumprocumbens. J Ethnopharmacol. 2012 Oct 11;143(3):755-71. doi:10.1016/j.jep.2012.08.013. Epub 2012 Aug 21. Review. PubMed PMID: 22940241
+157.Morton LM. Dissecting lymphoma incidence to inform epidemiologic andclinical research. Leuk Lymphoma. 2013 Aug;54(8):1575-6. doi:10.3109/10428194.2013.774000. Epub 2013 Mar 8. PubMed PMID: 23391143
+158.Mozaheb Z, Aledavood A, Farzad F. Diet and non-Hodgkin's lymphoma risk. Pan Afr Med J. 2012;12:53. Epub 2012 Jun 28. PubMed PMID: 22937193; PubMed CentralPMCID: PMC3428173
+159.MSKCC. Memorial Sloan-Kettering Cancer Center. Diagnosis & Treatment page. Treatment for Non-Hodgkin Lymphoma. Available at: http://www.mskcc.org/cancer-care/adult/treatment-non-hodgkin-lymphoma. 2013. Accessed 11/25/2013.
+160.Mukherji D, Pettengell R. Pixantrone maleate for non-Hodgkin's lymphoma Drugs Today (Barc). 2009 Nov;45(11):797-805. doi: 1396674/dot.2009.45.11.1413767 Review. PubMed PMID: 20126672
+161.Mukhopadhyay-Sardar S, Rana MP, Chatterjee M. Antioxidant associatedchemoprevention by selenomethionine in murine tumor model. Mol Cell Biochem. 2000Mar;206(1-2):17-25. PubMed PMID: 10839190
+162.Nastoupil LJ, Rose AC, Flowers CR. Diffuse large B-cell lymphoma: currenttreatment approaches. Oncology (Williston Park). 2012 May;26(5):488-95. Review PubMed PMID: 22730604
+163.NCI. National Cancer Institute. Health Professional Version page. Adult Non-Hodgkin Lymphoma Treatment (PDQ®). Available at: http://www.cancer.gov/cancertopics/pdq/treatment/adult-non-hodgkins/HealthProfessional/page4. Last updated 11/19/2013. Accessed 11/26/2013. 2013
+164.Neve J. Selenium as a 'nutraceutical': how to conciliate physiological and supra-nutritional effects for an essential trace element. Current opinion in clinical nutrition and metabolic care. Nov 2002;5(6):659-663
+165.Oh EG, Bang SY, Kim SH, Hyun SS, Chu SH, Jeon JY, Im JA, Lee JE, Lee MK Therapeutic lifestyle modification program reduces plasma levels of thechemokines CRP and MCP-1 in subjects with metabolic syndrome. Biol Res Nurs. 2013Jan;15(1):48-55. doi: 10.1177/1099800411416637. Epub 2011 Aug 22. PubMed PMID:21859748
+166.Ollberding NJ, Aschebrook-Kilfoy B, Caces DB, Smith SM, Weisenburger DD,Chiu BC. Dietary intake of fruits and vegetables and overall survival innon-Hodgkin lymphoma. Leuk Lymphoma. 2013 Apr 30. [Epub ahead of print] PubMedPMID: 23488609
+167.Ollberding NJ, Aschebrook-Kilfoy B, Caces DB, Wright ME, Weisenburger DD,Smith SM, Chiu BC. Phytanic acid and the risk of non-Hodgkin lymphoma. Carcinogenesis. 2013 Jan;34(1):170-5. doi: 10.1093/carcin/bgs315. Epub 2012 Oct5. PubMed PMID: 23042099; PubMed Central PMCID: PMC3534193
+168.Olsson H, Brandt L. Risk of non-Hodgkin's lymphoma among men occupationally exposed to organic solvents. Scandinavian journal of work, environment & health. Aug 1988;14(4):246-251
+169.Ostermann T, Büssing A. Retrolective studies on the survival of cancerpatients treated with mistletoe extracts: a meta-analysis. Explore (NY). 2012Sep-Oct;8(5):277-81. doi: 10.1016/j.explore.2012.06.005. Review. PubMed PMID:22938746
+170.Otte A, van de Wiele C, Dierckx RA. Radiolabeled immunotherapy innon-Hodgkin's lymphoma treatment: the next step. Nucl Med Commun. 2009Jan;30(1):5-15. doi: 10.1097/MNM.0b013e328313e565. Review. PubMed PMID: 19020470
+171.Papadatos-Pastos D, Pettengell R. Pixantrone: merging safety with efficacy. Expert Rev Hematol. 2013 Feb;6(1):25-33. doi: 10.1586/ehm.12.61. Review. PubMedPMID: 23373776
+172.Parbhakar S, Cin AD. Primary cutaneous B-cell lymphoma: Role of surgery. CanJ Plast Surg. 2011 Summer;19(2):e12-4. PubMed PMID: 22654537; PubMed CentralPMCID: PMC3328108
+173.Parent MÉ, El-Zein M, Rousseau MC, Pintos J, Siemiatycki J. Night work andthe risk of cancer among men. Am J Epidemiol. 2012 Nov 1;176(9):751-9. doi:10.1093/aje/kws318. Epub 2012 Oct 3. PubMed PMID: 23035019
+174.Péan E, Flores B, Hudson I, et al. The European Medicines Agency review of pixantrone for the treatment of adult patients with multiply relapsed or refractory aggressive non-Hodgkin’s B-cell lymphomas: summary of the scientific assessment of the committee for medicinal products for human use. Oncologist. 2013;18(5):625-33
+175.Persengiev SP, Kyurkchiev S. Selective effect of melatonin on theproliferation of lymphoid cells. Int J Biochem. 1993 Mar;25(3):441-4. PubMedPMID: 8462731
+176.Pettengell R, Coiffier B, Narayanan G, de Mendoza FH, Digumarti R, Gomez H, Zinzani PL, Schiller G, Rizzieri D, Boland G, Cernohous P, Wang L, Kuepfer C,Gorbatchevsky I, Singer JW. Pixantrone dimaleate versus other chemotherapeuticagents as a single-agent salvage treatment in patients with relapsed orrefractory aggressive non-Hodgkin lymphoma: a phase 3, multicentre, open-label,randomised trial. Lancet Oncol. 2012 Jul;13(7):696-706. doi:10.1016/S1470-2045(12)70212-7. Epub 2012 May 30. Erratum in: Lancet Oncol. 2012Jul;13(7):e285. PubMed PMID: 22652183
+177.Pfister HW, Preac-Mursic V, Wilske B, Schielke E, Sorgel F, Einhaupl KM. Randomized comparison of ceftriaxone and cefotaxime in Lyme neuroborreliosis. The Journal of infectious diseases. Feb 1991;163(2):311-318
+178.Portlock CS, Hamlin P, Noy A, Chey W, Gaydos CA, Palomba L, Schwartz I,Corcoran S, Rosenzweig L, Walker D, Papanicolaou G, Markowitz A. Infectiousdisease associations in advanced stage, indolent lymphoma (follicular andnonfollicular): developing a lymphoma prevention strategy. Ann Oncol. 2008Feb;19(2):254-8. Epub 2007 Oct 26. PubMed PMID: 17965114
+179.Portlock CS. Hodgkin Lymphoma (Hodgkin's Disease). The Merck Manual Home Health Handbook online. Lymphomas page. Available at: http://www.merckmanuals.com/home/blood_disorders/lymphomas/hodgkin_lymphoma.html. Last updated 10/2012. Accessed 11/26/2013.
+180.Poullot E, Bouscary D, Guyader D, Ghandour C, Roussel M, Fest T, Houot R,Lamy T. Large granular lymphocyte leukemia associated with hepatitis C virusinfection and B cell lymphoma: improvement after antiviral therapy. LeukLymphoma. 2013 Aug;54(8):1797-9. doi: 10.3109/10428194.2012.752486. Epub 2012 Dec26. PubMed PMID: 23176408
+181.Puligheddu M, Conti S, Campagna M, Meloni M, Pau M, Cocco P, Marrosu F [Cancer risk among shift workers: a review]. G Ital Med Lav Ergon. 2012Jul-Sep;34(3 Suppl):624-6. Review. Italian. PubMed PMID: 23405734
+182.Qiao Q, Jiang Y, Li G. Curcumin enhances the response of non-Hodgkin's lymphoma cells to ionizing radiation through further induction of cell cycle arrest at the G2/M phase and inhibition of mTOR phosphorylation. Oncology reports. Jan 2013b;29(1):380-386
+183.Qiao Q, Jiang Y, Li G. Inhibition of the PI3K/AKT-NF-κB pathway withcurcumin enhanced radiation-induced apoptosis in human Burkitt's lymphoma. JPharmacol Sci. 2013a;121(4):247-56. PubMed PMID: 23603894
+184.Ramsay AD. 30 years of lymph node pathology: biomarkers and other advances. Appl Immunohistochem Mol Morphol. 2013 Mar;21(2):103-9. doi:10.1097/PAI.0b013e31827ea77c. Review. PubMed PMID: 23417072
+185.Rana MP, Sardar S, Chatterjee M. Selenomethionine in the inhibition of atransplantable murine lymphoma: reflection on hepatic drug metabolizing enzymes. Tumour Biol. 1996;17(2):102-9. PubMed PMID: 8658012
+186.Rancea M, Monsef I, von Tresckow B, et al. High-dose chemotherapy followed by autologous stem cell transplantation for patients with relapsed/refractory Hodgkin lymphoma. The Cochrane database of systematic reviews. 2013;6:Cd009411.
+187.Rapozzi V, Zorzet S, Comelli M, Mavelli I, Perissin L, Giraldi T. Melatonin decreases bone marrow and lymphatic toxicity of adriamycin in mice bearing TLX5lymphoma. Life Sci. 1998;63(19):1701-13. PubMed PMID: 9806226
+188.Reynolds GM, Billingham LJ, Gray LJ, et al. Interleukin 6 expression by Hodgkin/Reed-Sternberg cells is associated with the presence of ‘B’ symptoms and failure to achieve complete remission in patients with advanced Hodgkin’s disease. Br J Haematol. 2002;118(1):195-201
+189.Rezvani K, de Lavallade H. Vaccination strategies in lymphomas and leukaemias: recent progress. Drugs. Sep 10 2011;71(13):1659-1674
+190.Riddihough G, Zahn LM. Epigenetics. What is epigenetics? Introduction. Science (New York, N.Y.). Oct 29 2010;330(6004):611
+191.Rudnicka D, Oszmiana A, Finch DK, Strickland I, Schofield DJ, Lowe DC, . . . Davis DM. Rituximab causes a polarization of B cells that augments its therapeutic function in NK-cell-mediated antibody-dependent cellular cytotoxicity. Blood. Jun 6 2013;121(23):4694-4702
+192.Sánchez-Hidalgo M, Lee M, de la Lastra CA, Guerrero JM, Packham G. Melatonininhibits cell proliferation and induces caspase activation and apoptosis in humanmalignant lymphoid cell lines. J Pineal Res. 2012 Nov;53(4):366-73. doi:10.1111/j.1600-079X.2012.01006.x. Epub 2012 May 14. PubMed PMID: 22582944
+193.Saxton JA Jr, Silberberg M. Skeletal growth and ageing in rats receivingcomplete or restricted diets. Am J Anat. 1947 Nov;81(3):445-75. PubMed PMID:18895349
+194.Schernhammer ES, Bertrand KA, Birmann BM, Sampson L, Willett WC, FeskanichD. Consumption of artificial sweetener- and sugar-containing soda and risk oflymphoma and leukemia in men and women. Am J Clin Nutr. 2012 Dec;96(6):1419-28. doi: 10.3945/ajcn.111.030833. Epub 2012 Oct 24. Erratum in: Am J Clin Nutr. 2013 Aug;98(2):512. PubMed PMID: 23097267; PubMed Central PMCID: PMC3497928
+195.Schöllkopf C, Melbye M, Munksgaard L, Smedby KE, Rostgaard K, Glimelius B,Chang ET, Roos G, Hansen M, Adami HO, Hjalgrim H. Borrelia infection and risk of non-Hodgkin lymphoma. Blood. 2008 Jun 15;111(12):5524-9. doi:10.1182/blood-2007-08-109611. Epub 2008 Apr 18. PubMed PMID: 18424667; PubMedCentral PMCID: PMC2972577
+196.Schuster SJ, Neelapu SS, Gause BL, Janik JE, Muggia FM, Gockerman JP, WinterJN, Flowers CR, Nikcevich DA, Sotomayor EM, McGaughey DS, Jaffe ES, Chong EA,Reynolds CW, Berry DA, Santos CF, Popa MA, McCord AM, Kwak LW. Vaccination withpatient-specific tumor-derived antigen in first remission improves disease-freesurvival in follicular lymphoma. J Clin Oncol. 2011 Jul 10;29(20):2787-94. doi:10.1200/JCO.2010.33.3005. Epub 2011 May 31. PubMed PMID: 21632504; PubMed CentralPMCID: PMC3139394
+197.Shanafelt TD, Lee YK, Call TG, Nowakowski GS, Dingli D, Zent CS, Kay NE Clinical effects of oral green tea extracts in four patients with low gradeB-cell malignancies. Leuk Res. 2006 Jun;30(6):707-12. Epub 2005 Dec 1. PubMedPMID: 16325256
+198.Shankland KR, Armitage JO, Hancock BW. Non-Hodgkin lymphoma. Lancet. Sep 1 2012;380(9844):848-857
+199.Shehzad A, Lee J, Lee YS. Curcumin in various cancers. Biofactors. 2013Jan-Feb;39(1):56-68. doi: 10.1002/biof.1068. Epub 2013 Jan 10. Review. PubMedPMID: 23303705
+200.Shields BA, Engelman RW, Fukaura Y, Good RA, Day NK. Calorie restrictionsuppresses subgenomic mink cytopathic focus-forming murine leukemia virustranscription and frequency of genomic expression while impairing lymphomaformation. Proc Natl Acad Sci U S A. 1991 Dec 15;88(24):11138-42. PubMed PMID:1763029; PubMed Central PMCID: PMC53089
+201.Siegel R, Naishadham D, Jemal A. Cancer statistics, 2012. CA Cancer J Clin. 2012 Jan-Feb;62(1):10-29. doi: 10.3322/caac.20138. Epub 2012 Jan 4. PubMed PMID: 22237781
+202.Siegel R, Naishadham D, Jemal A. Cancer statistics, 2013. CA Cancer J Clin. 2013 Jan;63(1):11-30. doi: 10.3322/caac.21166. Epub 2013 Jan 17. PubMed PMID:23335087
+203.Singh AT, Ghosh M, Forte TM, Ryan RO, Gordon LI. Curcumin nanodisk-inducedapoptosis in mantle cell lymphoma. Leuk Lymphoma. 2011 Aug;52(8):1537-43. doi:10.3109/10428194.2011.584253. Epub 2011 Jun 24. PubMed PMID: 21699455; PubMedCentral PMCID: PMC3321639
+204.Singh N, Singh SM, Shrivastava P. Effect of Tinospora cordifolia on theantitumor activity of tumor-associated macrophages-derived dendritic cells Immunopharmacol Immunotoxicol. 2005;27(1):1-14. PubMed PMID: 15803856
+205.Singh SM, Singh N, Shrivastava P. Effect of alcoholic extract of Ayurvedicherb Tinospora cordifolia on the proliferation and myeloid differentiation ofbone marrow precursor cells in a tumor-bearing host. Fitoterapia. 2006Jan;77(1):1-11. Epub 2005 Dec 2. PubMed PMID: 16326030
+206.Sisson S, Kuter DJ, Garg S, et al. Non-Hodgkin lymphoma. First Consult. Clinical Key. Summary page. Available at: https://www.clinicalkey.com/#!/ContentPlayerCtrl/doPlayContent/21-s2.0-1014672/{"scope":"all","query":"lymphadenopathy"}. 2013. Accessed 11/26/2013
+207.Skibola CF. Obesity, diet and risk of non-Hodgkin lymphoma. Cancer epidemiology, biomarkers & prevention : a publication of the American Association for Cancer Research, cosponsored by the American Society of Preventive Oncology. Mar 2007;16(3):392-395
+208.Slattery ML, Curtin K, Baumgartner R, Sweeney C, Byers T, Giuliano AR, . . . Wolff RR. IL6, aspirin, nonsteroidal anti-inflammatory drugs, and breast cancer risk in women living in the southwestern United States. Cancer epidemiology, biomarkers & prevention: a publication of the American Association for Cancer Research, cosponsored by the American Society of Preventive Oncology. Apr 2007;16(4):747-755.
+209.Smedby KE, Hjalgrim H. Epidemiology and etiology of mantle cell lymphoma andother non-Hodgkin lymphoma subtypes. Semin Cancer Biol. 2011 Nov;21(5):293-8 doi: 10.1016/j.semcancer.2011.09.010. Epub 2011 Sep 18. Review. PubMed PMID:21945518
+210.Smith LT, Otterson GA, Plass C. Unraveling the epigenetic code of cancer fortherapy. Trends Genet. 2007 Sep;23(9):449-56. Epub 2007 Aug 6. Review. PubMedPMID: 17681396
+211.Solans-Laqué R, López-Hernandez A, Bosch-Gil JA, Palacios A, Campillo M,Vilardell-Tarres M. Risk, predictors, and clinical characteristics of lymphomadevelopment in primary Sjögren's syndrome. Semin Arthritis Rheum. 2011Dec;41(3):415-23. doi: 10.1016/j.semarthrit.2011.04.006. Epub 2011 Jun 12. PubMedPMID: 21665245
+212.Steinmann J, Buer J, Pietschmann T, Steinmann E. Anti-infective propertiesof epigallocatechin-3-gallate (EGCG), a component of green tea. Br J Pharmacol. 2013 Mar;168(5):1059-73. doi: 10.1111/bph.12009. Review. PubMed PMID: 23072320;PubMed Central PMCID: PMC3594666
+213.Stevens J, Waters R, Sieniawska C, Kassam S, Montoto S, Fitzgibbon J,Rohatiner A, Lister A, Joel S. Serum selenium concentration at diagnosis andoutcome in patients with haematological malignancies. Br J Haematol. 2011Aug;154(4):448-56. doi: 10.1111/j.1365-2141.2011.08744.x. Epub 2011 Jul 20. PubMed PMID: 21770918
+214.Straus DJ. Long-term survivorship at a price: late-term, therapy-associated toxicities in the adult hodgkin lymphoma patient. Ther Adv Hematol. 2011Apr;2(2):111-9. doi: 10.1177/2040620711402414. PubMed PMID: 23556081; PubMedCentral PMCID: PMC3573398
+215.Sumba PO, Kabiru EW, Namuyenga E, Fiore N, Otieno RO, Moormann AM, Orago AS,Rosenbaum PF, Rochford R. Microgeographic variations in Burkitt's lymphomaincidence correlate with differences in malnutrition, malaria and Epstein-Barrvirus. Br J Cancer. 2010 Nov 23;103(11):1736-41. doi: 10.1038/sj.bjc.6605947. PubMed PMID: 21102592; PubMed Central PMCID: PMC2994219
+216.Szwajcer D. CancerCare Manitoba/University of Manitoba. HDAC Inhibitor Valproic Acid as an Effective Therapy for Chronic Lymphocytic Leukemia. In: ClinicalTrial.gov [Internet]. Manitoba (Canada). National Library of Medicine (US). 2011 [cited 2013 Nov 26]. Available at: http://clinicaltrials.gov/show/NCT00524667%20and%20http://clinicaltrials.gov/show/NCT00810680. NLM Identifier: NCT00524667
+217.Takahashi K, Nishida N, Kawabata H, Haga H, Chiba T. Regression of Hodgkinlymphoma in response to antiviral therapy for hepatitis C virus infection. InternMed. 2012;51(19):2745-7. Epub 2012 Oct 1. PubMed PMID: 23037466
+218.Tantawy AA, Elmasry OA, Shaaban M, Toaima DN, El Shahat AM. Radionuclideventriculography detects early anthracycline cardiotoxicity in children withHodgkin lymphoma. J Pediatr Hematol Oncol. 2011 May;33(4):e132-7. doi:10.1097/MPH.0b013e318212eb6b. PubMed PMID: 21516011
+219.Taylor AL, Marcus R, Bradley JA. Post-transplant lymphoproliferative disorders (PTLD) after solid organ transplantation. Critical reviews in oncology/hematology. Oct 2005;56(1):155-167
+220.Terbach N, Williams RS. Structure-function studies for the panacea, valproic acid. Biochem Soc Trans. 2009;37(Pt 5):1126-32
+221.Thomas RK, Re D, Wolf J, Diehl V. Part I: Hodgkin's lymphoma--molecular biology of Hodgkin and Reed-Sternberg cells. The lancet oncology. Jan 2004;5(1):11-18
+222.Thomas SK, Kwak LW. Lymphoma vaccine therapy: next steps after a positive, controlled phase III clinical trial. Seminars in oncology. Jun 2012;39(3):253-262
+223.Thompson CA, Habermann TM, Wang AH, Vierkant RA, Folsom AR, Ross JA, Cerhan JR. Antioxidant intake from fruits, vegetables and other sources and risk ofnon-Hodgkin's lymphoma: the Iowa Women's Health Study. Int J Cancer. 2010 Feb15;126(4):992-1003. doi: 10.1002/ijc.24830. PubMed PMID: 19685491; PubMed CentralPMCID: PMC2798902
+224.Thompson CA, Mauck K, Havyer R, et al. Care of the Adult Hodgkin Lymphoma Survivor. Am J Med. 2011;124(12):1106-1112
+225.Tian Y, Ye Y, Gao W, Chen H, Song T, Wang D, . . . Ren C. Aspirin promotes apoptosis in a murine model of colorectal cancer by mechanisms involving downregulation of IL-6-STAT3 signaling pathway. International journal of colorectal disease. Jan 2011;26(1):13-22.
+226.Todisco M, Casaccia P, Rossi N. Cyclophosphamide plus somatostatin, bromociptin, retinoids, melatonin and ACTH in the treatment of low-grade non-Hodgkin’s lymphomas at advanced stage: results of a phase II trial. Cancer Biother Radiopharm. 2001;16(2):171-7
+227.Todisco M. Low-grade non-Hodgkin lymphoma at advanced stage: a casesuccessfully treated with cyclophosphamide plus somatostatin, bromocriptine,retinoids, and melatonin. Am J Ther. 2007 Jan-Feb;14(1):113-5. PubMed PMID:17303979
+228.Todisco M. Relapse of high-grade non-Hodgkin's lymphoma after autologousstem cell transplantation: a case successfully treated with cyclophosphamide plussomatostatin, bromocriptine, melatonin, retinoids, and ACTH. Am J Ther. 2006Nov-Dec;13(6):556-7. PubMed PMID: 17122540
+229.Tomita N, Takasaki H, Fujisawa S, Miyashita K, Ogusa E, Kishimoto K, . . . Ishigatsubo Y. Standard R-CHOP therapy in follicular lymphoma and diffuse large B-cell lymphoma. Journal of clinical and experimental hematopathology: JCEH. 2013;53(2):121-125
+230.Townsend W, Linch D. Hodgkin's lymphoma in adults. Lancet. Sep 1 2012;380(9844):836-847.
+231.Trofe J, Buell JF, First MR, Hanaway MJ, Beebe TM, Woodle ES. The role ofimmunosuppression in lymphoma. Recent Results Cancer Res. 2002;159:55-66. Review. PubMed PMID: 11785845
+232.Troxell ML, Bangs CD, Cherry AM, Natkunam Y, Kong CS. Cytologic diagnosis of Burkitt lymphoma. Cancer. 2005 Oct 25;105(5):310-8
+233.Trubiani O, Recchioni R, Moroni F, Pizzicannella J, Caputi S, Di Primio R. Melatonin provokes cell death in human B-lymphoma cells bymitochondrial-dependent apoptotic pathway activation. J Pineal Res. 2005Nov;39(4):425-31. PubMed PMID: 16207299
+234.Tsubaki K, Horiuchi A, Kitani T, Taniguchi N, Masaoka T, Shibata H, YonezawaT, Tsubakio T, Kawagoe H, Shinohara Y, et al. [Investigation of the preventiveeffect of CoQ10 against the side-effects of anthracycline antineoplastic agents]. Gan To Kagaku Ryoho. 1984 Jul;11(7):1420-7. Japanese. PubMed PMID: 6742867
+235.Tsuboi I, Tanaka H, Nakao M, Shichijo S, Itoh K. Nonsteroidalanti-inflammatory drugs differentially regulate cytokine production in humanlymphocytes: up-regulation of TNF, IFN-gamma and IL-2, in contrast todown-regulation of IL-6 production. Cytokine. 1995 May;7(4):372-9. PubMed PMID:8589268
+236.Ujjani C, Cheson BD. The optimal management of follicular lymphoma: anevolving field. Drugs. 2013 Sep;73(13):1395-403. doi: 10.1007/s40265-013-0092-5. PubMed PMID: 23884816
+237.van Dorp W, van Beek RD, Laven JS, Pieters R, de Muinck Keizer-Schrama SM,van den Heuvel-Eibrink MM. Long-term endocrine side effects of childhoodHodgkin's lymphoma treatment: a review. Hum Reprod Update. 2012Jan-Feb;18(1):12-28. doi: 10.1093/humupd/dmr038. Epub 2011 Sep 6. Review. PubMed PMID: 21896559
+238.Vendrame E, Martínez-Maza O. Assessment of pre-diagnosis biomarkers ofimmune activation and inflammation: insights on the etiology of lymphoma. JProteome Res. 2011 Jan 7;10(1):113-9. doi: 10.1021/pr100729z. Epub 2010 Oct 1. Review. PubMed PMID: 20886858; PubMed Central PMCID: PMC3017655
+239.Vidal L, Gafter-Gvili A, Salles G, Dreyling MH, Ghielmini M, Hsu Schmitz SF, . . . Shpilberg O. Rituximab maintenance for the treatment of patients with follicular lymphoma: an updated systematic review and meta-analysis of randomized trials. Journal of the National Cancer Institute. Dec 7 2011;103(23):1799-1806
+240.Villanueva H, de Cerio AL, Inoges S, Pastor F, Soldevilla MM, Bendandi M. BiovaxID®: a customized idiotype vaccine for the treatment of B-cell lymphoma. Expert Rev Vaccines. 2011 Dec;10(12):1661-9. doi: 10.1586/erv.11.132. PubMedPMID: 22085168
+241.Visco C, Arcaini L, Brusamolino E, Burcheri S, Ambrosetti A, Merli M, . . . Rodeghiero F. Distinctive natural history in hepatitis C virus positive diffuse large B-cell lymphoma: analysis of 156 patients from northern Italy. Annals of oncology: official journal of the European Society for Medical Oncology / ESMO. Sep 2006;17(9):1434-1440
+242.Vishvakarma NK, Kumar A, Singh SM. Role of curcumin-dependent modulation of tumor microenvironment of a murine T cell lymphoma in altered regulation of tumorcell survival. Toxicol Appl Pharmacol. 2011 May 1;252(3):298-306. doi:10.1016/j.taap.2011.03.002. Epub 2011 Mar 11. PubMed PMID: 21397623
+243.von der Weid NX. Adult life after surviving lymphoma in childhood. Support Care Cancer. 2008 Apr;16(4):339-45
+244.Voorhees PM, Manges RF, Sonneveld P, Jagannath S, Somlo G, Krishnan A,Lentzsch S, Frank RC, Zweegman S, Wijermans PW, Orlowski RZ, Kranenburg B, HallB, Casneuf T, Qin X, van de Velde H, Xie H, Thomas SK. A phase 2 multicentrestudy of siltuximab, an anti-interleukin-6 monoclonal antibody, in patients with relapsed or refractory multiple myeloma. Br J Haematol. 2013 May;161(3):357-66. doi: 10.1111/bjh.12266. Epub 2013 Feb 25. PubMed PMID: 23432640
+245.Wada H, Tsuboi R, Kato Y, Sugaya M, Tobinai K, Hamada T, Shimamoto T,Noguchi K, Iwatsuki K. Phase I and pharmacokinetic study of the oral histonedeacetylase inhibitor vorinostat in Japanese patients with relapsed or refractorycutaneous T-cell lymphoma. J Dermatol. 2012 Oct;39(10):823-8. doi:10.1111/j.1346-8138.2012.01554.x. Epub 2012 Apr 16. PubMed PMID: 22506596
+246.Wang CS, Sun CF. C-reactive protein and malignancy: clinico-pathologicalassociation and therapeutic implication. Chang Gung Med J. 2009Sep-Oct;32(5):471-82. Review. PubMed PMID: 19840504
+247.Wang SQ. [Electrocardiogram analysis of adriamycin cardiotoxicity in 160cases]. Zhonghua Zhong Liu Za Zhi. 1991 Jan;13(1):71-3. Chinese. PubMed PMID:1889343
+248.Wang X, Zhao HR, Gu X, Liu P, Bikmituofu H. [Plasma interleukin-6 andinterleukin-10 levels in different subtypes of lymphoma and their clinicalsignificance]. Nan Fang Yi Ke Da Xue Xue Bao. 2011 Aug;31(8):1360-4. Chinese. PubMed PMID: 21868324
+249.Ward MH, Mark SD, Cantor KP, Weisenburger DD, Correa-Villasenor A, Zahm SH. Drinking water nitrate and the risk of non-Hodgkin's lymphoma. Epidemiology (Cambridge, Mass.). Sep 1996;7(5):465-471
+250.Wilson KS. Regression of follicular lymphoma with Devil's Claw: coincidence or causation? Curr Oncol. 2009 Aug;16(4):67-70. PubMed PMID: 19672427; PubMedCentral PMCID: PMC2722058
+251.Wormser GP. Clinical practice. Early Lyme disease. N Engl J Med. 2006 Jun29;354(26):2794-801. Review. PubMed PMID: 16807416
+252.Xu XJ, Zhao HZ, Tang YM. Efficacy and safety of adoptive immunotherapy using anti-CD19 chimeric antigen receptor transduced T-cells: a systematic review of phase I clinical trials. Leukemia & lymphoma. Feb 2013;54(2):255-260.
+        </p>
+
+</div>
+<script>
+        
+    </script>
+</body>
+</html>

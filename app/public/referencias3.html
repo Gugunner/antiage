@@ -1,0 +1,420 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">  
+    <link rel="icon" href="dc3.png" type="image/png">  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White Book</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">
+    <!-- Estilos para dispositivos móviles -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (max-width: 768px)">
+    <!-- Estilos para pantallas de PC -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (min-width: 769px)">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+
+    <!-- Metadatos Open Graph -->
+    <meta property="og:title" content="YOU TOMORROW">
+    <meta property="og:description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta property="og:image" content="https://drive.google.com/file/d/1ZZI3G6Fit_kovvVZolrvchtXQQDrnWYI/view?usp=sharing">
+    <meta property="og:url" content="https://ytomorrow.com/">
+    <meta property="og:type" content="website">
+
+    <!-- Otros metadatos -->
+    <meta name="description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta name="keywords" content="you, YOU TOMORROW, TOMORROW, TOMORR, TOM, web">
+
+    <style>
+
+   body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 17px;
+    line-height: 1.4;
+    margin: 20px;
+    font-weight: 500; /* Grosor medio de la negrita */
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1, h2, h3 {
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+p {
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.section {
+    margin-bottom: 30px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    width: 100%;
+}
+
+.chart-row {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+    width: 50%; /* Ajusta el ancho para que se adapte al contenido */
+}
+
+.chart-box {
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    min-width: 150px; /* Asegura que las tarjetas tengan un ancho mínimo */
+    max-width: 300px; /* Limita el ancho máximo para tarjetas largas */
+    word-wrap: break-word; /* Permite que el texto se ajuste dentro de la tarjeta */
+    flex: 1; /* Permite que las tarjetas se expandan uniformemente */
+}
+
+.chart-box:hover {
+    transform: scale(1.05);
+}
+
+.chart-box.ceo {
+    background: linear-gradient(135deg, #ff6f61, #e53935);
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.chart-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transform: rotate(45deg);
+}
+
+.chart-box:hover::before {
+    opacity: 1;
+}
+
+.chart-box.ceo::before {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.connector {
+    width: 2px;
+    height: 20px;
+    background-color: #1b3a7a;
+    margin: 0 auto;
+}
+
+.horizontal-connector {
+    height: 2px;
+    width: 100%;
+    background-color: #1b3a7a;
+}
+
+.horizontal-connector.long {
+    width: 50%;
+}
+
+.chart-box i {
+    margin-right: 8px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #1b5e20;
+    color: #1b5e20;
+    font-weight: bold;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+
+  caption {
+    caption-side: top;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+    </style>
+
+</head>
+<body>
+<div class="container">
+REFERENCES
+    <ol>
+        1.Kshirsagar AV, Carpenter M, Bang H, Wyatt SB, Colindres RE. Blood pressure usually considered normal is associated with an elevated risk of cardiovascular disease. The American journal of medicine. Feb 2006;119(2):133-141.
+2.Lewington S, Clarke R, Qizilbash N, Peto R, Collins R. Age-specific relevance of usual blood pressure to vascular mortality: a meta-analysis of individual data for one million adults in 61 prospective studies. Lancet. Dec 14 2002;360(9349):1903-1913.
+3.Chobanian AV, Bakris GL, Black HR, et al. Seventh report of the Joint National Committee on Prevention, Detection, Evaluation, and Treatment of High Blood Pressure. Hypertension. Dec 2003;42(6):1206-1252.
+4.Weber MA, Schiffrin EL, White WB, et al. Clinical practice guidelines for the management of hypertension in the community: a statement by the American Society of Hypertension and the International Society of Hypertension. Journal of clinical hypertension (Greenwich, Conn.). Jan 2014;16(1):14-26.
+5.Sprint Research Group. A Randomized Trial of Intensive versus Standard Blood-Pressure Control. The New England journal of medicine. Nov 9 2015;0(0):null.
+6.Bakris GL, Weir MR. Angiotensin-converting enzyme inhibitor-associated elevations in serum creatinine: is this a cause for concern? Archives of internal medicine. Mar 13 2000;160(5):685-693.
+7.Apperloo AJ, de Zeeuw D, de Jong PE. A short-term antihypertensive treatment-induced fall in glomerular filtration rate predicts long-term stability of renal function. Kidney international. Mar 1997;51(3):793-797.
+8.Whelton PK, Carey RM, Aronow WS, Casey DE, Collins KJ, Dennison Himmelfarb C, . . . Wright JT. 2017 ACC/AHA/AAPA/ABC/ACPM/AGS/APhA/ASH/ASPC/NMA/PCNA Guideline for the Prevention, Detection, Evaluation, and Management of High Blood Pressure in Adults. A Report of the American College of Cardiology/American Heart Association Task Force on Clinical Practice Guidelines. 2017.
+9.Egan BM, Stevens-Fabry S. Prehypertension--prevalence, health risks, and management strategies. Nature reviews cardiology. May 2015;12(5):289-300.
+10.Garofalo C, Borrelli S, Pacilio M, et al. Hypertension and Prehypertension and Prediction of Development of Decreased Estimated GFR in the General Population: A Meta-analysis of Cohort Studies. American journal of kidney diseases: the official journal of the National Kidney Foundation. Oct 13 2015.
+11.Stocchetti N, Chieregato A, De Marchi M, Croci M, Benti R, Grimoldi N. High cerebral perfusion pressure improves low values of local brain tissue O2 tension (PtiO2) in focal lesions. Acta neurochirurgica. Supplement. 1998;71:162-165.
+12.The ACCORD Study Group. Effects of Intensive Blood-Pressure Control in Type 2 Diabetes Mellitus. New England Journal of Medicine. 2010;362(17):1575-1585.
+13.Barzilay JI, Howard AG, Evans GW, et al. Intensive Blood Pressure Treatment Does Not Improve Cardiovascular Outcomes in Centrally Obese Hypertensive Individuals With Diabetes: The Action to Control Cardiovascular Risk in Diabetes (ACCORD) Blood Pressure Trial. Diabetes care. July 1, 2012 2012;35(7):1401-1405.
+14.Brunström M, Carlberg B. Effect of antihypertensive treatment at different blood pressure levels in patients with diabetes mellitus: systematic review and meta-analyses. BMJ (Clinical research ed.). 2016-02-25 00:06:06 2016;352.
+15.Odden MC, Shlipak MG, Whitson HE, et al. Risk factors for cardiovascular disease across the spectrum of older age: the Cardiovascular Health Study. Atherosclerosis. Nov 2014;237(1):336-342.
+16.Beckett NS, Peters R, Fletcher AE, et al. Treatment of hypertension in patients 80 years of age or older. The New England journal of medicine. May 1 2008;358(18):1887-1898.
+17.Oates DJ, Berlowitz DR, Glickman ME, Silliman RA, Borzecki AM. Blood pressure and survival in the oldest old. Journal of the American Geriatrics Society. Mar 2007;55(3):383-388.
+18.James PA, Oparil S, Carter BL, et al. 2014 evidence-based guideline for the management of high blood pressure in adults: report from the panel members appointed to the Eighth Joint National Committee (JNC 8). JAMA : the journal of the American Medical Association. Feb 5 2014;311(5):507-520.
+19.Krakoff LR. Blood Pressure Out of the Office: Its Time Has Finally Come. American journal of hypertension. Nov 6 2015.
+20.Fuchs SC, Ferreira-da-Silva AL, Moreira LB, et al. Efficacy of isolated home blood pressure monitoring for blood pressure control: randomized controlled trial with ambulatory blood pressure monitoring - MONITOR study. Journal of hypertension. Jan 2012;30(1):75-80.
+21.Breaux-Shropshire TL, Judd E, Vucovich LA, Shropshire TS, Singh S. Does home blood pressure monitoring improve patient outcomes? A systematic review comparing home and ambulatory blood pressure monitoring on blood pressure control and patient outcomes. Integrated blood pressure control. 2015;8:43-49.
+22.Agena F, Prado Edos S, Souza PS, et al. Home blood pressure (BP) monitoring in kidney transplant recipients is more adequate to monitor BP than office BP. Nephrology, dialysis, transplantation : official publication of the European Dialysis and Transplant Association - European Renal Association. Nov 2011;26(11):3745-3749.
+23.Imai Y, Obara T, Asamaya K, Ohkubo T. The reason why home blood pressure measurements are preferred over clinic or ambulatory blood pressure in Japan. Hypertension research : official journal of the Japanese Society of Hypertension. Aug 2013;36(8):661-672.
+24.Fuchs SC, Mello RG, Fuchs FC. Home blood pressure monitoring is better predictor of cardiovascular disease and target organ damage than office blood pressure: a systematic review and meta-analysis. Current cardiology reports. Nov 2013;15(11):413.
+25.Sacks FM, Appel LJ, Moore TJ, et al. A dietary approach to prevent hypertension: a review of the Dietary Approaches to Stop Hypertension (DASH) Study. Clinical cardiology. Jul 1999;22(7 Suppl):Iii6-10.
+26.Svetkey LP, Simons-Morton D, Vollmer WM, et al. Effects of dietary patterns on blood pressure: subgroup analysis of the Dietary Approaches to Stop Hypertension (DASH) randomized clinical trial. Archives of internal medicine. Feb 8 1999;159(3):285-293.
+27.Appel LJ, Moore TJ, Obarzanek E, et al. A clinical trial of the effects of dietary patterns on blood pressure. DASH Collaborative Research Group. The New England journal of medicine. Apr 17 1997;336(16):1117-1124.
+28.Streppel MT, Arends LR, van 't Veer P, Grobbee DE, Geleijnse JM. Dietary fiber and blood pressure: a meta-analysis of randomized placebo-controlled trials. Archives of internal medicine. Jan 24 2005;165(2):150-156.
+29.Sacks FM, Svetkey LP, Vollmer WM, et al. Effects on blood pressure of reduced dietary sodium and the Dietary Approaches to Stop Hypertension (DASH) diet. DASH-Sodium Collaborative Research Group. The New England journal of medicine. Jan 4 2001;344(1):3-10.
+30.Hinderliter AL, Sherwood A, Craighead LW, et al. The long-term effects of lifestyle change on blood pressure: One-year follow-up of the ENCORE study. American journal of hypertension. May 2014;27(5):734-741.
+31.Sikand G. Mediterranean, DASH & TLC Dietary Patterns: Mechanisms for CVD Reduction. Paper presented at: 2014 Clinical Lipid Update; March 16th 2014, 2014; Maui.
+32.Tognon G, Lissner L, Saebye D, Walker KZ, Heitmann BL. The Mediterranean diet in relation to mortality and CVD: a Danish cohort study. The British journal of nutrition. Jan 14 2014;111(1):151-159.
+33.Lourida I, Soni M, Thompson-Coon J, et al. Mediterranean diet, cognitive function, and dementia: a systematic review. Epidemiology (Cambridge, Mass.). Jul 2013;24(4):479-489.
+34.Perez-Lopez FR, Chedraui P, Haya J, Cuadros JL. Effects of the Mediterranean diet on longevity and age-related morbid conditions. Maturitas. Oct 20 2009;64(2):67-79.
+35.Martinez-Gonzalez MA, Salas-Salvado J, Estruch R, Corella D, Fito M, Ros E. Benefits of the Mediterranean Diet: Insights From the PREDIMED Study. Progress in cardiovascular diseases. Jul-Aug 2015;58(1):50-60.
+36.Palkowska E, Bartnikowska E, Owsiak D. [The use of low-caloric diet with modified fatty acids pool in the therapy of the metabolic syndrome]. Roczniki Panstwowego Zakladu Higieny. 2012;63(2):163-169.
+37.Trubitsyn AG. The Lag of the Proliferative Aging Clock Underlies the Lifespan-Extending Effect of Calorie Restriction. Current aging science. 2015;8(3):220-226.
+38.Stein PK, Soare A, Meyer TE, Cangemi R, Holloszy JO, Fontana L. Caloric restriction may reverse age-related autonomic decline in humans. Aging Cell. Aug 2012;11(4):644-650.
+39.McCarty MF. AMPK activation--protean potential for boosting healthspan. Age (Dordrecht, Netherlands). Apr 2014;36(2):641-663.
+40.Kishi T, Hirooka Y, Ogawa K, Konno S, Sunagawa K. Calorie restriction inhibits sympathetic nerve activity via anti-oxidant effect in the rostral ventrolateral medulla of obesity-induced hypertensive rats. Clinical and experimental hypertension (New York, N.Y. : 1993). 2011;33(4):240-245.
+41.Finckenberg P, Eriksson O, Baumann M, et al. Caloric restriction ameliorates angiotensin II-induced mitochondrial remodeling and cardiac hypertrophy. Hypertension. Jan 2012;59(1):76-84.
+42.de Cavanagh EM, Inserra F, Ferder L. Angiotensin II blockade: how its molecular targets may signal to mitochondria and slow aging. Coincidences with calorie restriction and mTOR inhibition. American journal of physiology. Heart and circulatory physiology. Jul 1 2015;309(1):H15-44.
+43.Liu Y, Chen H, Liu D. Mechanistic perspectives of calorie restriction on vascular homeostasis. Science China. Life sciences. Aug 2014;57(8):742-754.
+44.Jefferson ME, Nicklas BJ, Chmelo EA, et al. Effects of Resistance Training With and Without Caloric Restriction on Arterial Stiffness in Overweight and Obese Older Adults. American journal of hypertension. Aug 20 2015.
+45.Walford RL, Mock D, Verdery R, MacCallum T. Calorie restriction in biosphere 2: alterations in physiologic, hematologic, hormonal, and biochemical parameters in humans restricted for a 2-year period. The journals of gerontology. Series A, Biological sciences and medical sciences. Jun 2002;57(6):B211-224.
+46.Ravussin E, Redman LM, Rochon J, et al. A 2-Year Randomized Controlled Trial of Human Caloric Restriction: Feasibility and Effects on Predictors of Health Span and Longevity. The journals of gerontology. Series A, Biological sciences and medical sciences. Sep 2015;70(9):1097-1104.
+47.Riegel G, Moreira LB, Fuchs SC, et al. Long-term effectiveness of non-drug recommendations to treat hypertension in a clinical setting. American journal of hypertension. Nov 2012;25(11):1202-1208.
+48.Elsevier. First Consult: Hypertension.
+49.Perez V, Chang ET. Sodium-to-potassium ratio and blood pressure, hypertension, and related factors. Advances in nutrition (Bethesda, Md.). Nov 2014;5(6):712-741.
+50.Penton D, Czogalla J, Loffing J. Dietary potassium and the renal control of salt balance and blood pressure. Pflugers Arch. Mar 2015;467(3):513-530.
+51.Stevens VJ, Obarzanek E, Cook NR, et al. Long-term weight loss and changes in blood pressure: results of the Trials of Hypertension Prevention, phase II. Ann Intern Med. Jan 2 2001;134(1):1-11.
+52.Kan AW, Hussain T, Carson KA, et al. The Contribution of Age and Weight to Blood Pressure Levels Among Blacks and Whites Receiving Care in Community-Based Primary Care Practices. Preventing chronic disease. 2015;12:E161.
+53.Whelton SP, Chin A, Xin X, He J. Effect of aerobic exercise on blood pressure: a meta-analysis of randomized, controlled trials. Ann Intern Med. Apr 2 2002;136(7):493-503.
+54.Cornelissen VA, Fagard RH. Effect of resistance training on resting blood pressure: a meta-analysis of randomized controlled trials. Journal of hypertension. Feb 2005;23(2):251-259.
+55.Kelley GA, Kelley KS. Progressive resistance exercise and resting blood pressure : A meta-analysis of randomized controlled trials. Hypertension. Mar 2000;35(3):838-843.
+56.Larsen RN, Kingwell BA, Sethi P, Cerin E, Owen N, Dunstan DW. Breaking up prolonged sitting reduces resting blood pressure in overweight/obese adults. Nutrition, metabolism, and cardiovascular diseases : NMCD. Sep 2014;24(9):976-982.
+57.Bazzano LA, Green T, Harrison TN, Reynolds K. Dietary approaches to prevent hypertension. Current hypertension reports. Dec 2013;15(6):694-702.
+58.Xin X, He J, Frontini MG, Ogden LG, Motsamai OI, Whelton PK. Effects of alcohol reduction on blood pressure: a meta-analysis of randomized controlled trials. Hypertension. Nov 2001;38(5):1112-1117.
+59.Aljadhey H, Tu W, Hansen RA, Blalock SJ, Brater DC, Murray MD. Comparative effects of non-steroidal anti-inflammatory drugs (NSAIDs) on blood pressure in patients with hypertension. BMC cardiovascular disorders. 2012;12:93.
+60.Hsu CC, Wang H, Hsu YH, et al. Use of Nonsteroidal Anti-Inflammatory Drugs and Risk of Chronic Kidney Disease in Subjects With Hypertension: Nationwide Longitudinal Cohort Study. Hypertension. Sep 2015;66(3):524-533.
+61.Medicine AAoS. Rising prevalence of sleep apnea in U.S. threatens public health. 2014.
+62.Mayo Clinic. Diseases and Conditions. Sleep Apnea. http://www.mayoclinic.org/diseases-conditions/sleep-apnea/basics/complications/con-20020286. 8/25/2015. Accessed 11/19/2015.
+63.Liu L, Cao Q, Guo Z, Dai Q. Continuous Positive Airway Pressure in Patients With Obstructive Sleep Apnea and Resistant Hypertension: A Meta-Analysis of Randomized Controlled Trials. Journal of clinical hypertension (Greenwich, Conn.). Aug 17 2015.
+64.Hughes JW, Fresco DM, Myerscough R, van Dulmen MH, Carlson LE, Josephson R. Randomized controlled trial of mindfulness-based stress reduction for prehypertension. Psychosomatic medicine. Oct 2013;75(8):721-728.
+65.Gasperin D, Netuveli G, Dias-da-Costa JS, Pattussi MP. Effect of psychological stress on blood pressure increase: a meta-analysis of cohort studies. Cadernos de saude publica. Apr 2009;25(4):715-726.
+66.Larson AJ, Symons JD, Jalili T. Therapeutic potential of quercetin to decrease blood pressure: review of efficacy and mechanisms. Advances in nutrition (Bethesda, Md.). Jan 2012;3(1):39-46.
+67.Laskar MAC, M. D. In silico screening of some plant based natural products as angiotensin receptor blockers against cardiovascular diseases. World Journal of Pharmacy and Pharmaceutical Science. 2015;4(1):1248-1257.
+68.Egert S, Bosy-Westphal A, Seiberl J, et al. Quercetin reduces systolic blood pressure and plasma oxidised low-density lipoprotein concentrations in overweight subjects with a high-cardiovascular disease risk phenotype: a double-blinded, placebo-controlled cross-over study. The British journal of nutrition. Oct 2009;102(7):1065-1074.
+69.Pfeuffer M, Auinger A, Bley U, et al. Effect of quercetin on traits of the metabolic syndrome, endothelial function and inflammation in men with different APOE isoforms. Nutrition, metabolism, and cardiovascular diseases : NMCD. May 2013;23(5):403-409.
+70.Brull V, Burak C, Stoffel-Wagner B, et al. Effects of a quercetin-rich onion skin extract on 24 h ambulatory blood pressure and endothelial function in overweight-to-obese patients with (pre-)hypertension: a randomised double-blinded placebo-controlled cross-over trial. The British journal of nutrition. Oct 2015;114(8):1263-1277.
+71.Edwards RL, Lyon T, Litwin SE, Rabovsky A, Symons JD, Jalili T. Quercetin reduces blood pressure in hypertensive subjects. The Journal of nutrition. Nov 2007;137(11):2405-2411.
+72.Zahedi M, Ghiasvand R, Feizi A, Asgari G, Darvish L. Does Quercetin Improve Cardiovascular Risk factors and Inflammatory Biomarkers in Women with Type 2 Diabetes: A Double-blind Randomized Controlled Clinical Trial. International journal of preventive medicine. Jul 2013;4(7):777-785.
+73.Ross JA, Kasum CM. Dietary flavonoids: bioavailability, metabolic effects, and safety. Annual review of nutrition. 2002;22:19-34.
+74.Basli A, Soulet S, Chaher N, et al. Wine polyphenols: potential agents in neuroprotection. Oxidative medicine and cellular longevity. 2012;2012:805762.
+75.Godse S, Mohan M, Kasture V, Kasture S. Effect of myricetin on blood pressure and metabolic alterations in fructose hypertensive rats. Pharmaceutical biology. May 2010;48(5):494-498.
+76.Borde P, Mohan M, Kasture S. Effect of myricetin on deoxycorticosterone acetate (DOCA)-salt-hypertensive rats. Natural product research. Sep 2011;25(16):1549-1559.
+77.Hobbs CA, Swartz C, Maronpot R, et al. Genotoxicity evaluation of the flavonoid, myricitrin, and its aglycone, myricetin. Food and chemical toxicology : an international journal published for the British Industrial Biological Research Association. Sep 2015;83:283-292.
+78.Wang SJ, Tong Y, Lu S, et al. Anti-inflammatory activity of myricetin isolated from Myrica rubra Sieb. et Zucc. leaves. Planta medica. Oct 2010;76(14):1492-1496.
+79.Domitrovic R, Rashed K, Cvijanovic O, Vladimir-Knezevic S, Skoda M, Visnic A. Myricitrin exhibits antioxidant, anti-inflammatory and antifibrotic activity in carbon tetrachloride-intoxicated mice. Chemico-biological interactions. Mar 25 2015;230:21-29.
+80.Fernandez SP, Nguyen M, Yow TT, et al. The flavonoid glycosides, myricitrin, gossypin and naringin exert anxiolytic action in mice. Neurochemical research. Oct 2009;34(10):1867-1875.
+81.Sales DS, Carmona F, de Azevedo BC, et al. Eugenia punicifolia (Kunth) DC. as an adjuvant treatment for type-2 diabetes mellitus: a non-controlled, pilot study. Phytotherapy research : PTR. Dec 2014;28(12):1816-1821.
+82.Soejarto DD, Kinghorn AD, Farnsworth NR. Potential Sweetening Agents of Plant Origin. III. Organoleptic Evaluation of Stevia Leaf Herbarium Samples For Sweetness. Journal of natural products. 1982/09/01 1982;45(5):590-599.
+83.Gardana C, Simonetti P, Canzi E, Zanchi R, Pietta P. Metabolism of stevioside and rebaudioside A from Stevia rebaudiana extracts by human microflora. Journal of agricultural and food chemistry. Oct 22 2003;51(22):6618-6622.
+84.Liu JC, Kao PK, Chan P, et al. Mechanism of the antihypertensive effect of stevioside in anesthetized dogs. Pharmacology. Jan 2003;67(1):14-20.
+85.Melis MS. Influence of calcium on the blood pressure and renal effects of stevioside. Brazilian journal of medical and biological research = Revista brasileira de pesquisas medicas e biologicas / Sociedade Brasileira de Biofisica ... [et al.]. 1992;25(9):943-949.
+86.Melis MS. Stevioside effect on renal function of normal and hypertensive rats. Journal of ethnopharmacology. Jun 1992;36(3):213-217.
+87.Onakpoya IJ, Heneghan CJ. Effect of the natural sweetener, steviol glycoside, on cardiovascular risk factors: A systematic review and meta-analysis of randomised clinical trials. European journal of preventive cardiology. Dec 2015;22(12):1575-1587.
+88.Altun A, Ugur-Altun B. Melatonin: therapeutic and clinical utilization. International journal of clinical practice. May 2007;61(5):835-845.
+89.Pechanova O, Paulis L, Simko F. Peripheral and Central Effects of Melatonin on Blood Pressure Regulation. International journal of molecular sciences. 10/08 07/03/received 09/17/revised 09/17/accepted 2014;15(10):17920-17937.
+90.Rodella LF, Favero G, Foglio E, et al. Vascular endothelial cells and dysfunctions: role of melatonin. Frontiers in bioscience (Elite edition). 2013;5:119-129.
+91.Li Y, Wang JG. Isolated nocturnal hypertension: a disease masked in the dark. Hypertension. Feb 2013;61(2):278-283.
+92.Kimura G. [Nocturnal hypertension and cardio-renal association]. Nihon rinsho. Japanese journal of clinical medicine. Aug 2014;72(8):1404-1409.
+93.Li F, Huang H, Song L, Hao H, Ying M. Effects of Obstructive Sleep Apnea Hypopnea Syndrome on Blood Pressure and C-Reactive Protein in Male Hypertension Patients. J Clin Med Res. Mar 2016;8(3):220-224.
+94.Grossman E, Laudon M, Zisapel N. Effect of melatonin on nocturnal blood pressure: meta-analysis of randomized controlled trials. Vasc Health Risk Manag. 2011;7:577-584.
+95.Geleijnse JM, Giltay EJ, Grobbee DE, Donders AR, Kok FJ. Blood pressure response to fish oil supplementation: metaregression analysis of randomized trials. Journal of hypertension. Aug 2002;20(8):1493-1499.
+96.Miller PE, Van Elswyk M, Alexander DD. Long-chain omega-3 fatty acids eicosapentaenoic acid and docosahexaenoic acid and blood pressure: a meta-analysis of randomized controlled trials. American journal of hypertension. Jul 2014;27(7):885-896.
+97.Endo J, Arita M. Cardioprotective mechanism of omega-3 polyunsaturated fatty acids. Journal of cardiology. Sep 7 2015.
+98.Jain AP, Aggarwal KK, Zhang PY. Omega-3 fatty acids and cardiovascular disease. European review for medical and pharmacological sciences. 2015;19(3):441-445.
+99.Li D. Omega-3 polyunsaturated fatty acids and non-communicable diseases: meta-analysis based systematic review. Asia Pacific journal of clinical nutrition. 2015;24(1):10-15.
+100.Nestel P, Clifton P, Colquhoun D, et al. Indications for Omega-3 Long Chain Polyunsaturated Fatty Acid in the Prevention and Treatment of Cardiovascular Disease. Heart, lung & circulation. Aug 2015;24(8):769-779.
+101.Ho MJ, Bellusci A, Wright JM. Blood pressure lowering efficacy of coenzyme Q10 for primary hypertension. The Cochrane database of systematic reviews. 2009(4):Cd007435.
+102.Wyman M, Leonard M, Morledge T. Coenzyme Q10: a therapy for hypertension and statin-induced myalgia? Cleveland Clinic journal of medicine. Jul 2010;77(7):435-442.
+103.Mortensen SA, Rosenfeldt F, Kumar A, et al. The Effect of Coenzyme Q on Morbidity and Mortality in Chronic Heart Failure: Results From Q-SYMBIO: A Randomized Double-Blind Trial. JACC. Heart failure. Sep 25 2014.
+104.Gao L, Mao Q, Cao J, Wang Y, Zhou X, Fan L. Effects of coenzyme Q10 on vascular endothelial function in humans: a meta-analysis of randomized controlled trials. Atherosclerosis. Apr 2012;221(2):311-316.
+105.Hamilton SJ, Chew GT, Watts GF. Coenzyme Q10 Improves Endothelial Dysfunction in Statin-Treated Type 2 Diabetic Patients. Diabetes care. May 1, 2009 2009;32(5):810-812.
+106.Kedziora-Kornatowska K, Czuczejko J, Motyl J, et al. Effects of coenzyme Q10 supplementation on activities of selected antioxidative enzymes and lipid peroxidation in hypertensive patients treated with indapamide. A pilot study. Archives of medical science : AMS. Aug 30 2010;6(4):513-518.
+107.Alehagen U, Johansson P, Björnstedt M, Rosén A, Dahlström U. Cardiovascular mortality and N-terminal-proBNP reduced after combined selenium and coenzyme Q10 supplementation: A 5-year prospective randomized double-blind placebo-controlled trial among elderly Swedish citizens. International journal of cardiology. 9/1/ 2013;167(5):1860-1866.
+108.Jee SH, Miller ER, 3rd, Guallar E, Singh VK, Appel LJ, Klag MJ. The effect of magnesium supplementation on blood pressure: a meta-analysis of randomized clinical trials. American journal of hypertension. Aug 2002;15(8):691-696.
+109.Shechter M, Shechter A. The Role of Magnesium in the Cardiovascular System. In: Watson RR, Preedy VR, Zibadi S, eds. Magnesium in Human Health and Disease: Humana Press; 2013:191-204.
+110.Houston M. Magnesium and Hypertension. In: Watson RR, Preedy VR, Zibadi S, eds. Magnesium in Human Health and Disease: Humana Press; 2013:183-189.
+111.Rosanoff A. Magnesium supplements may enhance the effect of antihypertensive medications in stage 1 hypertensive subjects. Magnesium research : official organ of the International Society for the Development of Research on Magnesium. Mar 2010;23(1):27-40.
+112.Qu X, Jin F, Hao Y, et al. Magnesium and the risk of cardiovascular events: a meta-analysis of prospective cohort studies. PloS one. 2013;8(3):e57720.
+113.Grober U, Schmidt J, Kisters K. Magnesium in Prevention and Therapy. Nutrients. 2015;7(9):8199-8226.
+114.Rosanoff A, Plesset MR. Oral magnesium supplements decrease high blood pressure (SBP>155 mmHg) in hypertensive subjects on anti-hypertensive medications: a targeted meta-analysis. Magnesium research : official organ of the International Society for the Development of Research on Magnesium. Jul-Sep 2013;26(3):93-99.
+115.Tin A, Grams ME, Maruthur NM, et al. Results from the Atherosclerosis Risk in Communities study suggest that low serum magnesium is associated with incident kidney disease. Kidney international. 04//print 2015;87(4):820-827.
+116.Witkowski M, Hubert J, Mazur A. Methods of assessment of magnesium status in humans: a systematic review. Magnesium research : official organ of the International Society for the Development of Research on Magnesium. Dec 2011;24(4):163-180.
+117.Fekete AA, Givens DI, Lovegrove JA. Casein-derived lactotripeptides reduce systolic and diastolic blood pressure in a meta-analysis of randomised clinical trials. Nutrients. Jan 2015;7(1):659-681.
+118.Gold Standard. Drug Monograph. Lisinopril. www.clinicalkey.com. Copyright 2015 by Elsevier, Inc. Last updated 8/5/2014. Accessed 11/19/2015.
+119.Gold Standard. Drug Monograph. Candesartan. www.clinicalkey.com. Copyright 2015 by Elsevier, Inc. Last updated 6/15/2012. Accessed 11/19/2015.
+120.Pal S, Ellis V. The chronic effects of whey proteins on blood pressure, vascular function, and inflammatory markers in overweight individuals. Obesity (Silver Spring, Md.). Jul 2010;18(7):1354-1359.
+121.Pal S, Ellis V. Acute effects of whey protein isolate on blood pressure, vascular function and inflammatory markers in overweight postmenopausal women. The British journal of nutrition. May 2011;105(10):1512-1519.
+122.FitzGerald RJ, Murray BA, Walsh DJ. Hypotensive peptides from milk proteins. The Journal of nutrition. Apr 2004;134(4):980s-988s.
+123.Cicero AFG, Aubin F, Azais-Braesco V, Borghi C. Do the Lactotripeptides Isoleucine–Proline–Proline and Valine–Proline–Proline Reduce Systolic Blood Pressure in European Subjects? A Meta-Analysis of Randomized Controlled Trials. American journal of hypertension. 2013;26(3):442-449.
+124.Pins JJ, Keenan JM. Effects of whey peptides on cardiovascular disease risk factors. Journal of clinical hypertension (Greenwich, Conn.). Nov 2006;8(11):775-782.
+125.Houston M. The role of nutrition and nutraceutical supplements in the treatment of hypertension. World journal of cardiology. 2014;6(2):38-66.
+126.Maes W, Van Camp J, Vermeirssen V, et al. Influence of the lactokinin Ala-Leu-Pro-Met-His-Ile-Arg (ALPMHIR) on the release of endothelin-1 by endothelial cells. Regulatory peptides. Apr 15 2004;118(1-2):105-109.
+127.Li SH, Tian HB, Zhao HJ, Chen LH, Cui LQ. The acute effects of grape polyphenols supplementation on endothelial function in adults: meta-analyses of controlled trials. PloS one. 2013;8(7):e69818.
+128.Li SH, Zhao P, Tian HB, Chen LH, Cui LQ. Effect of Grape Polyphenols on Blood Pressure: A Meta-Analysis of Randomized Controlled Trials. PloS one. 2015;10(9):e0137665.
+129.Edirisinghe I, Burton-Freeman B, Tissa Kappagoda C. Mechanism of the endothelium-dependent relaxation evoked by a grape seed extract. Clinical science (London, England : 1979). Feb 2008;114(4):331-337.
+130.Park E, Edirisinghe I, Choy YY, Waterhouse A, Burton-Freeman B. Effects of grape seed extract beverage on blood pressure and metabolic indices in individuals with pre-hypertension: a randomised, double-blinded, two-arm, parallel, placebo-controlled trial. The British journal of nutrition. Nov 16 2015:1-13.
+131.Asgary S, Keshvari M, Sahebkar A, Hashemi M, Rafieian-Kopaei M. Clinical investigation of the acute effects of pomegranate juice on blood pressure and endothelial function in hypertensive individuals. ARYA atherosclerosis. Nov 2013;9(6):326-331.
+132.Asgary S, Sahebkar A, Afshani MR, Keshvari M, Haghjooyjavanmard S, Rafieian-Kopaei M. Clinical evaluation of blood pressure lowering, endothelial function improving, hypolipidemic and anti-inflammatory effects of pomegranate juice in hypertensive subjects. Phytotherapy research : PTR. Feb 2014;28(2):193-199.
+133.Tsang C, Smail NF, Almoosawi S, Davidson I, Al-Dujaili EA. Intake of polyphenol-rich pomegranate pure juice influences urinary glucocorticoids, blood pressure and homeostasis model assessment of insulin resistance in human volunteers. Journal of nutritional science. 2012;1:e9.
+134.Aviram M, Dornfeld L. Pomegranate juice consumption inhibits serum angiotensin converting enzyme activity and reduces systolic blood pressure. Atherosclerosis. Sep 2001;158(1):195-198.
+135.Aviram M, Rosenblat M, Gaitini D, et al. Pomegranate juice consumption for 3 years by patients with carotid artery stenosis reduces common carotid intima-media thickness, blood pressure and LDL oxidation. Clinical nutrition (Edinburgh, Scotland). Jun 2004;23(3):423-433.
+136.de Nigris F, Balestrieri ML, Williams-Ignarro S, et al. The influence of pomegranate fruit extract in comparison to regular pomegranate juice and seed oil on nitric oxide and arterial function in obese Zucker rats. Nitric Oxide. Aug 2007;17(1):50-54.
+137.Mohan M, Waghulde H, Kasture S. Effect of pomegranate juice on Angiotensin II-induced hypertension in diabetic Wistar rats. Phytotherapy research : PTR. Jun 2010;24 Suppl 2:S196-203.
+138.Susalit E, Agus N, Effendi I, et al. Olive (Olea europaea) leaf extract effective in patients with stage-1 hypertension: comparison with Captopril. Phytomedicine : international journal of phytotherapy and phytopharmacology. Feb 15 2011;18(4):251-258.
+139.Cherif S, Rahal N, Haouala M, et al. [A clinical trial of a titrated Olea extract in the treatment of essential arterial hypertension]. J Pharm Belg. Mar-Apr 1996;51(2):69-71.
+140.Perrinjaquet-Moccetti T, Busjahn A, Schmidlin C, Schmidt A, Bradl B, Aydogan C. Food supplementation with an olive (Olea europaea L.) leaf extract reduces blood pressure in borderline hypertensive monozygotic twins. Phytotherapy research : PTR. Sep 2008;22(9):1239-1242.
+141.de Bock M, Derraik JG, Brennan CM, et al. Olive (Olea europaea L.) leaf polyphenols improve insulin sensitivity in middle-aged overweight men: a randomized, placebo-controlled, crossover trial. PloS one. 2013;8(3):e57622.
+142.Scheffler A, Rauwald HW, Kampa B, Mann U, Mohr FW, Dhein S. Olea europaea leaf extract exerts L-type Ca(2+) channel antagonistic effects. Journal of ethnopharmacology. Nov 20 2008;120(2):233-240.
+143.Gilani AH, Khan AU, Shah AJ, Connor J, Jabeen Q. Blood pressure lowering effect of olive is mediated through calcium channel blockade. International journal of food sciences and nutrition. Dec 2005;56(8):613-620.
+144.Hansen K, Adsersen A, Christensen SB, Jensen SR, Nyman U, Smitt UW. Isolation of an angiotensin converting enzyme (ACE) inhibitor from Olea europaea and Olea lancea. Phytomedicine : international journal of phytotherapy and phytopharmacology. Mar 1996;2(4):319-325.
+145.Parzonko A, Czerwinska ME, Kiss AK, Naruszewicz M. Oleuropein and oleacein may restore biological functions of endothelial progenitor cells impaired by angiotensin II via activation of Nrf2/heme oxygenase-1 pathway. Phytomedicine : international journal of phytotherapy and phytopharmacology. Sep 15 2013;20(12):1088-1094.
+146.Madhavi D, Kagan D, Rao V. A Pilot Study to Evaluate the Antihypertensive Effect of a Celery Extract in Mild to Moderate Hypertensive Patients. Age. 2013;57:10.13.
+147.Moghadam MH, Imenshahidi M, Mohajeri SA. Antihypertensive effect of celery seed on rat blood pressure in chronic administration. Journal of medicinal food. Jun 2013;16(6):558-563.
+148.Ko FN, Huang TF, Teng CM. Vasodilatory action mechanisms of apigenin isolated from Apium graveolens in rat thoracic aorta. Biochimica et biophysica acta. Nov 14 1991;1115(1):69-74.
+149.Jorge VG, Angel JR, Adrian TS, et al. Vasorelaxant activity of extracts obtained from Apium graveolens: possible source for vasorelaxant molecules isolation with potential antihypertensive effect. Asian Pac J Trop Biomed. Oct 2013;3(10):776-779.
+150.Hamet P. The evaluation of the scientific evidence for a relationship between calcium and hypertension. The Journal of nutrition. Feb 1995;125(2 Suppl):311s-400s.
+151.van Mierlo LA, Arends LR, Streppel MT, et al. Blood pressure response to calcium supplementation: a meta-analysis of randomized controlled trials. Journal of human hypertension. Aug 2006;20(8):571-580.
+152.Geleijnse JM, Vermeer C, Grobbee DE, et al. Dietary intake of menaquinone is associated with a reduced risk of coronary heart disease: the Rotterdam Study. The Journal of nutrition. Nov 2004;134(11):3100-3105.
+153.Chow CK. Dietary intake of menaquinones and risk of cancer incidence and mortality. The American journal of clinical nutrition. December 1, 2010 2010;92(6):1533-1534.
+154.Shea MK, O'Donnell CJ, Hoffmann U, et al. Vitamin K supplementation and progression of coronary artery calcium in older men and women. The American journal of clinical nutrition. Jun 2009;89(6):1799-1807.
+155.DiNicolantonio JJ, Bhutani J, O'Keefe JH. The health benefits of vitamin K. Open Heart. 10/06 06/01/received 08/27/revised 09/18/accepted 2015;2(1):e000300.
+156.Shea MK, Holden RM. Vitamin K status and vascular calcification: evidence from observational and clinical studies. Advances in nutrition (Bethesda, Md.). Mar 2012;3(2):158-165.
+157.Dong JY, Qin LQ, Zhang Z, et al. Effect of oral L-arginine supplementation on blood pressure: a meta-analysis of randomized, double-blind, placebo-controlled trials. American heart journal. Dec 2011;162(6):959-965.
+158.Kozuma K, Tsuchiya S, Kohori J, Hase T, Tokimitsu I. Antihypertensive effect of green coffee bean extract on mildly hypertensive subjects. Hypertension research : official journal of the Japanese Society of Hypertension. Sep 2005;28(9):711-718.
+159.Yamaguchi T, Chikama A, Mori K, et al. Hydroxyhydroquinone-free coffee: a double-blind, randomized controlled dose-response study of blood pressure. Nutrition, metabolism, and cardiovascular diseases : NMCD. Jul 2008;18(6):408-414.
+160.Wang J, Xiong X, Feng B. Effect of crataegus usage in cardiovascular disease prevention: an evidence-based approach. Evidence-based complementary and alternative medicine : eCAM. 2013;2013:149363.
+161.Liu Y, Ma W, Zhang P, He S, Huang D. Effect of resveratrol on blood pressure: a meta-analysis of randomized controlled trials. Clinical nutrition (Edinburgh, Scotland). Feb 2015;34(1):27-34.
+162.Izzo JL, Jr., Weir MR. Angiotensin-converting enzyme inhibitors. Journal of clinical hypertension (Greenwich, Conn.). Sep 2011;13(9):667-675.
+163.Taylor AA, Siragy H, Nesbitt S. Angiotensin receptor blockers: pharmacology, efficacy, and safety. Journal of clinical hypertension (Greenwich, Conn.). Sep 2011;13(9):677-686.
+164.Li EC, Heran BS, Wright JM. Angiotensin converting enzyme (ACE) inhibitors versus angiotensin receptor blockers for primary hypertension. The Cochrane database of systematic reviews. 2014;8:Cd009096.
+165.Akhrass PR, McFarlane SI. Telmisartan and cardioprotection. Vascular Health and Risk Management. 11/15 2011;7:677-683.
+166.Lacourciere Y, Krzesinski JM, White WB, Davidai G, Schumacher H. Sustained antihypertensive activity of telmisartan compared with valsartan. Blood pressure monitoring. Aug 2004;9(4):203-210.
+167.Littlejohn T, Mroczek W, Marbury T, VanderMaelen CP, Dubiel RF. A prospective, randomized, open-label trial comparing telmisartan 80 mg with valsartan 80 mg in patients with mild to moderate hypertension using ambulatory blood pressure monitoring. The Canadian journal of cardiology. Sep 2000;16(9):1123-1132.
+168.Lacourciere Y, Lenis J, Orchard R, et al. A comparison of the efficacies and duration of action of the angiotensin II receptor blockers telmisartan and amlodipine. Blood pressure monitoring. Oct 1998;3(5):295-302.
+169.Benson SC, Pershadsingh HA, Ho CI, et al. Identification of telmisartan as a unique angiotensin II receptor antagonist with selective PPARgamma-modulating activity. Hypertension. May 2004;43(5):993-1002.
+170.Schupp M, Janke J, Clasen R, Unger T, Kintscher U. Angiotensin type 1 receptor blockers induce peroxisome proliferator-activated receptor-gamma activity. Circulation. May 4 2004;109(17):2054-2057.
+171.Berger JP, Petro AE, Macnaul KL, et al. Distinct properties and advantages of a novel peroxisome proliferator-activated protein [gamma] selective modulator. Molecular endocrinology (Baltimore, Md.). Apr 2003;17(4):662-676.
+172.Takeuchi K, Yamamoto K, Ohishi M, et al. Telmisartan modulates mitochondrial function in vascular smooth muscle cells. Hypertension research : official journal of the Japanese Society of Hypertension. May 2013;36(5):433-439.
+173.He H, Yang D, Ma L, et al. Telmisartan prevents weight gain and obesity through activation of peroxisome proliferator-activated receptor-delta-dependent pathways. Hypertension. Apr 2010;55(4):869-879.
+174.Scalera F, Martens-Lobenhoffer J, Bukowska A, Lendeckel U, Tager M, Bode-Boger SM. Effect of telmisartan on nitric oxide--asymmetrical dimethylarginine system: role of angiotensin II type 1 receptor gamma and peroxisome proliferator activated receptor gamma signaling during endothelial aging. Hypertension. Mar 2008;51(3):696-703.
+175.Feng X, Luo Z, Ma L, et al. Angiotensin II receptor blocker telmisartan enhances running endurance of skeletal muscle through activation of the PPAR-delta/AMPK pathway. Journal of cellular and molecular medicine. Jul 2011;15(7):1572-1581.
+176.Sanchis-Gomar F, Lippi G. Telmisartan as metabolic modulator: a new perspective in sports doping? Journal of strength and conditioning research / National Strength & Conditioning Association. Mar 2012;26(3):608-610.
+177.Sugimoto K, Qi NR, Kazdova L, Pravenec M, Ogihara T, Kurtz TW. Telmisartan but not valsartan increases caloric expenditure and protects against weight gain and hepatic steatosis. Hypertension. May 2006;47(5):1003-1009.
+178.Goyal SN, Bharti S, Bhatia J, Nag TC, Ray R, Arya DS. Telmisartan, a dual ARB/partial PPAR-gamma agonist, protects myocardium from ischaemic reperfusion injury in experimental diabetes. Diabetes, obesity & metabolism. Jun 2011;13(6):533-541.
+179.Iwai M, Inaba S, Tomono Y, et al. Attenuation of focal brain ischemia by telmisartan, an angiotensin II type 1 receptor blocker, in atherosclerotic apolipoprotein E-deficient mice. Hypertension research : official journal of the Japanese Society of Hypertension. Jan 2008;31(1):161-168.
+180.Iwanami J, Mogi M, Tsukuda K, et al. Low dose of telmisartan prevents ischemic brain damage with peroxisome proliferator-activated receptor-gamma activation in diabetic mice. Journal of hypertension. Aug 2010;28(8):1730-1737.
+181.Yuen CY, Wong WT, Tian XY, et al. Telmisartan inhibits vasoconstriction via PPARgamma-dependent expression and activation of endothelial nitric oxide synthase. Cardiovascular research. Apr 1 2011;90(1):122-129.
+182.Myojo M, Nagata D, Fujita D, et al. Telmisartan activates endothelial nitric oxide synthase via Ser1177 phosphorylation in vascular endothelial cells. PloS one. 2014;9(5):e96948.
+183.de Araujo Junior RF, Leitao Oliveira AL, de Melo Silveira RF, de Oliveira Rocha HA, de Franca Cavalcanti P, de Araujo AA. Telmisartan induces apoptosis and regulates Bcl-2 in human renal cancer cells. Experimental biology and medicine (Maywood, N.J.). Jan 2015;240(1):34-44.
+184.Koyama N, Nishida Y, Ishii T, Yoshida T, Furukawa Y, Narahara H. Telmisartan induces growth inhibition, DNA double-strand breaks and apoptosis in human endometrial cancer cells. PloS one. 2014;9(3):e93050.
+185.Lee LD, Mafura B, Lauscher JC, Seeliger H, Kreis ME, Grone J. Antiproliferative and apoptotic effects of telmisartan in human colon cancer cells. Oncology letters. Dec 2014;8(6):2681-2686.
+186.Pu Z, Zhu M, Kong F. Telmisartan prevents proliferation and promotes apoptosis of human ovarian cancer cells through upregulating PPARgamma and downregulating MMP9 expression. Molecular medicine reports. Nov 6 2015.
+187.Ferri FF. Ferri's Clinical Advisor. Disease Overview: Hypertension. Copyright 2016 by Elsevier, Inc. www.clinicalkey.com. 11/19/2015.
+188.Moser M, Feig PU. FIfty years of thiazide diuretic therapy for hypertension. Archives of internal medicine. 2009;169(20):1851-1856.
+189.ePocrates. Drugs. hydrochlorothiazide. Adverse Reactions. https://online.epocrates.com/drugs/22205/hydrochlorothiazide/Adverse-Reactions. Accessed 11/19/2015.
+190.Rimoldi SF, Messerli FH, Chavez P, Stefanini GG, Scherrer U. Efficacy and safety of calcium channel blocker/diuretics combination therapy in hypertensive patients: a meta-analysis.
+191.Spindler SR, Mote PL, Li R, et al. beta1-Adrenergic receptor blockade extends the life span of Drosophila and long-lived mice. Age (Dordrecht, Netherlands). Dec 2013;35(6):2099-2109.
+192.Gomez A, Sanchez-Roman I, Gomez J, et al. Lifelong treatment with atenolol decreases membrane fatty acid unsaturation and oxidative stress in heart and skeletal muscle mitochondria and improves immunity and behavior, without changing mice longevity. Aging Cell. Jun 2014;13(3):551-560.
+193.NPS MEDICINEWISE. Medical tests. ACE and ARB - reductions in GFR. http://www.nps.org.au/medical-tests/tests-by-conditions/for-individuals/kidney-problems-and-disorders-tests/for-health-professionals/medicines-to-be-aware-of/ace-arb-reductions-in-gfr#References. 6/30/2012. Accessed 11/20/2015.
+194.Schoolwerth A. Cautions with Angiotensin Converting Enzyme Inhibitor (ACEI) and Angiotensin Receptor Blocker (ARB) Therapy. CKD Update: Attacking Chronic Kidney Disease. Vol. 1; Issue 3. Copyright 2004 by The National Kidney Foundation. http://www.imakenews.com/ckdupdate/e_article000327587.cfm?x=b11,0,w. Accessed 11/20/2015.
+195.Weber MA, Schiffrin EL, White WB, et al. Clinical practice guidelines for the management of hypertension in the community a statement by the American Society of Hypertension and the International Society of Hypertension. Journal of hypertension. Jan 2014;32(1):3-15.
+196.Hermida RC, Ayala DE, Mojon A, Fernandez JR. Bedtime dosing of antihypertensive medications reduces cardiovascular risk in CKD. Journal of the American Society of Nephrology : JASN. Dec 2011;22(12):2313-2321.
+197.Hermida RC, Ayala DE. Chronotherapy with the angiotensin-converting enzyme inhibitor ramipril in essential hypertension: improved blood pressure control with bedtime dosing. Hypertension. Jul 2009;54(1):40-46.
+198.Hermida RC, Ayala DE, Fontao MJ, Mojon A, Fernandez JR. Chronotherapy with valsartan/amlodipine fixed combination: improved blood pressure control of essential hypertension with bedtime dosing. Chronobiology international. Jul 2010;27(6):1287-1303.
+199.Hermida RC, Ayala DE, Mojon A, Fernandez JR. Chronotherapy with nifedipine GITS in hypertensive patients: improved efficacy and safety with bedtime dosing. American journal of hypertension. Aug 2008;21(8):948-954.
+200.Hermida RC, Ayala DE, Mojon A, Fontao MJ, Fernandez JR. Chronotherapy with valsartan/hydrochlorothiazide combination in essential hypertension: improved sleep-time blood pressure control with bedtime dosing. Chronobiology international. Aug 2011;28(7):601-610.
+201.Zeng J, Jia M, Ran H, et al. Fixed-combination of amlodipine and diuretic chronotherapy in the treatment of essential hypertension: improved blood pressure control with bedtime dosing-a multicenter, open-label randomized study. Hypertension research : official journal of the Japanese Society of Hypertension. Jun 2011;34(6):767-772.
+202.Cruickshank JM. The role of coronary perfusion pressure. European heart journal. Sep 1992;13 Suppl D:39-43.
+203.Owens P, O'Brien E. Hypotension in patients with coronary disease: can profound hypotensive events cause myocardial ischaemic events? Heart (British Cardiac Society). Oct 1999;82(4):477-481.
+204.Voudris V, Avramides D, Gatzov P, Malakos J, Skoularigis J, Manolis A, . . . Cokkinos DV. The effect of rapid decreases of blood pressure by different mechanisms on coronary flow and flow reserve in normal coronary arteries. American journal of hypertension. Dec 2003;16(12):1000-1005.
+205.Bangalore S, Messerli FH, Wun CC, Zuckerman AL, DeMicco D, Kostis JB, LaRosa JC. J-curve revisited: An analysis of blood pressure and cardiovascular events in the Treating to New Targets (TNT) Trial. European heart journal. Dec 2010;31(23):2897-2908.
+206.Lanza CM. CITRUS FRUITS | Processed and Derived Products of Oranges. In: Caballero B, ed. Encyclopedia of Food Sciences and Nutrition (Second Edition). Oxford: Academic Press; 2003:1346-1354.
+207.Benavente-Garcia O, Castillo J. Update on uses and properties of citrus flavonoids: new findings in anticancer, cardiovascular, and anti-inflammatory activity. J Agric Food Chem. Aug 13 2008;56(15):6185-6205.
+        </p>
+
+</div>
+<script>
+        
+    </script>
+</body>
+</html>

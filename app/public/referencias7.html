@@ -1,0 +1,386 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">  
+    <link rel="icon" href="dc3.png" type="image/png">  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White Book</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">
+    <!-- Estilos para dispositivos móviles -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (max-width: 768px)">
+    <!-- Estilos para pantallas de PC -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (min-width: 769px)">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+
+    <!-- Metadatos Open Graph -->
+    <meta property="og:title" content="YOU TOMORROW">
+    <meta property="og:description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta property="og:image" content="https://drive.google.com/file/d/1ZZI3G6Fit_kovvVZolrvchtXQQDrnWYI/view?usp=sharing">
+    <meta property="og:url" content="https://ytomorrow.com/">
+    <meta property="og:type" content="website">
+
+    <!-- Otros metadatos -->
+    <meta name="description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta name="keywords" content="you, YOU TOMORROW, TOMORROW, TOMORR, TOM, web">
+
+    <style>
+
+   body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 17px;
+    line-height: 1.4;
+    margin: 20px;
+    font-weight: 500; /* Grosor medio de la negrita */
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1, h2, h3 {
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+p {
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.section {
+    margin-bottom: 30px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    width: 100%;
+}
+
+.chart-row {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+    width: 50%; /* Ajusta el ancho para que se adapte al contenido */
+}
+
+.chart-box {
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    min-width: 150px; /* Asegura que las tarjetas tengan un ancho mínimo */
+    max-width: 300px; /* Limita el ancho máximo para tarjetas largas */
+    word-wrap: break-word; /* Permite que el texto se ajuste dentro de la tarjeta */
+    flex: 1; /* Permite que las tarjetas se expandan uniformemente */
+}
+
+.chart-box:hover {
+    transform: scale(1.05);
+}
+
+.chart-box.ceo {
+    background: linear-gradient(135deg, #ff6f61, #e53935);
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.chart-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transform: rotate(45deg);
+}
+
+.chart-box:hover::before {
+    opacity: 1;
+}
+
+.chart-box.ceo::before {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.connector {
+    width: 2px;
+    height: 20px;
+    background-color: #1b3a7a;
+    margin: 0 auto;
+}
+
+.horizontal-connector {
+    height: 2px;
+    width: 100%;
+    background-color: #1b3a7a;
+}
+
+.horizontal-connector.long {
+    width: 50%;
+}
+
+.chart-box i {
+    margin-right: 8px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #1b5e20;
+    color: #1b5e20;
+    font-weight: bold;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+
+  caption {
+    caption-side: top;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+    </style>
+
+</head>
+<body>
+<div class="container">
+REFERENCES
+    <ol>
+       REFERENCES.
+1.Pawankar R, Canonica G, Holgate S, Lockey R. (eds). World Health Organization (WAO) White Book on Allergy. 2011.
+2.Chang, Christopher, 2011. Asthma in Children and Adolescents: A Comprehensive Approach to Diagnosis and Management. Clinical Reviews in Allergy and Immunology. Doi: 10.1007/s12016-011-8261-3.
+3.Wallace DV, Dykewicz MS, Bernstein DI, et al. The diagnosis and management of rhinitis: An updated practice parameters. J Allergy ClinImmunol 2008; 122: S1-S84
+4.Fishbein AB, FuleihanRL. The hygiene hypothesis revisited: does exposure to infectious agents protect us from allergy? CurrOpinPediatr. 2012 Feb;24(1):98-102.
+5.Jedrychowski W et al. Wheezing and asthma may be enhanced by broad spectrum antibiotics used in early childhood. Concept and results of a pharmacoepidemiology study. J PhysiolPharmacol. 2011 Apr;62(2):189-95.
+6.Li XM. Complementary and alternative medicine in pediatric allergic disorders. CurrOpin Allergy ClinImmunol. 2009 Apr;9(2):161-7.
+7.Metcalfe A, Williams J, McChesney J, et al. Use of complementary and alternative medicine by those with a chronic disease and the general population—results of a national population based survey. BMC Complement Altern Med. 2010;10:58.
+8.Lin SY et al. Sublingual immunotherapy. OtolaryngolClin North Am. 2011 Jun;44(3):753-64, x-xi.
+9.American Academy of Allergy, Asthma and Immunology. Allergies. Available at http://www.aaaai.org/conditions-and-treatments/allergies.aspx. Accessibility verified December 17, 2011.
+10.Kasper DL, Braunwald DE , et al. Harrison 's Principles of Internal Medicine . 16th ed. New York : McGraw-Hill Professional; 2005.
+11.Berger A. Th1 and Th2 responses: What are they? BMJ 2000;321:424.1.
+12.Bellanti JA. Cytokines and allergic diseases: clinical aspects. Allergy Asthma Proc 1998 Dec;19(6):337-41.
+13.Hansen I, Klimek L, Mosges R, Hormann K. Mediators of inflammation in the early and the late phase of allergic rhinitis. CurrOpin Allergy ClinImmunol. 2004 Jun;4(3):159-63.
+14.Gupta R, Sheikh A, Strachan DP, Anderson HR. Burden of allergic disease in the UK: secondary analyses of national databases. ClinExp Allergy. 2004 Apr;34(4):520-6.
+15.Yuksel H, Dinc G, Sakar A, et al. Prevalence and comorbidity of allergic eczema, rhinitis, and asthma in a city in western Turkey. J InvestigAllergolClinImmunol. 2008;18(1):31-5.
+16.Asher MI, Montefort S, ISAAC Phase Three Study Group, et al. Worldwide time trends in the prevalence of symptoms of asthma, allergic rhinoconjunctivitis, and eczema in childhood: ISAAC Phases One and Three repeat multicountry cross-sectional surveys. Lancet. 2006 Aug 26;368(9537):733-43.
+17.Björkstén  B, Clayton T, et al. ISAAC Phase III Study Group. Worldwide time trends for symptoms of rhinitis and conjunctivitis: Phase III of the International Study of Asthma and Allergies in Childhood. Pediatr Allergy Immunol. 2008 Mar;19(2):110-24.
+18.Zheng T, Yu J, Oh MH, Zhu Z. The atopic march: progression from atopic dermatitis to allergic rhinitis and asthma. Allergy Asthma Immunol Res. 2011 Apr;3(2):67-73.
+19.Johansson SG, Bieber T, Dahl R, et al. Revised nomenclature for allergy for global use: Report of the Nomenclature Review Committee of the World Allergy Organization, October 2003. J Allergy ClinImmunol. 2004 May;113(5):832-6.
+20.Simpson CR, Newton J, Hippisley-Cox J, Sheikh A. Incidence and prevalence of multiple allergic disorders recorded in a national primary care database. J R Soc Med. 2008 Nov;101(11):558-63.
+21.Spergel JM, Paller AS. Atopic dermatitis and the atopic march. J Allergy ClinImmunol. 2003 Dec;112(6 Suppl):S118-27.
+22.Spergel JM. Epidemiology of atopic dermatitis and atopic march in children. Immunol Allergy Clin North Am. 2010 Aug;30(3):269-80.
+23.Hoare C, Li Wan Po A, Williams H. Systematic review of treatments for atopic eczema. Health Technol Assess. 2000;4(37):1-191.
+24.Leung DY, Nicklas RA, Li JT, et al. Disease management of atopic dermatitis: an updated practice parameter. Joint Task Force on Practice Parameters. Ann Allergy Asthma Immunol. 2004 Sep;93(3 Suppl 2):S1-21.
+25.Meltzer EO, Blaiss MS, DereberyMJ, et al. Burden of allergic rhinitis: results from the Pediatric Allergies in America survey. J Allergy ClinImmunol. 2009 Sep;124(3 Suppl):S43-70. Epub 2009 Jul 9.
+26.Choi SH, Yoo Y, Yu J, et al. Bronchial hyperresponsiveness in young children with allergic rhinitis and its risk factors. Allergy. 2007 Sep;62(9):1051-6.
+27.Craig TJ, Sherkat A, Safaee S. Congestion and sleep impairment in allergic rhinitis. Curr Allergy Asthma Rep. 2010 Mar;10(2):113-21.
+28.Rondón  C, Doña I, Torres MJ, Campo P, Blanca M. Evolution of patients with nonallergic rhinitis supports conversion to allergic rhinitis. J Allergy ClinImmunol. 2009 May;123(5):1098-102.
+29.Bousquet J, Khaltaev N, Cruz AA, Denburg J, et al. Allergic Rhinitis and its Impact on Asthma (ARIA) 2008 update (in collaboration with the World Health Organization, GA(2)LEN and AllerGen). Allergy. 2008 Apr;63Suppl 86:8-160.
+30.Sabin BR, Saltoun CA, Avila PC. Advances in upper airway diseases and allergen immunotherapy. J Allergy ClinImmunol. 2011 Feb;127(2):342-50.
+31.Zhang J, ParéPD, SandfordAJ. Recent advances in asthma genetics. Respir Res. 2008 Jan 15;9:4.
+32.Sicherer SH. Food allergy. Mt Sinai J Med. 2011 Sep-Oct;78(5):683-96. doi: 10.1002/msj.20292.
+33.Branum AM, Lukacs SL. Food allergy among U.S. children: trends in prevalence and hospitalizations. NCHS Data Brief. 2008 Oct;(10):1-8.
+34.Bahna SL. Clinical expressions of food allergy. Ann Allergy Asthma Immunol. 2003 Jun;90(6 Suppl 3):41-4.
+35.Troncone  R, Caputo N, Florio G, Finelli E. Increased intestinal sugar permeability after challenge in children with cow's milk allergy or intolerance. Allergy. 1994;49(3):142–146.
+36.Pizzuti D, Senzolo M, Buda A, et al. In vitro model for IgE mediated food allergy. Scand J Gastroenterol. 2011 Feb;46(2):177-87. Epub 2010 Oct 28.
+37.Moneret-Vautrin DA, Morisset M. Adult food allergy. Curr Allergy Asthma Rep . 2005 Jan;5(1):80–5.
+38.Yu LC. Intestinal epithelial barrier dysfunction in food hypersensitivity. J Allergy (Cairo). 2012;2012:596081.
+39.Frank DN, Amand ALS, Feldman RA, et al. Molecular-phylogenetic characterization of microbial community imbalances in human inflammatory bowel diseases. Proceedings of the National Academy of Sciences of the United States of America. 2007;104(34):13780–13785.
+40.Kelly D, Conway S. Bacterial modulation of mucosal innate immunity. Molecular Immunology. 2005;42(8):895–901.
+41.Kelly D, King T, Aminov R. Importance of microbial colonization of the gut in early life to the development of immunity. Mutation Research. 2007;622(1-2):58–69.
+42.Sudo N, Yu XN, Aiba Y, et al. An oral introduction of intestinal bacteria prevents the development of a long-term Th2-skewed immunological memory induced by neonatal antibiotic treatment in mice. Clinical and Experimental Allergy. 2002;32(7):1112–1116
+43.Vinderola CG, Medici M, Perdigon G. Relationship between interaction sites in the gut, hydrophobicity, mucosal immunomodulating capacities and cell wall protein profiles in indigenous and exogenous bacteria. J ApplMicrobiol . 2004;96(2):230–43.
+44.Gun F, Salman T, et al. Effect of probiotic supplementation on bacterial transaction in thermal injury. Surg Today . 2005;35(9):760–4.
+45.Casas IA , DobrogoszWJ. Validation of the probiotic concept: Lactobacillus reuteri confers broad-spectrum protection against disease in humans and animals. Microbial Ecology in Health and Disease 2000;12:247–85.
+46.Pelto L, Ioslauri E, et al. Probiotic bacteria down-regulate the milk-induced inflammatory response in milk-hypersensitive subjects but have an immunostimulatory effect in healthy subjects . ClinExp Allergy. 1998 Dec;28(12):1474–9.
+47.Goldin BR. Health benefits of probiotics. Br J Nutr1998;80:S203–S207 .
+48.Cross ML, Gill HS. Can immunoregulatory lactic acid bacteria be used as dietary supplements to limit allergies? Int Arch Allergy Immunol . 2001 Jun;125(2):112–9.
+49.Bouhnik Y, Vahedi K, et al. Short-chain fructo-oligosaccharide administration dose-dependently increases fecal bifidobacteria in healthy humans. J Nutr 1999;129:113–6 .
+50.O'Keefe SJ et al. Effect of fiber supplementation on the microbiota in critically ill patients. World J GastrointestPathophysiol. 2011 Dec 15;2(6):138-45.
+51.Russel L et al. What's Really Making You Sick? Life Extension Magazine September 2010.
+52.Mitchell N et al. Randomised controlled trial of food elimination diet based on IgG antibodies for the prevention of migraine like headaches. Nutr J. 2011 Aug 11;10:85.
+53.Bentz S et al. Clinical relevance of IgG antibodies against food antigens in Crohn's disease: a double-blind cross-over diet intervention study. Digestion. 10;81(4):252-64. Epub 2010 Jan 30.
+54.Anthoni S et al. Milk protein IgG and IgA: the association with milk-induced gastrointestinal symptoms in adults. World J Gastroenterol. 2009 Oct 21;15(39):4915-8.
+55.Atkinson W et al. Food elimination based on IgG antibodies in irritable bowel syndrome: a randomised controlled trial. Gut. 2004 Oct;53(10):1459-64.
+56.Fischbach F. A manual of Laboratory and Diagnostic Tests . 5th ed. Philadelphia , Pa : Lippincott-Raven; 1996.
+57.Rolinck-Werninghaus C, Staden U, et al. Specific oral tolerance induction with food in children: transient or persistent effect on food allergy? Allergy . 2005 Oct;60(10):1320–2.
+58.Calderon MA, Penagos M, Sheikh A, et al. Sublingual immunotherapy for allergic conjunctivitis: Cochrane systemic review and meta-analysis. Clin Exp Allergy. 2011 Sep;41(9):1263-72.
+59.Cox L, Wallace D. Specific allergy immunotherapy for allergic rhinitis: subcutaneous and sublingual. Immunol Allergy Clin North Am. 2011 Aug;31(3):561-99.
+60.Bahceciler NN, Cobanoglu N. Subcutaneous versus sublingual immunotherapy for allergic rhinitis and/or asthma. Immunotherapy. 2011 Jun;3(6):747-56.
+61.Penders J, Stobberingh EE, van den Brandt PA, Thijs C. The role of the intestinal microbiota in the development of atopic disorders. Allergy. 2007 Nov;62(11):1223-36.
+62.Pan SJ, Kuo CH, Lam KP, et al.Probiotics and allergy in children--an update review. Pediatr Allergy Immunol. 2010 Jun;21(4 Pt 2):e659-66.
+63.Kalliomaki M, Kirjavainen P, Eerola E, et al. Distinct patterns of neonatal gut microflora in infants in whom atopy was and was not developing. J Allergy ClinImmunol 2001;107:129–34.
+64.Food and Agriculture Organization, World Health Organization (FAO/WHO). Report of Joint FAO/WHO expert consultation on evaluation of health and nutritional properties of probiotics in food including powder milk with live lactic acid bacteria. FAO/WHO Report no. 10-1-2001.WHOINT; Córdoba,Argentina.
+65.Wang MF, Lin HC, Wang YY, Hsu CH. Treatment of perennial allergic rhinitis with lactic acid bacteria. Pediatr Allergy Immunol 2004: 15: 152–8.
+66.Peng GC, Hsu CH. The efficacy and safety of heat-killed Lactobacillus paracasei for treatment of perennial allergic rhinitis induced by house-dust mite. Pediatr Allergy Immunol. 2005 Aug;16(5):433-8.
+67.Giovannini M, Agostoni C, Riva E et al.; Felicita Study Group. A randomized prospective double blind controlled trial on effects of long-term consumption of fermented milk containing Lactobacillus casei in pre-school children with allergic asthma and/or rhinitis. Pediatr Res. 2007 Aug;62(2):215-20.
+68.Ciprandi G, Vizzaccaro A, Cirillo I, Tosca MA. Bacillus clausii effects in children with allergic rhinitis. Allergy. 2005 May;60(5):702-3.
+69.Morita H, He F, Kawase M, Kubota A, et al.Preliminary human study for possible alteration of serum immunoglobulin E production in perennial allergic rhinitis with fermented milk prepared with Lactobacillus gasseriTMC0356. MicrobiolImmunol. 2006;50(9):701-6.
+70.Xiao JZ, Kondo S, Yanagisawa N, et al. Probiotics in the treatment of Japanese cedar pollinosis: a double-blind placebo-controlled trial. ClinExp Allergy. 2006 Nov;36(11):1425-35.
+71.Iwabuchi N et al. Suppressive effects of Bifidobacteriumlongum on the production of Th2-attracting chemokines induced with T cell-antigen-presenting cell interactions. FEMSImmunol Med Microbiol. 2009 Apr;55(3):324-34.
+72.Odamaki T et al. Influence of BifidobacteriumlongumBB536 intake on faecalmicrobiota in individuals with Japanese cedar pollinosis during the pollen season. J Med Microbiol. 2007 Oct;56(Pt 10):1301-8.
+73.Takahashi N et al. Oral administration of an immunostimulatory DNA sequence from Bifidobacteriumlongum improves Th1/Th2 balance in a murine model. BiosciBiotechnolBiochem. 2006 Aug;70(8):2013-7.
+74.Nagata Y, Yoshida M, Kitazawa H, Araki E, Gomyo T. Improvements in seasonal allergic disease with Lactobacillus plantarum No. 14. BiosciBiotechnolBiochem. 2010;74(9):1869-77.
+75.Betsi GI, Papadavid E, Falagas ME. Probiotics for the treatment or prevention of atopic dermatitis: a review of the evidence from randomized controlled trials. Am J ClinDermatol. 2008;9(2):93-103.
+76.Moroi M, Uchi S, Nakamura K, et al. Beneficial effect of a diet containing heat-killed Lactobacillus paracaseiK71 on adult type atopic dermatitis. J Dermatol. 2011 Feb;38(2):131-9. doi: 10.1111/j.1346-8138.2010.00939.
+77.GerasimovSV, VasjutaVV, MyhovychOO, Bondarchuk LI. Probiotic supplement reduces atopic dermatitis in preschool children: a randomized, double-blind, placebo-controlled, clinical trial. Am J ClinDermatol. 2010;11(5):351-61.
+78.Boyle RJ, Ismail IH, Kivivuori S, et al. Lactobacillus GG treatment during pregnancy for the prevention of eczema: a randomized controlled trial.Allergy. 2011 Apr;66(4):509-16.
+79.Berni Canani R, Nocerino R, Terrin G, et al. Effect of Lactobacillus GG on tolerance acquisition in infants with cow's milk allergy: A randomized trial. J Allergy ClinImmunol. 2011 Nov 10.
+80.Ozdemir O. Various effects of different probiotic strains in allergic disorders: an update from laboratory and clinical data. ClinExpImmunol. 2010 Jun;160(3):295-304.
+81.Jensen GS. Patterson KM. Barnes J. Schauss AG. Beaman R. Reeves SG. Robinson LE. A double-blind placebo-controlled, randomized pilot study: consumption of a high-metabolite immunogen from yeast culture has beneficial effects on erythrocyte health and mucosal immune protection in healthy subjects. Open Nutr J. 2008;2:68–75.
+82.Moyad MA, Robinson LE, Kittelsrud JM, Reeves SG, Weaver SE, Guzman AI, Bubak ME. Immunogenic yeast-based fermentation product reduces allergic rhinitis-induced nasal congestion: a randomized, double-blind, placebo-controlled trial. Adv Ther. 2009 Aug;26(8):795-804.
+83.Ishida Y, Bandou I, Kanzato H, Yamamoto N. Decrease in ovalbumin specific IgE of mice serum after oral uptake of lactic acid bacteria. Biosci Biotechnol Biochem. 2003 May;67(5):951-7.
+84.Ishida Y, Nakamura F, Kanzato H, Sawada D, Yamamoto N, Kagata H, Oh-Ida M, Takeuchi H, Fujiwara S. Effect of milk fermented with Lactobacillus acidophilus strain L-92 on symptoms of Japanese cedar pollen allergy: a randomized placebo-controlled trial. Biosci Biotechnol Biochem. 2005 Sep;69(9):1652-60.
+85.Ishida Y, Nakamura F, Kanzato H, Sawada D, Hirata H, Nishimura A, Kajimoto O, Fujiwara S. Clinical effects of Lactobacillus acidophilus strain L-92 on perennial allergic rhinitis: a double-blind, placebo-controlled study. J Dairy Sci. 2005 Feb;88(2):527-33.
+86.Calpis Co., Ltd., 2012. https://www.calpis.net/
+87.Searing DA, Leung DY. Vitamin D in atopic dermatitis, asthma and allergic diseases. Immunol Allergy Clin North Am. 2010 Aug;30(3):397-409.
+88.Clifford RL, Knox AJ. Vitamin D-a new treatment for airway remodelling in asthma?. Br J Pharmacol 2009;158:1426–1428.
+89.Weiss ST, Litonjua AA. Childhood asthma is a fat-soluble vitamin deficiency disease. ClinExp Allergy 2008;38:385–387.
+90.Litonjua AA. Childhood asthma may be a consequence of vitamin D deficiency. CurrOpin Allergy ClinImmunol 2009;9:202–207.
+91.Freishtat RJ, Iqbal SF, Pillai DK, et al. High prevalence of vitamin d deficiency among inner-city African American youth with asthma in Washington, DC. J Pediatr 2010;156:948– 952.
+92.Sharief S, Jariwala S, Kumar J, Muntner P, Melamed ML. Vitamin D levels and food and environmental allergies in the United States: results from the National Health and Nutrition Examination Survey 2005–2006. J Allergy ClinImmunol 2011;127:1195–1202.
+93.Peroni DG, Piacentini GL, Cametti E, Chinellato I, Boner AL. Correlation between serum 25-hydroxyvitamin D levels and severity of atopic dermatitis in children. Br J Dermatol 2011;164:1078–1082.
+94.Chinellato I, Piazza M, Sandri M, et al. Vitamin D serum levels and markers of asthma control in Italian children. J Pediatr 2011;158:437–441.
+95.Thorp WA, Goldner W, Meza J, Poole JA. Reduced vitamin D levels in adult subjects with chronic urticaria. J Allergy ClinImmunol 2010;126:413.
+96.Javanbakht MH, Keshavarz SA, Djalali M, et al. Randomized controlled trial using vitamins E and D supplementation in atopic dermatitis. J Dermatolog Treat. 2011 Jun;22(3):144-50. Epub 2010 Jul 24.
+97.Camargo CA, RifasShiman SL, Litonjua AA, et al. Maternal intake of vitamin D during pregnancy and risk of recurrent wheeze in children at 3 y of age. Am J ClinNutr 2007;85:788–795
+98.Erkkola M, Kaila M, Nwaru BI, et al. Maternal vitamin D intake during pregnancy is inversely associated with asthma and allergic rhinitis in 5-year-old children. ClinExp Allergy 2009;39:875–882.
+99.Hollams EM, Hart PH, Holt BJ, et al. Vitamin D and atopy and asthma phenotypes in children: a longitudinal cohort study. EurRespir J. 2011 Dec;38(6):1320-7. Epub 2011 May 12.
+100.Weiss ST. Randomized trial: maternal vitamin D supplementation to prevent childhood asthma (VDAART). ClinicalTrials.gov: NCT00920621. Last updated 3/13/2018.
+101.Centanni S, Santus P, Di Marco F, et al. The potential role of tocopherol in asthma and allergies: modification of the leukotriene pathway. Biodrugs . 2001;15(2):81–6.
+102.Zingg JM. Vitamin E and mast cells. VitamHorm 2007;76:393-418.
+103.Kempna P, Reiter E, Arock M, Azzi A, Zingg JM. Inhibition of HMC-1 mast cell proliferation by vitamin E: involvement of the protein kinase B pathway. J BiolChem 2004;279:50700-9.
+104.Miyake Y, Sasaki S, Tanaka K, Hirota Y. Consumption of vegetables, fruit, and antioxidants during pregnancy and wheeze and eczema in infants. Allergy. 2010 Jun 1;65(6):758-65.
+105.Devereux G, Turner SW, Craig LCA, et al. Reduced maternal vitamin E intake during pregnancy is associated with asthma in 5-year-old children. Am J RespirCrit Care Med. 2006;174;499-507.
+106.Hijazi N, Abalkhail B, et al. Diet and childhood asthma in a society in transition: A study in urban and rural Saudi Arabia . Thorax . 2000 Sep;55(9):775–9.
+107.Troisi RJ, Willett WC, Weiss ST, et al. A prospective study of diet and adult-onset asthma. Am J RespirCrit Care Med. 1995;151:1401-1408.
+108.Tsoureli-Nikita E, Hercogova J, Lotti T, Menchini G. Evaluation of dietary intake of vitamin E in the treatment of atopic dermatitis: a study of the clinical course and evaluation of the immunoglobulin E serum levels. Int J Dermatol. 2002 Mar;41(3):146-50.
+109.Zheng K, Adjei A, Shinjo M, et al. Effect of dietary vitamin E supplementation on murine nasal allergy. Am. J. Med. Sci. 1999. 318, 49–54.
+110.Shahar, E., Hassoun, G., and Pollack, S. (2004). Effect of vitamin E supplementation on the regular treatment of seasonal allergic rhinitis. Ann. Allergy Asthma Immunol. 92, 654–658.
+111.Johnston CS, Solomon RE, Corte C. Vitamin C depletion is associated with alterations in blood histamine and plasma free carnitine in adults. J Am CollNutr . 1996 Dec;15(6):586–91.
+112.Bucca C, Rolla G, et al. Effect of vitamin C on histamine bronchial responsiveness of patients with allergic rhinitis. Ann Allergy . 1990 Oct; 65(4):311–4.
+113.Soutar A, Seaton A, et al. Bronchial reactivity and dietary antioxidants. Thorax . 1997 Feb;52(2):166–70.
+114.Chang HH, Chen CS, Lin JY. High dose vitamin C supplementation increases the Th1/Th2 cytokine secretion ratio, but decreases eosinophilic infiltration in bronchoalveolar lavage fluid of ovalbumin-sensitized and challenged mice. J Agric Food Chem. 2009 Nov 11;57(21):10471-6.
+115.Laires MJ, Monteiro C. Exercise, magnesium and immune function. Magnes Res. 2008 Jun;21(2):92-6.
+116.Ciarallo L, Sauer AH, Shannon MW. Intravenous magnesium therapy for moderate to severe pediatric asthma: results of a randomized, placebo-controlled trial. J Pediatr. 1996;129(6):809–14.
+117.Devi PR, Kumar L, Singhi SC, Prasad R, Singh M. Intravenous magnesium sulfate in acute severe asthma not responding to conventional therapy. Indian Pediatr. 1997;34(5):389–97.
+118.Gürkan  F, Haspolat K, Bosnak M, et al. Intravenous magnesium sulphate in the management of moderate to severe acute asthmatic children nonresponding to conventional therapy. Eur J Emerg Med. 1999;6(3):201–5.
+119.Ciarallo L, Brousseau D, Reinert S. Higher-dose intravenous magnesium therapy for children with moderate to severe acute asthma. Arch PediatrAdolesc Med. 2000 Oct;154(10):979-83.
+120.Scarfone RJ, LoiselleJM, Joffe MD, et al. A randomized trial of magnesium in the emergency department treatment of children with asthma. Ann Emerg Med. 2000;36(6):572–8.
+121.Bede O, Surányi A, Pintér K, Szlávik M, Gyurkovits K. Urinary magnesium excretion in asthmatic children receiving magnesium supplementation: a randomized, placebo-controlled, double-blind study. Magnes Res. 2003 Dec;16(4):262-70.
+122.Gontijo-Amaral C, Ribeiro MA, GontijoLS, Condino-Neto A, Ribeiro JD. Oral magnesium supplementation in asthmatic children: a double-blind randomized placebo-controlled trial. Eur J ClinNutr. 2007 Jan;61(1):54-60. Epub 2006 Jun 21.
+123.Kazaks AG, Uriu-Adams JY, Albertson TE, Shenoy SF, Stern JS. Effect of oral magnesium supplementation on measures of airway resistance and subjective assessment of asthma control and quality of life in men and women with mild to moderate asthma: a randomized placebo controlled trial. J Asthma. 2010 Feb;47(1):83-92.
+124.Calder PC. Polyunsaturated fatty acids and inflammation. BiochemSoc Trans . 2005 Apr; (pt 2): 423–7.
+125.Leaf A. On the reanalysis of the GISSI-Prevenzione. Circulation . 2002;105:1874 – 1875.
+126.Connor WE. N-3 Fatty acids from fish and fish oil: panacea or nostrum? Am J ClinNutr. 2001;74:415 – 6.
+127.Calder PC. N-3 polyunsaturated fatty acids, inflammation and immunity: pouring oil on troubled waters or another fishy tale? Nutr Res . 2001;21:309–41.
+128.CederholmTE et al. Low levels of essential fatty acids are related to impaired delayed skin hypersensitivity in malnourished chronically ill elderly people. Eur J Clin Invest. 1994 Sep;24(9):615-20.
+129.Watanabe T, Kuroda Y. The effect of a newly developed ointment containing eicosapentaenoic and docosahexaenioc acid in the treatment of atopic dermatitis. J Med Invest . 1999 Aug;46(3–4):173–7.
+130.Klemens CM, Berman DR, Mozurkewich EL. The effect of perinatal omega-3 fatty acid supplementation on inflammatory markers and allergic diseases: a systematic review. BJOG. 2011 Jul;118(8):916-25.
+131.Miyake Y, Sasaki S, Tanaka K, et al; Osaka Maternal and Child Health Study Group. Fish and fat intake and prevalence of allergic rhinitis in Japanese females: the Osaka Maternal and Child Health Study. J Am CollNutr. 2007 Jun;26(3):279-87.
+132.Thomet OA, Schapowal A, Heinisch IV, Wiesmann UN, Simon HU. Anti-inflammatory activity of an extract of Petasiteshybridus in allergic rhinitis. IntImmunopharmacol. 2002 Jun;2(7):997-1006.
+133.Shimoda H, Tanaka J, Yamada E, et al. Anti type I allergic property of Japanese butterbur extract and its mast cell degranulation inhibitory ingredients. J Agric Food Chem 2006; 54:2915–2920.
+134.Lee JS, Yang EJ, Yun CY, Kim DH, Kim IS. Suppressive effect of Petasitesjaponicus extract on ovalbumin-induced airway inflammation in an asthmatic mouse model. J Ethnopharmacol. 2011 Jan 27;133(2):551-7. Epub 2010 Oct 26.
+135.Schapowal A. Butterbur Ze339 for the treatment of intermittent allergic rhinitis: dose-dependent efficacy in a prospective, randomized, double-blind, placebo-controlled study. Arch Otolaryngol Head Neck Surg 2004; 130: 1381–1386.
+136.Schapowal A. Randomised controlled trial of butterbur and cetirizine for treating seasonal allergic rhinitis. BMJ 2002; 324:144–146.
+137.Schapowal A. Treating intermittent allergic rhinitis: a prospective, randomized, placebo and antihistamine-controlled study of butterbur extract Ze 339. Phytother Res 2005; 19:530–537.
+138.Lee DK, Gray RD, Robb FM, et al. A placebo-controlled evaluation of butterbur and fexofenadine on objective and subjective outcomes in perennial allergic rhinitis. ClinExp Allergy 2004; 34:646–64.
+139.Guo R, Pittler MH, Ernst E. Herbal medicines for the treatment of allergic rhinitis: a systematic review. Ann Allergy Asthma Immunol. 2007 Dec;99(6):483-95.
+140.Brattström  A, Schapowal A, Maillet I, et al. Petasites extract Ze 339 (PET) inhibits allergen-induced Th2 responses, airway inflammation and airway hyperreactivity in mice. Phytother Res. 2010 May;24(5):680-5.
+141.Lee JS, Yang EJ, Yun CY, et al. Suppressive effect of Petasites japonicas extract on ovalbumin-induced airway inflammation in an asthmatic mouse model. J Ethnopharmacol. 2011 Jan;133(2):551-7.
+142.Chirumbolo S, Marzotto M, Conforti A, et al.Bimodal action of the flavonoid quercetin on basophil function: an investigation of the putative biochemical targets. ClinMol Allergy. 2010 Sep 17;8:13.
+143.Huang RY, Yu YL, Cheng WC, et al. Immunosuppressive effect of quercetin on dendritic cell activation and function. J Immunol. 2010 Jun 15;184(12):6815-21. Epub 2010 May 17.
+144.Shishehbor F, Behroo L, GhafouriyanBroujerdnia M, Namjoyan F, Latifi SM. Quercetin effectively quells peanut-induced anaphylactic reactions in the peanut sensitized rats. Iran J Allergy Asthma Immunol. 2010 Mar;9(1):27-34.
+145.Joskova M, Franova S, Sadlonova V. Acute bronchodilator effect of quercetin in experimental allergic asthma. BratislLekListy. 2011;112(1):9-12.
+146.Rogerio AP, Dora CL, Andrade EL, et al. Anti-inflammatory effect of quercetin-loaded microemulsion in the airways allergic inflammatory model in mice. Pharmacol Res. 2010 Apr;61(4):288-97.
+147.Remberg P, Bjork L, Sterner O. Characteristics, clinical effect profile and tolerability of a nasal spray preparation for Artemisia abrotanum L for allergic rhinitis. Phytomedicine . 2004 Jan;11(1):36–42.
+148.Kawai M, Hirano T, Arimitsu J, et al.Effect of enzymatically modified isoquercitrin, a flavonoid, on symptoms of Japanese cedar pollinosis: a randomized double-blind placebo-controlled trial. Int Arch Allergy Immunol. 2009;149(4):359-68. Epub 2009 Mar 17.
+149.Hirano T, Kawai M, Arimitsu J, et al. Preventative effect of a flavonoid, enzymatically modified isoquercitrin on ocular symptoms of Japanese cedar pollinosis. Allergol Int. 2009 Sep;58(3):373-82. Epub 2009 May 25.
+150.Garg A et al. Chemistry and pharmacology of the Citrus bioflavonoid hesperidin. Phytother Res. 2001 Dec;15(8):655-69.
+151.Saylor BW. Treatment of allergic and vasomotor rhinitis with hesperidin chalcone sodium. Arch Otolaryngol. 1949 Dec;50(6):813-20.
+152.Guex JJ et al. Quality of life improvement in Latin American patients suffering from chronic venous disorder using a combination of Ruscusaculeatus and hesperidin methyl-chalcone and ascorbic acid (quality study). IntAngiol. 2010 Dec;29(6):525-32.
+153.Mainardi T, Kapoor S, Bielory L. Complementary and alternative medicine: herbs, phytochemicals and vitamins and their immunologic effects. J Allergy ClinImmunol. 2009 Feb;123(2):283-94; quiz 295-6.
+154.Jang AH, Kim TH, Kim GD, et al. Rosmarinic acid attenuates 2,4-dinitrofluorobenzene-induced atopic dermatitis in NC/Nga mice. IntImmunopharmacol. 2011 Sep;11(9):1271-7. Epub 2011 Apr 17.
+155.Osakabe N, Takano H, Sanbongi C, et al. Anti-inflammatory and anti-allergic effect of rosmarinic acid (RA); inhibition of seasonal allergic rhinoconjunctivitis (SAR) and its mechanism. Biofactors. 2004;21(1-4):127-31.
+156.Takano H, Osakabe N, Sanbongi C, et al.Extract of Perillafrutescens enriched for rosmarinic acid, a polyphenolic phytochemical, inhibits seasonal allergic rhinoconjunctivitis in humans.ExpBiol Med (Maywood). 2004 Mar;229(3):247-54.
+157.Sanbongi C, Takano H, Osakabe N, et al. Rosmarinic acid in perilla extract inhibits allergic inflammation induced by mite allergen, in a mouse model. ClinExp Allergy. 2004 Jun;34(6):971-7.
+158.Inoue K, Takano H, Shiga A, et al. Effects of volatile constituents of a rosemary extract on allergic airway inflammation related to house dust mite allergen in mice. Int J Mol Med. 2005 Aug;16(2):315-9.
+159.Oh H, Park CS, AhnHJ, Park YS, Kim HM. Effect of Perillafrutescens var. acutaKudo and rosmarinic acid on allergic inflammatory reactions. ExpBiol Med (Maywood). 2011 Jan;236(1):99-106.
+160.Lee J, Jung E, Koh J, Kim YS, Park D. Effect of rosmarinic acid on atopic dermatitis.JDermatol. 2008 Dec;35(12):768-71.
+161.Anderson BE, Miller CJ, Adams DR. Stinging nettle dermatitis. Am J Contact Dermat. 2003 Mar;14(1):44-6.
+162.Mittman P. Randomized, double-blind study of freeze-dried Urticadioica in the treatment of allergic rhinitis. Planta Med. 1990 Feb;56(1):44-7.
+163.Konrad A, Mähler M, Arni S, et al. Ameliorative effect of IDS 30, a stinging nettle leaf extract, on chronic colitis. Int J Colorectal Dis. 2005 Jan;20(1):9-17.
+164.Roschek B Jr, Fink RC, McMichael M, Alberte RS. Nettle extract (Urticadioica) affects key receptors and enzymes associated with allergic rhinitis. Phytother Res. 2009 Jul;23(7):920-6.
+165.Deng R, Chow TJ. Hypolipidemic, antioxidant, and antiinflammatory activities of microalgae Spirulina. CardiovascTher. 2010 Aug;28(4):e33-45.
+166.Marles RJ et al. United States pharmacopeia safety evaluation of spirulina. Crit Rev Food SciNutr. 2011 Aug;51(7):593-604.
+167.Mao TK et al. Effects of a Spirulina-based dietary supplement on cytokine production from allergic rhinitis patients. J Med Food. 2005 Spring;8(1):27-30.
+168.Cingi C et al. The effects of spirulina on allergic rhinitis. Eur Arch Otorhinolaryngol. 2008 Oct;265(10):1219-23. Epub 2008 Mar 15.
+169.Chen LL et al. [Experimental study of spirulinaplatensis in treating allergic rhinitis in rats]. Zhong Nan Da XueXueBao Yi Xue Ban. 2005 Feb;30(1):96-8.
+170.Remirez D et al. Role of histamine in the inhibitory effects of phycocyanin in experimental models of allergic inflammatory response. Mediators Inflamm. 2002 Apr;11(2):81-5.
+171.Dillon JS. Dehydroepiandrosterone, dehydroepiandrosterone sulfate and related steroids: their role in inflammatory, allergic and immunological disorders. Curr Drug Targets Inflamm Allergy. 2005 Jun;4(3):377-85.
+172.Kasperska-Zajac AE et al. Dehydroepiandrosterone in therapy of allergic diseases. Recent Pat Inflamm Allergy Drug Discov. 2009 Nov;3(3):211-3.
+        </p>
+
+</div>
+<script>
+        
+    </script>
+</body>
+</html>
