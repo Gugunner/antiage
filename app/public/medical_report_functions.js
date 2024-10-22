@@ -2,6 +2,10 @@ const EXCLUDE = "exclude";
 const ABUNDANT = "abundant";
 const MODERATE = "moderate";
 
+const MEDIUMRISK = "medio";
+const HIGHRISK = "alto";
+const PRESENTRISK = "presente";
+
 const COMPLEX_URL = "obtener_enfermedades_complejas2.php";
 const MONOGENIC_URL = "obtenerPdfMonogenic.php";
 const DISEASE_FOOD_CONSUMPTION_TABLE_URL = "getDiseaseFoodConsumptionTable.php"
@@ -103,7 +107,7 @@ function __recordDisease(pageNum, textItems, results, stopPattern) {
     //Offset the starting value in first page 1 to i+1 to skip any "eol or whise space" in the pdf.
     offset = pageNum == 1 ? i+1 : 0;
     j = offset
-    riskKeywords = ['medio',"alto","presente"];
+    riskKeywords = [MEDIUMRISK, HIGHRISK, PRESENTRISK];
     while (j < textItems.length) {
         disease =  __processWord(textItems[j].str);
         //Increase by 2 to detect results in medical record.
@@ -114,11 +118,6 @@ function __recordDisease(pageNum, textItems, results, stopPattern) {
         }
         //Increase by 2 to go to next disease in medical record.
         j+=2;
-    }
-
-    for (let j = offset; j < textItems.length; j+=4) {
-        disease = __processWord(textItems[j].str);
-        results.push(disease);
     }
 }
 
@@ -155,7 +154,7 @@ function __processWord(word) {
     if (typeof word !== "string" || word.length == 0) {
         return "";
     }
-    delimeters = /[^a-zA-Z0-9áéíóúÁÉÍÓÚ ]/g;
+    delimeters = /[^a-zA-Z0-9áéíóúÁÉÍÓÚñÑ\s]/g;
     trimmed = word.trim();
     processed = trimmed.replace(delimeters,"");
     first = processed.charAt(0);
@@ -224,13 +223,13 @@ function __processDiseaseFood(diseasesToProcess, uniqueValues, diseaseRels) {
 }
 
 /**
-     * Prepares a list of unique foods categorized by consumption level.
-     * 
-     * @param {[string]} diseases - The list of diseases where each food will be looked up.
-     * @param {{string: {string: [string]}}} - The food level consumption relationship for each disease found in 
-     * the medical records.
-     * @returns {{string: [string]}} - The complete categorized list of unique foods based on the diseases entered.
-     */
+ * Prepares a list of unique foods categorized by consumption level.
+ * 
+ * @param {[string]} diseases - The list of diseases where each food will be looked up.
+ * @param {{string: {string: [string]}}} - The food level consumption relationship for each disease found in 
+ * the medical records.
+ * @returns {{string: [string]}} - The complete categorized list of unique foods based on the diseases entered.
+ */
 function __getFoodByConsumptionLevel(diseases, diseaseRels) {
     processedUniqueValues = {
         "abundant": [],
