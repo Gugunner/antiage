@@ -1,0 +1,358 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">  
+    <link rel="icon" href="dc3.png" type="image/png">  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White Book</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">
+    <!-- Estilos para dispositivos móviles -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (max-width: 768px)">
+    <!-- Estilos para pantallas de PC -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (min-width: 769px)">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+
+    <!-- Metadatos Open Graph -->
+    <meta property="og:title" content="YOU TOMORROW">
+    <meta property="og:description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta property="og:image" content="https://drive.google.com/file/d/1ZZI3G6Fit_kovvVZolrvchtXQQDrnWYI/view?usp=sharing">
+    <meta property="og:url" content="https://ytomorrow.com/">
+    <meta property="og:type" content="website">
+
+    <!-- Otros metadatos -->
+    <meta name="description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta name="keywords" content="you, YOU TOMORROW, TOMORROW, TOMORR, TOM, web">
+
+    <style>
+
+   body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 17px;
+    line-height: 1.4;
+    margin: 20px;
+    font-weight: 500; /* Grosor medio de la negrita */
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1, h2, h3 {
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+p {
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.section {
+    margin-bottom: 30px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    width: 100%;
+}
+
+.chart-row {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+    width: 50%; /* Ajusta el ancho para que se adapte al contenido */
+}
+
+.chart-box {
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    min-width: 150px; /* Asegura que las tarjetas tengan un ancho mínimo */
+    max-width: 300px; /* Limita el ancho máximo para tarjetas largas */
+    word-wrap: break-word; /* Permite que el texto se ajuste dentro de la tarjeta */
+    flex: 1; /* Permite que las tarjetas se expandan uniformemente */
+}
+
+.chart-box:hover {
+    transform: scale(1.05);
+}
+
+.chart-box.ceo {
+    background: linear-gradient(135deg, #ff6f61, #e53935);
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.chart-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transform: rotate(45deg);
+}
+
+.chart-box:hover::before {
+    opacity: 1;
+}
+
+.chart-box.ceo::before {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.connector {
+    width: 2px;
+    height: 20px;
+    background-color: #1b3a7a;
+    margin: 0 auto;
+}
+
+.horizontal-connector {
+    height: 2px;
+    width: 100%;
+    background-color: #1b3a7a;
+}
+
+.horizontal-connector.long {
+    width: 50%;
+}
+
+.chart-box i {
+    margin-right: 8px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #1b5e20;
+    color: #1b5e20;
+    font-weight: bold;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+
+  caption {
+    caption-side: top;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+    </style>
+
+</head>
+<body>
+<div class="container">
+REFERENCES
+    <ol>
+        REFERENCES
+
+1.NSF. National Sleep Foundation. Insomnia. https://www.sleepfoundation.org/sleep-disorders/insomnia. Copyright 2019. Accessed 5/13/2019.
+2.CDC. Centers for Disease Control and Prevention. 1 in 3 adults don’t get enough sleep. https://www.cdc.gov/media/releases/2016/p0215-enough-sleep.html. 2/16/2016. Accessed 5/13/2019.
+3.Hirshkowitz M, Whiton K, Albert SM, et al. National Sleep Foundation’s sleep time duration recommendations: methodology and results summary. Sleep health. 2015;1(1):40-43.
+4.University H. Sleep and mental health. Harvard Mental Health Letter. 2010.
+5.Insititue NHLaB. Sleep Deprivation and Deficiency. 2018.
+6.Terauchi M, Hiramitsu S, Akiyoshi M, et al. Associations between anxiety, depression and insomnia in peri- and post-menopausal women. Maturitas. 2012;72(1):61-65.
+7.Ohayon MM, Caulet M, Lemoine P. Comorbidity of mental and insomnia disorders in the general population. Comprehensive psychiatry. 1998;39(4):185-197.
+8.Kakizaki M, Inoue K, Kuriyama S, et al. Sleep duration and the risk of prostate cancer: the Ohsaki Cohort Study. British journal of cancer. 2008;99(1):176-178.
+9.Verkasalo PK, Lillberg K, Stevens RG, et al. Sleep duration and breast cancer: a prospective cohort study. Cancer Res. 2005;65(20):9595-9600.
+10.Phillips B, Mannino DM. Do insomnia complaints cause hypertension or cardiovascular disease? Journal of clinical sleep medicine: JCSM: official publication of the American Academy of Sleep Medicine. 2007;3(5):489-494.
+11.Mayo Clinic. Insomnia. https://www.mayoclinic.org/diseases-conditions/insomnia/symptoms-causes/syc-20355167. 10/15/2016. Accessed 5/13/2019.
+12.Kripke DF. I petitioned the FDA to restrict hypnotics: here is why. Sleep Med. 2016;23:119-120.
+13.Kripke DF. Hypnotic drug risks of mortality, infection, depression, and cancer: but lack of benefit. F1000Research. 2016;5:918.
+14.Kripke DF, Langer RD, Kline LE. Hypnotics' association with mortality or cancer: a matched cohort study. BMJ open. 2012;2(1):e000850.
+15.Yang CM, Lin SC, Hsu SC, Cheng CP. Maladaptive sleep hygiene practices in good sleepers and patients with insomnia. Journal of health psychology. 2010;15(1):147-155.
+16.Lande RG, Gragnani C. Nonpharmacologic approaches to the management of insomnia. J Am Osteopath Assoc. 2010;110(12):695-701.
+17.Xu Z, Jiang X, Li W, Gao D, Li X, Liu J. Propofol-induced sleep: efficacy and safety in patients with refractory chronic primary insomnia. Cell Biochem Biophys. 2011;60(3):161-166.
+18.Sateia MJ, Buysse DJ, Krystal AD, Neubauer DN, Heald JL. Clinical Practice Guideline for the Pharmacologic Treatment of Chronic Insomnia in Adults: An American Academy of Sleep Medicine Clinical Practice Guideline. Journal of clinical sleep medicine: JCSM: official publication of the American Academy of Sleep Medicine. 2017;13(2):307-349.
+19.Saddichha S. Diagnosis and treatment of chronic insomnia. Annals of Indian Academy of Neurology. 2010;13(2):94-102.
+20.Roth T, Roehrs T. Insomnia: epidemiology, characteristics, and consequences. Clinical cornerstone. 2003;5(3):5-15.
+21.NSF. National Sleep Foundation. Menopause and Sleep. https://www.sleepfoundation.org/articles/menopause-and-sleep. Copyright 2019. Accessed 4/2/2019.
+22.Silva BH, Martinez D, Wender MC. A randomized, controlled pilot trial of hormone therapy for menopausal insomnia. Archives of women's mental health. 2011;14(6):505-508.
+23.Barrett-Connor E, Dam TT, Stone K, Harrison SL, Redline S, Orwoll E. The association of testosterone levels with overall sleep quality, sleep architecture, and sleep-disordered breathing. J Clin Endocrinol Metab. 2008;93(7):2602-2609.
+24.Kim SD, Cho KS. Obstructive Sleep Apnea and Testosterone Deficiency. The world journal of men's health. 2019;37(1):12-18.
+25.Wittert G. The relationship between sleep disorders and testosterone in men. Asian journal of andrology. 2014;16(2):262-265.
+26.Burschtin O, Wang J. Testosterone Deficiency and Sleep Apnea. Sleep medicine clinics. 2016;11(4):525-529.
+27.Canguven O, Salepci B, Albayrak S, Selimoglu A, Balaban M, Bulbul M. Is there a correlation between testosterone levels and the severity of the disease in male patients with obstructive sleep apnea? Arch Ital Urol Androl. 2010;82(4):143-147.
+28.Mayo Clinic. Symptoms & causes. Obstructive sleep apnea. https://www.mayoclinic.org/diseases-conditions/obstructive-sleep-apnea/symptoms-causes/syc-20352090. 3/6/2018. Accessed 4/2/2019.
+29.NSF. National Sleep Foundation. Sleep Apnea. https://www.sleepfoundation.org/sleep-apnea. Copyright 2019. Accessed 4/2/2019.
+30.Punjabi NM. The epidemiology of adult obstructive sleep apnea. Proceedings of the American Thoracic Society. 2008;5(2):136-143.
+31.Drager LF, Polotsky VY, Lorenzi-Filho G. Obstructive sleep apnea: an emerging risk factor for atherosclerosis. Chest. 2011;140(2):534-542.
+32.AHA. American Heart Association. Sleep Apnea and Heart Disease, Stroke. https://www.heart.org/en/health-topics/consumer-healthcare/sleep-apnea-and-heart-disease-stroke. 7/31/2015. Accessed 5/13/2019.
+33.Gottlieb DJ, Yenokyan G, Newman AB, et al. Prospective study of obstructive sleep apnea and incident coronary heart disease and heart failure: the sleep heart health study. Circulation. 2010;122(4):352-360.
+34.Pedrosa RP, Drager LF, Gonzaga CC, et al. Obstructive sleep apnea: the most common secondary cause of hypertension associated with resistant hypertension. Hypertension. 2011;58(5):811-817.
+35.Aronsohn RS, Whitmore H, Van Cauter E, Tasali E. Impact of untreated obstructive sleep apnea on glucose control in type 2 diabetes. American journal of respiratory and critical care medicine. 2010;181(5):507-513.
+36.Nieto FJ, Peppard PE, Young T, Finn L, Hla KM, Farre R. Sleep-disordered breathing and cancer mortality: results from the Wisconsin Sleep Cohort Study. American journal of respiratory and critical care medicine. 2012;186(2):190-194.
+37.Yaggi HK, Concato J, Kernan WN, Lichtman JH, Brass LM, Mohsenin V. Obstructive sleep apnea as a risk factor for stroke and death. The New England journal of medicine. 2005;353(19):2034-2041.
+38.Morin CM, LeBlanc M, Daley M, Gregoire JP, Merette C. Epidemiology of insomnia: prevalence, self-help treatments, consultations, and determinants of help-seeking behaviors. Sleep Med. 2006;7(2):123-130.
+39.Buysse DJ, Germain A. Diagnosis, Epidemiology, and Consequences of Insomnia. Primary Psychiatry. 2005;12(8):37-44.
+40.Baroni A, Hernandez M, Grant MC, Faedda GL. Sleep Disturbances in Pediatric Bipolar Disorder: A Comparison between Bipolar I and Bipolar NOS. Frontiers in psychiatry. 2012;3:22.
+41.Yokoyama E, Ohida T, Tamaki T, et al. Association between Depression and Insomnia Subtypes: A Longitudinal Study on the Elderly in Japan. Sleep. 2010;33(12):1693-1702.
+42.NSF. National Sleep Foundation. Sleep Hygiene, Insomnia and Mental Health. https://www.sleepfoundation.org/articles/sleep-hygiene-insomnia-and-mental-health. Copyright 2019. Accessed 4/2/2019.
+43.Roane BM, Taylor DJ. Adolescent Insomnia as a Risk Factor for Early Adult Depression and Substance Abuse. Sleep. 2008;31(10):1351-1356.
+44.Singareddy R, Vgontzas AN, Fernandez-Mendoza J, et al. Risk factors for incident chronic insomnia: a general population prospective study. Sleep Med. 2012;13(4):346-353.
+45.Franzen PL, Buysse DJ, Dahl RE, Thompson W, Siegle GJ. Sleep deprivation alters pupillary reactivity to emotional stimuli in healthy young adults. Biological Psychology. 2009;80(3):300-305.
+46.Medicine. AAoS. Insomnia may cause dysfunction in emotional brain circuitry. Science Daily. 2013.
+47.Bastien CH, St-Jean G, Morin CM, Turcotte I, Carrier J. Chronic psychophysiological insomnia: hyperarousal and/or inhibition deficits? An ERPs investigation. Sleep. 2008;31(6):887-898.
+48.Espie CA. Insomnia: conceptual issues in the development, persistence, and treatment of sleep disorder in adults. Annual review of psychology. 2002;53:215-243.
+49.van de Laar M, Pevernagie D, van Mierlo P, Overeem S. Psychiatric Comorbidity and Aspects of Cognitive Coping Negatively Predict Outcome in Cognitive Behavioral Treatment of Psychophysiological Insomnia. Behavioral sleep medicine. 2015;13(2):140-156.
+50.National Heart, Lung, and Blood Institiute. Insomnia. https://www.nhlbi.nih.gov/health-topics/insomnia. 11/9/2011. Accessed 5/13/2019.
+51.NSF. National Sleep Foundation. What causes insomnia? https://www.sleepfoundation.org/insomnia/what-causes-insomnia. Copyright 2019. Accessed 4/2/2019.
+52.Dhaval Patel MJS, MD; Pragnesh Patel, MD. Insomnia in the Elderly: A Review. Journal of Clinical Sleep Medicine. 2018;14(6).
+53.Carroll JE, Irwin MR, Levine M, et al. Epigenetic Aging and Immune Senescence in Women With Insomnia Symptoms: Findings From the Women’s Health Initiative Study. Biological psychiatry. 2017;81(2):136-144.
+54.Foral PK, Jon; Dewan, Naresh; Malesker, Mark. Medication-Induced Sleep Disturbances. The Consultant Pharmacist. 2011:414-425(412).
+55.NSF. National Sleep Foundation. How Medications May Affect Sleep. https://www.sleepfoundation.org/articles/how-medications-may-affect-sleep. Copyright 2019. Accessed 4/2/2019.
+56.Neikrug AB, Ancoli-Israel S. Sleep disorders in the older adult - a mini-review. Gerontology. 2010;56(2):181-189.
+57.Moghadam-Kia S, Werth VP. Prevention and treatment of systemic glucocorticoid side effects. Int J Dermatol. 2010;49(3):239-248.
+58.Nerbass FB, Pedrosa RP, Genta PR, Drager LF, Lorenzi-Filho G. Calcium channel blockers are independently associated with short sleep duration in hypertensive patients with obstructive sleep apnea. J Hypertens. 2011;29(6):1236-1241.
+59.Bercovitch RS, Tsai SC. Respiratory medications and sleep. Current Respiratory Care Reports. 2012;1(2):123-130.
+60.Roehrs T, Roth T. Caffeine: sleep and daytime sleepiness. Sleep medicine reviews. 2008;12(2):153-162.
+61.Chaudhary NS, Grandner MA, Jackson NJ, Chakravorty S. Caffeine consumption, insomnia, and sleep duration: Results from a nationally representative sample. Nutrition (Burbank, Los Angeles County, Calif). 2016;32(11):1193-1199.
+62.Clark I, Landolt HP. Coffee, caffeine, and sleep: A systematic review of epidemiological studies and randomized controlled trials. Sleep medicine reviews. 2017;31:70-78.
+63.Youngberg MR, Karpov IO, Begley A, Pollock BG, Buysse DJ. Clinical and physiological correlates of caffeine and caffeine metabolites in primary insomnia. Journal of clinical sleep medicine: JCSM: official publication of the American Academy of Sleep Medicine. 2011;7(2):196-203.
+64.Jaehne A, Loessl B, Barkai Z, Riemann D, Hornyak M. Effects of nicotine on sleep during consumption, withdrawal and replacement therapy. Sleep medicine reviews. 2009;13(5):363-377.
+65.Brook JS, Zhang C, Rubenstone E, Brook DW. Insomnia in adults: the impact of earlier cigarette smoking from adolescence to adulthood. Journal of addiction medicine. 2015;9(1):40-45.
+66.Sabanayagam C, Shankar A. The association between active smoking, smokeless tobacco, second-hand smoke exposure and insufficient sleep. Sleep medicine. 2011;12(1):7-11.
+67.Hendler RA, Ramchandani VA, Gilman J, Hommer DW. Stimulant and sedative effects of alcohol. Curr Top Behav Neurosci. 2013;13:489-509.
+68.Brower KJ, Myra Kim H, Strobbe S, Karam-Hage MA, Consens F, Zucker RA. A randomized double-blind pilot trial of gabapentin versus placebo to treat alcohol dependence and comorbid insomnia. Alcohol Clin Exp Res. 2008;32(8):1429-1438.
+69.Stein MD, Friedmann PD. Disturbed Sleep and Its Relationship to Alcohol Use. Substance Abuse. 2006;26(1):1-13.
+70.Brooks AT, Wallen GR. Sleep Disturbances in Individuals with Alcohol-Related Disorders: A Review of Cognitive-Behavioral Therapy for Insomnia (CBT-I) and Associated Non-Pharmacological Therapies. Substance Abuse: Research and Treatment. 2014;8:SART.S18446.
+71.Zhabenko N, Wojnar M, Brower KJ. Prevalence and Correlates of Insomnia in a Polish Sample of Alcohol-Dependent Patients. 2012;36(9):1600-1607.
+72.Brower KJ, Krentzman A, Robinson EAR. Persistent insomnia, abstinence, and moderate drinking in alcohol-dependent individuals. The American journal on addictions. 2011;20(5):435-440.
+73.Baglioni C, Spiegelhalder K, Lombardo C, Riemann D. Sleep and emotions: A focus on insomnia. Sleep medicine reviews. 2010;14(4):227-238.
+74.Fernández-Mendoza J, Vela-Bueno A, Vgontzas AN, et al. Cognitive-Emotional Hyperarousal as a Premorbid Characteristic of Individuals Vulnerable to Insomnia. 2010;72(4):397-403.
+75.Kolla BP, Auger RR. Jet lag and shift work sleep disorders: how to help reset the internal clock. Cleveland Clinic journal of medicine. 2011;78(10):675-684.
+76.NSF. National Sleep Foundation. Shift Work Disorder. https://www.sleepfoundation.org/sleep-disorders/shift-work-disorder. Copyright 2019. Accessed 4/2/2019.
+77.Bertisch SM, Mittleman MA, Redline S, et al. Insomnia with objective short sleep duration and risk of incident cardiovascular disease and all-cause mortality: Sleep Heart Health Study. Sleep. 2018;41(6).
+78.Vatten LJ, Strand LB, Laugsand LE, Platou C, Janszky I. Insomnia and the risk of incident heart failure: a population study. European Heart Journal. 2013;35(21):1382-1393.
+79.Domínguez F, Fuster V, Fernández-Alvira JM, et al. Association of Sleep Duration and Quality With Subclinical Atherosclerosis. Journal of the American College of Cardiology. 2019;73(2):134-144.
+80.Ibarra-Coronado EG, Pantaleón-Martinez, Velazquéz-Moctezuma J, et al. The Bidirectional Relationship between Sleep and Immunity against Infections %J Journal of Immunology Research. 2015;2015:14.
+81.Aldabal L, Bahammam AS. Metabolic, endocrine, and immune consequences of sleep deprivation. The open respiratory medicine journal. 2011;5:31-43.
+82.Bonnet MH, Arand DL. Hyperarousal and insomnia: state of the science. Sleep medicine reviews. 2010;14(1):9-15.
+83.Zhang J, Ma RC, Kong AP, et al. Relationship of sleep quantity and quality with 24-hour urinary catecholamines and salivary awakening cortisol in healthy middle-aged adults. Sleep. 2011;34(2):225-233.
+84.Chiodini I, Scillitani A. [Role of cortisol hypersecretion in the pathogenesis of osteoporosis]. Recenti progressi in medicina. 2008;99(6):309-313.
+85.Butcher SK, Killampalli V, Lascelles D, Wang K, Alpar EK, Lord JM. Raised cortisol:DHEAS ratios in the elderly after injury: potential impact upon neutrophil function and immunity. Aging Cell. 2005;4(6):319-324.
+86.Duong M, Cohen JI, Convit A. High cortisol levels are associated with low quality food choice in type 2 diabetes. Endocrine. 2012;41(1):76-81.
+87.Haack M, Scott-Sutherland J, Santangelo G, Simpson NS, Sethna N, Mullington JM. Pain sensitivity and modulation in primary insomnia. 2012;16(4):522-533.
+88.Schuh-Hofer S, Wodarski R, Pfau DB, et al. One night of total sleep deprivation promotes a state of generalized hyperalgesia: A surrogate pain model to study the relationship of insomnia and pain. PAIN®. 2013;154(9):1613-1621.
+89.Harsora P, Kessmann J. Nonpharmacologic management of chronic insomnia. American family physician. 2009;79(2):125-130.
+90.CDC. Centers for Disease Control and Prevention. Sleep and Sleep Disorders: Tips for Better Sleep. https://www.cdc.gov/sleep/about_sleep/sleep_hygiene.html. Last updated 7/15/2016. Accessed 4/2/2019. 2016.
+91.Gellis LA, Park A, Stotsky MT, Taylor DJ. Associations between sleep hygiene and insomnia severity in college students: cross-sectional and prospective analyses. Behav Ther. 2014;45(6):806-816.
+92.Holt B, Tran S, Cochran A, Saffle J, Lin H, Faraklas I. Impact of a Nursing-Driven Sleep Hygiene Protocol on Sleep Quality. Journal of Burn Care & Research. 2013;34(2):249-254.
+93.McCurry SM, Logsdon RG, Teri L, Vitiello MV. Sleep disturbances in caregivers of persons with dementia: contributing factors and treatment implications. Sleep medicine reviews. 2007;11(2):143-153.
+94.Hoch CC, Reynolds CF, 3rd, Buysse DJ, et al. Protecting sleep quality in later life: a pilot study of bed restriction and sleep hygiene. The journals of gerontology Series B, Psychological sciences and social sciences. 2001;56(1):P52-59.
+95.Miller CB, Espie CA, Epstein DR, et al. The evidence base of sleep restriction therapy for treating insomnia disorder. Sleep medicine reviews. 2014;18(5):415-424.
+96.Mayo Clinic. Insomnia treatment: Cognitive behavioral therapy instead of sleeping pills. https://www.mayoclinic.org/diseases-conditions/insomnia/in-depth/insomnia-treatment/art-20046677. 9/28/2016. Accessed 4/2/2019.
+97.Edinger JD, Wohlgemuth WK, Radtke RA, Marsh GR, Quillian RE. Cognitive behavioral therapy for treatment of chronic primary insomnia: a randomized controlled trial. JAMA. 2001;285(14):1856-1864.
+98.Smith MT, Neubauer DN. Cognitive behavior therapy for chronic insomnia. Clinical cornerstone. 2003;5(3):28-40.
+99.Smith MT, Huang MI, Manber R. Cognitive behavior therapy for chronic insomnia occurring within the context of medical and psychiatric disorders. Clin Psychol Rev. 2005;25(5):559-592.
+100.Savard J, Simard S, Ivers H, Morin CM. Randomized study on the efficacy of cognitive-behavioral therapy for insomnia secondary to breast cancer, part I: Sleep and psychological effects. J Clin Oncol. 2005;23(25):6083-6096.
+101.Lancee J, Eisma MC, van Straten A, Kamphuis JH. Sleep-Related Safety Behaviors and Dysfunctional Beliefs Mediate the Efficacy of Online CBT for Insomnia: A Randomized Controlled Trial. Cognitive behaviour therapy. 2015;44(5):406-422.
+102.Mitchell MD, Gehrman P, Perlis M, Umscheid CA. Comparative effectiveness of cognitive behavioral therapy for insomnia: a systematic review. BMC Family Practice. 2012;13(1):40.
+103.Kripke DF. Hypnotic drug risks of mortality, infection, depression, and cancer: but lack of benefit. F1000Research. 2018;5:918-918.
+104.Brasure M, MacDonald R, Fuchs E, et al. AHRQ Comparative Effectiveness Reviews. In: Management of Insomnia Disorder. Rockville (MD): Agency for Healthcare Research and Quality (US); 2015.
+105.Ong JC, Ulmer CS, Manber R. Improving sleep with mindfulness and acceptance: A metacognitive model of insomnia. Behaviour Research and Therapy. 2012;50(11):651-660.
+106.Gross CR, Kreitzer MJ, Reilly-Spong M, et al. Mindfulness-Based Stress Reduction Versus Pharmacotherapy for Chronic Primary Insomnia: A Randomized Controlled Clinical Trial. EXPLORE. 2011;7(2):76-87.
+107.Afonso RF, Hachul H, Kozasa EH, et al. Yoga decreases insomnia in postmenopausal women: a randomized clinical trial. 2012;19(2):186-193.
+108.Dhaval Patel MJS, MD; Pragnesh Patel, MD. Insomnia in the Elderly: A Review. Journal of clinical sleep medicine: JCSM: official publication of the American Academy of Sleep Medicine. 2018;14(6):1017-1024.
+109.Mayo Clinic. Sleep aids: Understand over-the-counter options. https://www.mayoclinic.org/healthy-lifestyle/adult-health/in-depth/sleep-aids/art-20047860. 2/17/2018. Accessed 4/2/2019.
+110.Randall S, Roehrs TA, Roth T. Over-the-counter sleep aid medications and insomnia. Primary Psychiatry. 2008;15(5):52.
+111.Mayo Clinic. Sleep aids: Understand over-the-counter options. https://www.mayoclinic.org/healthy-lifestyle/adult-health/in-depth/sleep-aids/art-20047860. 2/17/2018. Accessed 5/13/2019.
+112.Stone JA, Lester CA, Aboneh EA, Phelan CH, Welch LL, Chui MA. A preliminary examination of over-the-counter medication misuse rates in older adults. Research in Social and Administrative Pharmacy. 2017;13(1):187-192.
+113.Abraham O, Schleiden L, Albert SMJIJoCP. Over-the-counter medications containing diphenhydramine and doxylamine used by older adults to improve sleep. 2017;39(4):808-817.
+114.Lieberman JA. Update on the safety considerations in the management of insomnia with hypnotics: incorporating modified-release formulations into primary care. Primary care companion to the Journal of clinical psychiatry. 2007;9(1):25-31.
+115.Bourgeois J, Elseviers, M.M., Van Bortel, L. et al. . One-Year Evolution of Sleep Quality in Older Users of Benzodiazepines: A Longitudinal Cohort Study in Belgian Nursing Home Residents. Drugs and Aging. 2014;31(677).
+116.Medicine NUSNLo. Zaleplon. 2018.
+117.Greenblatt DJ, Roth T. Zolpidem for insomnia. Expert opinion on pharmacotherapy. 2012;13(6):879-893.
+118.Roth T, Walsh JK, Krystal A, Wessel T, Roehrs TA. An evaluation of the efficacy and safety of eszopiclone over 12 months in patients with chronic primary insomnia. Sleep Med. 2005;6(6):487-495.
+119.Ancoli-Israel S, Krystal AD, McCall WV, et al. A 12-week, randomized, double-blind, placebo-controlled study evaluating the effect of eszopiclone 2 mg on sleep/wake function in older adults with primary and comorbid insomnia. Sleep. 2010;33(2):225-234.
+120.FDA. U.S. Food & Drug Administration. FDA Drug Safety Communication: FDA warns of next-day impairment with sleep aid Lunesta (eszopiclone) and lowers recommended dose. https://www.fda.gov/drugs/drugsafety/ucm397260.htm. 5/15/2014. Accessed 4/2/2019.
+121.Sateia MJ, Buysse DJ, Krystal AD, Neubauer DN. Adverse Effects of Hypnotic Medications. Journal of clinical sleep medicine: JCSM: official publication of the American Academy of Sleep Medicine. 2017;13(6):839-839.
+122.FDA. FDA requires stronger warnings about rare but serious incidents related to certain prescription insomnia medicines. https://www.fda.gov/news-events/press-announcements/fda-requires-stronger-warnings-about-rare-serious-incidents-related-certain-prescription-insomnia. Published 2019. Updated Apr. 30, 2019. Accessed May 8, 2019.
+123.University H. Overcoming insomnia. Harvard Mental Health Letter. 2011.
+124.Roth T, Rogowski R, Hull S, et al. Efficacy and safety of doxepin 1 mg, 3 mg, and 6 mg in adults with primary insomnia. Sleep. 2007;30(11):1555-1561.
+125.Krystal AD, Durrence HH, Scharf M, et al. Efficacy and Safety of Doxepin 1 mg and 3 mg in a 12-week Sleep Laboratory and Outpatient Trial of Elderly Subjects with Chronic Primary Insomnia. Sleep. 2010;33(11):1553-1561.
+126.Krystal AD, Lankford A, Durrence HH, et al. Efficacy and safety of doxepin 3 and 6 mg in a 35-day sleep laboratory trial in adults with chronic primary insomnia. Sleep. 2011;34(10):1433-1442.
+127.Walsh JK, Erman M, Erwin C, et al. Subjective hypnotic efficacy of trazodone and zolpidem in DSMIII–R primary insomnia. Human Psychopharmacology: Clinical and Experimental. 1998;13(3):191-198.
+128.Park PKNaSH. Antidepressant management of insomnia disorder in the absence of a mood disorder. Mental Health Clinician. 2014;4:41-46.
+129.Roth AJ, McCall WV, Liguori A. Cognitive, psychomotor and polysomnographic effects of trazodone in primary insomniacs. 2011;20(4):552-558.
+130.Camargos EF, Louzada LL, Quintas JL, Naves JOS, Louzada FM, Nóbrega OT. Trazodone Improves Sleep Parameters in Alzheimer Disease Patients: A Randomized, Double-Blind, and Placebo-Controlled Study. The American Journal of Geriatric Psychiatry. 2014;22(12):1565-1574.
+131.NIH. National Institutes of Health. https://medlineplus.gov/druginfo/meds/a682388.html. Amitriptyline. Last updated 5/7/2019. Accessed 5/13/2019.
+132.Karsten J, Hagenauw LA, Kamphuis J, Lancel M. Low doses of mirtazapine or quetiapine for transient insomnia: A randomised, double-blind, cross-over, placebo-controlled trial. Journal of Psychopharmacology. 2017;31(3):327-337.
+133.Wichniak A, Wierzbicka A, Walęcka M, Jernajczyk WJCPR. Effects of Antidepressants on Sleep. 2017;19(9):63.
+134.Kripke DF, Garfinkel L, Wingard DL, Klauber MR, Marler MR. Mortality associated with sleep duration and insomnia. Archives of general psychiatry. 2002;59(2):131-136.
+135.Liu J, Clough SJ, Hutchinson AJ, Adamah-Biassi EB, Popovska-Gorevski M, Dubocovich ML. MT1 and MT2 Melatonin Receptors: A Therapeutic Perspective. Annual review of pharmacology and toxicology. 2016;56:361-383.
+136.Miyamoto M. [A novel therapeutic drug: ramelteon]. Nihon rinsho Japanese journal of clinical medicine. 2009;67(8):1595-1600.
+137.CH B Praveena Devi SS, N Kusuma Kumari and JVC, Sharma AK. A review on insomnia: The sleep disorder. The Pharma Innovation. 2018;7(12):227-230.
+138.Turek FW, Gillette MU. Melatonin, sleep, and circadian rhythms: rationale for development of specific melatonin agonists. Sleep Med. 2004;5(6):523-532.
+139.Kato K, Hirai K, Nishiyama K, et al. Neurochemical properties of ramelteon (TAK-375), a selective MT1/MT2 receptor agonist. Neuropharmacology. 2005;48(2):301-310.
+140.Sateia MJ, Kirby-Long P, Taylor JL. Efficacy and clinical safety of ramelteon: an evidence-based review. Sleep medicine reviews. 2008;12(4):319-332.
+141.Roth T, Seiden D, Sainati S, Wang-Weigand S, Zhang J, Zee P. Effects of ramelteon on patient-reported sleep latency in older adults with chronic insomnia. Sleep Med. 2006;7(4):312-318.
+142.Zammit G, Erman M, Wang-Weigand S, Sainati S, Zhang J, Roth T. Evaluation of the efficacy and safety of ramelteon in subjects with chronic insomnia. Journal of clinical sleep medicine : JCSM : official publication of the American Academy of Sleep Medicine. 2007;3(5):495-504.
+143.Rajaratnam SM, Polymeropoulos MH, Fisher DM, et al. Melatonin agonist tasimelteon (VEC-162) for transient insomnia after sleep-time shift: two randomised controlled multicentre trials. Lancet. 2009;373(9662):482-491.
+        </p>
+
+</div>
+<script>
+        
+    </script>
+</body>
+</html>

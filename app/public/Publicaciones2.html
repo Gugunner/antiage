@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">  
+    <link rel="icon" href="dc3.png" type="image/png">  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White Book</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">
+    <!-- Estilos para dispositivos móviles -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (max-width: 768px)">
+    <!-- Estilos para pantallas de PC -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (min-width: 769px)">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+
+    <!-- Metadatos Open Graph -->
+    <meta property="og:title" content="YOU TOMORROW">
+    <meta property="og:description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta property="og:image" content="https://drive.google.com/file/d/1ZZI3G6Fit_kovvVZolrvchtXQQDrnWYI/view?usp=sharing">
+    <meta property="og:url" content="https://ytomorrow.com/">
+    <meta property="og:type" content="website">
+
+    <!-- Otros metadatos -->
+    <meta name="description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta name="keywords" content="you, YOU TOMORROW, TOMORROW, TOMORR, TOM, web">
+
+    <style>
+
+   body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 17px;
+    line-height: 1.4;
+    margin: 20px;
+    font-weight: 500; /* Grosor medio de la negrita */
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1, h2, h3 {
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+p {
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.section {
+    margin-bottom: 30px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    width: 100%;
+}
+
+.chart-row {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+    width: 50%; /* Ajusta el ancho para que se adapte al contenido */
+}
+
+.chart-box {
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    min-width: 150px; /* Asegura que las tarjetas tengan un ancho mínimo */
+    max-width: 300px; /* Limita el ancho máximo para tarjetas largas */
+    word-wrap: break-word; /* Permite que el texto se ajuste dentro de la tarjeta */
+    flex: 1; /* Permite que las tarjetas se expandan uniformemente */
+}
+
+.chart-box:hover {
+    transform: scale(1.05);
+}
+
+.chart-box.ceo {
+    background: linear-gradient(135deg, #ff6f61, #e53935);
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.chart-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transform: rotate(45deg);
+}
+
+.chart-box:hover::before {
+    opacity: 1;
+}
+
+.chart-box.ceo::before {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.connector {
+    width: 2px;
+    height: 20px;
+    background-color: #1b3a7a;
+    margin: 0 auto;
+}
+
+.horizontal-connector {
+    height: 2px;
+    width: 100%;
+    background-color: #1b3a7a;
+}
+
+.horizontal-connector.long {
+    width: 50%;
+}
+
+.chart-box i {
+    margin-right: 8px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #1b5e20;
+    color: #1b5e20;
+    font-weight: bold;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+
+  caption {
+    caption-side: top;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+    </style>
+
+</head>
+<body>
+  
+    
+<div class="container">
+
+<!-- Publicaciones -->
+    <h2 style="border-bottom: 2px solid #1b5e20;">
+        <i class="fas fa-book" style="margin-right: 10px; color: #1b5e20;"></i>Publicaciones
+    </h2>
+    <ul>
+    <li>Bilbao, O.; Fernández, E.; Iraizoz, A. Conferencias de Tecnología Farmacéutica I. Ed. MES, 179 p.(1989)</li>
+    <li>Iraizoz, A.; Bilbao, O.; Barrios, M.A. Conferencias de Tecnología Farmacéutica II. Ed MES, 267 p. (1990)</li>
+    <li>Bilbao, O; Castañeda, A; Iraizoz, A.; Barrios, M.A. Manual de Prácticas de Laboratorio de Tecnología Farmacéutica I. Ed. MES, 66 p. (1986).</li>
+    <li>Iraizoz, A.; Barrios, M.A.; Bilbao, O. Manual de Prácticas de Laboratorio de Tecnología Farmacéutica II. Ed. MES 78 p. (1986).</li>
+    <li>Bilbao, O.; Iraizoz, A.; Castañeda, A.; Barrios, M.A. Manual de Prácticas de Laboratorio de Farmacia Galénica. Ed. MES. 70 p. (1984).</li>
+    <li>Iraizoz, A.; López, R.; Cañizares, E. Evaluación del Almidón de Arroz como aglutinante en tabletas. Rev. Cubana de Farmacia.(1977)</li>
+    <li>Iraizoz, A.; García, O. Cápsulas de teofilina de acción prolongada. Rev. Cubana de Farmacia.(1986)</li>
+    <li>Ramos, I.; Iraizoz, A.; Rosquete, E. Descontaminación parcial de granulados de polimetacrilato de quinidina mediante radiaciones gamma y/o envejecimiento. Rev. Cubana de Farmacia.(1994)</li>
+    <li>Ramos, I.; Iraizoz, A.; Rosquete, E. Estudio de estabilidad de tabletas de liberación prolongada elaboradas a partir de polimetacrilato de quinidina. Rev Cubana de Farmacia.(1993)</li>
+    <li>Perdomo, I.; Iraizoz, A.; Rodríguez, G. Escalado industrial y utilización del principio activo zeolítico ZZ: Antiséptico de espectro amplio. Rev. CNIC (1995).</li>
+    <li>Barrios, M.A.; Iraizoz, A.; Rodríguez, G. Estudio tecnológico de la zeolita natural purificada NZ para la producción de tabletas. Rev. CNIC (1995).</li>
+    <li>Perdomo, I.; Iraizoz, A.; Rodríguez, G.; Barrios, M.A. Métodos analíticos para el PAZ-ZZ.- Aplicación en formas farmacéuticas. Rev. CNIC. (1995)</li>
+    <li>Perdomo, I.; Iraizoz, A.; Rodríguez, G.; Barrios, M.A. Medicamento antiséptico elaborado a partir de una zeolita natural modificada. Crema ZZ. Rev. Cubana de Farmacia. (1995)</li>
+    <li>Campo, M.; Perdomo, I.; Iraizoz, A. Tabletas de desipramina clorhidrato de acción controlada. Estudio tecnológico preliminar. Rev. Cubana de Farmacia (1995).</li>
+    <li>Iraizoz, A. Medazepán, variantes tecnológicas de liberación prolongada. Rev. Cubana de Farmacia.(1995).</li>
+    <li>Iraizoz, A. Tabletas de clorhidrato de clorpromacina de acción controlada. Matrices hidrofílicas. Rev. Cubana de Farmacia (1995)</li>
+    <li>Heinamaki, J.; Iraizoz, A.; Ylyrrussi, J. Evaluación de cubiertas entéricas por el método de películas libres. Int.Pharm.Journal. (Reino Unido). (idioma inglés).(1993).</li>
+    <li>Heinmaki¨, J.; Iraizoz, A.; Ylirrussi, J. Comparative evaluation of ammoniated aqueuos and organic-solvent-based cellulose enteric by isolated film method. International Journal of Pharmaceutics 08/1994;109 (1-109)</li>
+    <li>Párez, I.; Iraizoz, A. Obtención de microcápsulas entéricas de bisacodylo. Rev. Cubana de Farmacia.(1994)</li>
+    <li>Barrios, M.A.; Rodríguez, G.; Iraizoz, A. ENTEREX: anti-diarrehocal based on purified clinoptilolite. Zeolites. U.S.A Julio,1997.</li>
+    <li>Tamargo B.; Tolosa V.; Perdomo I.; Iraizoz A.; Benitez J. Diseño y evaluación de la formulación de tabletas de pimozida 1 y 4mg. Revista Cubana de Farmacia. Vol. 32, No. 1, enero – abril, 1998, p. 21 – 27.</li>
+    <li>Perdomo, I.; Iraizoz, A.; Rodríguez, G.; Barrios, M.A. Ungüento ZZ, antiséptico elaborado con una zeolita natural modificada. Revista Cubana de Farmacia. Vol. 32, No. 3, septiembre – diciembre, 1998, p. 169 – 173.</li>
+    <li>Iraizoz, A. Combinación de dextrana y otros agentes hidrofílicos para la obtención de un sistema matricial de indometacina de liberación controlada. Revista Mexicana de Ciencias Farmacéuticas. Vol. 30, No. 2, abril – junio de 1999, p. 27 – 31.</li>
+    <li>Héctor, M.; Perdomo, I.; Barrios, M.A.; Iraizoz, A.; Rodríguez, G. Validación de un método de análisis para el control de la calidad de las tabletas que contienen el PAZ MZ. Revista Cubana de Farmacia. Vol. 34, Suplemento Especial, junio 2000, p. 113 – 114.</li>
+    <li>Iraizoz, A.; González, A.; Rodríguez, J. Estudio de formulación de tabletas de cloruro de potasio, 750mg. de acción controlada. Revista Cubana de Farmacia. Vol. 34, Suplemento Especial, junio 2000. P. 114 – 117.</li>
+    <li>Pérez, I.; Iraizoz, A. Diseño de una formulación de cápsulas duras por 5mg de bisacodilo a partir de microcápsulas. Estudios tecnológicos. Revista Cubana de Farmacia, Vol. 34, Suplemento Especial, junio 2000, p. 117 – 118.</li>
+    <li>Rivera, A.; Barrios, M.A.; Rodríguez, G.; Iraizoz, A. Tabletas buffereadas de ácido acetil salicílico 325mg. Estudio tecnológico preliminar. Revista Cubana de Farmacia, Vol. 34, Suplemento Especial, junio 2000. p. 125 – 126.</li>
+    <li>González, G.; Iraizoz, A.; Suzarte, A.; Ortíz, O. Influencia del grado de hidrólisis del POVIAC en la liberación de fármacos. Revista Cubana de Farmacia, Vol. 34, Suplemento Especial, junio 2000, p. 135 – 136.</li>
+    <li>Iraizoz, A.; Pérez, I.; Espino, M. Desarrollo de un ensayo de disolución para tabletas de liberación controlada de amitriptilina, 75mg y diseño de formulación. Revista Cubana de Farmacia, Vol. 34, Suplemento Especial, junio 2000, p. 149 – 151.</li>
+    <li>Urquiza, T.; Iraizoz, A. Estudio de la granulación húmeda en un ROTO JUNIOR – 10, para el escalado al ROTO P – 400. Revista Cubana de Farmacia, Vol. 34, Suplemento Especial, junio 2000, p. 179 – 182.</li>
+    <li>Iraizoz, A.; Fernández, S.; Barrios, M.A.; Díaz, R. Utilización de la sangre bovina en la elaboración de cápsulas para el tratamiento del signo anémico. Revista Cubana de Farmacia. Vol. 34, Suplemento Especial, junio 2000, p. 186 – 190.</li>
+    <li>Iloki Simón Bernard; Yanet Támbara; Josefa Hormaza; Julio Aguilar; Eduardo Pentón y Antonio Iraioz Colarte. Modificación del patrón de elución en cromatografía de exclusión molecular del Antígeno de Superficie del virus de Hepatitis B por reacción con ß-ciclodextrina. Revista Cubana de Farmacia. 01/2000, 34:367</li>
+    <li>Iraizoz, A.; González, H.Ma.; González, G.; Pérez, I.; Toledo, G. “Mezcla dextrana-coloides hidrofílicos. Empleo en el control de la liberación de fármacos (II)”. Rev. Cub. de Farmacia. Vol. 35 Suplemento Especial 2001.p.70-72.</li>
+    <li>Pérez, I.; Fernández, M.; Iraizoz, A.; Montero, E.; Suárez, M.; García, R. “Mezcla- dextrana coloides hidrofílicos. Empleo en el control de la liberación de fármacos”. Rev. Cubana de Farmacia . Vol.35 Suplemento Especial 2001.p.78-80.</li>
+    <li>Barrios, Ma.A.; Viamontes, A.J.; Perdomo, I.; Iraizoz, A.; Rodríguez, G.; García, O.; García, G.; Capiro, B. “Diseño tecnológico de un semisólido utilizando una zeolita modificada para su empleo en mucosas”. Rev. Cubana de Farmacia; Vol. 35 Suplemento Especial 2001.p.86-89.</li>
+    <li>González, G.; Pérez, I.; Iraizoz, A.; Ortíz, O. “Estudio de la factibilidad del empleo de la dextrana en un sistema matricial combinado”. Rev. Cubana de Farmacia; Vol. 35 Suplemento Especial 2001. P.92-94.</li>
+    <li>Castellanos, E.; Iraizoz, A.; Héctor, M.; Alemán, A.; Lara, J.Lizardo.; González, T. “The Cuban Technical Dextran. Use for control release system of drugs”. Rev. Cubana de Farmacia; Vol. 35 Suplemento Especial 2001. P.95-98.</li>
+    <li>Campo, M.; Perdomo, M.; Iraizoz, A.; Nuñez, L.; Perdomo,U. "Escalamiento de Planta Piloto de tabletas de liberación controlada de clorhidrato de desipramina 75 mg" Rev. Mexicana de Farmacia; Vol.32.(2) abril-junio; 2001. p. 14-18.</li>
+    <li>Fernández Cervera, Mirna; Fernández Cárdenas, Tania; García Verdecia, Beatriz; Gutierrez Leiva, Jacqueline; Iraizoz Colarte, Antonio. Estabilidad acelerada de tabletas de levodopa-carbidopa (250-25mg). Revista Cubana de Farmacia. 08/2001. 35(2). P. 90-94.</li>
+    <li>González L.; Tamargo B.; Ojito E.; Sierra G.; Riverón L.; Cabrera O.; Ruiz O.; Amador F.; Iraizoz A.; Implementación del curso teórico práctico de Biotecnología como asignatura opcional en el curriculum del profesional farmacético. Revista Cubana de Farmacia Vol. 36 Suplemento Especial No1 ISSN 0034-7515. 2002. A 19-22.</li>
+    <li>Campo M.; García M.; González T.; Iraizoz A.;Diseño preliminar de cápsulas de alfalfa como suplemento nutricional. Revista Cubana de Farmacia Vol. 36 Suplemento Especial No1 ISSN 0034-7515. 2002. F 167-169</li>
+    <li>Castellanos E.; Iraizoz A.; Lobenzarit disódico de acción controlada. Estudio de optimización en matrices EDYTONRevista Cubana de Farmacia Vol. 36 Suplemento Especial No1 ISSN 0034-7515. 2002.D</li>
+    <li>Barrios M.A.; Iraizoz A. Diseño de un sistema de dispersión sólida con polímeros para el Albendazol.; Revista Cubana de Farmacia Vol. 36 Suplemento Especial No1 ISSN 0034-7515. 2002. D</li>
+    <li>Iraizoz A.; Barrios M.A. Estudio comparativo de lactosas de compresión a diferentes concentraciones de tres proveedores. Revista Cubana de Farmacia Vol. 36 Suplemento Especial No1 ISSN 0034-7515. 2002.D</li>
+    <li>González L., González Y., Castiñeira M., Alonso E., Moya M., Iraizoz A. Diseño y evaluación de nuevas formulaciones de tabletas de acetato de cortisona (25 mg.). Rev. Cub. Farm. 2002. ISSN 0034-7515. Vol.36 (1) : 7-14</li>
+    <li>Mercedes Campo, Antonio Iraizoz. Diseño tecnológico de tabletas de desipramina de liberación controlada. Rev. Cubana Farmacia. Volumen 36. Suplemento Especial No 1. ISSN 0034-7515. 2002.</li>
+    <li>Barrios Ma. A., Iraizoz A., Martínez B., Rivera A. Potencialidad de la zeolita como neutralizante en tabletas de aspirina bufferada Revista Cubana de Farmacia. Suplemento Especial . Volumen 37. SSN 0034-7515. Año 2003. p.B 5-9.</li>
+    <li>Pérez I., Vázquez M., Iraizoz A. Evaluación de las propiedades aglutinantes de la dextrana, técnica cubana. Revista Cubana de Farmacia. Suplemento Especial . Volumen 37. SSN 0034-7515. Año 2003. p- B 114-118.</li>
+    <li>Barrios Álvarez, Ma. Aurora; Iraizoz Colarte Antonio. “Diplomado de Tecnología y Control Tecnológico de los Medicamentos. Una opción de superación”. Rev. Cubana Farm 2004; 38 (Supl 1): 1 – 6,</li>
+    <li>Aguilar Cruz, Lidia; Iraizoz Colarte, Antonio; Barrios Alvarez, María Aurora “Estudio comparativo de tres tipos de celulosa microcristalina y su influencia sobre las propiedades farmacotécnicas de tabletas” Rev. Cubana Farm 2004; 38 (Supl 1): 152 – 159.</li>
+    <li>Castellanos Gil, Eddy; Iraizoz Colarte, Antonio; Paneque Quevedo, Armando; Coro, Julieta; González Castillo, Tahimí. “Empleo de dextrana técnica en formulaciones farmacéuticas”. Rev Cubana Farm 2004; 38 (Supl 1): 168 – 174</li>
+    <li>Iloki Assanga Simón Bernard; Iraizoz Colarte, Antonio. “Pharmaceutical applications of cyclodextrins”. Rev Cubana Farm 2004; 38 (Supl 1): 209 – 214.</li>
+    <li>Cervera Fernández, M.; Heinämäki, J.; Räsänen, E.; Antikainen, O.; Nieto Acosta, O.M.; Iraizoz Colarte, A.; Yliruusi. Determination of tackiness of chitosan film-coated pellets exploiting minimum fluididization velocity., J. Int. J. Pharm., 2004, 119-127. IP:2.156</li>
+    <li>Cervera Fernández, M.; Karjalainen, M.; Airaksinen, S.; Rantanen, J.; Heinämäki, J.; Iraizoz Colarte, A.; Yliruusi. Physical stability and moisture sorption of aqueous chitosan-amylose starch films plasticized with polyols., J. Eur. J. Pharm. Biopharm., 2004, 58, 69-76. IP:3.64</li>
+    <li>Cervera Fernández, M.; Heinämäki, J.; Krogars, K.; Jörgensen, A.; Karjalainen, M.; Iraizoz Colarte, A.; Yliruusi, J. Solid-state and mechanical properties of aqueous chitosan-amylose starch films plasticized with polyols. AAPS Pharm. Sci. Tech., 2004, 5(1) Article 15 (http.//www.aapspharmscitech.org) 1-6. IP:1.64</li>
+    <li>Cervera Fernández, M.; Heinämäki, J.; Räsänen, M.; Maunu, S.L.; Karjalainen, M.; Nieto Acosta, O.M.; Iraizoz Colarte, A.; Yliruusi, J. Solid-state characterization of chitosans derived from lobster chitin. Carbohydr. Polym. (2004), 58, 401-408.IF:4.07</li>
+    <li>Cervera Fernández, M.; Heinämäki, J.; Salgado Rodríguez, E.; Antikainen, O.; Iraizoz Colarte, A.; Yliruusi, Effective optimization of enteric film coating of pellets with a miniaturized top-spray coater. J. Pharm. Ind. 2005, 67 (2), 231-236.</li>
+    <li>González Novoa G.A., Heinämäki J., Mirza S., Antikainen O., Iraizoz Colarte A., Suzarte Paz A and Yliruusi J., 2005. Physical solid-state properties and dissolution of sustained-release matrices of polyvinylacetate. Eur.J.Pharm.Biopharm. 59, 343-350.</li>
+    <li>Eddy Castellanos Gil; Antonio Iraizoz Colarte; Bernard Bataille; José Luis Pedraz; Fernand Rodríguez, Jyrki Heinämäki. Development and optimization of a novel sustained-release dextran tablet formulation for propranolol hydrochloride; International J. of Pharmaceuticals. Ed. Elsevier. (2006) 32-39 Indice de impacto: 3.65</li>
+    <li>Gerardo Rodríguez-Fuentes, Aramis Rivera Denis, María A. Barrios Álvarez, Antonio Iraizoz Colarte; Antacid drug based on purified natural clinoptilolite. Microporous and Mesopourus Materials. Ed Elsevier. 94 (2006) 200-207. Indice de impacto. 3.45</li>
+    <li>García Viviana, Iraizoz, A.; Heinamäki, J.; Nieto, O.; Bilbao, O.; Antikainen, O.; Ulyrrussi, J. “Aplicación de la quitina y la quitosana en cosméticos y farmacia” European Journal Pharmaceutical Science Vol. 28 (1). 2006 57-58. Indice de impacto: 2.347.</li>
+    <li>OB,Revoredo; OM,Nieto; Y,Suárez; V. García; M, Fernández; A, Iraizoz; RD, Henriques. “Application of chitin and chitosan in pharmacy and cosmetology”. European Journal Of Pharmaceutical Sciences. Conference Paper. 06/2006. Índice de impacto. 3.65</li>
+    <li>E. Castellanos Gil, A. Iraizoz Colarte, A. El Ghzaoui, D. Durand, J. L. Delarbre, B. Bataille. A sugar cane native dextran as an innovative functional excipient for the development of pharmaceutical tablets. European Journal of Pharmaceutics and Biopharmaceutics 68 (2) (2008) 319–329. IF 3.39</li>
+    <li>E. Castellanos Gil, A. Iraizoz Colarte. Estimation of percolation threshold in lobenzarit disodium native dextran matrix tablets. 2008 AAPS Journal. Vol 8 (4). IP=1.64</li>
+    <li>E. Castellanos Gil, A. Iraizoz Colarte, J.L. Lara Sampedro, B. Bataille. Sub coating with Kollidon VA 64 as water barrier in a new combined native dextran/HPMC-cetyl alcohol controlled release tablets. European Journal of Pharmaceutics and Biopharmaceutics 69 (2008) 303-311, IF 3.185</li>
+    <li>E. Castellanos Gil, A. Iraizoz Colarte. Aqueous Solution of native dextran of high molecular weight and binary mixture dextran: HPMC. Temperature, pH and ion strength effect. (Carbohydr Polym IP : 4.07)</li>
+    <li>E. Castellanos Gil, A. Iraizoz Colarte. Swelling and erosion properties of native dextran and its fractions matrices—influence of agitation rate and dissolution medium composition (Drug Development and industrial pharmacy, IP 0.821)</li>
+    <li>E. Castellanos Gil, A. Iraizoz Colarte. Swelling, erosion and profile release studies from native dextrans, HPMC and combined dextran-HPMC tablets (International Journal of Pharmaceutics IP 2.212).</li>
+    <li>V.García, J. Heinamaki, O.Antikainen, O. Bilbao. A. Iraizoz, O.M. Nieto and J. Ylirussi. “Direct Compression properties of chitin and chitosan”. European Journal of Pharmaceutics and Biopharmaceutics. Vol 70 (1) 964-968 2008. Index by: BIOSIS/Biological Abstracts, CAB Abstracts, Chemical Abstracts Service, EMBASE/Excerpta Medica, International Pharmaceutical Abstracts, MEDLINE®, PASCAL M, Science Citation Index – Expanded, Scopus. IP: 3.38</li>
+    <li>Castellanos Gil E., Iraizoz A., Bataille B., Caraballo I. “Estimation of the percolation thresholds in ternary lobenzarit disodium–dextran–HPMC hydrophilic matrices tablets: Effects of initial porosity. Eur. J. Pharm. Sci. (2009), doi:10.1016/j.ejps.2009.07.013 IP=2.482.</li>
+    <li>Viviana García Mir,1 Jyrki Heinämäki,2,4 Osmo Antikainen,2 Niklas Sandler,3 Ofelia Bilbao Revoredo,1 Antonio Iraizoz Colarte,1 Olga Maria Nieto,1 and Jouko Yliruusi2. Application of Crustacean Chitin as a Co-diluent in Direct Compression. of Tablets.. AAPS PharmSciTech. 2010, 11(1), 409-415. DOI: 10.1208/s12249-010-9398-8. Published on line 18 march 2010. IP = 0.857</li>
+    <li>Viviana García Mir, Jyrki Heinämaki, Osmo Antikainen, Antonio Iraizoz Colarte, Sari Airaksinen, Milja Karjalainen, Ofelia Bilbao Reboredo, Olga María Nieto Acosta, Jouko Yliruusi. Effects of moisture on Tablet compression of chitin. Carbohydrate Polymers. 08/2011; 86(2) 477-483. DOI:10.1016/j carbopol. 2011.04.065 IP:4.07</li>
+    <li>Rodríguez-Amado JR, Lafourcade-Prada A, Escalona-Arranz JC, Iraizoz-Colarte A. Preformulación de tabletas de Tamarindus indica L. Revista Cubana de Farmacia 2011; 45(4):</li>
+    <li>Rodríguez-Amado JR, Lafourcade PA, Escalona AJC, Pérez RR, Iraizoz CA. Physicomechanical and compaction characterization of tablets obtained from a natural dry extracts. Rev. Tecn. Química. 2011.</li>
+    <li>Jesús Rafael Rodríguez Amado; Ariadna Lafourcade Prada; Julio César Escalona Arranz. Antonio Iraizoz Colarte. Estabilidad en estante de tabletas de las hojas de tamarindus indica L. Revista Cubana de Farmacia. Vol. 46, No. 2, 2012 (abril-junio).</li>
+    <li>Iraizoz Barrios, A.; Iraizoz Colarte, A.; Bataille, B.; Barrios, M.A.; Castanedo, N.; Incremento de la solubilidad de un derivado del furano utilizando la técnica de secado por atomización. Revista Cubana de Farmacia. Vol. 46, No. 2, 2012 (abril-junio).</li>
+    <li>Rodríguez Amado, Jesús Rafael; Pérez Rondón, Liana; Lafourcade Prada, Ariadna; Escalona Arranz, Julio César; Iraizoz Colarte, Antonio. Formulación de cápsulas duras de Tamarindus indica L. Rev. Cubana Farm. vol.48 no.1. ene.-mar. 2014.</li>
+    <li>Jesus Rafael Rodríguez Amado, Ariadna Lafourcade Prada, Julio César Escalona Arranz, Humberto Morris, Quevedo, Antonio Iraizoz Colarte and Jose Carlos Tavares Carvalho. Optimization of a novel tablets formulation using Doptimal mixture design. African Journal of Pharmacy and Pharmacology, Vol. 9(14), pp 474-483, 15 april 2015. DOI: 10.5897/AJPP2014. 4296. ISSN 1996-0816.</li>
+    <li>Y Saucedo Hernández, L Vicet Muro, E Jorge Rodríguez, D González Mosquera, LR Bravo Sánchez, MM González Bedia, HM González San Miguel, G Villanueva Ramos, A Cuellar Cuellar, A Iraizoz Colarte. Evaluación química y farmacológica de plantas medicinales para su uso como ingredientes farmacéuticos activos herbarios en los laboratorios de producción local. Anales de la Academia de Ciencias de Cuba 2015; 5 (3): 1-7.</li>
+</ul>
+
+
+
+</div>
+
+</body>
+</html>

@@ -1,2 +1,6 @@
 .env*
 secrets/
+*.DS_STORE
+*.png
+*.jpeg
+*.pdf

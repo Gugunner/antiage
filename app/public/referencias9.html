@@ -1,0 +1,422 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">  
+    <link rel="icon" href="dc3.png" type="image/png">  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White Book</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">
+    <!-- Estilos para dispositivos móviles -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (max-width: 768px)">
+    <!-- Estilos para pantallas de PC -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (min-width: 769px)">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+
+    <!-- Metadatos Open Graph -->
+    <meta property="og:title" content="YOU TOMORROW">
+    <meta property="og:description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta property="og:image" content="https://drive.google.com/file/d/1ZZI3G6Fit_kovvVZolrvchtXQQDrnWYI/view?usp=sharing">
+    <meta property="og:url" content="https://ytomorrow.com/">
+    <meta property="og:type" content="website">
+
+    <!-- Otros metadatos -->
+    <meta name="description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta name="keywords" content="you, YOU TOMORROW, TOMORROW, TOMORR, TOM, web">
+
+    <style>
+
+   body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 17px;
+    line-height: 1.4;
+    margin: 20px;
+    font-weight: 500; /* Grosor medio de la negrita */
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1, h2, h3 {
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+p {
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.section {
+    margin-bottom: 30px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    width: 100%;
+}
+
+.chart-row {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+    width: 50%; /* Ajusta el ancho para que se adapte al contenido */
+}
+
+.chart-box {
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    min-width: 150px; /* Asegura que las tarjetas tengan un ancho mínimo */
+    max-width: 300px; /* Limita el ancho máximo para tarjetas largas */
+    word-wrap: break-word; /* Permite que el texto se ajuste dentro de la tarjeta */
+    flex: 1; /* Permite que las tarjetas se expandan uniformemente */
+}
+
+.chart-box:hover {
+    transform: scale(1.05);
+}
+
+.chart-box.ceo {
+    background: linear-gradient(135deg, #ff6f61, #e53935);
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.chart-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transform: rotate(45deg);
+}
+
+.chart-box:hover::before {
+    opacity: 1;
+}
+
+.chart-box.ceo::before {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.connector {
+    width: 2px;
+    height: 20px;
+    background-color: #1b3a7a;
+    margin: 0 auto;
+}
+
+.horizontal-connector {
+    height: 2px;
+    width: 100%;
+    background-color: #1b3a7a;
+}
+
+.horizontal-connector.long {
+    width: 50%;
+}
+
+.chart-box i {
+    margin-right: 8px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #1b5e20;
+    color: #1b5e20;
+    font-weight: bold;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+
+  caption {
+    caption-side: top;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+    </style>
+
+</head>
+<body>
+<div class="container">
+REFERENCES
+    <ol>
+        REFERENCES.
+1.Tan WW et al. Metastatic Cancer With Unknown Primary Site. Medscape web page. Background. Available at: http://emedicine.medscape.com/article/280505-overview. Accessed 10/24/2011.
+2.Lancet. [no authors listed] Polychemotherapy for early breast cancer: an overview of the randomised trials. Early Breast Cancer Trialists' Collaborative Group. Lancet. 1998 Sep 19;352(9132):930-42.
+3.Clarke MJ. WITHDRAWN: Multi-agent chemotherapy for early breast cancer. Cochrane Database Syst Rev. 2008 Oct 8;(4):CD000487.
+4.Gelber RD, Cole BF, Goldhirsch A, Rose C, Fisher B, Osborne CK, Boccardo F, Gray R, Gordon NH, Bengtsson NO, Sevelda P. Adjuvant chemotherapy plus tamoxifen compared with tamoxifen alone for postmenopausal breast cancer: meta-analysis of quality-adjusted survival. Lancet. 1996 Apr 20;347(9008):1066-71.
+5.International Breast Cancer Study Group (IBCSG). Endocrine responsiveness and tailoring adjuvant therapy for postmenopausal lymph node-negative breast cancer: a randomized trial. J Natl Cancer Inst. 2002; 94(14):1054-65.
+6.Hayes DF, Thor AD, Dressler LG, Weaver D, Edgerton S, Cowan D, Broadwater G, Goldstein LJ, Martino S, Ingle JN, Henderson IC, Norton L, Winer EP, Hudis CA, Ellis MJ, Berry DA; Cancer and Leukemia Group B (CALGB) Investigators. HER2 and response to paclitaxel in node-positive breast cancer. N Engl J Med. 2007 Oct 11;357(15):1496-506.
+7.Moore, A. Breast-cancer therapy—looking back to the future. N Engl J Med. 2007 Oct 11;357(15):1547-9.
+8.Gennari A, Sormani MP, Pronzato P, Puntoni M, Colozza M, Pfeffer U, Bruzzi P. HER2 status and efficacy of adjuvant anthracyclines in early breast cancer: a pooled analysis of randomized trials. J Natl Cancer Inst. 2008 Jan 2;100(1):14-20.
+9.Swain SM, Whaley FS, Ewer MS. Congestive heart failure in patients treated with doxorubicin: a retrospective analysis of three trials. Cancer. 2003 Jun 1;97(11):2869-79.
+10.Kuhnl A et al. High expression of IGFBP2 is associated with chemoresistance in adult acute myeloid leukemia. Leuk Res. 2011 Sep 5.
+11.Kuukasjärvi T, Karhu R, Tanner M, Kähkönen M, Schäffer A, Nupponen N, Pennanen S, Kallioniemi A, Kallioniemi OP, Isola J. Genetic heterogeneity and clonal evolution underlying development of asynchronous metastasis in human breast cancer. Cancer Res. 1997 Apr 15;57(8):1597-604.
+12.Meng S, Tripathy D, Shete S, Ashfaq R, Haley B, Perkins S, Beitsch P, Khan A, Euhus D, Osborne C, Frenkel E, Hoover S, Leitch M, Clifford E, Vitetta E, Morrison L, Herlyn D, Terstappen LW, Fleming T, Fehm T, Tucker T, Lane N, Wang J, Uhr J. HER-2 gene amplification can be acquired as breast cancer progresses. Proc Natl Acad Sci U S A. 2004 Jun 22;101(25):9393-8.
+13.Wülfing P, Borchard J, Buerger H, et al. HER2-positive circulating tumor cells indicate poor clinical outcome in stage I and III breast cancer patients. Clin Cancer Res. 2006;12(6):1715-20.
+14.Cristofanilli M et al. Circulating tumor cells in metastatic breast cancer: biologic staging beyond tumor burden. Clin Breast Cancer. 2007 Feb;7(6):471-9.
+15.Moreno JG, Miller MC, Gross S, Allard WJ, Gomella LG, Terstappen LW. Circulating tumor cells predict survival in patients with metastatic prostate cancer. Urology. 2005 Apr;65(4):713-8.
+16.Tombal B, Van Cangh PJ, Loric S, Gala JL. Prognostic value of circulating prostate cells in patients with a rising PSA after radical prostatectomy. Prostate. 2003 Aug 1;56(3):163-70.
+17.Pound CR, Partin AW, Eisenberger MA, Chan DW, Pearson JD, Walsh PC. Natural history of progression after PSA elevation following radical prostatectomy. JAMA. 1999;281:1591-1597
+18.Halabi S, Small EJ, Hayes DF, Vogelzang NJ, Kantoff PW. Prognostic significance of reverse transcriptase polymerase chain reaction for prostate-specific antigen in metastatic prostate cancer: a nested study within CALGB 9583. J Clin Oncol. 2003 Feb 1;21(3):490-5.
+19.Danila DC, Heller G, Gignac GA, Gonzalez-Espinoza R, Anand A, Tanaka E, Lilja H, Schwartz L, Larson S, Fleisher M, Scher HI. Circulating tumor cell number and prognosis in progressive castration-resistant prostate cancer. Clin Cancer Res. 2007 Dec 1;13(23):7053-8.
+20.Hayes DF, Cristofanilli M, Budd GT, Ellis MJ, Stopeck A, Miller MC, Matera J, Allard WJ, Doyle GV, Terstappen LW. Circulating tumor cells at each follow-up time point during therapy of metastatic breast cancer patients predict progression-free and overall survival. Clin Cancer Res. 2006 Jul 15;12(14 Pt 1):4218-24.
+21.Cohen SJ, Punt CJ, Iannotti N, Saidman BH, Sabbath KD, Gabrail NY, Picus J, Morse M, Mitchell E, Miller MC, Doyle GV, Tissing H, Terstappen LW, Meropol NJ. Relationship of circulating tumor cells to tumor response, progression-free survival, and overall survival in patients with metastatic colorectal cancer. J Clin Oncol. 2008 Jul 1;26(19):3213-21.
+22.Quintela-Fandino M, López JM, Hitt R, Gamarra S, Jimeno A, Ayala R, Hornedo J, Guzman C, Gilsanz F, Cortés-Funes H. Breast cancer-specific mRNA transcripts presence in peripheral blood after adjuvant chemotherapy predicts poor survival among high-risk breast cancer patients treated with high-dose chemotherapy with peripheral blood stem cell support. J Clin Oncol. 2006 Aug 1;24(22):3611-8.
+23.Pachmann K, Dengler R, Lobodasch K, Fröhlich F, Kroll T, Rengsberger M, Schubert R, Pachmann U. An increase in cell number at completion of therapy may develop as an indicator of early relapse: Quantification of circulating epithelial tumor cells (CETC) for monitoring of adjuvant therapy in breast cancer. J Cancer Res Clin Oncol. 2008 Jan;134(1):59-65.
+24.Di Leo A, Gancberg D, Larsimont D, Tanner M, Jarvinen T, Rouas G, Dolci S, Leroy JY, Paesmans M, Isola J, Piccart MJ. HER-2 amplification and topoisomerase IIalpha gene aberrations as predictive markers in node-positive breast cancer patients randomly treated either with an anthracycline-based therapy or with cyclophosphamide, methotrexate, and 5-fluorouracil. Clin Cancer Res. 2002 May;8(5):1107-16
+25.Ciaparrone M, Quirino M, Schinzari G, et al. Predictive role of thymidylate synthase, dihydropyrimidine dehydrogenase and thymidine phosphorylase expression in colorectal cancer patients receiving adjuvant 5-fluorouracil. Oncology. 2006;70(5):366-77.
+26.Siwak DR, Shishodia S, Aggarwal BB, Kurzrock R. Curcumin-induced antiproliferative and proapoptotic effects in melanoma cells are associated with suppression of IkappaB kinase and nuclear factor kappaB activity and are independent of the B-Raf/mitogen-activated/extracellular signal-regulated protein kinase pathway and the Akt pathway. Cancer. 2005 Aug 15;104(4):879-90.
+27.Hayeshi R, Mutingwende I, Mavengere W, Masiyanise V, Mukanganyama S. The inhibition of human glutathione S-transferases activity by plant polyphenolic compounds ellagic acid and curcumin. Food Chem Toxicol. 2007 Feb;45(2):286-95.
+28.Sears B. A Dietary Road Map.1995.
+29.Newmark T. Beyond Aspirin. 2000.
+30.Chakraborti AK, Garg SK, Kumar R, Motiwala HF, Jadhavar PS. Progress in COX-2 Inhibitors: A Journey So Far. Curr Med Chem. 2010 Feb 18.
+31.Tucker ON, Dannenberg AJ, Yang EK, et al. Cyclooxygenase-2 expression is up-regulated in human pancreatic cancer. Cancer Res. 1999 Mar 1;59(5):987-90.
+32.Gately S. The contributions of cyclooxygenase-2 to tumor angiogenesis. Cancer Metastasis Rev. 2000;19(1-2):19-27.
+33.Reddy BS, Rao CV. Colon cancer: a role for cyclo-oxygenase-2-specific nonsteroidal anti-inflammatory drugs. Drugs Aging. 2000 May;16(5):329-34.
+34.Sheehan KM, Sheahan K, O'Donoghue DP, et al. The relationship between cyclooxygenase-2 expression and colorectal cancer. JAMA. 1999 Oct 6;282(13):1254-7.
+35.Brody JE. Aspirin linked to aid in colon cancer fight. New York Times. 1991;141(48, 812):A12.
+36.Knorr J. Aspirin: the multi-purpose compound not just for headaches anymore. Life Extension Magazine 2000 Feb. 2000; Life Extension Magazine 2000 Feb6(2):50.
+37.Agarwal B, Rao CV, Bhendwal S, et al. Lovastatin augments sulindac-induced apoptosis in colon cancer cells and potentiates chemopreventive effects of sulindac. Gastroenterology. 1999 Oct;117(4):838-47.
+38.Tsujii M, Kawano S, Tsuji S, et al. Cyclooxygenase regulates angiogenesis induced by colon cancer cells. Cell. 1998 May 29;93(5):705-16.
+39.Valsecchi ME, Pomerantz SC, Jaslow R, Tester W. Reduced risk of bone metastasis for patients with breast cancer who use COX-2 inhibitors. Clin Breast Cancer. 2009 Nov;9(4):225-30.
+40.Edelman MJ, Watson D, Wang X, et al. Eicosanoid modulation in advanced lung cancer: cyclooxygenase-2 expression is a positive predictive factor for celecoxib + chemotherapy—Cancer and Leukemia Group B Trial 30203. J Clin Oncol. 2008 Feb;26(6):848-55.
+41.Pruthi RS, Derksen JE, Moore D, e al. Phase II trial of celecoxib in prostate-specific antigen recurrent prostate cancer after definitive radiation therapy or radical prostatectomy. Clin Cancer Res. 2006 Apr;12(7 Pt 1):2172-7.
+42.Manola J, Atkins M, Ibrahim J, et al. Prognostic factors in metastatic melanoma: a pooled analysis of Eastern Cooperative Oncology Group trials. J Clin Oncol. 2000 Nov;18(22):3782-93.
+43.Lai V, George J, Richey L, et al. Results of a pilot study of the effects of celecoxib on cancer cachexia in patients with cancer of the head, neck, and gastrointestinal tract. Head Neck. 2008 Jan;30(1):67-74.
+44.Harris RE. Cyclooxygenase-2 (cox-2) blockade in the chemoprevention of cancers of the colon, breast, prostate, and lung. Inflammopharmacology. 2009 Apr;17(2):55-67.
+45.Erovic BM et al. Strong evidence for up-regulation of cyclooxygenase-1 in head and neck cancer. Eur J Clin Invest. 2008 Jan;38(1):61-6.
+46.Khunnarong J et al. Expression of cyclooxygenase-1 in epithelial ovarian cancer: a clinicopathological study. Asian Pac J Cancer Prev. 2008 Oct-Dec;9(4):757-62.
+47.Wu WK et al. Inhibition of cyclooxygenase-1 lowers proliferation and induces macroautophagy in colon cancer cells. Biochem Biophys Res Commun. 2009 Apr 24;382(1):79-84. Epub 2009 Mar 1.
+48.Li W et al. Effects of a cyclooxygenase-1-selective inhibitor in a mouse model of ovarian cancer, administered alone or in combination with ibuprofen, a nonselective cyclooxygenase inhibitor. Med Oncol. 2009;26(2):170-7. Epub 2008 Nov 6.
+49.McFadden DW et al. Additive effects of Cox-1 and Cox-2 inhibition on breast cancer in vitro. Int J Oncol. 2006 Oct;29(4):1019-23.
+50.Wu KK et al. Aspirin and other cyclooxygenase inhibitors: new therapeutic insights. Semin Vasc Med. 2003 May;3(2):107-12.
+51.Rothwell PM, Wilson M, Elwin CE, et al. Long-term effect of aspirin on colorectal cancer incidence and mortality: 20-year follow-up of five randomised trials. Lancet. 2010 Nov 20;376(9754):1741-50.
+52.Sjodahl R. Nonsteroidal anti-inflammatory drugs and the gastrointestinal tract. Extent, mode, and dose dependence of anticancer effects. Am J Med. 2001 Jan 8;110(1A):66S-69S.
+53.Corley DA, Kerlikowske K, Verma R, Buffler P. Protective association of aspirin/NSAIDs and esophageal cancer: a systematic review and meta-analysis. Gastroenterology. 2003 Jan;124(1):47-56.
+54.Bosetti C, Gallus S, La Vecchia C. Aspirin and cancer risk: a summary review to 2007. Recent Results Cancer Res. 2009;181:231-51.
+55.Dhillon PK, Kenfield SA, Stampfer MJ, Giovannucci EL. Long-term aspirin use and the risk of total, high-grade, regionally advanced and lethal prostate cancer in a prospective cohort of health professionals, 1988-2006. Int J Cancer. 2010 Dec 2.
+56.Salinas CA, Kwon EM, FitzGerald LM, et al. Use of aspirin and other nonsteroidal antiinflammatory medications in relation to prostate cancer risk. Am J Epidemiol. 2010 Sep 1;172(5):578-90.
+57.Duursma AM, Agami R. Ras interference as cancer therapy. Semin Cancer Biol. 2003 Aug;13(4):267-73.
+58.Minamoto T, Mai M, Ronai Z. K-ras mutation: early detection in molecular diagnosis and risk assessment of colorectal, pancreas, and lung cancers--a review. Cancer Detect Prev. 2000;24(1):1-12.
+59.Vachtenheim J. Occurrence of ras mutations in human lung cancer. Minireview. Neoplasma. 1997;44(3):145-9.
+60.Bartram CR. Mutations in ras genes in myelocytic leukemias and myelodysplastic syndromes. Blood Cells. 1988;14(2-3):533-8.
+61.Bos JL. ras oncogenes in human cancer: a review. Cancer Res. 1989 Sep;49(17):4682-9.
+62.Hsieh JS, Lin SR, Chang MY, Chen FM, Lu CY, Huang TJ, Huang YS, Huang CJ, Wang JY. APC, K-ras, and p53 gene mutations in colorectal cancer patients: correlation to clinicopathologic features and postoperative surveillance. Am Surg. 2005 Apr;71(4):336-43.
+63.Däbritz J, Preston R, Hänfler J, Oettle H. Follow-up study of K-ras mutations in the plasma of patients with pancreatic cancer: correlation with clinical features and carbohydrate antigen 19-9. Pancreas. 2009 Jul;38(5):534-41.
+64.Gibbs JB, Kohl NE, Koblan KS, et al. Farnesyltransferase inhibitors and anti-Ras therapy. Breast Cancer Res Treat. 1996;38(1):75-83.
+65.Oliff A. Therapies of the Future: New Molecular Targets for Cancer Therapy. 1996.
+66.Feramisco JR, Clark R, Wong G, et al. Transient reversion of ras oncogene-induced cell transformation by antibodies specific for amino acid 12 of ras protein. Nature. 1985 Apr 18;314(6012):639-42.
+67.Weden S et al. Long-term follow-up of patients with resected pancreatic cancer following vaccination against mutant K-ras. Int J Cancer. 2011 Mar 1;128(5):1120-8. doi: 10.1002/ijc.25449.
+68.Lu X, Xu T, Qian J. [An application value of detecting K-ras and p53 gene mutation in the stool and pure pancreatic juice for diagnosis of early pancreatic cancer]. Zhonghua Yi Xue Za Zhi. 2001 Sep 10;81(17):1050-3.
+69.Wu X, Lu XH, Xu T, Qian JM, Zhao P, Guo XZ, Yang XO, Jiang WJ. Evaluation of the diagnostic value of serum tumor markers, and fecal k-ras and p53 gene mutations for pancreatic cancer. Chin J Dig Dis. 2006;7(3):170-4.
+70.Bland J. Farnesyl transferase inhibitors.2001;October 17-21, 2001.
+71.Asamoto M, Ota T, Toriyama-Baba H, et al. Mammary carcinomas induced in human c-Ha-ras proto-oncogene transgenic rats are estrogen-independent, but responsive to d-limonene treatment. Jpn J Cancer Res. 2002 Jan;93(1):32-5.
+72.Kim Ms, Kang HJ, Moon A. Inhibition of invasion and induction of apoptosis by curcumin in H-ras-transformed MCF10A human breast epithelial cells. Arch Pharm Res. 2001 Aug;24(4):349-54.
+73.Chen X, Hasuma T, Yano Y, et al. Inhibition of farnesyl protein transferase by monoterpene, curcumin derivatives and gallotannin. Anticancer Res. 1997 Jul-Aug;17(4A):2555-64.
+74.Yano T, Uchida M, Yuasa M, et al. The inhibitory effect of vitamin E on K-ras mutation at an early stage of lung carcinogenesis in mice. Eur J Pharmacol. 1997 Mar;323(1):99-102.
+75.Prasad KN, Cohrs RJ, Sharma OK. Decreased expressions of c-myc and H-ras oncogenes in vitamin E succinate induced morphologically differentiated murine B-16 melanoma cells in culture. Biochem Cell Biol. 1990 Nov;68(11):1250-5.
+76.Singh A, Purohit A, Hejaz HA, et al. Inhibition of deoxyglucose uptake in MCF-7 breast cancer cells by 2-methoxyestrone and 2-methoxyestrone-3-O-sulfamate. Mol Cell Endocrinol. 2000 Feb 25;160(1-2):61-6.
+77.Chung JY, Huang C, Meng X, et al. Inhibition of activator protein 1 activity and cell growth by purified green tea and black tea polyphenols in H-ras-transformed cells: structure-activity relationship and mechanisms involved. Cancer Res. 1999 Sep 15;59(18):4610-7.
+78.Collett ED, Davidson LA, Fan YY, et al. n-6 and n-3 polyunsaturated fatty acids differentially modulate oncogenic Ras activation in colonocytes. Am J Physiol Cell Physiol. 2001 May;280(5):C1066-C1075.
+79.Wang IK, Lin-Shiau SY, Lin JK. Suppression of invasion and MMP-9 expression in NIH 3T3 and v-H-Ras 3T3 fibroblasts by lovastatin through inhibition of ras isoprenylation. Oncology. 2000 Sep;59(3):245-54.
+80.Hohl RJ, Lewis K. Differential effects of monoterpenes and lovastatin on RAS processing. J Biol Chem. 1995 Jul 21;270(29):17508-12.
+81.Kawata S, Yamasaki E, Nagase T, Inui Y, Ito N, Matsuda Y, Inada M, Tamura S, Noda S, Imai Y, Matsuzawa Y. Effect of pravastatin on survival in patients with advanced hepatocellular carcinoma. A randomized controlled trial. Br J Cancer. 2001 Apr 6;84(7):886-91.
+82.Graf H, Jüngst C, Straub G, Dogan S, Hoffmann RT, Jakobs T, Reiser M, Waggershauser T, Helmberger T, Walter A, Walli A, Seidel D, Goke B, Jüngst D. Chemoembolization combined with pravastatin improves survival in patients with hepatocellular carcinoma. Digestion. 2008;78(1):34-8.
+83.Samuels AJBHRSSB. Increased alpha 1 antitrypsin, decreased systemic fibrinolysis, hypercoaguable state and increased fibrin split products in patients with lung cancer. Proc Am Soc Clin Oncol. 1975;(16):238.
+84.Cafagna D, Ponte E. [Pulmonary embolism of paraneoplastic origin]. Minerva Med. 1997 Dec;88(12):523-30.
+85.Ahmad S et al. Therapeutic roles of heparin anticoagulants in cancer and related disorders. Med Chem. 2011 Sep 1;7(5):504-17.
+86.Cosgrove RH, Zacharski LR, Racine E, et al. Improved cancer mortality with low-molecular-weight heparin treatment: a review of the evidence. Semin Thromb Hemost. 2002 Feb;28(1):79-87.
+87.Mousa SA. Anticoagulants in thrombosis and cancer: the missing link. Expert Rev Anticancer Ther. 2002 Apr;2(2):227-33.
+88.von Tempelhoff GF, Harenberg J, Niemann F, et al. Effect of low molecular weight heparin (Certoparin) versus unfractioned heparin on cancer survival following breast and pelvic cancer surgery: A prospective randomized double-blind trial. Int J Oncol. 2000;16(4):815-24.
+89.Wellness Directory of Minnesota. 2002
+90.Lebeau B, Chastang C, Brechot JM, et al. Subcutaneous heparin treatment increases survival in small cell lung cancer. "Petites Cellules" Group. Cancer. 1994 Jul 1;74(1):38-45.
+91.Van Doormaal FF, Büller HR, Middeldrop S. Development of anticoagulant therapy. Crit Rev Oncol Hematol. 2008 May;66(2):145-54.
+92.Spivak JL. Cancer-related anemia: its causes and characteristics. Semin Oncol. 1994 Apr;21(2 Suppl 3):3-8.
+93.Caro JJ, Salas M, Ward A, et al. Anemia as an independent prognostic factor for survival in patients with cancer: a systemic, quantitative review. Cancer. 2001 Jun 15;91(12):2214-21.
+94.Cazzola M. Mechanisms of anaemia in patients with malignancy: implications for the clinical use of recombinant human erythropoietin. Med Oncol. 2000 Nov;17 Suppl 1:S11-S16.
+95.Reis ST et al. Tgf-β1 expression as a biomarker of poor prognosis in prostate cancer. Clinics (Sao Paulo). 2011;66(7):1143-7.
+96.Zacharski LR, Henderson WG, Rickles FR, et al. Effect of warfarin anticoagulation on survival in carcinoma of the lung, colon, head and neck, and prostate. Final report of VA Cooperative Study #75. Cancer. 1984 May 15;53(10):2046-52.
+97.Zacharski LR, Memoli VA, Rousseau SM, et al. Occurrence of blood coagulation factors in situ in small cell carcinoma of the lung. Cancer. 1987 Dec 1;60(11):2675-81.
+98.Chahinian AP, Propert KJ, Ware JH, et al. A randomized trial of anticoagulation with warfarin and of alternating chemotherapy in extensive small-cell lung cancer by the Cancer and Leukemia Group B. J Clin Oncol. 1989 Aug;7(8):993-1002.
+99.Saad F, Abrahamsson PA, Miller K. Preserving bone health in patients with hormone-sensitive prostate cancer: the role of bisphosphonates. BJU Int. 2009 Dec;104(11):1573-9.
+100.Mystakidou K, Katsouda E, Parpa E, Kelekis A, Galanos A, Vlahos L. Randomized, open label, prospective study on the effect of zoledronic acid on the prevention of bone metastases in patients with recurrent solid tumors that did not present with bone metastases at baseline. Med Oncol. 2005;22(2):195-201.
+101.Gnant BT, Amenedo C, Freeman K, et al. Outcomes of placing dental implants in patients taking oral bisphosphonates: a review of 115 cases. J Oral Masxillofac Surg. 2008;66:223-230.
+102.Coleman RE, Thorpe HC, Cameron D, et al. Adjuvant Treatment with Zoledronic Acid in Stage II/III Breast Cancer. The AZURE Trial (BIG 01/04). http://www.abstracts2view.com/sabcs10/view.php?nu=SABCS10L_226&terms. 12/10/2010.
+103.Morgan G, Davies F, Gregory W, et al. Evaluating the effects of zoledronic acid (ZOL) on overall survival (OS) in patients (Pts) with multiple myeloma (MM): results of the Medical Research Council (MRC) Myeloma IX study. J Clin Oncol. 2010;28(suppl):578s. (abstr 8021).
+104.Hwang SH, Lee SA, Ahn SG, Lee HM, Jeong J, Lee HD. Effects of zoledronic acid on bone mineral density during aromatase inhibitor treatment of Korean postmenopausal breast cancer patients. Breast Cancer Res Treat. 2011 Aug 23.
+105.Stopeck AT, Lipton A, Body JJ, et al. Denosumab compared with zoledronic acid for the treatment of bone metastases in patients with advanced breast cancer: a randomized, double-blind study. J Clin Oncol. 2010;28(35):5132-9.
+106.Weitzman R, Sauter N, Eriksen EF, et al. Critical review: updated recommendations for the prevention, diagnosis, and treatment of osteonecrosis of the jaw in cancer patients—May 2006. Crit Rev Oncol Hematol. 2007 May;62(2):148-52.
+107.Heckbert SR, Li G, Cummings SR, Smith NL, Psaty BM. Use of alendronate and risk of incident atrial fibrillation in women. Arch Intern Med. 2008 Apr 28;168(8):826-31.
+108.Miller PD. Curr Osteoporos Rep. 2009 Mar;7(1):18-22. Denosumab: anti-RANKL antibody.
+109.Fizazi K, Carducci M, Smith M, Damião R, Brown J, Karsh L, Milecki P, Shore N, Rader M, Wang H, Jiang Q, Tadros S, Dansey R, Goessl C. Lancet. 2011 Mar 5;377(9768):813-22. Denosumab versus zoledronic acid for treatment of bone metastases in men with castration-resistant prostate cancer: a randomised, double-blind study.
+110.Shammas NW, Moss AJ, Sullebarger JT, et al. Acquired coronary angiogenesis after myocardial infarction. Cardiology. 1993;83(3):212-6.
+111.Suh DY. Understanding angiogenesis and its clinical applications. Ann Clin Lab Sci. 2000 Jul;30(3):227-38.
+112.Cooke R. Dr. Folkman's War: Angiogenesis and the Struggle to Defeat Cancer. Nature Medicine. 2001 May;7(5):525-6.
+113.Folkman J. Tumor angiogenesis: therapeutic implications. N Engl J Med. 1971 Nov 18;285(21):1182-6
+114.Cao Y, Langer R. A review of Judah Folkman's remarkable achievements in biomedicine. Proc Natl Acad Sci U S A. 2008 Sep 9;105(36):13203-5.
+115.Folkman J. The role of angiogenesis in tumor growth. Semin Cancer Biol. 1992b Apr;3(2):65-71.
+116.Folkman J, Shing Y. Control of angiogenesis by heparin and other sulfated polysaccharides. Adv Exp Med Biol. 1992a;313:355-64.
+117.NIH/NCI. Angiogenesis Inhibitors in Cancer Research. NIH/NCI Angiogenesis Inhibitors in Cancer Research 1998 Jul 7 Bethesda, MD: National Cancer Institute (Http://Www Slip Net/~Mcdavis/Database/Angio163 Htm).1998;Jul 7
+118.Ghosh J. Rapid induction of apoptosis in prostate cancer cells by selenium: reversal by metabolites of arachidonate 5-lipoxygenase. Biochem Biophys Res Commun. 2004 Mar 12;315(3):24-35.
+119.Moretti RM, Montagani Marelli M, Sala A, et al. Activation of the orphan nuclear receptor RORalpha counteracts the proliferative effect of fatty acids on prostate cancer cells: crucial role of 5-lipoxygenase. Int J Cancer. 2004 Oct;121(1):87-93.
+120.Hassan S, Carraway RE. Involvement of arachidonic acid metabolism and EGF receptor in neurotensin-induced prostate cancer PC3 cell growth. Regul Pept. 2006 Jan;133(1-3):105-14.
+121.Matsuyama M, Yoshimura R, Mitsuhashi M, et al. Expression of lipoxygenase in human prostate cancer and growth reduction by its inhibitors. Int J Oncol. 2004a Apr;24(4):821-7.
+122.Kelavkar UP, Glasgow W, Olson SJ, Foster BA, Shappell SB. Overexpression of 12/15-lipoxygenase, an ortholog of human 15-lipoxygenase-1, in the prostate tumors of TRAMP mice. Neoplasia. 2004 Nov;6(6):821-30.
+123.Gupta S, Srivastava M, Ahmad N, et al. Lipoxygenase-5 is overexpressed in prostate adenocarcinoma. Cancer. 2001 Feb 15;91(4):737-43
+124.Kelavkar UP, Nixon JB, Cohen C, et al. Overexpression of 15-lipoxygenase-1 in PC-3 human prostate cancer cells increases tumorigenesis. Carcinogenesis. 2001 Nov;22(11):1765-73.
+125.Ghosh J, Myers CE. Arachidonic acid stimulates prostate cancer cell growth: critical role of 5-lipoxygenase. Biochem Biophys Res Commun. 1997 Jun;235(2):418-23.
+126.Gao X, Grignon DJ, Chbihi T, et al. Elevated 12-lipoxygenase mRNA expression correlates with advanced stage and poor differentiation of human prostate cancer. Urology. 1995;46(2):227-37.
+127.Sundaram S, Ghosh J. Expression of 5-oxoETE receptor in prostate cancer cells: critical role in survival. Biochem Biophys Res Commun. 2006 Jan 6;339(1):93-8.
+128.Myers CE, Ghosh J. Lipoxygenase inhibition in prostate cancer. Eur Urol. 1999;35(5-6):395-8.
+129.Nakao-Hayashi J, Ito H, Kanayasu T, Morita I, Murota S. Stimulatory effects of insulin and insulin-like growth factor I on migration and tube formation by vascular endothelial cells. Atherosclerosis. 1992 Feb;92(2-3):141-9.
+130.Cohen P, Peehl DM, Lamson G, Rosenfeld RG. Insulin-like growth factors (IGFs), IGF receptors, and IGF-binding proteins in primary cultures of prostate epithelial cells. J Clin Endocrinol Metab. 1991 Aug;73(2):401-7.
+131.Ghosh J. Inhibition of arachidonate 5-lipoxygenase triggers prostate cancer cell death through rapid activation of c-Jun N-terminal kinase. Biochem Biophys Res Commun. 2003 Jul 25;307(2):342-9.
+132.Jiang WG, Douglas-Jones AG, Mansel RE. Aberrant expression of 5-lipoxygenase-activating protein (5-LOXAP) has prognostic and survival significance in patients with breast cancer. Prostaglandins Leukot Essent Fatty Acids. 2006 Feb;74(2):125-34.
+133.Yoshimura R, Matsuyama M, Mitsuhashi M, et al. Relationship between lipoxygenase and human testicular cancer. Int J Mol Med. 2004 Mar;13(3):389-93.
+134.Zhang L, Zhang WP, Hu H, et al. Expression patterns of 5-lipoxygenase in human brain with traumatic injury and astrocytoma. Neuropathology. 2006 Apr;26(2):99-106.
+135.Soumaoro LT, Iida S, Uetake H, et al. Expression of 5-Lipoxygenase in human colorectal cancer. World J Gastroenterol. 2006 Oct 21;12(39):6355-60.
+136.Hayashi T, Nishiyama K, Shirahama T. Inhibition of 5-lipoxygenase pathway suppresses the growth of bladder cancer cells. Int J Urol. 2006 Aug;13(8):1086-91.
+137.Hoque A, Lippman SM, Wu TT, et al. Increased 5-lipoxygenase expression and induction of apoptosis by its inhibitors in esophageal cancer: a potential target for prevention. Carcinogenesis. 2005 Apr;26(4):785-91.
+138.Hennig R, Ding XZ, Tong WG, et al. 5-Lipoxygenase and leukotriene B(4) receptor are expressed in human pancreatic cancers but not in pancreatic ducts in normal tissue. Am J Pathol. 2002 Aug;161(2):421-8.
+139.Ding XZ, Iversen P, Cluck MW, Knezetic JA, Adrian TE. Lipoxygenase inhibitors abolish proliferation of human pancreatic cancer cells. Biochem Biophys Res Commun. 1999 Jul 22;261(1):218-23.
+140.Matsuyama M, Yoshimura R, Mitsuhashi M, et al. 5-Lipoxygenase inhibitors attenuate growth of human renal cell carcinoma and induce apoptosis through arachidonic acid pathway. Oncol Rep. 2005 Jul;14(1):73-9.
+141.Zhi H, Zhang J, Hu G, et al. The deregulation of arachidonic acid metabolism-related genes in human esophageal squamous cell carcinoma. Int J Cancer. 2003 Sep 1;106(3):327-33.
+142.Penglis PS, Cleland LG, Demasi M, Caughey GE, James MJ. Differential regulation of prostaglandin E2 and thromboxane A2 production in human monocytes: implications for the use of cyclooxygenase inhibitors. J Immunol. 2000 Aug 1;165(3):1605-11.
+143.Rubinsztajn R, Wronska J, Chazan R. [Urinary leukotriene E4 concentration in patients with bronchial asthma and intolerance of non-steroids anti-inflammatory drugs before and after oral aspirin challenge]. Pol Arch Med Wewn. 2003 Aug;110(2):849-854
+144.Subbarao K, Jala VR, Mathis S, et al. Role of leukotriene B4 receptors in the development of atherosclerosis: potential mechanisms. Arterioscler Thromb Vasc Biol. 2004 Feb;24(2):369-75.
+145.Hu Y, Sun H, O’Flaherty JT, et al. 15-Lipoxygenase-1-mediated metabolism of docosahexaenoic acid is required for syndecan-1 signaling and apoptosis in prostate cancer cells. Carcinogenesis. 2013;34(1):176-82.
+146.Ye YN, Liu ES, Shin VY, Wu WK, Cho CH. Contributory role of 5-lipoxygenase and its association with angiogenesis in the promotion of inflammation-associated colonic tumorigenesis by cigarette smoking. Toxicology. 2004 Oct 15;203(1-3):179-88.
+147.Rajashekhar G, Willuweit A, Patterson CE, et al. Continuous endothelial cell activation increases angiogenesis: evidence for the direct role of endothelium linking angiogenesis and inflammation. J Vasc Res. 2006;43(2):193-204.
+148.Hazai E, Bikadi Z, Zsila F, Lockwood SF. Molecular modeling of the non-covalent binding of the dietary tomato carotenoids lycopene and lycophyll, and selected oxidative metabolites with 5-lipoxygenase. Bioorg Med Chem. 2006 Oct 15;14(20):6859-67.
+149.Ghosh J, Myers CE. Inhibition of arachidonate 5-lipoxygenase triggers massive apoptosis in human prostate cancer cells. Proc Natl Acad Sci USA. 1998 Oct 27;95(22):13182-7.
+150.Yang P, Collin P, Madden T, et al. Inhibition of proliferation of PC3 cells by the branched-chain fatty acid, 12-methyltetradecanoic acid, is associated with inhibition of 5-lipoxygenase. Prostate. 2003 Jun 1;55(4):281-91.
+151.Anderson KM, Seed T, Vos M, et al. 5-Lipoxygenase inhibitors reduce PC-3 cell proliferation and initiate nonnecrotic cell death. Prostate. 1998;37(3):161-73.
+152.Steinhilber D et al. 5-lipoxygenase: underappreciated role of a pro-inflammatory enzyme in tumorigenesis. Front Pharmacol. 2010;1:143. Epub 2010 Dec 24.
+153.Taccone-Gallucci M, Manca-di-Villahermosa S, Battistini L, et al. N-3 PUFAs reduce oxidative stress in ESRD patients on maintenance HD by inhibiting 5-lipoxygenase activity. Kidney Int. 2006 Apr;69(8):1450-4.
+154.Calder PC. N-3 polyunsaturated fatty acids and inflammation: from molecular biology to the clinic. Lipids. 2003 Apr;38(4):343-52.
+155.Jian L, Du CJ, Lee AH, Binns CW. Do dietary lycopene and other carotenoids protect against prostate cancer? Int J Cancer. 2005 Mar 1;113(6):1010-4.
+156.Campbell JK, Canene-Adams K, Lindshield BL, et al. Tomato phytochemicals and prostate cancer risk. J Nutr. 2004 Dec;134(12 Suppl):3486S-92S.
+157.Wertz K, Siler U, Goralczyk R. Lycopene: modes of action to promote prostate health. Arch Biochem Biophys. 2004 Oct 1;430(1):127-34.
+158.Binns CW, LJ LJ, Lee AH. The relationship between dietary carotenoids and prostate cancer risk in Southeast Chinese men. Asia Pac J Clin Nutr. 2004;13(Suppl):S117.
+159.Kim L, Rao AV, Rao LG. Effect of lycopene on prostate LNCaP cancer cells in culture. J Med Food. 2002;5(4):181-7.
+160.Giovannucci E. A review of epidemiologic studies of tomatoes, lycopene, and prostate cancer. Exp Biol Med (Maywood.). 2002 Nov;227(10):852-9.
+161.Vogt TM, Mayne ST, Graubard BI, et al. Serum lycopene, other serum carotenoids, and risk of prostate cancer in US blacks and whites. Am J Epidemiol. 2002 Jun 1;155(11):1023-32.
+162.Bosetti C, Tzonou A, Lagiou P, et al. Fraction of prostate cancer incidence attributed to diet in Athens, Greece. Eur J Cancer Prev. 2000 Apr;9(2):119-23.
+163.Blumenfeld AJ, Fleshner N, Casselman B, Trachtenberg J. Nutritional aspects of prostate cancer: a review. Can J Urol. 2000 Feb;7(1):927-35.
+164.Agarwal S, Rao AV. Tomato lycopene and its role in human health and chronic diseases. CMAJ. 2000 Sep 19;163(6):739-44.
+165.Gann PH, Ma J, Giovannucci E, et al. Lower prostate cancer risk in men with elevated plasma lycopene levels: results of a prospective analysis. Cancer Res. 1999 Mar 15;59(6):1225-30.
+166.Giovannucci E, Ascherio A, Rimm EB, et al. Intake of carotenoids and retinol in relation to risk of prostate cancer. J Natl Cancer Inst. 1995 Dec;87(23):1767-76.
+167.Hill B, Kyprianou N. Effect of permixon on human prostate cell growth: lack of apoptotic action. Prostate. 2004 Sep 15;61(1):73-80.
+168.Paubert-Braquet M, Mencia Huerta JM, Cousse H, et al. Effect of the lipidic lipidosterolic extract of Serenoa repens (Permixon) on the ionophore A23187-simulated production of leukotriene B4 (LTB4) from human polymorphonuclear neutrophils. Prostaglandins Leukot Essent Fatty Acids. 1997;57(3):299-304.
+169.Safayhi H, Rall B, Sailer ER, Ammon HP. Inhibition by boswellic acids of human leukocyte elastase. J Pharmacol Exp Ther. 1997 Apr;281(1):460-3.
+170.Safayhi H, Sailer ER, Ammon HP. Mechanism of 5-lipoxygenase inhibition by acetyl-11-keto-beta-boswellic acid. Mol Pharmacol. 1995 Jun;47(6):1212-6.
+171.Kimmatkar N, Thawani V, Hingorani L, Khiyani R. Efficacy and tolerability of Boswellia serrata extract in treatment of osteoarthritis of knee—a randomized double blind placebo controlled trial. Phytomedicine. 2003 Jan;10(1):3-7.
+172.Ammon HP. Boswellic acids (components of frankincense) as the active principle in treatment of chronic inflammatory disease. Wien Med Wochenschr. 2002;152(15-16):373-8.
+173.Wallace JM. Nutritional and botanical modulation of the inflammatory cascade--eicosanoids, cyclooxygenases, and lipoxygenases—as an adjunct in cancer therapy. Integr Cancer Ther. 2002 Mar;1(1):7-37.
+174.Gerhardt H, Seifert F, Buvari P, Vogelsang H, Repges R. Therapy of active Crohn disease with Boswellia serrata extract H 15. Z Gastroenterol. 2001 Jan;39(1):11-7.
+175.Gupta I, Gupta V, Parihar A, et al. Effects of Boswellia serrata gum resin in patients with bronchial asthma: results of a double-blind, placebo-controlled, 6-week clinical study. Eur J Med Res. 1998 Nov 17;3(11):511-4.
+176.Kulkarni RR, Patki PS, Jog VP, Gandage SG, Patwardhan B. Treatment of osteoarthritis with a herbomineral formulation: a double-blind, placebo-controlled, cross-over study. J Ethnopharmacol. 1991 May;33(1-2):91-5.
+177.Park YS, Lee JH, Harwalkar JA, et al. Acetyl-11-keto-beta-boswellic acid (AKBA) is cytotoxic for meningioma cells and inhibits phosphorylation of the extracellular-signal regulated kinase 1 and 2. Adv Exp Med Biol. 2002;507:387-93.
+178.Liu JJ, Nilsson A, Oredsson S, Badmaev V, Duan RD. Keto- and acetyl-keto-boswellic acids inhibit proliferation and induce apoptosis in Hep G2 cells via a caspase-8 dependent pathway. Int J Mol Med. 2002 Oct;10(4):501-5.
+179.Syrovets T, Büchele B, Gedig E, et al. Acetyl-boswellic acids are novel catalytic inhibitors of human topoisomerases I and IIalpha. Mol Pharmacol. 2000 Jul;58(1):71-81.
+180.Sailer ER, Subramanian LR, Rall B, et al. Acetyl-11-keto-beta-boswellic acid (AKBA): structure requirements for binding and 5-lipoxygenase inhibitory activity. Br J Pharmacol. 1996 Feb;117(4):615-8.
+181.Sengupta K, Kolla JN, Krishnaraju AV, et al. Cellular and molecular mechanisms of anti-inflammatory effect of Aflapin: a novel Boswellia serrata extract. Mol Cell Biochem. 2011 Aug;354(1-2):189-97.
+182.Krishnaraju AV, Sundararaju D, Vamsikrishna U, et al. Safety and toxicological evaluation of Aflapin: a novel Boswellia-derived anti-inflammatory product. Toxicol Mech Methods. 2010;20(9):556-63.
+183.Bird NC et al. Biology of colorectal liver metastases: A review. J Surg Oncol. 2006 Jul 1;94(1):68-80.
+184.Dowdall JF et al. Soluble interleukin 6 receptor (sIL-6R) mediates colonic tumor cell adherence to the vascular endothelium: a mechanism for metastatic initiation? J Surg Res. 2002 Sep;107(1):1-6.
+185.Raz A et al. Endogenous galactoside-binding lectins: a new class of functional tumor cell surface molecules related to metastasis. Cancer Metastasis Rev. 1987;6(3):433-52.
+186.Yu LG et al. Galectin-3 interaction with Thomsen-Friedenreich disaccharide on cancer-associated MUC1 causes increased cancer cell endothelial adhesion. J Biol Chem. 2007 Jan 5;282(1):773-81. Epub 2006 Nov 7.
+187.ten Kate M et al. Influence of proinflammatory cytokines on the adhesion of human colon carcinoma cells to lung microvascular endothelium. Int J Cancer. 2004 Dec 20;112(6):943-50.
+188.Nangia-Makker P et al. Inhibition of human cancer cell growth and metastasis in nude mice by oral intake of modified citrus pectin. J Natl Cancer Inst. 2002 Dec 18;94(24):1854-62.
+189.Guess BW et al. Modified citrus pectin (MCP) increases the prostate-specific antigen doubling time in men with prostate cancer: a phase II pilot study. Prostate Cancer Prostatic Dis. 2003;6(4):301-4.
+190.Jackson CL et al. Pectin induces apoptosis in human prostate cancer cells: correlation of apoptotic function with pectin structure. Glycobiology. 2007;17(8):805-819.
+191.Eichbaum C et al. Breast Cancer Cell-derived Cytokines, Macrophages and Cell Adhesion: Implications for Metastasis. Anticancer Res. 2011 Oct;31(10):3219-27.
+192.Matsumoto S et al. Cimetidine increases survival of colorectal cancer patients with high levels of sialyl Lewis-X and sialyl Lewis-A epitope expression on tumour cells. Br J Cancer. 2002 Jan 21;86(2):161-7.
+193.Adams WJ et al. Short-course cimetidine and survival with colorectal cancer. Lancet. 1994 Dec 24-31;344(8939-8940):1768-9.
+194.Shakhar G et al. Potential prophylactic measures against postoperative immunosuppression: could they reduce recurrence rates in oncological patients? Ann Surg Oncol. 2003 Oct;10(8):972-92.
+195.Koda K et al. Preoperative natural killer cell activity: correlation with distant metastases in curatively research colorectal carcinomas. Int Surg. 1997 Apr-Jun;82(2):190-3.
+196.Fisher M et al. Anticancer effects and mechanisms of polysaccharide-K (PSK): implications of cancer immunotherapy. Anticancer Res. 2002 May-Jun;22(3):1737-54.
+197.Garcia-Lora A et al. Protein-bound polysaccharide K and interleukin-2 regulate different nuclear transcription factors in the NKL human natural killer cell line. Cancer Immunol Immunother. 2001 Jun;50(4):191-8.
+198.Hayakawa K et al. Effect of Krestin as adjuvant treatment following radical radiotherapy in non-small cell lung cancer patients. Cancer Detect Prev. 1997;21(1):71-7.
+199.Sakai T et al. Immunochemotherapy with PSK and fluoropyrimidines improves long-term prognosis for curatively resected colorectal cancer. Cancer Biother Radiopharm. 2008 Aug;23(4):461-7.
+200.Ohwada S et al. Adjuvant immunochemotherapy with oral Tegafur/Uracil plus PSK in patients with stage II or III colorectal cancer: a randomised controlled study. Br J Cancer. 2004 Mar 8;90(5):1003-10.
+201.Okazaki A et al. [The effects of PS-K on long-term survival of uterine cervical cancer patients treated with radiation]. Gan No Rinsho. 1986 Feb;32(2):181-5.
+202.Nakazato H et al. Efficacy of immunochemotherapy as adjuvant treatment after curative resection of gastric cancer. Study Group of Immunochemotherapy with PSK for Gastric Cancer. Lancet. 1994 May 7;343(8906):1122-6.
+203.Toi M et al. Randomized adjuvant trial to evaluate the addition of tamoxifen and PSK to chemotherapy in patients with primary breast cancer. 5-Year results from the Nishi-Nippon Group of the Adjuvant Chemoendocrine Therapy for Breast Cancer Organization. Cancer. 1992 Nov 15;70(10):2475-83.
+204.White MC, Holman DM, Boehm JE, Peipins LA, Grossman M, Henley SJ. Age and cancer risk: a potentially modifiable relationship. American journal of preventive medicine. 2014;46(3 Suppl 1):S7-S15.
+205.Harding C, Pompei F, Wilson R. Peak and decline in cancer incidence, mortality, and prevalence at old ages. Cancer. 2012;118(5):1371-1386.
+206.Gomes AP, Ilter D, Low V, et al. Age-induced accumulation of methylmalonic acid promotes tumour progression. Nature. 2020.
+207.Vashi P, Edwin P, Popiel B, Lammersfeld C, Gupta D. Methylmalonic Acid and Homocysteine as Indicators of Vitamin B-12 Deficiency in Cancer. PloS one. 2016;11(1):e0147843-e0147843.
+208.Ye X, Weinberg RA. Epithelial-Mesenchymal Plasticity: A Central Regulator of Cancer Progression. Trends in cell biology. 2015;25(11):675-686.
+        </p>
+
+</div>
+<script>
+        
+    </script>
+</body>
+</html>

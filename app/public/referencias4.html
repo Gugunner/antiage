@@ -1,0 +1,361 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">  
+    <link rel="icon" href="dc3.png" type="image/png">  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White Book</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">
+    <!-- Estilos para dispositivos móviles -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (max-width: 768px)">
+    <!-- Estilos para pantallas de PC -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (min-width: 769px)">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+
+    <!-- Metadatos Open Graph -->
+    <meta property="og:title" content="YOU TOMORROW">
+    <meta property="og:description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta property="og:image" content="https://drive.google.com/file/d/1ZZI3G6Fit_kovvVZolrvchtXQQDrnWYI/view?usp=sharing">
+    <meta property="og:url" content="https://ytomorrow.com/">
+    <meta property="og:type" content="website">
+
+    <!-- Otros metadatos -->
+    <meta name="description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta name="keywords" content="you, YOU TOMORROW, TOMORROW, TOMORR, TOM, web">
+
+    <style>
+
+   body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 17px;
+    line-height: 1.4;
+    margin: 20px;
+    font-weight: 500; /* Grosor medio de la negrita */
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1, h2, h3 {
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+p {
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.section {
+    margin-bottom: 30px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    width: 100%;
+}
+
+.chart-row {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+    width: 50%; /* Ajusta el ancho para que se adapte al contenido */
+}
+
+.chart-box {
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    min-width: 150px; /* Asegura que las tarjetas tengan un ancho mínimo */
+    max-width: 300px; /* Limita el ancho máximo para tarjetas largas */
+    word-wrap: break-word; /* Permite que el texto se ajuste dentro de la tarjeta */
+    flex: 1; /* Permite que las tarjetas se expandan uniformemente */
+}
+
+.chart-box:hover {
+    transform: scale(1.05);
+}
+
+.chart-box.ceo {
+    background: linear-gradient(135deg, #ff6f61, #e53935);
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.chart-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transform: rotate(45deg);
+}
+
+.chart-box:hover::before {
+    opacity: 1;
+}
+
+.chart-box.ceo::before {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.connector {
+    width: 2px;
+    height: 20px;
+    background-color: #1b3a7a;
+    margin: 0 auto;
+}
+
+.horizontal-connector {
+    height: 2px;
+    width: 100%;
+    background-color: #1b3a7a;
+}
+
+.horizontal-connector.long {
+    width: 50%;
+}
+
+.chart-box i {
+    margin-right: 8px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #1b5e20;
+    color: #1b5e20;
+    font-weight: bold;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+
+  caption {
+    caption-side: top;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+    </style>
+
+</head>
+<body>
+<div class="container">
+REFERENCES
+    <ol>
+       REFERENCE.
+1.[Anonymous] Monograph. Plant sterols and sterolins. Altern Med Rev. 2001 Apr;6(2):203-6.
+2.Abdel-Tawab M, Werz O, Schubert-Zsilavecz M. Boswellia serrata: an overall assessment of in vitro, preclinical, pharmacokinetic and clinical data. Clin Pharmacokinet, 2011. 50(6):349-69.
+3.Ahmed S. Green tea polyphenol epigallocatechin 3-gallate in arthritis: progress and promise. Arthritis Res Ther, 2010. 12(2):208.
+4.Ahn KS, Aggarwal BB. Transcription Factor NF-{kappa}B: A sensor for smoke and stress signals. Ann N Y Acad Sci. 2005 Nov;1056:218-33.
+5.Aletaha D, et al. 2010 Rheumatoid arthritis classification criteria: an American College of Rheumatology/European League Against Rheumatism collaborative initiative. Arthritis Rheum, 2010. 62(9):2569-81.
+6.American College of Rheumatology Subcommittee on Rheumatic Arthritis Guidelines (2002), Guidelines for the management of rheumatoid arthritis: 2002 Update. Arthritis Rheum, 2002. 46(2):328-46.
+7.Ammon HP. Boswellic acids in chronic inflammatory diseases. Planta Med, 2006. 72(12):1100-16.
+8.Balbir-Gurman A, et al. Consumption of pomegranate decreases serum oxidative stress and reduces disease activity in patients with active rheumatoid arthritis: a pilot study. Isr Med Assoc J, 2011. 13(8):474-9.
+9.Banji D, et al. Synergistic activity of curcumin with methotrexate in ameliorating Freund's Complete Adjuvant induced arthritis with reduced hepatotoxicity in experimental animals. Eur J Pharmacol, 2011. 668(1-2):293-8.
+10.Bao Z, Guan S, Cheng C, et al. A novel antiinflammatory role for andrographolide in asthma via inhibition of the nuclear factor-kappaB pathway. Am J Respir Crit Care Med. 2009 Apr 15;179(8):657-65.
+11.Boers M, et al. Influence of glucocorticoids and disease activity on total and high density lipoprotein cholesterol in patients with rheumatoid arthritis. Ann Rheum Dis, 2003. 62(9):842-5.
+12.Bouic P, et al. The effects of B-sitosterol (BSS) and B-sitosterol glucoside (BSSG) mixture on selected immune parameters of marathon runners: inhibition of post marathon immune suppression and inflammation. Int J Sports Med. 1999 May;20(4):258-62.
+13.Brzeski M, Madhok R, Capell HA. Evening primrose oil in patients with rheumatoid arthritis and side-effects of non-steroidal anti-inflammatory drugs. Br J Rheumatol, 1991. 30(5):370-2.
+14.Buhrmann C, et al. Curcumin mediated suppression of nuclear factor-kappaB promotes chondrogenic differentiation of mesenchymal stem cells in a high-density co-culture microenvironment. Arthritis Res Ther, 2010. 12(4):R127.
+15.Buttgereit F, et al. Targeting pathophysiological rhythms: prednisone chronotherapy shows sustained efficacy in rheumatoid arthritis. Ann Rheum Dis. 2010 Jul;69(7):1275-80. Epub 2010 Jun 11.
+16.Buttgereit F. How should impaired morning function in rheumatoid arthritis be treated? Scand J Rheumatol Suppl. 2011;125:28-39.
+17.Cai Y, Yuan Q, Xu K, et al. Assessment of the Therapeutic Effect of Total Glucosides of Peony for Juvenile Idiopathic Arthritis: A Systematic Review and Meta-Analysis. Evidence-based complementary and alternative medicine: eCAM.2016;2016:8292486.
+18.Cairns AP and McVeigh JG. A systematic review of the effects of dynamic exercise in rheumatoid arthritis. Rheumatol Int, 2009. 30(2):147-58.
+19.Cameron M, et al. Evidence of effectiveness of herbal medicinal products in the treatment of arthritis. Part 2: Rheumatoid arthritis. Phytother Res, 2009. 23(12):1647-62.
+20.Cameron M, Gagnier JJ, Chrubasik S. Herbal therapy for treating rheumatoid arthritis. Cochrane Database Syst Rev, 2011(2):CD002948.
+21.Caughey GE, et al. Fish oil supplementation increases the cyclooxygenase inhibitory activity of paracetamol in rheumatoid arthritis patients. Complement Ther Med, 2010. 18(3-4):171-4.
+22.Chandran B and Goel A. A Randomized, Pilot Study to Assess the Efficacy and Safety of Curcumin in Patients with Active Rheumatoid Arthritis. Published online 9 MAR 2012.
+23.Chao WW, Kuo YH, Hsieh SL, Lin BF. Inhibitory effects of ethyl acetate extract of Andrographis paniculata on NF-{kappa}B trans-activation activity and LPS-induced acute inflammation in mice. Evid Based Complement Alternat Med. 2009 Sep 10.
+24.Chen T, Guo ZP, Wang L, et al. Paeoniflorin suppresses vascular damage and the expression of E-selectin and ICAM-1 in a mouse model of cutaneous Arthus reaction. Experimental dermatology. Jul 2013;22(7):453-457.
+25.Chen Z, Li XP, Li ZJ, Xu L, Li XM. Reduced hepatotoxicity by total glucosides of paeony in combination treatment with leflunomide and methotrexate for patients with active rheumatoid arthritis. International immunopharmacology.Mar 2013;15(3):474-477.
+26.Chiang EP, et al. Abnormal vitamin B(6) status is associated with severity of symptoms in patients with rheumatoid arthritis. Am J Med, 2003. 114(4):283-7.
+27.Chiou WF, Chen CF, Lin JJ. Mechanisms of suppression of inducible nitric oxide synthase (iNOS) expression in RAW 264.7 cells by andrographolide. Br J Pharmacol. 2000 Apr;129(8):1553-60.
+28.Coblyn JS and Brigham and Women's Hospital. Brigham and Women's experts' approach to rheumatology2011, Sudbury, Mass.: Jones and Bartlett. xi, 236.
+29.Colebatch AN, Marks JL, Edwards CJ. Safety of non-steroidal anti-inflammatory drugs, including aspirin and paracetamol (acetaminophen) in people receiving methotrexate for inflammatory arthritis (rheumatoid arthritis, ankylosing spondylitis, psoriatic arthritis, other spondyloarthritis). Cochrane Database Syst Rev, 2011. 11: CD008872.
+30.Cooney JK, et al. Benefits of exercise in rheumatoid arthritis. J Aging Res, 2011. 2011: Article ID 681640. doi: 10.4061/2011/681640.
+31.Cush JJ and Kavanaugh A. Rheumatoid arthritis: early diagnosis and treatment. 1st ed. 2005, West Islip, NY: Professional Communications. p.320.
+32.Cutolo M, et al. Estrogens and autoimmune diseases. Ann N Y Acad Sci. 2006 Nov;1089:538-47.
+33.Cutolo M, et al. Sex hormones influence on the immune system: basic and clinical aspects in autoimmunity. Lupus. 2004;13(9):635-8.
+34.Cutolo M. Androgens in rheumatoid arthritis: when are they effectors? Arthritis Res Ther. 2009;11(5):126. Epub 2009 Sep 22.
+35.Cutolo M. Rheumatoid arthritis: circadian and circannual rhythms in RA. Nat Rev Rheumatol. 2011 Aug 2;7(9):500-2. doi: 10.1038/nrrheum.2011.115.
+36.Dawczynski C, et al. Incorporation of n-3 PUFA and gamma-linolenic acid in blood lipids and red blood cell lipids together with their influence on disease activity in patients with chronic inflammatory arthritis--a randomized controlled human intervention trial. Lipids in health and disease, 2011. 10:130.
+37.Deodhar SD, Sethi R, Srimal RC. Preliminary study on antirheumatic activity of curcumin (diferuloyl methane). Indian J Med Res, 1980. 71:632-4.
+38.Du JH, Dong BD. [Comparative study on clinical efficacy of using methotrexate singly or combined with total glucosides of Paeony in treating rheumatoid arthritis]. Zhongguo Zhong xi yi jie he za zhi Zhongguo Zhongxiyi jiehe zazhi = Chinese journal of integrated traditional and Western medicine / Zhongguo Zhong xi yi jie he xue hui, Zhongguo Zhong yi yan jiu yuan zhu ban.Jun 2005;25(6):540-542.
+39.Dudics V, et al. Chondrogenic potential of mesenchymal stem cells from patients with rheumatoid arthritis and osteoarthritis: measurements in a microculture system. Cells Tissues Organs, 2009. 189(5):307-16.
+40.Duijnisveld BJ, et al. Regenerative potential of human muscle stem cells in chronic inflammation. Arthritis Res Ther, 2011. 13(6):R207.
+41.Ebina K, Shi K, Hirao M, et al. Vitamin K2 administration is associated with decreased disease activity in patients with rheumatoid arthritis. Mod Rheumatol. 2013;23(5):1001-7.
+42.Edwards JC, et al. Efficacy of β-cell-targeted therapy with rituximab in patients with rheumatoid arthritis. N Engl J Med, 2004. 350(25):2572-81.
+43.Endres S, et al. The effect of dietary supplementation with n-3 polyunsaturated fatty acids on the synthesis of interleukin-1 and tumor necrosis factor by mononuclear cells. N Engl J Med, 1989. 320(5):265-71.
+44.Faloon W. "ARTHRITIS UPDATE: Drugs That Inhibit COX-2 May Cause Tissue Damage" Life Extension magazine, 1/2001.
+45.Feng Z, Xu J, He G, Cao M, Duan L, Chen L, Wu Z. The Efficacy and Safety of the Combination of Total Glucosides of Peony and Leflunomide for the Treatment of Rheumatoid Arthritis: A Systemic Review and Meta-Analysis. Evidence-based complementary and alternative medicine: eCAM. 2016;2016:9852793.
+46.Feng Z-T, Xu J, He G-C, Cai S-J, Li J, Mei Z-G. A systemic review and meta-analysis of the clinical efficacy and safety of total glucosides of peony combined with methotrexate in rheumatoid arthritis. Clinical rheumatology. 2018;37(1):35-42. doi:10.1007/s10067-017-3770-y
+47.FDA Import Refusal Report. Available at http://www.accessdata.fda.gov/scripts/importrefusals/ir_detail.cfm?EntryId=UPS-2301487-7&DocId=1&LineId=1&SfxId= Accessed 2/8/2012.
+48.Flint-Wagner HG, et al. Assessment of a sixteen-week training program on strength, pain, and function in rheumatoid arthritis patients. J Clin Rheumatol, 2009. 15(4):165-71.
+49.Fouda AM and Berika MY. Evaluation of the effect of hydroalcoholic extract of Zingiber officinale rhizomes in rat collagen-induced arthritis. Basic Clin Pharmacol Toxicol, 2009. 104(3):262-71.
+50.Funk JL, et al. Comparative effects of two gingerol-containing Zingiber officinale extracts on experimental rheumatoid arthritis. J Nat Prod, 2009. 72(3):403-7.
+51.Gheita TA and Kenawy SA. Effectiveness of Nigella sativa Oil in the Management of Rheumatoid Arthritis Patients: A Placebo Controlled Study. Phytother Res, 2011.
+52.Gold Standard. Drug Monograph. Methotrexate. www.clinicalkey.com. Last updated 2016. Accessed 10/7/2016.
+53.Goldberg RJ and Katz J. A meta-analysis of the analgesic effects of omega-3 polyunsaturated fatty acid supplementation for inflammatory joint pain. Pain, 2007. 129(1-2):210-23.
+54.Gopinath K and Danda D. Supplementation of 1,25 dihydroxy vitamin D3 in patients with treatment naive early rheumatoid arthritis: a randomised controlled trial. Int J Rheum Dis, 2011. 14(4):332-9.
+55.Grober U, Reichrath J, Holick M, et al. Vitamin K: an old vitamin in a new perspective. Dermatoendocrinol. 2014;6(1):e968490.
+56.Grzanna R, Lindmark L, Frondoza CG. Ginger--an herbal medicinal product with broad anti-inflammatory actions. J Med Food, 2005. 8(2):125-32.
+57.Haqqi TM, et al. Prevention of collagen-induced arthritis in mice by a polyphenolic fraction from green tea. Proc Natl Acad Sci U S A, 1999. 96(8):4524-9.
+58.He DY, Dai SM. Anti-inflammatory and immunomodulatory effects of paeonia lactiflora pall., a traditional chinese herbal medicine. Frontiers in pharmacology.2011;2:10.
+59.Henrotin Y, et al. Biological actions of curcumin on articular chondrocytes. Osteoarthritis Cartilage, 2010. 18(2):141-9.
+60.Holub BJ. Clinical nutrition: 4. Omega-3 fatty acids in cardiovascular care. CMAJ : Canadian Medical Association journal = journal de l'Association medicale canadienne, 2002. 166(5):608-15.
+61.Hua J, et al. Evaluation of the suppressive actions of glucosamine on the interleukin-1beta-mediated activation of synoviocytes. Inflamm Res, 2007. 56(10):432-8.
+62.Huang SC, et al. Vitamin B(6) supplementation improves pro-inflammatory responses in patients with rheumatoid arthritis. Eur J Clin Nutr, 2010. 64(9):1007-13.
+63.Ierna M, et al. Supplementation of diet with krill oil protects against experimental rheumatoid arthritis. BMC musculoskeletal disorders, 2010. 11:136.
+64.Jackson JK, et al. The antioxidants curcumin and quercetin inhibit inflammatory processes associated with arthritis. Inflamm Res, 2006. 55(4):168-75.
+65.James M, Proudman S, Cleland L. Fish oil and rheumatoid arthritis: past, present and future. Proc Nutr Soc, 2010. 69(3):316-23.
+66.James MJ and Cleland LG, Dietary n-3 fatty acids and therapy for rheumatoid arthritis. Semin Arthritis Rheum, 1997. 27(2):85-97.
+67.Jia XY, Chang Y, Sun XJ, et al. Total glucosides of paeony inhibit the proliferation of fibroblast-like synoviocytes through the regulation of G proteins in rats with collagen-induced arthritis. International immunopharmacology.Jan 2014;18(1):1-6.
+68.Juanola-Falgarona M, Salas-Salvado J, Estruch R, et al. Association between dietary phylloquinone intake and peripheral metabolic risk markers related to insulin resistance and diabetes in elderly subjects at high cardiovascular risk. Cardiovasc Diabetol. 2013;12(7).
+69.Ju YH, et al. beta-Sitosterol, beta-Sitosterol Glucoside, and a Mixture of beta-Sitosterol and beta-Sitosterol Glucoside Modulate the Growth of Estrogen-Responsive Breast Cancer Cells In Vitro and in Ovariectomized Athymic Mice. J Nutr. 2004 May;134(5):1145-51.
+70.Jurgens MS, Jacobs JW, and Bijlsma JW. The use of conventional disease-modifying anti-rheumatic drugs in established RA. Best Pract Res Clin Rheumatol, 2011. 25(4):523-33.
+71.Kahlenberg JM and Fox DA. Advances in the medical treatment of rheumatoid arthritis. Hand Clin, 2011. 27(1):11-20.
+72.Karlson EW, et al. A prospective study of androgen levels, hormone-related genes and risk of rheumatoid arthritis. Arthritis Res Ther. 2009;11(3):R97. Epub 2009 Jun 25.
+73.Keystone E, et al. Rituximab inhibits structural joint damage in patients with rheumatoid arthritis with an inadequate response to tumour necrosis factor inhibitor therapies. Ann Rheum Dis, 2009. 68(2):216-21.
+74.Khan F, et al. The role of endothelial function and its assessment in rheumatoid arthritis. Nat Rev Rheumatol. 2010 May;6(5):253-61. Epub 2010 Mar 30.
+75.Kim HR, et al. Green tea protects rats against autoimmune arthritis by modulating disease-related immune events. J Nutr, 2008. 138(11):2111-6.
+76.Klippel, JH. The pocket primer on the rheumatic diseases. 2nd ed2010, Atlanta, GA: Arthritis Foundation. p.242.
+77.Kremer JM, et al. Effects of manipulation of dietary fatty acids on clinical manifestations of rheumatoid arthritis. Lancet, 1985. 1(8422):184-7.
+78.Lee JH and Kim GH. Evaluation of antioxidant and inhibitory activities for different subclasses flavonoids on enzymes for rheumatoid arthritis. J Food Sci, 2010. 75(7):H212-7.
+79.Leventhal LJ, Boyce EG, Zurier RB. Treatment of rheumatoid arthritis with gammalinolenic acid. Ann Intern Med, 1993. 119(9):867-73.
+80.Leventhal LJ, Boyce EG, Zurier RB. Treatment of rheumatoid arthritis with blackcurrant seed oil. Br J Rheumatol, 1994. 33(9):847-52.
+81.Life Extension. Available at: http://www.lifeextension.com/HealthWellness/ClinicalResearch/StudyDetails.aspx?study=CL025 Accessed 2/10/2012.
+82.Lin J, Xiao L, Ouyang G, et al. Total glucosides of paeony inhibits Th1/Th17 cells via decreasing dendritic cells activation in rheumatoid arthritis. Cell Immunol.Dec 2012;280(2):156-163.
+83.Lindler BN, Long KE, Taylor NA, Lei W. Use of Herbal Medications for Treatment of Osteoarthritis and Rheumatoid Arthritis. Medicines (Basel, Switzerland). Oct 28 2020;7(11)doi:10.3390/medicines7110067
+84.Liu B, Meng X, Ma Y, et al. Clinical safety of total glucosides of paeony adjuvant therapy for rheumatoid arthritis treatment: a systematic review and meta-analysis. BMC Complement Med Ther. Mar 26 2021;21(1):102. doi:10.1186/s12906-021-03252-y
+85.Liu GL, Li YC, Shen YJ. [Inhibitory effect of total glucosides of paeonia on the NF-kappaB/p65 protein expression in paws of RA rats]. Xi bao yu fen zi mian yi xue za zhi = Chinese journal of cellular and molecular immunology.Nov 2010;26(11):1082-1084.
+86.Liu J, Wang ZT, Ge BX. Andrograpanin, isolated from Andrographis paniculata, exhibits anti-inflammatory property in lipopolysaccharide-induced macrophage cells through down-regulating the p38 MAPKs signaling pathways. Int Immunopharmacol. 2008 Jul;8(7):951-8.
+87.Liu J, Wang ZT, Ji LL, Ge BX. Inhibitory effects of neoandrographolide on nitric oxide and prostaglandin E2 production in LPS-stimulated murine macrophage. Mol Cell Biochem. 2007 Apr;298(1-2):49-57.
+88.Liu J, Wang ZT, Ji LL. In vivo and in vitro anti-inflammatory activities of neoandrographolide. Am J Chin Med. 2007;35(2):317-28.
+89.Louw I, et al. A pilot study of the clinical effects of a mixture of beta-sitosterol and beta-sitosterol glucoside in active rheumatoid arthritis (RA). Am J Clin Nutr 2002 75: 2 339S-439S [abstract 40].
+90.Ma MH, Kingsley GH, and Scott DL. A systematic comparison of combination DMARD therapy and tumour necrosis inhibitor therapy with methotrexate in patients with early rheumatoid arthritis. Rheumatology (Oxford), 2010. 49(1):91-8.
+91.Macfarlane GJ, et al. Evidence for the efficacy of complementary and alternative medicines in the management of rheumatoid arthritis: a systematic review. Rheumatology (Oxford), 2011. 50(9):1672-83.
+92.Manganelli P and Rioda WT. [Weekly low-dose methotrexate in rheumatoid arthritis. Review of the literature]. Minerva medica, 1993. 84(10):541-52.
+93.Martinez-Calatrava MJ, Largo R, Herrero-Beaumont G. Improvement of experimental accelerated atherosclerosis by chondroitin sulphate. Osteoarthritis Cartilage, 2010. 18 Suppl 1:S12-6.
+94.Masi AT, et al. Sex hormones and risks of rheumatoid arthritis and developmental or environmental influences. Ann N Y Acad Sci. 2006 Jun;1069:223-35.
+95.McCormack PL. Celecoxib: a review of its use for symptomatic relief in the treatment of osteoarthritis, rheumatoid arthritis and ankylosing spondylitis. Drugs, 2011. 71(18): 2457-89.
+96.Mikuls TR, et al. The association of race and ethnicity with disease expression in male US veterans with rheumatoid arthritis. J Rheumatol, 2007. 34(7):1480-4.
+97.Moreland LW and O'Dell JR. Glucocorticoids and rheumatoid arthritis: back to the future? Arthritis Rheum, 2002. 46(10):2553-63.
+98.Naik SR, Hule A. Evaluation of immunomodulatory activity of an extract of andrographolides from Andographis paniculata. Planta Med. 2009 Jun;75(8):785-91.
+99.Nakamura H, et al. Effects of glucosamine administration on patients with rheumatoid arthritis. Rheumatol Int, 2007. 27(3):213-8.
+100.Natarajan V, et al. Formulation and evaluation of quercetin polycaprolactone microspheres for the treatment of rheumatoid arthritis. J Pharm Sci, 2011. 100(1):195-205.
+101.Nell VP, et al. Benefit of very early referral and very early therapy with disease-modifying anti-rheumatic drugs in patients with early rheumatoid arthritis. Rheumatology (Oxford), 2004. 43(7):906-14.
+102.Nesher G, Osborn TG, Moore TL. In vitro effects of methotrexate on polyamine levels in lymphocytes from rheumatoid arthritis patients. Clin Exp Rheumatol, 1996. 14(4):395-9.
+103.NIAMS. Rheumatoid Arthritis. 2009 December 9, 2011]; Available from: http://www.niams.nih.gov/Health_Info/Rheumatic_Disease/default.asp.
+104.Nievergelt A, et al. Ginger phenylpropanoids inhibit IL-1beta and prostanoid secretion and disrupt arachidonate-phospholipid remodeling by targeting phospholipases A2. J Immunol, 2011. 187(8):4140-50.
+105.Ohsaki Y, Shirakawa H, Hiwatashi K, et al.Vitamin K Suppresses Lipopolysaccharide-Induced Inflammation in the Rat. Bioscience, Biotechnology, and Biochemistry. 2006;70(4):926-932.
+106.Okamoto H, Shidara K, Hoshi D, et al. Anti-arthritis effects of vitamin K(2) (menaquinone-4)--a new potential therapeutic strategy for rheumatoid arthritis. The FEBS J. 2007;274(17):4588-94.
+107.Olendzki BC, et al. Treatment of rheumatoid arthritis with marine and botanical oils: influence on serum lipids. Evid Based Complement Alternat Med, 2011. 2011: Article ID 827286. doi: 10.1155/2011/827286.
+108.Park YB, et al. Lipid profiles in untreated patients with rheumatoid arthritis. J Rheumatol, 1999. 26(8):1701-4.
+109.Pearson TA, et al. AHA Guidelines for Primary Prevention of Cardiovascular Disease and Stroke: 2002 Update: Consensus Panel Guide to Comprehensive Risk Reduction for Adult Patients Without Coronary or Other Atherosclerotic Vascular Diseases. American Heart Association Science Advisory and Coordinating Committee. Circulation, 2002. 106(3):388-91.
+110.Peters MJ, et al. Does rheumatoid arthritis equal diabetes mellitus as an independent risk factor for cardiovascular disease? A prospective study. Arthritis Rheum, 2009. 61(11): 1571-9.
+111.Pietschmann P. Principles of osteoimmunology: molecular mechanisms and clinical applications 2011, New York: Springer.
+112.Plasqui G. The role of physical activity in rheumatoid arthritis. Physiol Behav, 2008. 94(2):270-5.
+113.Radovits BJ, et al. Excess mortality emerges after 10 years in an inception cohort of early rheumatoid arthritis. Arthritis Care Res (Hoboken), 2010. 62(3):362-70.
+114.Ramadan G, Al-Kahtani MA, El-Sayed WM. Anti-inflammatory and anti-oxidant properties of Curcuma longa (turmeric) versus Zingiber officinale (ginger) rhizomes in rat adjuvant-induced arthritis. Inflammation, 2011. 34(4):291-301.
+115.Rheaume-Bleue K. Choosing the Right Vitamin K2: Menaquinone-4 vs Menaquinone-7: Clinical considerations of different forms of vitamin K2. Natural Medicine Journal. 2015;7(10).
+116.Ridker PM and Solomon DH. Should patients with rheumatoid arthritis receive statin therapy? Arthritis Rheum, 2009. 60(5):1205-9.
+117.Ruffing V and Bingham III CO. Rheumatoid Arthritis Clinical Presentation. Accessed 3/20/12. Available from: http://www.hopkins-arthritis.org/arthritis-info/rheumatoid-arthritis/rheum_clin_pres.html.
+118.Rutjes AW, et al. S-Adenosylmethionine for osteoarthritis of the knee or hip. Cochrane Database Syst Rev, 2009(4):CD007321.
+119.Sengupta K, et al. Cellular and molecular mechanisms of anti-inflammatory effect of Aflapin: a novel Boswellia serrata extract. Mol Cell Biochem, 2011. 354(1-2):189-97.
+120.Sengupta K, Krishnaraju AV, Vishal AA, et al. Comparative efficacy and tolerability of 5-Loxin and Aflapin Against osteoarthritis of the knee: a double blind, randomized, placebo controlled clinical study. Int J Med Sci. 2010;7(6):366–377
+121.Shabanova SS, et al. Ovarian function and disease activity in patients with systemic lupus erythematosus. Clin Exp Rheumatol. 2008 May-Jun;26(3):436-41.
+122.Sheng X, et al. Effectiveness of Statins on Total Cholesterol and Cardiovascular Disease and All-cause Mortality in Osteoarthritis and Rheumatoid Arthritis. J Rheumatol, 2011.
+123.Shukla M, et al. Consumption of hydrolyzable tannins-rich pomegranate extract suppresses inflammation and joint damage in rheumatoid arthritis. Nutrition, 2008. 24(7-8):733-43.
+124.Simopoulos AP. Evolutionary aspects of diet: the omega-6/omega-3 ratio and the brain. Mol Neurobiol. 2011 Oct;44(2):203-15. Epub 2011 Jan 29.
+125.Soeken KL, et al. Safety and efficacy of S-adenosylmethionine (SAMe) for osteoarthritis. J Fam Pract, 2002. 51(5):425-30.
+126.Spector TD, et al. Risk of vertebral fracture in women with rheumatoid arthritis. BMJ, 1993. 306(6877):558.
+127.St. Clair EW, Pisetsky DS, and Haynes BJ. Rheumatoid arthritis 2004, Philadelphia: Lippincott Williams & Wilkins. xiv, p.555.
+128.Stoll D, et al. High prevalence of hypovitaminosis D in a Swiss rheumatology outpatient population. Swiss Med Wkly. 2011 May 27;141:w13196. doi: 10.4414/smw.2011.13196.
+129.Straub RH, et al. Circadian rhythms in rheumatoid arthritis: implications for pathophysiology and therapeutic management. Arthritis Rheum. 2007 Feb;56(2):399-408.
+130.Tak PP and Kalden JR. Advances in rheumatology: new targeted therapeutics. Arthritis Res Ther, 2011. 13 Suppl 1:S5.
+131.Talbott SM and Hughes K. The health professional's guide to dietary supplements2007, Philadelphia: Lippincott Williams & Wilkins. xx, p.444.
+132.Tanasescu C, et al. Endothelial dysfunction in inflammatory rheumatic diseases. Rom J Intern Med. 2009;47(2):103-8.
+133.Tekeoglu I, et al. Effects of thymoquinone (volatile oil of black cumin) on rheumatoid arthritis in rat models. Phytother Res. 2007 Sep;21(9):895-7.
+134.Trelle S, et al. Cardiovascular safety of non-steroidal anti-inflammatory drugs: network meta-analysis. BMJ, 2011. 342:c7086.
+135.Tyndall A. Successes and failures of stem cell transplantation in autoimmune diseases. Hematology Am Soc Hematol Educ Program, 2011. 2011:280-4.
+136.Valensa. FlexPro MD Clinical Trial Overview and Results. (Data on File.) 2011
+137.van Aken J, et al. Radiological outcome after four years of early versus delayed treatment strategy in patients with recent onset rheumatoid arthritis. Ann Rheum Dis, 2004. 63(3):274-9.
+138.Van den Ende CH, et al. Dynamic exercise therapy in rheumatoid arthritis: a systematic review. Br J Rheumatol, 1998. 37(6):677-87.
+139.van Gestel AM, et al. Oral steroids as bridge therapy in rheumatoid arthritis patients starting with parenteral gold. A randomized double-blind placebo-controlled trial. Br J Rheumatol, 1995. 34(4):347-51.
+140.van Halm VP, et al. Lipids and inflammation: serial measurements of the lipid profile of blood donors who later developed rheumatoid arthritis. Ann Rheum Dis, 2007. 66(2): 184-8.
+141.Wang Y, Xing HY. [Clinical observation on effect of total glucosides of paeony combined with methotrexate on rheumatoid arthritis]. Zhongguo Zhong xi yi jie he za zhi Zhongguo Zhongxiyi jiehe zazhi = Chinese journal of integrated traditional and Western medicine / Zhongguo Zhong xi yi jie he xue hui, Zhongguo Zhong yi yan jiu yuan zhu ban.Sep 2007;27(9):839-840.
+142.Wang YN, Zhang Y, Wang Y, Zhu DX, Xu LQ, Fang H, Wu W. The beneficial effect of total glucosides of paeony on psoriatic arthritis links to circulating Tregs and Th1 cell function. Phytotherapy research: PTR.Mar 2014;28(3):372-381.
+143.Wei CC, You FT, Mei LY, Jian S, Qiang CY. Total glucosides of paeony prevents juxta-articular bone loss in experimental arthritis. BMC complementary and alternative medicine. 2013;13:186.
+144.Weiss EP, et al. droepiandrosterone (DHEA) replacement decreases insulin resistance and lowers inflammatory cytokines in aging humans. Aging (Albany NY). 2011 May;3(5):533-42.
+145.Weitoft T, et al. Serum levels of sex steroid hormones and matrix metalloproteinases after intra-articular glucocorticoid treatment in female patients with rheumatoid arthritis. Ann Rheum Dis. 2008 Mar;67(3):422-4. Epub 2007 Sep 18.
+146.Whittle SL and Hughes RA. Folate supplementation and methotrexate treatment in rheumatoid arthritis: a review. Rheumatology (Oxford), 2004. 43(3):267-71.
+Youssef PP, et al. Effects of pulse methylprednisolone on inflammatory mediators in peripheral blood, synovial fluid, and synovial membrane in rheumatoid arthritis. Arthritis Rheum, 1997. 40(8):1400-8.
+        </p>
+
+</div>
+<script>
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,452 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">  
+    <link rel="icon" href="dc3.png" type="image/png">  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White Book</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">
+    <!-- Estilos para dispositivos móviles -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (max-width: 768px)">
+    <!-- Estilos para pantallas de PC -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (min-width: 769px)">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+
+    <!-- Metadatos Open Graph -->
+    <meta property="og:title" content="YOU TOMORROW">
+    <meta property="og:description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta property="og:image" content="https://drive.google.com/file/d/1ZZI3G6Fit_kovvVZolrvchtXQQDrnWYI/view?usp=sharing">
+    <meta property="og:url" content="https://ytomorrow.com/">
+    <meta property="og:type" content="website">
+
+    <!-- Otros metadatos -->
+    <meta name="description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta name="keywords" content="you, YOU TOMORROW, TOMORROW, TOMORR, TOM, web">
+
+    <style>
+
+   body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 17px;
+    line-height: 1.4;
+    margin: 20px;
+    font-weight: 500; /* Grosor medio de la negrita */
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1, h2, h3 {
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+p {
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.section {
+    margin-bottom: 30px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    width: 100%;
+}
+
+.chart-row {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+    width: 50%; /* Ajusta el ancho para que se adapte al contenido */
+}
+
+.chart-box {
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    min-width: 150px; /* Asegura que las tarjetas tengan un ancho mínimo */
+    max-width: 300px; /* Limita el ancho máximo para tarjetas largas */
+    word-wrap: break-word; /* Permite que el texto se ajuste dentro de la tarjeta */
+    flex: 1; /* Permite que las tarjetas se expandan uniformemente */
+}
+
+.chart-box:hover {
+    transform: scale(1.05);
+}
+
+.chart-box.ceo {
+    background: linear-gradient(135deg, #ff6f61, #e53935);
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.chart-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transform: rotate(45deg);
+}
+
+.chart-box:hover::before {
+    opacity: 1;
+}
+
+.chart-box.ceo::before {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.connector {
+    width: 2px;
+    height: 20px;
+    background-color: #1b3a7a;
+    margin: 0 auto;
+}
+
+.horizontal-connector {
+    height: 2px;
+    width: 100%;
+    background-color: #1b3a7a;
+}
+
+.horizontal-connector.long {
+    width: 50%;
+}
+
+.chart-box i {
+    margin-right: 8px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #1b5e20;
+    color: #1b5e20;
+    font-weight: bold;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+
+  caption {
+    caption-side: top;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+    </style>
+
+</head>
+<body>
+<div class="container">
+REFERENCES
+    <ol>
+       REFERENCES
+1.Abd El Aziz M, Cahyadi O, Meier JJ, Schmidt WE, Nauck MA. Incretin-based glucose-lowering medications and the risk of acute pancreatitis and malignancies: a meta-analysis based on cardiovascular outcomes trials. Diabetes, obesity & metabolism. Apr 2020;22(4):699-704. doi:10.1111/dom.13924
+2.Abdul-Ghani M, Puckett C, Adams J, et al. Durability of Triple Combination Therapy Versus Stepwise Addition Therapy in Patients With New-Onset T2DM: 3-Year Follow-up of EDICT. Diabetes Care. Feb 2021;44(2):433-439. doi:10.2337/dc20-0978
+3.ACCORD Study Group. Effects of Intensive Glucose Lowering in Type 2 Diabetes. New England Journal of Medicine. 2008;358(24):2545-2559.
+4.ADA. American Diabetes Association. A1C and eAG. http://www.diabetes.org/living-with-diabetes/treatment-and-care/blood-glucose-control/a1c/?loc=keymatch. Last updated 9/29/2014a. Accessed 8/19/2015.
+5.ADA. American Diabetes Association. Glycemic Index and Diabetes. http://www.diabetes.org/food-and-fitness/food/what-can-i-eat/understanding-carbohydrates/glycemic-index-and-diabetes.html?referrer=https://www.google.com/. Last updated 5/14/2014b. Accessed 8/24/2015.
+6.ADA. Standards of medical care in diabetes--2014. Diabetes care. Jan 2014c;37 Suppl 1:S14-80.
+7.ADA. American Diabetes Association. Foundations of Care: Education, Nutrition, Physical Activity, Smoking Cessation, Psychosocial Care, and Immunization. Diabetes Care. 2015a;38(Suppl. 1): S20-S30. http://care.diabetesjournals.org/content/38/Supplement_1/S20.full.pdf
+8.ADA. American Diabetes Association. Checking Your Blood Glucose. http://www.diabetes.org/living-with-diabetes/treatment-and-care/blood-glucose-control/checking-your-blood-glucose.html. Last updated 6/17/2015b. Accessed 9/1/2015.
+9.ADA. American Diabetes Association. Insulin Basics. Available at: http://www.diabetes.org/living-with-diabetes/treatment-and-care/medication/insulin/insulin-basics.html. Last updated: 3/9/2015c. Accessed 4/10/2015.
+10.ADA. American Diabetes Association. What Are My Options? Available at: http://www.diabetes.org/living-with-diabetes/treatment-and-care/medication/oral-medications/what-are-my-options.html. Last updated: 3/3/2015d. Accessed 4/12/2015.
+11.ADA. American Diabetes Association. Glycemic Targets. Diabetes Care. 2015f;38(Suppl. 1): S33-S40. http://care.diabetesjournals.org/content/38/Supplement_1/S33.full
+12.ADA. American Diabetes Association. Pharmacologic Approaches to Glycemic Treatment: Standards of Medical Care in Diabetes-2019. Diabetes Care. Jan 2019;42(Suppl 1):S90-S102. doi:10.2337/dc19-S009
+13.ADA. American Diabetes Association. 6. Glycemic Targets: Standards of Medical Care in Diabetes-2021. Diabetes Care. Jan 2021a;44(Suppl 1):S73-S84. doi:10.2337/dc21-S006
+14.ADA. American Diabetes Association Professional Practice C. 5. Facilitating Behavior Change and Well-being to Improve Health Outcomes: Standards of Medical Care in Diabetes—2022. Diabetes Care. 2021b;45(Supplement_1):S60-S82. doi:10.2337/dc22-S005
+15.ADA. American Diabetes Association. Pharmacologic Approaches to Glycemic Treatment: Standards of Medical Care in Diabetes-2021. Diabetes Care. Jan 2021c;44(Suppl 1):S111-S124. doi:10.2337/dc21-S009
+16.ADA. American Diabetes Association. Standards of Medical Care in Diabetes—2022 Abridged for Primary Care Providers. Clinical Diabetes. 2022;40(1):10-38. doi:10.2337/cd22-as01
+17.Adams RJ, Appleton SL, Hill CL, et al. Independent association of HbA1C and incident cardiovascular disease in people without diabetes. Obesity. 2009;17:559-563.
+18.Adams TD, Davidson LE, Litwin SE, et al. Weight and Metabolic Outcomes 12 Years after Gastric Bypass. The New England journal of medicine. Sep 21 2017;377(12):1143-1155. doi:10.1056/NEJMoa1700459
+19.Afaghi A, Ziaee A, Afaghi M. Effect of low-glycemic load diet on changes in cardiovascular risk factors in poorly controlled diabetic patients. Indian journal of endocrinology and metabolism. Nov 2012;16(6):991-995.
+20.AFAR. TAME: Targeting Aging with Metformin http://www.afar.org/natgeo/. 4/14/2016.
+21.AHA. American Heart Association. Glycemic Index and Diabetes. http://www.heart.org/HEARTORG/GettingHealthy/NutritionCenter/HealthyEating/Glycemic-Index-and-Diabetes_UCM_457070_Article.jsp, Copyright 2014. Accessed 8/24/2015.
+22.Aleem E, Nehrbass D, Klimek F, et al. Upregulation of the insulin receptor and type 1 insulin-like growth factor receptor are early events in hepatocarcinogenesis. Toxicol Pathol. 2011;39(3):524-43.
+23.Al-Tabakha MM. Future prospect of insulin inhalation for diabetic patients: The case of Afrezza versus Exubera. Journal of controlled release: official journal of the Controlled Release Society. Jul 26 2015;215:25-38.
+24.Anisimov VN. Metformin: do we finally have an anti-aging drug? Cell Cycle. 2013;12(22):3483-3489.
+25.Aroda VR, Edelstein SL, Goldberg RB, Knowler WC, Marcovina SM, Orchard TJ, . . . Crandall JP. Long-term Metformin Use and Vitamin B12 Deficiency in the Diabetes Prevention Program Outcomes Study. The Journal of clinical endocrinology and metabolism. Feb 22 2016:jc20153754.
+26.Arterburn DE, Telem DA, Kushner RF, Courcoulas AP. Benefits and Risks of Bariatric Surgery in Adults: A Review. Jama. Sep 1 2020;324(9):879-887. doi:10.1001/jama.2020.12567
+27.Assefa ST, Yang EY, Chae SY, et al. Alpha Glucosidase Inhibitory Activities of Plants with Focus on Common Vegetables. Plants (Basel). Dec 18 2019;9(1)doi:10.3390/plants9010002
+28.Atkinson FS, Foster-Powell K, Brand-Miller JC. International Tables of Glycemic Index and Glycemic Load Values: 2008. Diabetes care. 2008;31(12):2281-2283.
+29.Azoulay L. Incretin-based drugs and adverse pancreatic events: almost a decade later and uncertainty remains. Diabetes care. Jun 2015;38(6):951-953.
+30.Azoulay L, Filion KB, Platt RW, Dahl M, Dormuth CR, Clemens KK, . . . Ernst P. Incretin based drugs and the risk of pancreatic cancer: international multicentre cohort study. BMJ (Clinical research ed.). 2016;352:i581.
+31.Bahr C, Groner B. The IGF-1 receptor and its contributions to metastatic tumor growth-novel approaches to the inhibition of IGF-1R function. Growth factors (Chur, Switzerland). Mar 2005;23(1):1-14.
+32.Bailey CJ. Tirzepatide: a new low for bodyweight and blood glucose. The lancet Diabetes & endocrinology. Oct 2021;9(10):646-648. doi:10.1016/S2213-8587(21)00217-5
+33.Bales CW, Kraus WE. Caloric restriction: implications for human cardiometabolic health. J Cardiopulm Rehabil Prev. Jul-Aug 2013;33(4):201-208.
+34.Barbarawi M, Al-Abdouh A, Barbarawi O, Lakshman H, Al Kasasbeh M, Chen K. SGLT2 inhibitors and cardiovascular and renal outcomes: a meta-analysis and trial sequential analysis. Heart failure reviews. Feb 23 2021;doi:10.1007/s10741-021-10083-z
+35.Barclay AW, Petocz P, McMillan-Price J, Flood VM, Prvan T, Mitchell P, Brand-Miller JC. Glycemic index, glycemic load, and chronic disease risk--a meta-analysis of observational studies. The American journal of clinical nutrition. Mar 2008;87(3):627-637.
+36.Bazzano LA, Li TY, Joshipura KJ, Hu FB. Intake of fruit, vegetables, and fruit juices and risk of diabetes in women. Diabetes care. Jul 2008;31(7):1311-1317.
+37.Belfiore A, Malaguarnera R. Insulin receptor and cancer. Endocrine-Related Cancer. 2011;18:R125-R147.
+38.Benjamin EM. Self-Monitoring of Blood Glucose: The Basics. Clinical Diabetes. 2002;20(1):45-47.
+39.Berstein LM. Metformin in obesity, cancer and aging: addressing controversies. Aging (Albany NY). 2012;4(5):320-329.
+40.Bhupathiraju SN, Tobias DK, Malik VS, Pan A, Hruby A, Manson JE, . . . Hu FB. Glycemic index, glycemic load, and risk of type 2 diabetes: results from 3 large US cohorts and an updated meta-analysis. The American journal of clinical nutrition. Jul 2014;100(1):218-232.
+41.Bjornholt JV, Erikssen G, Aaser E, et al. Fasting blood glucose: an underestimated risk factor for cardiovascular death. Diabetes Care. 1999;22:45-49.
+42.Blagosklonny MV. Validation of anti-aging drugs by treating age-related diseases. Aging (Albany NY). 2009;1(3):281-288.
+43.Boers I, Muskiet FA, Berkelaar E, Schut E, Penders R, Hoenderdos K, . . . Jong MC. Favourable effects of consuming a Palaeolithic-type diet on characteristics of the metabolic syndrome: a randomized controlled pilot-study. Lipids in health and disease. 2014;13:160.
+44.Bolla AM, Caretto A, Laurenzi A, Scavini M, Piemonti L. Low-Carb and Ketogenic Diets in Type 1 and Type 2 Diabetes. Nutrients. Apr 26 2019;11(5)doi:10.3390/nu11050962
+45.Boniol M, Franchi M, Bota M, et al. Incretin-Based Therapies and the Short-term Risk of Pancreatic Cancer: Results From Two Retrospective Cohort Studies. Diabetes Care. Feb 2018;41(2):286-292. doi:10.2337/dc17-0280
+46.Boyle JG, Salt IP, McKay GA. Metformin action on AMP-activated protein kinase: a translational research approach to understanding a potential new target. Diabet Med. 2010;27(10):1097-106.
+47.Boyle CN, Lutz TA, Le Foll C. Amylin - Its role in the homeostatic and hedonic control of eating and recent developments of amylin analogs to treat obesity. Molecular metabolism. Feb 2018;8:203-210. doi:10.1016/j.molmet.2017.11.009
+48.Bozkaya G, Ozgu E, Karaca B. The association between estimated average glucose levels and fasting plasma glucose levels. Clinics (Sao Paulo, Brazil). 2010;65(11):1077-1080.
+49.Buse JB, DeFronzo RA, Rosenstock J, Kim T, Burns C, Skare S, . . . Fineman M. The Primary Glucose-Lowering Effect of Metformin Resides in the Gut, Not the Circulation: Results From Short-term Pharmacokinetic and 12-Week Dose-Ranging Studies. Diabetes care. Feb 2016;39(2):198-205.
+50.Campbell LK, White JR, Campbell RK. Acarbose: its role in the treatment of diabetes mellitus. The Annals of pharmacotherapy. Nov 1996;30(11):1255-1262.
+51.Cao C, Yang S, Zhou Z. GLP-1 receptor agonists and risk of cancer in type 2 diabetes: an updated meta-analysis of randomized controlled trials. Endocrine. Nov 2019;66(2):157-165. doi:10.1007/s12020-019-02055-z
+52.Carter P, Gray LJ, Talbot D, Morris DH, Khunti K, Davies MJ. Fruit and vegetable intake and the association with glucose parameters: a cross-sectional analysis of the Let's Prevent Diabetes Study. European journal of clinical nutrition. Jan 2013;67(1):12-17.
+53.Chan J, Cheng-Lai A. Inhaled Insulin: A Clinical and Historical Review. Cardiology in review. May/Jun 2017;25(3):140-146. doi:10.1097/CRD.0000000000000143
+54.Chen X, Zhang J, Zhou Z. Targeting Islets: Metabolic Surgery Is More than a Bariatric Surgery. Obesity surgery. Sep 2019;29(9):3001-3009. doi:10.1007/s11695-019-03979-1
+55.Chen TH, Li YR, Chen SW, et al. Sodium-glucose cotransporter 2 inhibitor versus metformin as first-line therapy in patients with type 2 diabetes mellitus: a multi-institution database study. Cardiovasc Diabetol. Nov 9 2020;19(1):189. doi:10.1186/s12933-020-01169-3
+56.Chiasson JL, Josse RG, Gomis R, et al. Acarbose for prevention of type 2 diabetes mellitus: the STOP-NIDDM randomized trial. Lancet. 2002;359(9323):2072-7.
+57.Chokrungvaranon N, Deer J, Reaven PD. Intensive glycemic control and cardiovascular disease: are there patients who may benefit? Postgraduate medicine. Nov 2011;123(6):114-123.
+58.Chou HC, Chen WW, Hsiao FY. Acute pancreatitis in patients with type 2 diabetes mellitus treated with dipeptidyl peptidase-4 inhibitors: a population-based nested case-control study. Drug safety : an international journal of medical toxicology and drug experience. Jul 2014;37(7):521-528.
+59.Cohen O, Gillam M. First Consult. Diabetes mellitus type 1 in adults. Available at: www.clinicalkey.com. Copyright by Elsevier BV, Inc. Last updated 10/17/2013. Accessed 3/19/2015.
+60.Colberg SR, Sigal RJ, Fernhall B, Regensteiner JG, Blissmer BJ, Rubin RR, . . . Braun B. Exercise and type 2 diabetes: the American College of Sports Medicine and the American Diabetes Association: joint position statement. Diabetes care. Dec 2010;33(12):e147-167.
+61.Colman RJ, Anderson RM, Johnson SC, Kastman EK, Kosmatka KJ, Beasley TM, . . . Weindruch R. Caloric restriction delays disease onset and mortality in rhesus monkeys. Science (New York, N.Y.). Jul 10 2009;325(5937):201-204.
+62.Coniff RF, Shapiro JA, Robbins D, Kleinfield R, Seaton TB, Beisswenger P, McGill JB. Reduction of glycosylated hemoglobin and postprandial hyperglycemia by acarbose in patients with NIDDM. A placebo-controlled dose-comparison study. Diabetes care. Jun 1995;18(6):817-824.
+63.Coughlan KA, Valentine RJ, Ruderman NB, et al. AMPK activation: a therapeutic target for type 2 diabetes? Diabetes Metab Syndr Obes. 2014;7:241-253.
+64.Courcoulas AP, Belle SH, Neiberg RH, et al. Three-Year Outcomes of Bariatric Surgery vs Lifestyle Intervention for Type 2 Diabetes Mellitus Treatment: A Randomized Clinical Trial. JAMA surgery. Oct 2015;150(10):931-40. doi:10.1001/jamasurg.2015.1534
+65.Coutinho M, Gerstein HC, Wang Y, Yusuf S. The relationship between glucose and incident cardiovascular events. A metaregression analysis of published data from 20 studies of 95,783 individuals followed for 12.4 years. Diabetes care. Feb 1999;22(2):233-240.
+66.Cummings DE, Rubino F. Metabolic surgery for the treatment of type 2 diabetes in obese individuals. Diabetologia. Feb 2018;61(2):257-264. doi:10.1007/s00125-017-4513-y
+67.Dahl D, Onishi Y, Norwood P, Huh R, Patel H, RodrÍGuez Á. 80-LB: Tirzepatide, a Dual GIP/GLP-1 Receptor Agonist, Is Effective and Safe When Added to Basal Insulin for Treatment of Type 2 Diabetes (SURPASS-5). Diabetes. 2021;70(Supplement_1)doi:10.2337/db21-80-LB
+68.Davani-Davari D, Negahdaripour M, Karimzadeh I, et al. Prebiotics: Definition, Types, Sources, Mechanisms, and Clinical Applications. Foods. Mar 9 2019;8(3)doi:10.3390/foods8030092
+69.Davidson MB, Peters AL. An overview of metformin in the treatment of type 2 diabetes mellitus. The American journal of medicine. Jan 1997;102(1):99-110.
+70.de Heer J, Goke B. Are incretin mimetics and enhancers linked to pancreatitis and malignant transformations in pancreas? Expert opinion on drug safety. Nov 2014;13(11):1469-1481.
+71.de Jager J, Kooy A, Lehert P, et al. Long term treatment with metformin in patients with type 2 diabetes and risk of vitamin B12 deficiency: randmised placebo controlled trial. BMJ. 2010;340:c2181.
+72.Delamater AM. Clinical Use of Hemoglobin A1C to Improve Diabetes Management. Clinical Diabetes. January 1, 2006 2006;24(1):6-8.
+73.Del Prato S, Kahn SE, Pavo I, et al. Tirzepatide versus insulin glargine in type 2 diabetes and increased cardiovascular risk (SURPASS-4): a randomised, open-label, parallel-group, multicentre, phase 3 trial. Lancet. Nov 13 2021;398(10313):1811-1824. doi:10.1016/S0140-6736(21)02188-7
+74.Derdemezis CS, Lovegrove JA. Glycemic index, glycemic control and beyond. Current pharmaceutical design. 2014;20(22):3620-3630.
+75.Derosa G, Maffioli P. Efficacy and safety profile evaluation of acarbose alone and in association with other antidiabetic drugs: a systematic review. Clin Ther. 2012;34(6):1221-1236.
+76.Diabetes.co.uk. Treatment: Medication. Metformin Side Effects http://www.diabetes.co.uk/diabetes-medication/metformin-side-effects.html. Copyright 2016. Accessed 8/8/2016.
+77.Diabetes Prevention Program (DPP) Research Group. The Diabetes Prevention Program (DPP): description of lifestyle intervention. Diabetes care. Dec 2002;25(12):2165-2171.
+78.Dicembrini I, Montereggi C, Nreu B, Mannucci E, Monami M. Pancreatitis and pancreatic cancer in patientes treated with Dipeptidyl Peptidase-4 inhibitors: An extensive and updated meta-analysis of randomized controlled trials. Diabetes Res Clin Pract. Jan 2020;159:107981. doi:10.1016/j.diabres.2019.107981
+79.Donnan K, Segar L. SGLT2 inhibitors and metformin: Dual antihyperglycemic therapy and the risk of metabolic acidosis in type 2 diabetes. European journal of pharmacology. Mar 5 2019;846:23-29. doi:10.1016/j.ejphar.2019.01.002
+80.Dowling RJO, Goodwin PJ, Stambolic V. Understanding the benefit of metformin use in cancer treatment. BMC Medicine. 2011;9:33.
+81.Draznin B. Mechanism of the mitogenic influence of hyperinsulinemia. Diabetology & Metabolic Syndrome. 2011;3:10.
+82.Drucker DJ, Nauck MA. The incretin system: glucagon-like peptide-1 receptor agonists and dipeptidyl peptidase-4 inhibitors in type 2 diabetes. The Lancet. 2006;368(9548):1696-1705.
+83.Duckworth W, Abraira C, Moritz T, Reda D, Emanuele N, Reaven PD, . . . Huang GD. Glucose Control and Vascular Complications in Veterans with Type 2 Diabetes. New England Journal of Medicine. 2009;360(2):129-139.
+84.Dworatzek PD, Arcudi K, Gougeon R, Husein N, Sievenpiper JL, Williams SL. Nutrition therapy. Canadian journal of diabetes. Apr 2013;37 Suppl 1:S45-55.
+85.Egan AG, Blind E, Dunder K, de Graeff PA, Hummer BT, Bourcier T, Rosebraugh C. Pancreatic Safety of Incretin-Based Drugs — FDA and EMA Assessment. New England Journal of Medicine. 2014;370(9):794-797.
+86.Engelhardt K, Ferguson M, Rosselli JL. Prevention and Management of Genital Mycotic Infections in the Setting of Sodium-Glucose Cotransporter 2 Inhibitors. Ann Pharmacother. Apr 2021;55(4):543-548. doi:10.1177/1060028020951928
+87.Esposito K, Giugliano D. Mediterranean diet and type 2 diabetes. Diabetes/metabolism research and reviews. Mar 2014;30 Suppl 1:34-40.
+88.FDA. U.S. Food and Drug Administration. Safety. Exubera (insulin human [rDNA origin] Inhalation Powder September 2008. Available at: http://www.fda.gov/Safety/MedWatch/SafetyInformation/Safety-RelatedDrugLabelingChanges/ucm122978.htm. Last updated: 6/19/2009. Accessed 6/21/2015.
+89.FDA. U.S. Food and Drug Administration. News and Events. FDA News Release. FDA approves Afrezza to treat diabetes. Available at: http://www.fda.gov/NewsEvents/Newsroom/PressAnnouncements/ucm403122.htm. Updated: 6/30/2014. Accessed 4/19/2015.
+90.Feingold KR. Oral and Injectable (Non-Insulin) Pharmacological Agents for the Treatment of Type 2 Diabetes. In: Feingold KR, Anawalt B, Boyce A, et al, eds. Endotext. MDText.com, Inc. Copyright ©2000-2021; 2000.
+91.Fleming LW, Fleming JW, Davis CS. Afrezza: an inhaled approach to insulin delivery. J Am Assoc Nurse Pract. 2015;Mar 12. doi: 10.1002/2327-6924.12247.
+92.Fonseca V, Levinson P, Toth DW, Gillam M. First Consult. Diabetes mellitus type 2 in adults. Available at: www.clinicalkey.com. Copyright by Elsevier BV, Inc. Last updated 8/26/2013. Accessed 3/19/2015.
+93.Forouzandeh F, Salazar G, Patrushev N, et al. Metformin beyond diabetes: pleiotropic benefits of metformin in attenuation of atherosclerosis. J Am Heart Assoc. 2014;3(6):e001202.
+94.Forslund K, Hildebrand F, Nielsen T, Falony G, Le Chatelier E, Sunagawa S, . . . Pedersen O. Disentangling type 2 diabetes and metformin treatment signatures in the human gut microbiota. Nature. Dec 10 2015;528(7581):262-266.
+95.Franciosi M, Lucisano G, Lapice E, et al. Metformin therapy and risk of cancer in patients with type 2 diabetes: systematic review. PLoS One. 2013;8(8):e71583.
+96.Frias JP, Nauck MA, Van J, et al. Efficacy and tolerability of tirzepatide, a dual glucose-dependent insulinotropic peptide and glucagon-like peptide-1 receptor agonist in patients with type 2 diabetes: A 12-week, randomized, double-blind, placebo-controlled study to evaluate different dose-escalation regimens. Diabetes, obesity & metabolism. Jun 2020;22(6):938-946. doi:10.1111/dom.13979
+97.Frias JP, Davies MJ, Rosenstock J, et al. Tirzepatide versus Semaglutide Once Weekly in Patients with Type 2 Diabetes. The New England journal of medicine. Aug 5 2021;385(6):503-515. doi:10.1056/NEJMoa2107519
+98.Fung TT, van Dam RM, Hankinson SE, Stampfer M, Willett WC, Hu FB. Low-Carbohydrate Diets and All-Cause and Cause-Specific MortalityTwo Cohort Studies. Annals of Internal Medicine. 2010;153(5):289-298.
+99.GA, Hillier TA, Brown JB. Normal fasting plasma glucose and risk of type 2 diabetes diagnosis. Am J Med. 2008;121:519-524.
+100.Garber AJ. Long-acting glucagon-like peptide 1 receptor agonists: a review of their efficacy and tolerability. Diabetes Care. 2011;34(Suppl2):S279-S284.
+101.Garber AJ, Handelsman Y, Grunberger G, et al. Consensus Statement by the American Association of Clinical Endocrinologists and American College of Endocrinology on the Comprehensive Type 2 Diabetes Management Algorithm - 2020 Executive Summary. Endocr Pract. Jan 2020;26(1):107-139. doi:10.4158/CS-2019-0472
+102.Gerstein HC, Pais P, Pogue J, et al. Relationship of glucose and insulin levels to the risk of myocardial infarction: a case-control study. J Am Coll Cardiol. 1999;33:612-9.
+103.Gerstein HC, Miller ME, Genuth S, Ismail-Beigi F, Buse JB, Goff DC, Jr., . . . Friedewald WT. Long-term effects of intensive glucose lowering on cardiovascular outcomes. The New England journal of medicine. Mar 3 2011;364(9):818-828.
+104.Gerstein HC, Coleman RL, Scott CAB, et al. Impact of Acarbose on Incident Diabetes and Regression to Normoglycemia in People With Coronary Heart Disease and Impaired Glucose Tolerance: Insights From the ACE Trial. Diabetes Care. Sep 2020;43(9):2242-2247. doi:10.2337/dc19-2046
+105.Glossmann HH, Lutz OMD. Metformin and Aging: A Review. Gerontology . 2019;65(6):581-590. doi:10.1159/000502257
+106.Godsland IF. Insulin resistance and hyperinsulinaemia in the development and progression of cancer. Clin Sci (Lond). 2009;118(Pt 5):315-332.
+107.Gold Standard. Drug Monograph. Metformin. Copyright 2015 Elsevier, Inc. www.clinicalkey.com. Accessed 7/16/2015.
+108.Gotsis E, Anagnostis P, Mariolis A, Vlachou A, Katsiki N, Karagiannis A. Health benefits of the Mediterranean Diet: an update of research over the last 5 years. Angiology. Apr 2015;66(4):304-318.
+109.Gower BA, Goss AM. A lower-carbohydrate, higher-fat diet reduces abdominal and intermuscular fat and increases insulin sensitivity in adults at risk of type 2 diabetes. The Journal of nutrition. Jan 2015;145(1):177s-183s.
+110.Graff CL, Pollack GM. Nasal drug administration: potential for targeted central nervous system delivery. J Pharm Sci. 2005;94:1187-1195.
+111.Greer EL, Dowlatshahi D, Banko MR, et al. An AMPK-FOXO pathway mediates longevity induced by a novel method of dietary restriction in C. elegans. Curr Biol. 2007;17(19):1646-56.
+112.Gu S, Shi J, Tang Z, et al. Comparison of glucose lowering effect of metformin and acarbose in type 2 diabetes mellitus: a meta-analysis. PLoS One. 2015;10(5):e0126704.
+113.Gupta A, Bisht B, Dey CS. Peripheral insulin-sensitizer drug metformin ameliorates neuronal insulin resistance and Alzheimer’s-like changes. Neuropharmacology. 2011;60(6):910-20.
+114.Halabi A, Sen J, Huynh Q, Marwick TH. Metformin treatment in heart failure with preserved ejection fraction: a systematic review and meta-regression analysis. Cardiovasc Diabetol. Aug 5 2020;19(1):124. doi:10.1186/s12933-020-01100-w
+115.Handa K, Inukai K, Onuma H, Kudo A, Nakagawa F, Tsugawa K, . . . Ishida H. Long-term low carbohydrate diet leads to deleterious metabolic manifestations in diabetic mice. PloS one. 2014;9(8):e104948.
+116.Hanefeld M. The role of acarbose in the treatment of non-insulin-dependent diabetes mellitus. Journal of diabetes and its complications. Jul-Aug 1998;12(4):228-237.
+117.Hanefeld M, Cagatay M, Petrowitsch T, et al. Acarbose reduces the risk for myocardial infarction in type 2 diabetic patients: a meta-analysis of seven long-term studies. Eur Heart J. 2004;25(1):10-6.
+118.Hansawasdi C, Kawabata J. Alpha-glucosidase inhibitory effect of mulberry (Morus alba) leaves on Caco-2. Fitoterapia. Dec 2006;77(7-8):568-573.
+119.Heerspink HJL, Stefánsson BV, Correa-Rotter R, et al. Dapagliflozin in Patients with Chronic Kidney Disease. The New England journal of medicine. Oct 8 2020;383(15):1436-1446. doi:10.1056/NEJMoa2024816
+120.Heinemann L. The failure of exubera: are we beating a dead horse? Journal of diabetes science and technology. May 2008;2(3):518-529.
+121.Henry RR, Mudaliar SR, Howland WC 3rd, et al. Inhaled insulin using the AERx Insulin Diabetes Management System in healthy and asthmatic subjects. Diabetes Care. 2003;26(3):754-9.
+122.Higdon J, Drake V, Liu S. Linus Pauling Institute. Micronutrient Information Center. Glycemic Index and Glycemic Load. http://lpi.oregonstate.edu/mic/food-beverages/glycemic-index-glycemic-load. Last updated 2/2009. Accessed 7/22/2015.
+123.Hiraga T, Myoui A, Hashimoto N, Sasaki A, Hata K, Morita Y, . . . Yoneda T. Bone-derived IGF mediates crosstalk between bone and breast cancer cells in bony metastases. Cancer research. Aug 15 2012;72(16):4238-4249.
+124.Hodish I. Insulin therapy, weight gain and prognosis. Diabetes, Obesity and Metabolism. 2018;20(9):2085-2092. doi:https://doi.org/10.1111/dom.13367
+125.Horii T, Oikawa Y, Kunisada N, Shimada A, Atsuda K. Real-world risk of hypoglycemia-related hospitalization in Japanese patients with type 2 diabetes using SGLT2 inhibitors: a nationwide cohort study. BMJ Open Diabetes Res Care. Nov 2020;8(2):e001856. doi:10.1136/bmjdrc-2020-001856
+126.Hou G, Zhang S, Zhang X, et al. Clinical pathological characteristics and prognostic analysis of 1,013 breast cancer patients with diabetes. Breast Cancer Res Treat. 2013;137:807-816.
+127.Htike ZZ, Zaccardi F, Papamargaritis D, Webb DR, Khunti K, Davies MJ. Efficacy and safety of glucagon-like peptide-1 receptor agonists in type 2 diabetes: A systematic review and mixed-treatment comparison analysis. Diabetes, obesity & metabolism. Apr 2017;19(4):524-536. doi:10.1111/dom.12849
+128.Humpert PM, Djuric Z, Zeuge U, Oikonomou D, Seregin Y, Laine K, . . . Bierhaus A. Insulin stimulates the clonogenic potential of angiogenic endothelial progenitor cells by IGF-1 receptor-dependent signaling. Molecular medicine (Cambridge, Mass.). May-Jun 2008;14(5-6):301-308.
+129.Hung CT. Effects of high-fructose (90%) corn syrup on plasma glucose, insulin, and C-peptide in non-insulin-dependent diabetes mellitus and normal subjects. Taiwan yi xue hui za zhi. Journal of the Formosan Medical Association. Sep 1989;88(9):883-885.
+130.Hur KY, Lee MS. Gut Microbiota and Metabolic Disorders. Diabetes Metab J. Jun 2015;39(3):198-203.
+131.Ikramuddin S, Korner J, Lee WJ, et al. Lifestyle Intervention and Medical Management With vs Without Roux-en-Y Gastric Bypass and Control of Hemoglobin A1c, LDL Cholesterol, and Systolic Blood Pressure at 5 Years in the Diabetes Surgery Study. Jama. Jan 16 2018;319(3):266-278. doi:10.1001/jama.2017.20813
+132.Ilyas S, Al-Refai R, Maharjan R, Diaz Bustamante L, Ghattas KN, Khan S. Bariatric Surgery and Type 2 Diabetes Mellitus: Assessing Factors Leading to Remission. A Systematic Review. Cureus. Aug 23 2020;12(8):e9973. doi:10.7759/cureus.9973
+133.Inzucchi SE, Sherman RS, Goldman L (ed.), SchaferAI (ed.). Goldman's Cecil Medicine, Twenty-Fourth Edition. Chapter 236: Type 1 Diabetes Mellitus; 1475-1488. Copyright 2012a Saunders, an imprint of Elsevier, Inc. Available at: www.clinicalkey.com Accessed: 3/19/2015.
+134.Inzucchi SE, Sherman RS, Goldman L (ed.), SchaferAI (ed.). Goldman's Cecil Medicine, Twenty-Fourth Edition. Chapter 237: Type 2 Diabetes Mellitus; 1489-1499. Copyright 2012b Saunders, an imprint of Elsevier, Inc. Available at: www.clinicalkey.com Accessed: 3/19/2015.
+135.Inzucchi SE. Diagnosis of Diabetes. New England Journal of Medicine. 2012c;367(6):542-550.
+136.Inzucchi SE, Bergenstal RM, Buse JB, Diamant M, Ferrannini E, Nauck M, . . . Matthews DR. Management of Hyperglycemia in Type 2 Diabetes: A Patient-Centered Approach. Position Statement of the American Diabetes Association (ADA) and the European Association for the Study of Diabetes (EASD). 2012d;35(6):1364-1379.
+137.Inzucchi SE, Docherty KF, Kober L, et al. Dapagliflozin and the Incidence of Type 2 Diabetes in Patients With Heart Failure and Reduced Ejection Fraction: An Exploratory Analysis From DAPA-HF. Diabetes Care. Feb 2021;44(2):586-594. doi:10.2337/dc20-1675
+138.Jayaram S, Hariharan RS, Madhavan R, Periyandavar I, Samra SS. A prospective, parallel group, open-labeled, comparative, multi-centric, active controlled study to evaluate the safety, tolerability and benefits of fixed dose combination of acarbose and metformin versus metformin alone in type 2 diabetes. The Journal of the Association of Physicians of India. Nov 2010;58:679-682, 687.
+139.JDC. Joslin Diabetes Center. Healthy Eating: Why Does Fat Increase Blood Glucose? http://blog.joslin.org/2011/09/why-does-fat-increase-blood-glucose/. 9/27/2011. Accessed 6/7/2016
+140.Jiang M, Liu Q, Jiang T, Nizigiyimana P, Lei M. Adding Sodium-Glucose Co-Transporter 2 Inhibitors to Sulfonylureas and Risk of Hypoglycemia: A Systematic Review and Meta-Analysis of Randomized Controlled Trials. Frontiers in endocrinology. 2021;12:713192. doi:10.3389/fendo.2021.713192
+141.Johnson AB, Webster JM, Sum CF, Heseltine L, Argyraki M, Cooper BG, Taylor R. The impact of metformin therapy on hepatic glucose production and skeletal muscle glycogen synthase activity in overweight type II diabetic patients. Metabolism: clinical and experimental. Sep 1993;42(9):1217-1222.
+142.Jonsson T, Granfeldt Y, Ahren B, Branell UC, Palsson G, Hansson A, . . . Lindeberg S. Beneficial effects of a Paleolithic diet on cardiovascular risk factors in type 2 diabetes: a randomized cross-over pilot study. Cardiovascular diabetology. 2009;8:35.
+143.Jorgensen L, Jenssen T, Joakimsen O, et al. Glycated hemoglobin level is strongly related to the prevalence of carotid artery plaques with high echogenicity in nondiabetic individuals: the Tromso study. Circulation. 2004;110:466-470.
+144.Joshi SR, Ramachandran A, Chadha M, et al. Acarbose plus metformin fixed-dose combination in the management of type 2 diabetes. Expert Opin Pharmacother. 2014;15(11):1611-1620.
+145.Josse RG, McGuire AJ, Saal GB. A review of the economic evidence for acarbose in the prevention of diabetes and cardiovascular events in individuals with impaired glucose tolerance. Int J Clin Pract 2006;60(7):847-855.
+146.Juanola-Falgarona M, Salas-Salvado J, Ibarrola-Jurado N, Rabassa-Soler A, Diaz-Lopez A, Guasch-Ferre M, . . . Bullo M. Effect of the glycemic index of the diet on weight loss, modulation of satiety, inflammation, and other metabolic risk factors: a randomized controlled trial. The American journal of clinical nutrition. Jul 2014;100(1):27-35.
+147.Kaaks R. Nutrition, insulin, IGF-1 metabolism and cancer risk: a summary of epidemiological evidence. Novartis Foundation symposium. 2004;262:247-260; discussion 260-268.
+148.Kajbaf F, De Broe ME, Lalau JD. Therapeutic Concentrations of Metformin: A Systematic Review. Clinical pharmacokinetics. Apr 2016;55(4):439-459.
+149.Kanie T, Mizuno A, Takaoka Y, et al. Dipeptidyl peptidase-4 inhibitors, glucagon-like peptide 1 receptor agonists and sodium-glucose co-transporter-2 inhibitors for people with cardiovascular disease: a network meta-analysis. The Cochrane database of systematic reviews . Oct 25 2021;10:CD013650. doi:10.1002/14651858.CD013650.pub2
+150.Karlstad O, Starup Linde J, Vestergaard P, et al. Use of insulin and insulin analogs and risk of cancer—systematic review and meta-analysis of observational studies. Current drug safety. 2013;8(5):333-348.
+151.Kasznicki J, Sliwinska A, Drzewoski J. Metformin in cancer prevention and therapy. Annals of translational medicine. Jun 2014;2(6):57. doi:10.3978/j.issn.2305-5839.2014.06.01
+152.Kato M, Noda M, Suga H, et al. Fasting plasma glucose and incidence of diabetes – implication for the threshold for impaired fasting glucose: results from the population-based Omiya MA Cohort study. J Atheroscler Thromb. 2009;16:857-861.
+153.Kishore P. Merck Manual. Professional Version. Diabetes Mellitus (DM). Available at: http://www.merckmanuals.com/professional/endocrine-and-metabolic-disorders/diabetes-mellitus-and-disorders-of-carbohydrate-metabolism/diabetes-mellitus-dm. Last update: 6/2014. Accessed 4/2/2015.
+154.Klonoff DC. The Beneficial Effects of a Paleolithic Diet on Type 2 Diabetes and Other Risk Factors for Cardiovascular Disease. Journal of Diabetes Science and Technology. 2009;3(6):1229-1232.
+155.Knapen LM, van Dalem J, Keulemans YC, van Erp NP, Bazelier MT, De Bruin ML, . . . Driessen JH. Use of incretin agents and risk of pancreatic cancer: a population-based cohort study. Diabetes, obesity & metabolism. Mar 2016;18(3):258-265.
+156.Kocsis T, Molnár B, Németh D, et al. Probiotics have beneficial metabolic effects in patients with type 2 diabetes mellitus: a meta-analysis of randomized clinical trials. Scientific reports. 2020;10(1):11787.
+157.Koh ES, Han K, Nam YS, et al. Renal outcomes and all-cause death associated with sodium-glucose co-transporter-2 inhibitors versus other glucose-lowering drugs (CVD-REAL 3 Korea). Diabetes, obesity & metabolism. Feb 2021;23(2):455-466. doi:10.1111/dom.14239
+158.Koloverou E, Esposito K, Giugliano D, et al. The effect of Mediterranean diet on the development of type 2 diabetes mellitus: a meta-analysis of 10 prospective studies and 136,846 participants. Metabolism Clinical and Experimental. 2014;63:903-911.
+159.Lai YJ, Hu HY, Chen HH, Chou P. Dipeptidyl Peptidase-4 Inhibitors and the Risk of Acute Pancreatitis in Patients With Type 2 Diabetes in Taiwan: A Population-Based Cohort Study. Medicine. Oct 2015;94(43):e1906.
+160.LaMoia TE, Shulman GI. Cellular and Molecular Mechanisms of Metformin Action. Endocr Rev. Jan 28 2021;42(1):77-96. doi:10.1210/endrev/bnaa023
+161.La Sala L, Pontiroli AE. Prevention of Diabetes and Cardiovascular Disease in Obesity. International journal of molecular sciences. Oct 31 2020;21(21)doi:10.3390/ijms21218178
+162.Lau E, Belda E, Picq P, et al. Gut microbiota changes after metabolic surgery in adult diabetic patients with mild obesity: a randomised controlled trial. Diabetol Metab Syndr. May 21 2021;13(1):56. doi:10.1186/s13098-021-00672-1
+163.Lee SH, Min KJ. Caloric restriction and its mimetics. BMB reports. Apr 2013;46(4):181-187.
+164.Lee WJ, Kim M, Park HS, Kim HS, Jeon MJ, Oh KS, . . . Park JY. AMPK activation increases fatty acid oxidation in skeletal muscle by activating PPARalpha and PGC-1. Biochemical and biophysical research communications. Feb 3 2006;340(1):291-295.
+165.Lee M, Sun J, Han M, et al. Nationwide Trends in Pancreatitis and Pancreatic Cancer Risk Among Patients With Newly Diagnosed Type 2 Diabetes Receiving Dipeptidyl Peptidase 4 Inhibitors. Diabetes Care. Nov 2019;42(11):2057-2064. doi:10.2337/dc18-2195
+166.Lefevre M, Redman LM, Heilbronn LK, Smith JV, Martin CK, Rood JC, . . . Ravussin E. Caloric restriction alone and with exercise improves CVD risk in healthy non-obese individuals. Atherosclerosis. Mar 2009;203(1):206-213.
+167.Lexicomp. Drug information monographs. UpToDate: https://www.uptodate.com/contents/table-of-contents/drug-information/general-drug-information. Accessed Jan. 6, 2022.
+168.Li S, Flint A, Pai JK, Forman JP, Hu FB, Willett WC, . . . Rimm EB. Low carbohydrate diet from plant or animal sources and mortality among myocardial infarction survivors. J Am Heart Assoc. Oct 2014;3(5):e001169.
+169.Li L, Shen J, Bala MM, Busse JW, Ebrahim S, Vandvik PO, . . . Sun X. Incretin treatment and risk of pancreatitis in patients with type 2 diabetes mellitus: systematic review and meta-analysis of randomised and non-randomised studies. BMJ (Clinical research ed.). 2014;348:g2366.
+170.Lilly. Medicines in Development. Updated 1/31/2022. Accessed 2/7/2022, https://www.lilly.com/discovery/clinical-development-pipeline
+171.Lilly. News Release: Lily Reports Robust Third-Quarter 2021 Financial Results as Pipeline Success Strengthens Future Growth Potential. Updated 10/26/2021a. Accessed 2/7/2022. https://investor.lilly.com/news-releases/news-release-details/lilly-reports-robust-third-quarter-2021-financial-results
+172.Lilly. News Release: Tirzepatide significantly reduced A1C and body weight in people with type 2 diabetes in two phase 3 trials from Lilly's SURPASS program. Updated 2/17/2021b. Accessed 2/10/2022, https://investor.lilly.com/news-releases/news-release-details/tirzepatide-significantly-reduced-a1c-and-body-weight-people
+173.Liu XY, Zhang N, Chen R, Zhao JG, Yu P. Efficacy and safety of sodium-glucose cotransporter 2 inhibitors in type 2 diabetes: a meta-analysis of randomized controlled trials for 1 to 2years. Journal of diabetes and its complications. Nov-Dec 2015;29(8):1295-303. doi:10.1016/j.jdiacomp.2015.07.011
+174.Lordan S, Smyth TJ, Soler-Vila A, Stanton C, Ross RP. The alpha-amylase and alpha-glucosidase inhibitory effects of Irish seaweed extracts. Food chemistry. Dec 1 2013;141(3):2170-2176.
+175.Ludvik B, Giorgino F, Jódar E, et al. Once-weekly tirzepatide versus once-daily insulin degludec as add-on to metformin with or without SGLT2 inhibitors in patients with type 2 diabetes (SURPASS-3): a randomised, open-label, parallel-group, phase 3 trial. Lancet. Aug 14 2021;398(10300):583-598. doi:10.1016/s0140-6736(21)01443-4
+176.Magkos F, Hjorth MF, Astrup A. Diet and exercise in the prevention and treatment of type 2 diabetes mellitus. Nature reviews Endocrinology. Oct 2020;16(10):545-555. doi:10.1038/s41574-020-0381-5
+177.Mahajan R, Gupta K. Revisiting Metformin: Annual Vitamin B12 Supplementation may become Mandatory with Long-Term Metformin Use. Journal of young pharmacists: JYP. Oct 2010;2(4):428-429.
+178.Maiorino MI, Chiodini P, Bellastella G, et al. Free and fixed-ratio combinations of basal insulin and GLP-1 receptor agonists versus basal insulin intensification in type 2 diabetes: A systematic review and meta-analysis of randomized controlled trials. Diabetes, obesity & metabolism. Sep 2018;20(9):2309-2313. doi:10.1111/dom.13343
+179.Malin SK, Kashyap SR. Effects of various gastrointestinal procedures on β-cell function in obesity and type 2 diabetes. Surg Obes Relat Dis. Jul 2016;12(6):1213-9. doi:10.1016/j.soard.2016.02.035
+180.Martin-Montalvo A, Mercken EM, Mitchell SJ, et al. Metformin improves healthspan and lifespan in mice. Nat Commun. 2013;4:2192.
+181.Masharani U, Sherchan P, Schloetter M, Stratford S, Xiao A, Sebastian A, . . . Frassetto L. Metabolic and physiologic effects from consuming a hunter-gatherer (Paleolithic)-type diet in type 2 diabetes. European journal of clinical nutrition. Aug 2015;69(8):944-948.
+182.Mayo JJ, Kravitz L. Glycemic Index: Weight Loss Sham or Sensation? https://www.unm.edu/~lkravitz/Article%20folder/glycemicUNM.html. Accessed 3/31/2016
+183.Mazza A, Fruci B, Garinis GA, et al. The role of metformin in the management of NAFLD. Exp Diabetes Res. 2012;2012:716404.
+184.McCreight LJ, Bailey CJ, Pearson ER. Metformin and the gastrointestinal tract. Diabetologia. Mar 2016;59(3):426-435.
+185.McGill JB, Peters A, Buse JB, et al. Comprehensive Pulmonary Safety Review of Inhaled Technosphere((R)) Insulin in Patients with Diabetes Mellitus. Clinical drug investigation. Oct 2020;40(10):973-983. doi:10.1007/s40261-020-00958-8
+186.McRae MP. Dietary Fiber Intake and Type 2 Diabetes Mellitus: An Umbrella Review of Meta-analyses. Journal of chiropractic medicine. 2018;17(1):44-53.
+187.Meigs JB, Nathan DM, Wilson PW, Cupples LA, Singer DE. Metabolic risk factors worsen continuously across the spectrum of nondiabetic glucose tolerance. The Framingham Offspring Study. Ann Intern Med. Apr 1 1998;128(7):524-533.
+188.Mendez CE, Walker RJ, Eiler CR, Mishriky BM, Egede LE. Insulin therapy in patients with type 2 diabetes and high insulin resistance is associated with increased risk of complications and mortality. Postgrad Med. Aug 2019;131(6):376-382. doi:10.1080/00325481.2019.1643635
+189.Menne J, Dumann E, Haller H, Schmidt BMW. Acute kidney injury and adverse renal events in patients receiving SGLT2-inhibitors: A systematic review and meta-analysis. PLoS Med. Dec 2019;16(12):e1002983. doi:10.1371/journal.pmed.1002983
+190.Milder TY, Stocker SL, Abdel Shaheed C, et al. Combination Therapy with an SGLT2 Inhibitor as Initial Treatment for Type 2 Diabetes: A Systematic Review and Meta-Analysis. J Clin Med. Jan 4 2019;8(1)doi:10.3390/jcm8010045
+191.Milenkovic T, Bozhinovska N, Macut D, et al. Mediterranean Diet and Type 2 Diabetes Mellitus: A Perpetual Inspiration for the Scientific World. A Review. Nutrients. Apr 15 2021;13(4)doi:10.3390/nu13041307
+192.Miles JM, Rule AD, Borlaug BA. Use of metformin in diseases of aging. Curr Diab Rep. 2014;14:490.
+193.Mingrone G, Panunzi S, De Gaetano A, et al. Bariatric surgery versus conventional medical therapy for type 2 diabetes. The New England journal of medicine. Apr 26 2012;366(17):1577-85. doi:10.1056/NEJMoa1200111
+194.Mingrone G, Panunzi S, De Gaetano A, et al. Metabolic surgery versus conventional medical therapy in patients with type 2 diabetes: 10-year follow-up of an open-label, single-centre, randomised controlled trial. The Lancet. 2021;397(10271):293-304. doi:10.1016/S0140-6736(20)32649-0
+195.Misbin RI. The phantom of lactic acidosis due to metformin in patients with diabetes. Diabetes care. Jul 2004;27(7):1791-1793.
+196.Moghaddam E, Vogt JA, Wolever TM. The effects of fat and protein on glycemic responses in nondiabetic humans vary with waist circumference, fasting plasma insulin, and dietary fiber intake. The Journal of nutrition. Oct 2006;136(10):2506-2511.
+197.Mohanty RR, Das S. Inhaled Insulin - Current Direction of Insulin Research. Journal of clinical and diagnostic research: JCDR. Apr 2017;11(4):OE01-OE02. doi:10.7860/JCDR/2017/23626.9732
+198.Monami M, Candido R, Pintaudi B, Targher G, Mannucci E. Effect of metformin on all-cause mortality and major adverse cardiovascular events: An updated meta-analysis of randomized controlled trials. Nutr Metab Cardiovasc Dis. Mar 10 2021;31(3):699-704. doi:10.1016/j.numecd.2020.11.031
+199.Mooradian AD, Thurman JE. Drug therapy of postprandial hyperglycaemia. Drugs. Jan 1999;57(1):19-29.
+200.Morales DR, Morris AD. Metformin in cancer treatment and prevention. Annu Rev Med. 2015;66:17-29.
+201.Mudaliar S, Henry RR. Inhaled insulin in patients with asthma and chronic obstructive pulmonary disease. Diabetes technology & therapeutics. Jun 2007;9 Suppl 1:S83-92.
+202.Muti P, Quattrin T, Grant BJ, et al. Fasting glucose is a risk factor for breast cancer: a prospective study. Cancer Epidemiol Biomarkers Prev. 2002;11(11):1361-8.
+203.Nagel AK, Ahmed-Sarwar N, Werner PM, Cipriano GC, Van Manen RP, Brown JE. Dipeptidyl Peptidase-4 Inhibitor-Associated Pancreatic Carcinoma: A Review of the FAERS Database. The Annals of pharmacotherapy. Jan 2016;50(1):27-31.
+204.Napolitano A, Miller S, Nicholls AW, Baker D, Van Horn S, Thomas E, . . . Nunez DJ. Novel gut-based pharmacology of metformin in patients with type 2 diabetes mellitus. PloS one. 2014;9(7):e100778.
+205.Nasri H, Rafieian-Kopaei M. Metformin: current knowledge. J Res Med Sci. 2014;19(7):658-664.
+206.Nauck MA, Friedrich N. Do GLP-1–Based Therapies Increase Cancer Risk? Diabetes care. 2013;36(Supplement 2):S245-S252.
+207.Neuen BL, Arnott C, Perkovic V, et al. Sodium-glucose co-transporter-2 inhibitors with and without metformin: A meta-analysis of cardiovascular, kidney and mortality outcomes. Diabetes, obesity & metabolism. Feb 2021;23(2):382-390. doi:10.1111/dom.14226
+208.Neumiller JJ, Campbell RK. Technosphere insulin: an inhaled prandial insulin product. BioDrugs: clinical immunotherapeutics, biopharmaceuticals and gene therapy. Jun 2010;24(3):165-172.
+209.Niafar M, Hai F, Porhomayon J, et al. The role of metformin on vitamin B12 deficiency: a meta-analysis review. Intern Emerg Med. 2015;10(1):93-102.
+210.NIDDK. National Institute of Diabetes and Digestive Kidney Diseases. Am I at Risk for Type 2 Diabetes? Taking Steps to Lower Your Risk of Getting Diabetes. http://www.niddk.nih.gov/health-information/health-topics/Diabetes/type-2-diabetes-taking-steps-lower-your-risk-diabetes/Pages/index.aspx. 6/2012. Accessed 9/1/2015.
+211.NLM. U.S. National Library of Medicine. Meglitinide analogues for type 2 diabetes mellitus. http://www.ncbi.nlm.nih.gov/pubmedhealth/PMH0012926/. Copyright 2009 by Cochrance Collaboration. Accessed 8/17/2015.
+212.Noto H, Goto A, Tsujimoto T, Noda M. Low-carbohydrate diets and all-cause mortality: a systematic review and meta-analysis of observational studies. PloS one. 2013;8(1):e55030.
+213.NPG. Nature Publishing Group. Role of insulin-like growth factor 1 in bone metastasis. BoneKEy reports. 2012;1:170.
+214.O'Connor PJ, Sperl-Hillen JM. ePocrates online. Type 2 diabetes mellitus in adults. Available at: https://online.epocrates.com/u/291124/Type+2+diabetes+mellitus+in+adults. Last updated 1/12/2015. Accessed 3/19/2015.
+215.Odegaard AO, Koh WP, Yuan JM, Gross MD, Pereira MA. Western-style fast food intake and cardiometabolic risk in an Eastern country. Circulation. Jul 10 2012;126(2):182-188.
+216.Ouban A, Muraca P, Yeatman T, Coppola D. Expression and distribution of insulin-like growth factor-1 receptor in human carcinomas. Human pathology. Aug 2003;34(8):803-808.
+217.Palau-Rodriguez M, Tulipani S, Isabel Queipo-Ortuno M, Urpi-Sarda M, Tinahones FJ, Andres-Lacueva C. Metabolomic insights into the intricate gut microbial-host interaction in the development of obesity and type 2 diabetes. Front Microbiol. 2015;6:1151.
+218.Peng H, Want LL, Aroda VR. Safety and Tolerability of Glucagon-Like Peptide-1 Receptor Agonists Utilizing Data from the Exenatide Clinical Trial Development Program. Current diabetes reports. May 2016;16(5):44.
+219.Perkovic V, Jardine MJ, Neal B, et al. Canagliflozin and Renal Outcomes in Type 2 Diabetes and Nephropathy. The New England journal of medicine. Jun 13 2019;380(24):2295-2306. doi:10.1056/NEJMoa1811744
+220.Pernicova I, Korbonits M. Metformin--mode of action and clinical implications for diabetes and cancer. Nature reviews. Endocrinology. Mar 2014;10(3):143-156.
+221.Perraudeau F, McMurdie P, Bullard J, et al. Improvements to postprandial glucose control in subjects with type 2 diabetes: a multicenter, double blind, randomized placebo-controlled trial of a novel probiotic formulation. BMJ Open Diabetes Res Care. 2020;8(1).
+222.Pinto LC, Rados DV, Barkan SS, Leitao CB, Gross JL. Dipeptidyl peptidase-4 inhibitors, pancreatic cancer and acute pancreatitis: A meta-analysis with trial sequential analysis. Sci Rep. Jan 15 2018;8(1):782. doi:10.1038/s41598-017-19055-6
+223.Pryor R, Cabreiro F. Repurposing metformin: an old drug with new tricks in its binding pockets. The Biochemical journal. Nov 1 2015;471(3):307-322.
+224.Rana S, Blowers EC, Natarajan A. Small molecule adenosine 5’-monophosphate activated protein kinase (AMPK) modulators and human diseases. J Med Chem. 2015;58:2-29.
+225.Rehman MB, Tudrej BV, Soustre J, et al. Efficacy and safety of DPP-4 inhibitors in patients with type 2 diabetes: Meta-analysis of placebo-controlled randomized clinical trials. Diabetes Metab. Feb 2017;43(1):48-58. doi:10.1016/j.diabet.2016.09.005
+226.Rena G, Pearson ER, Sakamoto K. Molecular mechanism of action of metformin: old or new insights? Diabetologia. 2013;56(9):1898-1906.
+227.Rizza W, Veronese N, Fontana L. What are the roles of calorie restriction and diet quality in promoting healthy longevity? Ageing Res Rev. Jan 2014;13:38-45.
+228.Rosenstock J, Wysham C, Frias JP, et al. Efficacy and safety of a novel dual GIP and GLP-1 receptor agonist tirzepatide in patients with type 2 diabetes (SURPASS-1): a double-blind, randomised, phase 3 trial. Lancet. Jul 10 2021;398(10295):143-155. doi:10.1016/S0140-6736(21)01324-6
+229.Roshanov PS, Dennis BB. Incretin-based therapies are associated with acute pancreatitis: Meta-analysis of large randomized controlled trials. Diabetes research and clinical practice. Dec 2015;110(3):e13-17.
+230.Rubino F, Nathan DM, Eckel RH, Schauer PR, Alberti KG, Zimmet PZ, . . . Cummings DE. Metabolic Surgery in the Treatment Algorithm for Type 2 Diabetes: A Joint Statement by International Diabetes Organizations. Diabetes care. Jun 2016;39(6):861-877.
+231.Ruderman NB, Carling D, Prentki M, Cacicedo JM. AMPK, insulin resistance, and the metabolic syndrome. The Journal of clinical investigation. Jul 2013;123(7):2764-2772.
+232.Ryder RE. The potential risks of pancreatitis and pancreatic cancer with GLP-1-based therapies are far outweighed by the proven and potential (cardiovascular) benefits. Diabetic medicine: a journal of the British Diabetic Association. Oct 2013;30(10):1148-1155.
+233.Salminen A, Hyttinen JM, Kaarniranta K. AMP-activated protein kinase inhibits NF-kappaB signaling and inflammation: impact on healthspan and lifespan. J Mol Med (Berl). 2011;89(7):667-76.
+234.Sano R, Shinozaki Y, Ohta T. Sodium-glucose cotransporters: Functional properties and pharmaceutical potential. J Diabetes Investig. Jul 2020;11(4):770-782. doi:10.1111/jdi.13255
+235.Sarafidis PA, Ortiz A. The risk for urinary tract infections with sodium-glucose cotransporter 2 inhibitors: no longer a cause of concern? Clin Kidney J. Feb 2020;13(1):24-26. doi:10.1093/ckj/sfz170
+236.Schaafsma D, Gosens R, Ris JM, et al. Insulin induces airway smooth muscle contraction. Br J Phrmacol. 2007;150(2):136-42.
+237.Schauer PR, Bhatt DL, Kirwan JP, et al. Bariatric Surgery versus Intensive Medical Therapy for Diabetes - 5-Year Outcomes. The New England journal of medicine. Feb 16 2017;376(7):641-651. doi:10.1056/NEJMoa1600869
+238.Scheen AJ, Paquot N. Metformin revisited: a critical review of the benefit-risk balance in at-risk patients with type 2 diabetes. Diabetes Metab. 2013;39:179-190.
+        </p>
+
+</div>
+<script>
+        
+    </script>
+</body>
+</html>

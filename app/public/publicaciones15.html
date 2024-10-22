@@ -1,0 +1,793 @@
+
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">  
+    <link rel="icon" href="dc3.png" type="image/png">  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White Book</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">
+    <!-- Estilos para dispositivos móviles -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (max-width: 768px)">
+    <!-- Estilos para pantallas de PC -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (min-width: 769px)">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+
+    <!-- Metadatos Open Graph -->
+    <meta property="og:title" content="YOU TOMORROW">
+    <meta property="og:description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta property="og:image" content="https://drive.google.com/file/d/1ZZI3G6Fit_kovvVZolrvchtXQQDrnWYI/view?usp=sharing">
+    <meta property="og:url" content="https://ytomorrow.com/">
+    <meta property="og:type" content="website">
+
+    <!-- Otros metadatos -->
+    <meta name="description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta name="keywords" content="you, YOU TOMORROW, TOMORROW, TOMORR, TOM, web">
+
+    <style>
+
+   body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 17px;
+    line-height: 1.4;
+    margin: 20px;
+    font-weight: 500; /* Grosor medio de la negrita */
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1, h2, h3 {
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+p {
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.section {
+    margin-bottom: 30px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    width: 100%;
+}
+
+.chart-row {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+    width: 50%; /* Ajusta el ancho para que se adapte al contenido */
+}
+
+.chart-box {
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    min-width: 150px; /* Asegura que las tarjetas tengan un ancho mínimo */
+    max-width: 300px; /* Limita el ancho máximo para tarjetas largas */
+    word-wrap: break-word; /* Permite que el texto se ajuste dentro de la tarjeta */
+    flex: 1; /* Permite que las tarjetas se expandan uniformemente */
+}
+
+.chart-box:hover {
+    transform: scale(1.05);
+}
+
+.chart-box.ceo {
+    background: linear-gradient(135deg, #ff6f61, #e53935);
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.chart-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transform: rotate(45deg);
+}
+
+.chart-box:hover::before {
+    opacity: 1;
+}
+
+.chart-box.ceo::before {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.connector {
+    width: 2px;
+    height: 20px;
+    background-color: #1b3a7a;
+    margin: 0 auto;
+}
+
+.horizontal-connector {
+    height: 2px;
+    width: 100%;
+    background-color: #1b3a7a;
+}
+
+.horizontal-connector.long {
+    width: 50%;
+}
+
+.chart-box i {
+    margin-right: 8px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #1b5e20;
+    color: #1b5e20;
+    font-weight: bold;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+
+  caption {
+    caption-side: top;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+    </style>
+
+</head>
+<body>
+<div class="container">
+REFERENCES
+    <ol>
+        1.Marrero-Ponce, Y.; González-Díaz, H.; Romero-Zaldivar, V.; Torrens, F.; Castro, E. A. 3DChiral Quadratic Indices of the “Molecular Pseudograph’s Atom Adjacency Matrix” and their Application to Central Chirality Codification: Classification of ACE Inhibitors and Prediction of Receptor Antagonist Activities. Bioorg. Med. Chem. 2004, 12, 5331-5342. DOI: 10.1016/j.bmc.2004.07.051, ISSN: 0968-0896, IF: 3.205: This paper has recently been recognised in the "Top-50 most cited articles" as published in Bioorganic & Medicinal Chemistry 2003-2006, & all Tetrahedron Journals as well as Medical Magazine.
+        2.Marrero-Ponce, Y. Total and Local (Atom and Atom-Type) Molecular Quadratic Indices: Significance-Interpretation, Comparison to Other Molecular Descriptors and QSPR/QSAR Applications. Bioorg. Med. Chem. 2004, 12, 6351-6369. DOI: 10.1016/j.bmc.2004.09.034, ISSN: 0968-0896 and IF: 3.205. This paper has recently been recognised in the "Top-50 most cited articles" as published in Bioorganic & Medicinal Chemistry 2003-2006, & all Tetrahedron Journals as well as Medical Magazine.
+        3.Marrero-Ponce, Y.; Montero-Torres, A.; Romero-Zaldivar, C.; Iyarreta-Veitía, I.; Mayón Peréz, M.; García Sánchez, R. Non-Stochastic and Stochastic Linear Indices of the “Molecular Pseudograph’s Atom Adjacency Matrix”: Application to “in silico” Studies for the Rational Discovery of New active Compounds. Bioorg. Med. Chem. 2005, 13, 1293-1304. DOI: 10.1016/j.bmc.2004.11.008, ISSN: 0968-0896 and IF: 3.205.This paper has recently been recognised in the "Top-50 most cited articles" as published in Bioorganic & Medicinal Chemistry 2003-2006, & all Tetrahedron Journals as well as Medical Magazine.
+        4.Marrero-Ponce, Y.; Castillo-Garit, J.A.; Olazabal, E.; Serrano, H. S.; Morales, A.; Castañedo, N.; Ibarra-Velarde, F.; Huesca-Guillen, A.; Jorge, E.; Sánchez, A. M.; Torrens, F.; Castro, E. A. Atom, Atom-Type and Total Molecular Linear Indices as a Promising Approach for Bioorganic & Medicinal Chemistry: heoretical and Experimental Assessment of a Novel Method 10 for Virtual Screening and Rational Design of New Lead active. Bioorg. Med. Chem. 2005, 13, 1005-1020. DOI: 10.1016/j.bmc.2004.11.040, ISSN: 0968-0896 and IF: 3.205. **This paper has recently been recognised in the "Top-50 most cited articles" as published in Bioorganic & Medicinal Chemistry 2004-2007, & all Tetrahedron Journals as well as Medical Magazine.
+        5.Marrero-Ponce, Y.; Medina-Marrero, R.; Castillo-Garit, J.A.; Romero-Zaldivar, V.; Torrens, F.; Castro, E. A. Protein Linear Indices of the “Macromolecular Pseudograph’s -Carbon Atom Adjacency Matrix” in Bioinformatics. Part 1. Prediction of Protein Stability Effects of a Complete Set of Alanine Substitutions in Arc Repressor. Bioorg. Med. Chem. 2005, 13, 3003- 3015. DOI: 10.1016/j.bmc.2005.01.062, ISSN: 0968-0896 and IF: 3.205. **This paper has recently been recognised in the "Top-50 most cited articles" as published in Bioorganic & Medicinal Chemistry 2005-2008, & all Tetrahedron Journals as well as Medical Magazine.
+        6.Marrero-Ponce, Y.; Medina-Marrero, R.; Torrens, F.; Martinez, Y.; Romero-Zaldivar, V.; Castro, E. A. Atom, Atom-type, and Total Non-Stochastic and Stochastic Quadratic Fingerprints: A promising approach for modeling of antibacterial activity. Bioorg. Med. Chem. 2005, 13, 2881- 2899. DOI: 10.1016/j.bmc.2005.02.015, ISSN: 0968-0896 and IF: 3.205. *World’s 7th most requested article in 3rd quarter of 2005 according to the American Chemical Society (http://www.cas.org/spotlight/rlist3q05j/rlist3q05j.html).
+        7.Marrero-Ponce, Y.; Iyarreta, M.; Montero, A.; Romero, C.; Brandt, C. A.; Ávila, P. E.; Kirchgatter, K. A.; Machado, Y. Ligand-Based Virtual Screening and in silico Design of New active Compounds Using Non-Stochastic and Stochastic Total and Atom-type Quadratic Maps. J. Chem. Inf. Comput. Sci. 2005, 45, 1082-1100. DOI: 10.1021/ci050085t, ISSN: 1549- 9596 and IF: 4.068. Most-Cited Articles: 2005. J. Chem. Inf. Comput. Sci. For more information please see …  http://acsinfo.acs.org/journals/jcisd8/promo/most/most_cited/2005.html
+        8.Casañola-Martin, G. M.; Khan, M. T. H.; Marrero-Ponce, Y.; Ather, A.; Sultankhodzhaev, M. N.; Torrens, F. New Tyrosinase Inhibitors Selected by Atomic Linear Indices-Based Classification Models. Bioorg. Med. Chem. Letter. 2006, 16, 324-330. DOI: 10.1016/j.bmcl.2005.09.085, ISSN: 0960-894X and IF: 2.331.
+        9.Castillo-Garit, J. A.; Marrero-Ponce, Y.; Torrens, F. Atom-based 3D-Chiral Quadratic Indices: 2. Prediction of the Corticosteroid-Binding Globulin Binding Affinity of the Thirty-one Benchmark Steroids data set. Bioorg. Med. Chem. 2006, 14, 2398-2408. DOI: 10.1016/j.bmc.2005.11.024, ISSN: 0968-0896 and IF: 3.205.
+        10.Marrero-Ponce, Y.; Meneses-Marcel, A.; Machado-Tugores, Y.; Escario, J. A.; GómezBarrio, A; Montero Pereira, D.; Nogal-Ruiz, J. J.; Arán, V. J.; Martínez-Fernández, A. R.; Torrens, F.; Rotondo, R. Predicting Antitrichomonal Activity: A Computational Screening Using AtomBased Bilinear Indices and Experimental Proofs. Bioorg. Med. Chem. 2006, 14, 6502–6524. DOI: 10.1016/j.bmc.2006.06.016, ISSN: 0968-0896 and IF: 3.205.
+        11.Marrero-Ponce, Y.; Torrens, F.; Alvarado, Y. J: Rotondo, R. Bond-Based Global and Local (Bond, Group and Bond-Type) Quadratic Indices and Their Applications to Computer-Aided Molecular Design. 1. QSPR Studies of Diverse Sets of Organic Chemicals. J. Comput. Aided Mol. Des. 2006, 20, 685-701. DOI: 10.1007/s10822-006-9089-4, ISSN: 0920-654X and IF: 2.782.
+        12.Marrero-Ponce, Y.; Huesca-Guillén, A.; Torrens, F.; Ibarra-Velarde, F. Novel Ligand-Based Approach to Screening of Large Databases for Paramphistomicide Lead Generation. NEREIS 2011, 3, 9-15. ISSN: 1888-8550.
+        13.Rivera Borroto; O. M.; Hernández Díaz, Y.; García de la Vega, J. M.; Grau Ábalo, R. G; Marrero-Ponce, Y. Novel similarity measures for the effective and efficient retrieval of pharmacological datasets. Afinidad. 2011, LXVIII 551, 50-56. ISSN: 0001-9704 and IF: 0.23.
+        14.Barigye, S. J.; Marrero-Ponce, Y.; Pérez-Giménez, F.; Bonchev, D. Trends in Information Theory-based Chemical Structure Codification. Mol. Divers. 2014, 18, 673–686. DOI: 10.1007/s11030-014-9517-7, ISSN: 1381-1991 and IF: 2.544.
+        15.Barigye, S. J. and Marrero-Ponce, Y. Digital Communication and Chemical Structure Codification. In Encyclopedia of Complexity and Systems Science. 2016, R.A. Meyers (ed.), (Section: Complexity in Computational Chemistry, Chapter 10). Springer Science+Business Media New York. DOI: 10.1007/978-3-642-27737-5_625-2, ISBN: 978-3-642-27737-5.
+        16.Casañola-Martin, G. M.; Le-Thi-Thu, H.; Marrero-Ponce, Y.; Torrens, F.; Rescigno, A.; Abad, C.; Hassan Khan, M. QSAR-based CMs and TOMOCOMD-CARD Approach for the Discovery of New Tyrosinase Inhibitor Chemicals. In Recent Trends on QSAR in the Pharmaeutical Perceptions. Editor: Mahmud T. Hassan Khan. Bethan Books (http://ebooks.benthamscience.com/book/9781608053797/chapter/100538/). 2012, (Chapter 10), 296-337. DOI: 10.2174/97816080537971120101, and ISSN: 978-1-60805-433-6.
+        17.Cortes R,  Pérez Donato JA, Marrero O, Olazabal E, Rodríguez R. Evaluacion físico químico de  un extracto de polen  para uso alimentario y cosmético con perspectivas antienvejecimiento. Revista Cubana de Ciencia Apícola. 2012;14(2):72-78.
+        18.Duenas A, Cortés R, Marrero O, Donato J, Olazábal E. 2013.Toxicidad aguda do extracto hidroalcohólico de  la planta Chuquiraga jusieui, administrado por vía oral en ratas. La Técnica. 2013; (10): 12-17.
+        19.René Dionisio Cupull-Santana, Remigio Cortés-Rodríguez, Ervelio Eliseo Olazábal-Manso, Carlos Alberto Hernández Medina Actividad antifúngica de propóleos obtenidos en tres provincias de Cuba sobre hongos contaminantes en cultivo de tejidos vegetales. Acta Universitaria 2013;23(6):3-9.
+        20.Casañola-Martín, G. M.; Tareq Hassan Khan, M.; Le-Thi-Thu, H.; Marrero-Ponce, Y.; García-Domenech, R.; Torrens, F.; Rescigno, A.; Abad, C. Retrained Classification of Tyrosinase Inhibitors and “In silico” Potency Estimation by Using Atom-Type Linear Indices: A Powerful Tool for Speed up the Discovery of Leads. In Methodologies and Applications for Chemoinformatics and Chemical Engineering. Editor: Haghi, A. K. IGI Global, USA (http://www.igi-global.com/). 2013, (Chapter 21), 322-427. ISSN: 978-1-4666-4010-8.
+        21.Barigye, S. J. and Marrero-Ponce, Y. Digital Communication and Chemical Structure Codification. In Encyclopedia of Complexity and Systems Science. 2016, R.A. Meyers (ed.), (Section: Complexity in Computational Chemistry, Chapter 10). Springer Science+Business Media New York. DOI: 10.1007/978-3-642-27737-5_625-2, ISBN: 978-3-642-27737-5
+        22.Quevedo-Tumailli, V.F., B. Ortega-Tenezaca, and H. Gonzalez-Diaz, Chromosome Gene Orientation Inversion Networks (GOINs) of Plasmodium Proteome. J Proteome Res, 2018. 17(3): p. 1258-1268.
+        23.Pham-The, H., et al., Learning from Multiple Classifier Systems: Perspectives for Improving Decision Making of QSAR Models in Medicinal Chemistry. Curr Top Med Chem, 2018. 17(30): p. 3269-3288.
+        24.Nieto-Gonzalez, J.C., et al., Salivary gland ultrasound is linked to the autoimmunity profile in patients with primary Sjogren's syndrome. J Int Med Res, 2018: p. 300060518767031.
+        25.Nieto-Gonzalez, J.C., et al., Switch from intravenous to subcutaneous abatacept: Our experience. Reumatol Clin, 2018.
+        26.Mirza, N., et al., Expert Exchange Workgroup on Children Aged 5 and Younger with Severe Obesity: A Narrative Review of Medical and Genetic Risk Factors. Child Obes, 2018.
+        27.Miranda, C., et al., Biowaiver or Bioequivalence: Ambiguity in Sildenafil Citrate BCS Classification. AAPS PharmSciTech, 2018. 19(4): p. 1693-1698.
+        28.Gasior, P., et al., Novel ultrahigh molecular weight amorphous PLLA bioresorbable coronary scaffold upsized up to 0.8 mm beyond nominal diameter: An OCT and histopathology study in porcine coronary artery model. Catheter Cardiovasc Interv, 2018. 91(3): p. 378-386. Garcia-Jacas, C.R., et al., GOWAWA Aggregation Operator-based Global Molecular Characterizations: Weighting Atom/bond Contributions (LOVIs/LOEIs) According to their Influence in the Molecular Encoding. Mol Inform, 2018.
+        29.Fiandaca, M.S., R. Gonzalez-Dominguez, and H. Gonzalez-Diaz, New Experimental and Computational Tools for Drug Discovery: From Chemistry to Biology. Metabolomics, Pharmacokinetics, and Medicinal Chemistry. Part - IV. Curr Top Med Chem, 2018. 18(11): p. 881-882.
+        30.Ferreira da Costa, J., et al., Perturbation Theory/Machine Learning Model of ChEMBL Data for Dopamine Targets: Docking, Synthesis, and Assay of New l-Prolyl-l-leucyl-glycinamide Peptidomimetics. ACS Chem Neurosci, 2018.
+        31.Estrada, E. and G.J. Ross, Centralities in simplicial complexes. Applications to protein interaction networks. J Theor Biol, 2018. 438: p. 46-60.
+        32.Corrales-Urena, Y.R., et al., Biogenic silica-based microparticles obtained as a sub-product of the nanocellulose extraction process from pineapple peels. Sci Rep, 2018. 8(1): p. 10417.
+        33.Cabrera-Perez, M.A. and H. Pham-The, Computational modeling of human oral bioavailability: what will be next? Expert Opin Drug Discov, 2018. 13(6): p. 509-521.
+        34.Blay, V., T. Yokoi, and H. Gonzalez-Diaz, Perturbation Theory-Machine Learning Study of Zeolite Materials Desilication. J Chem Inf Model, 2018.
+        35.Betarelli, R.P., et al., The achievement of boar sperm in vitro capacitation is related to an increase of disrupted disulphide bonds and intracellular reactive oxygen species levels. Andrology, 2018.
+        36.Marrero-Ponce, Y., et al., Bond-based linear indices of the non-stochastic and stochastic edge-adjacency matrix. 1. Theory and modeling of ChemPhys properties of organic molecules. Mol Divers, 2010. 14(4): p. 731-53.
+        37.Marrero-Ponce, Y., et al., Ligand-based computer-aided discovery of tyrosinase inhibitors. Applications of the TOMOCOMD-CARDD method to the elucidation of new compounds. Curr Pharm Des, 2010. 16(24): p. 2601-24.
+        38.	Marrero-Ponce, Y., et al., Nucleotide's bilinear indices: novel bio-macromolecular descriptors for bioinformatics studies of nucleic acids. I. Prediction of paromomycin's affinity constant with HIV-1 Psi-RNA packaging region. J Theor Biol, 2009. 259(2): p. 229-41.
+        39.            Marrero-Ponce, Y., et al., Nucleotide's bilinear indices: novel bio-macromolecular descriptors for bioinformatics studies of nucleic acids. I. Prediction of paromomycin's affinity constant with HIV-1 Psi-RNA packaging region. J Theor Biol, 2009. 259(2): p. 229-41.
+        40.	Marrero-Ponce, Y., et al., Bond-based linear indices in QSAR: computational discovery of novel anti-trichomonal compounds. J Comput Aided Mol Des, 2008. 22(8): p. 523-40.
+        41.	Marrero-Ponce, Y., et al., Bond-based 2D TOMOCOMD-CARDD approach for drug discovery: aiding decision-making in 'in silico' selection of new lead tyrosinase inhibitors. J Comput Aided Mol Des, 2007. 21(4): p. 167-88.
+        42.            Marrero-Ponce, Y., et al., Prediction of tyrosinase inhibition activity using atom-based bilinear indices. ChemMedChem, 2007. 2(4): p. 449-78.
+        43.Marrero-Ponce, Y., et al., Bond-based global and local (bond, group and bond-type) quadratic indices and their applications to computer-aided molecular design. 1. QSPR studies of diverse sets of organic chemicals. J Comput Aided Mol Des, 2006. 20(10-11): p. 685-701.
+        44.Marrero-Ponce, Y., et al., Predicting antitrichomonal activity: a computational screening using atom-based bilinear indices and experimental proofs. Bioorg Med Chem, 2006. 14(19): p. 6502-24.
+        45.Marrero-Ponce, Y., et al., Predicting antitrichomonal activity: a computational screening using atom-based bilinear indices and experimental proofs. Bioorg Med Chem, 2006. 14(19): p. 6502-24.
+        46.Marrero-Ponce, Y., et al., Non-stochastic and stochastic linear indices of the molecular, Automatic extraction of structural alerts for predicting chromosome aberrations of organic compounds. J Mol Graph Model, 2006. 25(3): p. 275-88.
+        47.Marrero-Ponce, Y., et al., Non-stochastic and stochastic linear indices of the 'molecular pseudograph's atom adjacency matrix': application to 'in silico' studies for the rational discovery of new antimalarial compounds. Bioorg Med Chem, 2005. 13(4): p. 1293-304.
+        48.Marrero-Ponce, Y., et al., Atom, atom-type, and total nonstochastic and stochastic quadratic fingerprints: a promising approach for modeling of antibacterial activity. Bioorg Med Chem, 2005. 13(8): p. 2881-99.
+        49.Marrero-Ponce, Y., et al., Protein linear indices of the 'macromolecular pseudograph alpha-carbon atom adjacency matrix' in bioinformatics. Part 1: prediction of protein stability effects of a complete set of alanine substitutions in Arc repressor. Bioorg Med Chem, 2005. 13(8): p. 3003-15.
+        50.Marrero-Ponce, Y., et al., A computer-based approach to the rational discovery of new trichomonacidal drugs by atom-type linear indices. Curr Drug Discov Technol, 2005. 2(4): p. 245-65.
+        51.Marrero-Ponce, Y., et al., Ligand-based virtual screening and in silico design of new antimalarial compounds using nonstochastic and stochastic total and atom-type quadratic maps. J Chem Inf Model, 2005. 45(4): p. 1082-100.
+        52.Marrero-Ponce, Y., et al., Ligand-based virtual screening and in silico design of new antimalarial compounds using nonstochastic and stochastic total and atom-type quadratic maps. J Chem Inf Model, 2005. 45(4): p. 1082-100.
+        53.Marrero-Ponce, Y., et al., Atom, atom-type and total molecular linear indices as a promising approach for bioorganic and medicinal chemistry: theoretical and experimental assessment of a novel method for virtual screening and rational design of new lead anthelmintic. Bioorg Med Chem, 2005. 13(4): p. 1005-20.
+        54.Marrero-Ponce, Y. and J.A. Castillo-Garit, 3D-chiral atom, atom-type, and total non-stochastic and stochastic molecular linear indices and their applications to central chirality codification. J Comput Aided Mol Des, 2005. 19(6): p. 369-83.
+        55.Marrero Ponce, Y., J.A. Castillo Garit, and D. Nodarse, Linear indices of the 'macromolecular graph's nucleotides adjacency matrix' as a promising approach for bioinformatics studies. Part 1: prediction of paromomycin's affinity constant with HIV-1 psi-RNA packaging region. Bioorg Med Chem, 2005. 13(10): p. 3397-404.
+        56.Marrero-Ponce, Y., Linear indices of the "molecular pseudograph's atom adjacency matrix": definition, significance-interpretation, and application to QSAR analysis of flavone derivatives as HIV-1 integrase inhibitors. J Chem Inf Comput Sci, 2004. 44(6): p. 2010-26.
+        57.Marrero Ponce, Y., et al., A new topological descriptors based model for predicting intestinal epithelial transport of drugs in Caco-2 cell culture. J Pharm Pharm Sci, 2004. 7(2): p. 186-99.
+        58.Marrero Ponce, Y., et al., A new topological descriptors based model for predicting intestinal epithelial transport of drugs in Caco-2 cell culture. J Pharm Pharm Sci, 2004. 7(2): p. 186-99.
+        59.Marrero Ponce, Y., et al., A new topological descriptors based model for predicting intestinal epithelial transport of drugs in Caco-2 cell culture. J Pharm Pharm Sci, 2004. 7(2): p. 186-99.
+        60.http://compumat.uci.cu/?q=node/2559
+        61. http://www.sld.cu/sitios/revfarmacia/temas.php?idv=30516
+        62.http://digital.csic.es/bitstream/10261/86341/4/Art%C3%ADculo.pdf
+        63. http://ojs.uo.edu.cu/index.php/cq/article/viewFile/2090/1637
+        64.http://www.socepa.es/congresos/xii_congreso_iberico_parasitologia.pdf
+        65. http://www.usc.es/congresos/ecsoc/9/CC/g014/
+        66.https://www.usc.es/congresos/ecsoc/10/BOCNP/c005/c005.pdf
+        67. https://www.usc.es/congresos/ecsoc/12/hall_g_CC/g0003/g0003.pdf
+        68.http://sciforum.net/conference/ecsoc-12/paper/1280
+        69. http://sciforum.net/conference/ecsoc-12/paper/1282
+        70.http://www.informatica2013.sld.cu/index.php/informaticasalud/2013/schedConf/program
+        71.http://bvs.sld.cu/revistas/far/vol42_sup2_08/vol42_sup2_08.pdf
+        72.http://bvs.sld.cu/revistas/far/vol42_sup1_08/supl1_far48_08.pdf
+        73. http://www.chemistrycuba.com/Programacientifico.pdf
+        74. http://hta2014.uclv.edu.cu/wp-content/uploads/2014/07/P452_E8.pdf
+
+        Other publications are from contributors and developers of PPG NUTRITIONAL.
+
+        1.Simon-Vidal, L., et al., Perturbation-Theory and Machine Learning (PTML) Model for High-Throughput Screening of Parham Reactions: Experimental and Theoretical Studies. J Chem Inf Model, 2018. 58(7): p. 1384-1396.
+        2.Quevedo-Tumailli, V.F., B. Ortega-Tenezaca, and H. Gonzalez-Diaz, Chromosome Gene Orientation Inversion Networks (GOINs) of Plasmodium Proteome. J Proteome Res, 2018. 17(3): p. 1258-1268.
+        6.	Pham-The, H., et al., Learning from Multiple Classifier Systems: Perspectives for Improving Decision Making of QSAR Models in Medicinal Chemistry. Curr Top Med Chem, 2018. 17(30): p. 3269-3288.
+        7.	Nieto-Gonzalez, J.C., et al., Salivary gland ultrasound is linked to the autoimmunity profile in patients with primary Sjogren's syndrome. J Int Med Res, 2018: p. 300060518767031.
+        8.	Nieto-Gonzalez, J.C., et al., Switch from intravenous to subcutaneous abatacept: Our experience. Reumatol Clin, 2018.
+        9.	Mirza, N., et al., Expert Exchange Workgroup on Children Aged 5 and Younger with Severe Obesity: A Narrative Review of Medical and Genetic Risk Factors. Child Obes, 2018.
+        10.	Miranda, C., et al., Biowaiver or Bioequivalence: Ambiguity in Sildenafil Citrate BCS Classification. AAPS PharmSciTech, 2018. 19(4): p. 1693-1698.
+        11.	Meneses-Marcel, A., et al., Drug repositioning for novel antitrichomonas from known antiprotozoan drugs using hierarchical screening. Future Med Chem, 2018. 10(8): p. 863-878.
+        12.	Gasior, P., et al., Novel ultrahigh molecular weight amorphous PLLA bioresorbable coronary scaffold upsized up to 0.8 mm beyond nominal diameter: An OCT and histopathology study in porcine coronary artery model. Catheter Cardiovasc Interv, 2018. 91(3): p. 378-386.
+        13.	Garcia-Jacas, C.R., et al., GOWAWA Aggregation Operator-based Global Molecular Characterizations: Weighting Atom/bond Contributions (LOVIs/LOEIs) According to their Influence in the Molecular Encoding. Mol Inform, 2018.
+        14.	Fiandaca, M.S., R. Gonzalez-Dominguez, and H. Gonzalez-Diaz, New Experimental and Computational Tools for Drug Discovery: From Chemistry to Biology. Metabolomics, Pharmacokinetics, and Medicinal Chemistry. Part - IV. Curr Top Med Chem, 2018. 18(11): p. 881-882.
+        15.	Ferreira da Costa, J., et al., Perturbation Theory/Machine Learning Model of ChEMBL Data for Dopamine Targets: Docking, Synthesis, and Assay of New l-Prolyl-l-leucyl-glycinamide Peptidomimetics. ACS Chem Neurosci, 2018.
+        16.	Estrada, E. and G.J. Ross, Centralities in simplicial complexes. Applications to protein interaction networks. J Theor Biol, 2018. 438: p. 46-60.
+        17.	Corrales-Urena, Y.R., et al., Biogenic silica-based microparticles obtained as a sub-product of the nanocellulose extraction process from pineapple peels. Sci Rep, 2018. 8(1): p. 10417.
+        18.	Cabrera-Perez, M.A. and H. Pham-The, Computational modeling of human oral bioavailability: what will be next? Expert Opin Drug Discov, 2018. 13(6): p. 509-521.
+        19.	Blay, V., T. Yokoi, and H. Gonzalez-Diaz, Perturbation Theory-Machine Learning Study of Zeolite Materials Desilication. J Chem Inf Model, 2018.
+        20.	Betarelli, R.P., et al., The achievement of boar sperm in vitro capacitation is related to an increase of disrupted disulphide bonds and intracellular reactive oxygen species levels. Andrology, 2018.
+        21.	Barreiro, E., et al., Net-Net Auto Machine Learning (AutoML) Prediction of Complex Ecosystems. Sci Rep, 2018. 8(1): p. 12340.
+        22.	Arias, J.H., et al., Epidemics on plants: Modeling long-range dispersal on spatially embedded networks. J Theor Biol, 2018. 453: p. 1-13.
+        23.	Vazquez-Prieto, S., et al., A study of the Immune Epitope Database for some fungi species using network topological indices. Mol Divers, 2017. 21(3): p. 713-718.
+        24.	Valdes-Martini, J.R., et al., QuBiLS-MAS, open source multi-platform software for atom- and bond-based topological (2D) and chiral (2.5D) algebraic molecular descriptors computations. J Cheminform, 2017. 9(1): p. 35.
+        25.	Valdes-Martini, J.R., et al., QuBiLS-MAS, open source multi-platform software for atom- and bond-based topological (2D) and chiral (2.5D) algebraic molecular descriptors computations. J Cheminform, 2017. 9(1): p. 35.
+        26.	Sylla-Iyarreta Veitia, M., F. Dumas, and H. Gonzalez-Diaz, Editorial: New Experimental and Computational Tools for Drug Discovery: From Chemistry to Biology. Part-II. Curr Top Med Chem, 2017. 17(26): p. 2901-2902.
+        27.	Shameer, K., et al., Editorial: Improving Neuropharmacology using Big Data, Machine Learning and Computational Algorithms. Curr Neuropharmacol, 2017. 15(8): p. 1058-1061.
+        28.	Ruiz-Blanco, Y.B., et al., Novel "extended sequons" of human N-glycosylation sites improve the precision of qualitative predictions: an alignment-free study of pattern recognition using ProtDCal protein features. Amino Acids, 2017. 49(2): p. 317-325.
+        29.	Ruiz-Blanco, Y.B., et al., Novel "extended sequons" of human N-glycosylation sites improve the precision of qualitative predictions: an alignment-free study of pattern recognition using ProtDCal protein features. Amino Acids, 2017. 49(2): p. 317-325.
+        30.	Ramirez, A.S., E. Estrada, and A. Ruiz, Mapping the Health Information Landscape in a Rural, Culturally Diverse Region: Implications for Interventions to Reduce Information Inequality. J Prim Prev, 2017. 38(4): p. 345-362.
+        31.	Ramirez, A.S., et al., Bringing Produce to the People: Implementing a Social Marketing Food Access Intervention in Rural Food Deserts. J Nutr Educ Behav, 2017. 49(2): p. 166-174 e1.
+        32.	Paez, D., et al., Current status of nuclear cardiology practice in Latin America and the Caribbean. J Nucl Cardiol, 2017. 24(1): p. 308-316.
+        33.	Olvera-Castro, J.O., et al., Bobble-head doll syndrome in an 80-year-old man, associated with a giant arachnoid cyst of the lamina quadrigemina, treated with endoscopic ventriculocystocisternotomy and cystoperitoneal shunt. Acta Neurochir (Wien), 2017. 159(8): p. 1445-1450.
+        34.	Montejo Carrasco, P., et al., Subjective Memory Complaints in healthy older adults: Fewer complaints associated with depression and perceived health, more complaints also associated with lower memory performance. Arch Gerontol Geriatr, 2017. 70: p. 28-37.
+        35.	Martinez-Santiago, O., et al., Exploring the QSAR's predictive truthfulness of the novel N-tuple discrete derivative indices on benchmark datasets. SAR QSAR Environ Res, 2017. 28(5): p. 367-389.
+        36.	Martinez-Santiago, O., et al., Exploring the QSAR's predictive truthfulness of the novel N-tuple discrete derivative indices on benchmark datasets. SAR QSAR Environ Res, 2017. 28(5): p. 367-389.
+        37.	Martinez-Lopez, Y., et al., State of the Art Review and Report of New Tool for Drug Discovery. Curr Top Med Chem, 2017. 17(26): p. 2957-2976.
+        38.	Martinez-Lopez, Y., et al., Prediction of aquatic toxicity of benzene derivatives using molecular descriptor from atomic weighted vectors. Environ Toxicol Pharmacol, 2017. 56: p. 314-321.
+        39.	Martinez-Arzate, S.G., et al., PTML Model for Proteome Mining of B-Cell Epitopes and Theoretical-Experimental Study of Bm86 Protein Sequences from Colima, Mexico. J Proteome Res, 2017. 16(11): p. 4093-4103.
+        40.	Liu, Y., et al., Experimental Study and ANN Dual-Time Scale Perturbation Model of Electrokinetic Properties of Microbiota. Front Microbiol, 2017. 8: p. 1216.
+        41.	Hernandez-Caravaca, I., et al., Serum acute phase response induced by different vaccination protocols against circovirus type 2 and Mycoplasma hyopneumoniae in piglets. Res Vet Sci, 2017. 114: p. 69-73.
+        42.	Hempel, S., et al., A systematic review of modifiable risk factors in the progression of multiple sclerosis. Mult Scler, 2017. 23(4): p. 525-533.
+        43.	Hempel, S., et al., A systematic review of the effects of modifiable risk factor interventions on the progression of multiple sclerosis. Mult Scler, 2017. 23(4): p. 513-524.
+        44.	Gonzalez-Durruthy, M., et al., Decrypting Strong and Weak Single-Walled Carbon Nanotubes Interactions with Mitochondrial Voltage-Dependent Anion Channels Using Molecular Docking and Perturbation Theory. Sci Rep, 2017. 7(1): p. 13271.
+        45.	Gonzalez-Durruthy, M., et al., Carbon Nanotubes' Effect on Mitochondrial Oxygen Flux Dynamics: Polarography Experimental Study and Machine Learning Models using Star Graph Trace Invariants of Raman Spectra. Nanomaterials (Basel), 2017. 7(11).
+        46.	Gonzalez-Durruthy, M., et al., Experimental-Computational Study of Carbon Nanotube Effects on Mitochondrial Respiration: In Silico Nano-QSPR Machine Learning Models Based on New Raman Spectra Transform with Markov-Shannon Entropy Invariants. J Chem Inf Model, 2017. 57(5): p. 1029-1044.
+        47.	Garcia-Jacas, C.R., et al., Conformation-dependent QSAR approach for the prediction of inhibitory activity of bromodomain modulators. SAR QSAR Environ Res, 2017. 28(1): p. 41-58.
+        48.	Garcia-Jacas, C.R., et al., Tensor algebra-based geometric methodology to codify central chirality on organic molecules. SAR QSAR Environ Res, 2017. 28(6): p. 541-556.
+        49.	Estrada, E.S., et al., Multi-tool assessment of trace metals in mangroves combining sediment and clam sampling, DGT passive samplers and caged mussels. Sci Total Environ, 2017. 574: p. 847-857.
+        50.	Estrada, E., et al., Effects of reduced glutathione on acrosin activity in frozen-thawed boar spermatozoa. Reprod Fertil Dev, 2017. 29(2): p. 283-293.
+        51.	Estrada, E., et al., The addition of reduced glutathione to cryopreservation media induces changes in the structure of motile subpopulations of frozen-thawed boar sperm. Cryobiology, 2017. 78: p. 56-64.
+        52.	Estrada, E., A.A. Alhomaidhi, and F. Al-Thukair, Exploring the "Middle Earth" of network spectra via a Gaussian matrix function. Chaos, 2017. 27(2): p. 023109.
+        53.	Estrada, E., Quasirandom geometric networks from low-discrepancy sequences. Phys Rev E, 2017. 96(2-1): p. 022314.
+        54.	Cheng, Y., et al., Comparative Biomechanical Behavior and Healing Profile of a Novel Thinned Wall Ultrahigh Molecular Weight Amorphous Poly-l-Lactic Acid Sirolimus-Eluting Bioresorbable Coronary Scaffold. Circ Cardiovasc Interv, 2017. 10(7).
+        55.	Camacho, D., et al., Descriptions of depression and depression treatment in older Hispanic immigrants in a geriatric collaborative care program. Aging Ment Health, 2017: p. 1-7.
+        56.	Alexanderson-Rosas, E., et al., [(18)F]-Sodium fluoride uptake in Takayasu arteritis. J Nucl Cardiol, 2017. 24(5): p. 1674-1679.
+        57.	Aguilera-Pesantes, D., et al., Discovering key residues of dengue virus NS2b-NS3-protease: New binding sites for antiviral inhibitors design. Biochem Biophys Res Commun, 2017. 492(4): p. 631-642.
+        58.	Abeijon, P., et al., Multi-Target Mining of Alzheimer Disease Proteome with Hansch's QSBR-Perturbation Theory and Experimental-Theoretic Study of New Thiophene Isosters of Rasagiline. Curr Drug Targets, 2017. 18(5): p. 511-521.
+        59.	Yeste, M., et al., Specific LED-based red light photo-stimulation procedures improve overall sperm function and reproductive performance of boar ejaculates. Sci Rep, 2016. 6: p. 22569.
+        60.	Yang, F., E.F. Estrada, and M.C. Sanchez, Vibration training improves disability status in multiple sclerosis: A pretest-posttest pilot study. J Neurol Sci, 2016. 369: p. 96-101.
+        61.	Valdez, Z., et al., Community Perspectives on Access to and Availability of Healthy Food in Rural, Low-Resource, Latino Communities. Prev Chronic Dis, 2016. 13: p. E170.
+        62.	Vahl, T.P., et al., Four-year polymer biocompatibility and vascular healing profile of a novel ultrahigh molecular weight amorphous PLLA bioresorbable vascular scaffold: an OCT study in healthy porcine coronary arteries. EuroIntervention, 2016. 12(12): p. 1510-1518.
+        63.	Todeschini, R., et al., Data Analysis in Chemistry and Bio-Medical Sciences. Int J Mol Sci, 2016. 17(12).
+        64.	Tenorio-Borroto, E., et al., Experimental-Theoretic Approach to Drug-Lymphocyte Interactome Networks with Flow Cytometry and Spectral Moments Perturbation Theory. Curr Pharm Des, 2016. 22(33): p. 5114-5119.
+        65.	Romero-Duran, F.J., et al., Brain-inspired cheminformatics of drug-target brain interactome, synthesis, and assay of TVP1022 derivatives. Neuropharmacology, 2016. 103: p. 270-8.
+        66.	Rivera-Borroto, O.M., et al., Relational Agreement Measures for Similarity Searching of Cheminformatic Data Sets. IEEE/ACM Trans Comput Biol Bioinform, 2016. 13(1): p. 158-67.
+        67.	Rivera-Borroto, O.M., et al., Relational Agreement Measures for Similarity Searching of Cheminformatic Data Sets. IEEE/ACM Trans Comput Biol Bioinform, 2016. 13(1): p. 158-67.
+        68.	Rivera Fernandez, N., et al., A new type of quinoxalinone derivatives affects viability, invasion, and intracellular growth of Toxoplasma gondii tachyzoites in vitro. Parasitol Res, 2016. 115(5): p. 2081-96.
+        69.	Ran, T., et al., Gastrointestinal Spatiotemporal mRNA Expression of Ghrelin vs Growth Hormone Receptor and New Growth Yield Machine Learning Model Based on Perturbation Theory. Sci Rep, 2016. 6: p. 30174.
+        70.	Pham-The, H., et al., Exploring different strategies for imbalanced ADME data problem: case study on Caco-2 permeability modeling. Mol Divers, 2016. 20(1): p. 93-109.
+        71.	Messina, P.V., et al., Computational Modeling and Experimental Facts of Mixed Self- Assembly Systems. Curr Pharm Des, 2016. 22(34): p. 5249-5256.
+        72.	Martinez-Santiago, O., et al., Physico-Chemical and Structural Interpretation of Discrete Derivative Indices on N-Tuples Atoms. Int J Mol Sci, 2016. 17(6).
+        73.	Martinez-Santiago, O., et al., Physico-Chemical and Structural Interpretation of Discrete Derivative Indices on N-Tuples Atoms. Int J Mol Sci, 2016. 17(6).
+        74.	Martinez-Santiago, O., et al., Generalized Molecular Descriptors Derived From Event-Based Discrete Derivative. Curr Pharm Des, 2016. 22(33): p. 5095-5113.
+        75.	Gonzalez-Diaz, H., ADMET-Multi-Output Cheminformatics Models for Drug Delivery, Interactomics, and Nanotoxicology. Curr Drug Deliv, 2016.
+        76.	Garcia-Jacas, C.R., et al., N-tuple topological/geometric cutoffs for 3D N-linear algebraic molecular codifications: variability, linear independence and QSAR analysis. SAR QSAR Environ Res, 2016. 27(12): p. 949-975.
+        77.	Garcia-Jacas, C.R., et al., N-tuple topological/geometric cutoffs for 3D N-linear algebraic molecular codifications: variability, linear independence and QSAR analysis. SAR QSAR Environ Res, 2016. 27(12): p. 949-975.
+        78.	Garcia-Jacas, C.R., et al., Examining the predictive accuracy of the novel 3D N-linear algebraic molecular codifications on benchmark datasets. J Cheminform, 2016. 8: p. 10.
+        79.	Garcia-Jacas, C.R., et al., Examining the predictive accuracy of the novel 3D N-linear algebraic molecular codifications on benchmark datasets. J Cheminform, 2016. 8: p. 10.
+        80.	Garcia, Y., et al., Orthotropic Piezoelectricity in 2D Nanocellulose. Sci Rep, 2016. 6: p. 34616.
+        81.	Estrada, E., et al., Epidemic spreading in random rectangular networks. Phys Rev E, 2016. 94(5-1): p. 052316.
+        82.	Estrada, E., et al., Nicotine dependence and psychosis in Bipolar disorder and Schizoaffective disorder, Bipolar type. Am J Med Genet B Neuropsychiatr Genet, 2016. 171(4): p. 521-4.
+        83.	Cheng, Y., et al., Comparative Characterization of Biomechanical Behavior and Healing Profile of a Novel Ultra-High-Molecular-Weight Amorphous Poly-l-Lactic Acid Sirolimus-Eluting Bioresorbable Coronary Scaffold. Circ Cardiovasc Interv, 2016. 9(10).
+        84.	Casanola-Martin, G.M., et al., Multi-output Model with Box-Jenkins Operators of Quadratic Indices for Prediction of Malaria and Cancer Inhibitors Targeting Ubiquitin- Proteasome Pathway (UPP) Proteins. Curr Protein Pept Sci, 2016. 17(3): p. 220-7.
+        85.	Casanola-Martin, G.M., et al., Multi-output Model with Box-Jenkins Operators of Quadratic Indices for Prediction of Malaria and Cancer Inhibitors Targeting Ubiquitin- Proteasome Pathway (UPP) Proteins. Curr Protein Pept Sci, 2016. 17(3): p. 220-7.
+        86.	Casanola-Martin, G.M., et al., Multi-output Model with Box-Jenkins Operators of Quadratic Indices for Prediction of Malaria and Cancer Inhibitors Targeting Ubiquitin- Proteasome Pathway (UPP) Proteins. Curr Protein Pept Sci, 2016. 17(3): p. 220-7.
+        87.	Bayen, S., et al., Pharmaceutically active compounds and endocrine disrupting chemicals in water, sediments and mollusks in mangrove ecosystems from Singapore. Mar Pollut Bull, 2016. 109(2): p. 716-22.
+        88.	Basak, S.C., et al., Editorial (Thematic Issue: Chemoinformatics Models for Pharmaceutical Design, Part 1). Curr Pharm Des, 2016. 22(33): p. 5041-5042.
+        89.	Basak, S.C., et al., Editorial (Thematic Issue: Chemoinformatics Models for Pharmaceutical Design, Part 2). Curr Pharm Des, 2016. 22(34): p. 5177-5178.
+        90.	Aranzamendi, E., et al., Chiral Bronsted Acid-Catalyzed Enantioselective alpha-Amidoalkylation Reactions: A Joint Experimental and Predictive Study. ChemistryOpen, 2016. 5(6): p. 540-549.
+        91.	Yeste, M., et al., Intracellular calcium movements of boar spermatozoa during 'in vitro' capacitation and subsequent acrosome exocytosis follow a multiple-storage place, extracellular calcium-dependent model. Andrology, 2015. 3(4): p. 729-47.
+        92.	Yeste, M., et al., Cryotolerance of stallion spermatozoa is related to ROS production and mitochondrial membrane potential rather than to the integrity of sperm nucleus. Andrology, 2015. 3(2): p. 395-407.
+        93.	Yang, Y., et al., Attenuation of acute stroke injury in rat brain by minocycline promotes blood-brain barrier remodeling and alternative microglia/macrophage activation during recovery. J Neuroinflammation, 2015. 12: p. 26.
+        94.	Urias, R.W., et al., IMMAN: free software for information theory-based chemometric analysis. Mol Divers, 2015. 19(2): p. 305-19.
+        95.	Urias, R.W., et al., IMMAN: free software for information theory-based chemometric analysis. Mol Divers, 2015. 19(2): p. 305-19.
+        96.	Sifontes-Rodriguez, S., et al., The efficacy of 2-nitrovinylfuran derivatives against Leishmania in vitro and in vivo. Mem Inst Oswaldo Cruz, 2015. 110(2): p. 166-73.
+        97.	Santos-Fita, D., et al., Symbolism and ritual practices related to hunting in Maya communities from central Quintana Roo, Mexico. J Ethnobiol Ethnomed, 2015. 11: p. 71.
+        98.	Ruiz-Blanco, Y.B., et al., ProtDCal: A program to compute general-purpose-numerical descriptors for sequences and 3D-structures of proteins. BMC Bioinformatics, 2015. 16: p. 162.
+        99.	Ruiz-Blanco, Y.B., et al., ProtDCal: A program to compute general-purpose-numerical descriptors for sequences and 3D-structures of proteins. BMC Bioinformatics, 2015. 16: p. 162.
+        100.	Ruiz-Blanco, Y.B., et al., A Hookes law-based approach to protein folding rate. J Theor Biol, 2015. 364: p. 407-17.
+        101.	Ruiz-Blanco, Y.B., et al., A Hookes law-based approach to protein folding rate. J Theor Biol, 2015. 364: p. 407-17.
+        102.	Munteanu, C.R., et al., Bio-AIMS Collection of Chemoinformatics Web Tools based on Molecular Graph Information and Artificial Intelligence Models. Comb Chem High Throughput Screen, 2015. 18(8): p. 735-50.
+        103.	Messina, P.V., et al., Self-Assembled Binary Nanoscale Systems: Multioutput Model with LFER-Covariance Perturbation Theory and an Experimental-Computational Study of NaGDC-DDAB Micelles. Langmuir, 2015. 31(44): p. 12009-18.
+        104.	Medina Marrero, R., et al., QuBiLs-MAS method in early drug discovery and rational drug identification of antifungal agents. SAR QSAR Environ Res, 2015. 26(11): p. 943-58.
+        105.	Marrero-Ponce, Y., et al., Novel 3D bio-macromolecular bilinear descriptors for protein science: Predicting protein structural classes. J Theor Biol, 2015. 374: p. 125-37.
+        106.	Maldonado-Rojas, W., J. Olivero-Verbel, and Y. Marrero-Ponce, Computational fishing of new DNA methyltransferase inhibitors from natural products. J Mol Graph Model, 2015. 60: p. 43-54.
+        107.	Liu, Y., et al., Experimental and computational studies of fatty acid distribution networks. Mol Biosyst, 2015. 11(11): p. 2964-77.
+        108.	Jasik, C.B., et al., Characteristics of Youth Presenting for Weight Management: Retrospective National Data from the POWER Study Group. Child Obes, 2015. 11(5): p. 630-7.
+        109.	Herrera-Ibata, D.M., et al., Mapping chemical structure-activity information of HAART-drug cocktails over complex networks of AIDS epidemiology and socioeconomic data of U.S. counties. Biosystems, 2015. 132-133: p. 20-34.
+        110.	Hempel, S., et al., in Modifiable Risk Factors in the Progression of Multiple Sclerosis: A Systematic Review of the Epidemiology and Treatment. 2015: Washington (DC).
+        111.	Gongora, C.A., et al., Vessel Caging Versus Vascular Restoration in the Same Artery: Long-Term Vascular Remodeling and Healing in Response to Overlapping Metal Stent and Bioresorbable Polymer Scaffold. JACC Cardiovasc Interv, 2015. 8(4): p. 631-2.
+        112.	Giaretta, E., et al., Combining reduced glutathione and ascorbic acid has supplementary beneficial effects on boar sperm cryotolerance. Theriogenology, 2015. 83(3): p. 399-407.
+        113.	Garcia-Jacas, C.R., et al., Multi-Server Approach for High-Throughput Molecular Descriptors Calculation based on Multi-Linear Algebraic Maps. Mol Inform, 2015. 34(1): p. 60-9.
+        114.	Estrada, E., E. Vargas-Estrada, and H. Ando, Communicability angles reveal critical edges for network consensus dynamics. Phys Rev E Stat Nonlin Soft Matter Phys, 2015. 92(5): p. 052809.
+        115.	Estrada, E. and M. Sheerin, Random rectangular graphs. Phys Rev E Stat Nonlin Soft Matter Phys, 2015. 91(4): p. 042805.
+        116.	Estrada, E. and G. Chen, Synchronizability of random rectangular graphs. Chaos, 2015. 25(8): p. 083107.
+        117.	Conesa-Zamora, P., et al., Methylome profiling reveals functions and genes which are differentially methylated in serrated compared to conventional colorectal carcinoma. Clin Epigenetics, 2015. 7: p. 101.
+        118.	Castillo-Gonzalez, D., et al., Harmonization of QSAR Best Practices and Molecular Docking Provides an Efficient Virtual Screening Tool for Discovering New G-Quadruplex Ligands. J Chem Inf Model, 2015. 55(10): p. 2094-110.
+        119.	Castillo-Garit, J.A., et al., Bond-based bilinear indices for computational discovery of novel trypanosomicidal drug-like compounds through virtual screening. Eur J Med Chem, 2015. 96: p. 238-44.
+        120.	Casanola-Martin, G.M., et al., Multi-output model with Box-Jenkins operators of linear indices to predict multi-target inhibitors of ubiquitin-proteasome pathway. Mol Divers, 2015. 19(2): p. 347-56.
+        121.	Casanola-Martin, G.M., et al., Multi-output model with Box-Jenkins operators of linear indices to predict multi-target inhibitors of ubiquitin-proteasome pathway. Mol Divers, 2015. 19(2): p. 347-56.
+        122.	Brito-Sanchez, Y., et al., Towards Better BBB Passage Prediction Using an Extensive and Curated Data Set. Mol Inform, 2015. 34(5): p. 308-30.
+        123.	Bayen, S., et al., Direct injection of tissue extracts in liquid chromatography/tandem mass spectrometry for the determination of pharmaceuticals and other contaminants of emerging concern in mollusks. Anal Bioanal Chem, 2015. 407(19): p. 5553-8.
+        124.	Aguilera-Mendoza, L., et al., Overlap and diversity in antimicrobial peptide databases: compiling a non-redundant set of sequences. Bioinformatics, 2015. 31(15): p. 2553-9.
+        125.	Yeste, M., et al., The increase in phosphorylation levels of serine residues of protein HSP70 during holding time at 17 degrees C is concomitant with a higher cryotolerance of boar spermatozoa. PLoS One, 2014. 9(3): p. e90887.
+        126.	Yeste, M., et al., The improving effect of reduced glutathione on boar sperm cryotolerance is related with the intrinsic ejaculate freezability. Cryobiology, 2014. 68(2): p. 251-61.
+        127.	Vergara-Galicia, J., F.J. Prado-Prado, and H. Gonzalez-Diaz, Galvez-Markov network transferability indices: review of classic theory and new model for perturbations in metabolic reactions. Curr Drug Metab, 2014. 15(5): p. 557-64.
+        128.	Vazquez-Prieto, S., et al., A QSPR-like model for multilocus genotype networks of Fasciola hepatica in Northwest Spain. J Theor Biol, 2014. 343: p. 16-24.
+        129.	Tenorio-Borroto, E., et al., QSPR and flow cytometry analysis (QSPR-FCA): review and new findings on parallel study of multiple interactions of chemical compounds with immune cellular and molecular targets. Curr Drug Metab, 2014. 15(4): p. 414-28.
+        130.	Tenorio-Borroto, E., et al., Model for high-throughput screening of drug immunotoxicity--study of the anti-microbial G1 over peritoneal macrophages using flow cytometry. Eur J Med Chem, 2014. 72: p. 206-20.
+        131.	Romero Duran, F.J., et al., Prediction of multi-target networks of neuroprotective compounds with entropy indices and synthesis, assay, and theoretical study of new asymmetric 1,2-rasagiline carbamates. Int J Mol Sci, 2014. 15(9): p. 17035-64.
+        132.	Ramirez-Garzon, Y.T., et al., Measurement of radiation exposure in relatives of thyroid cancer patients treated with (131)I. Health Phys, 2014. 107(5): p. 410-6.
+        133.	Ramio-Lluch, L., et al., Oligomycin A-induced inhibition of mitochondrial ATP-synthase activity suppresses boar sperm motility and in vitro capacitation achievement without modifying overall sperm energy levels. Reprod Fertil Dev, 2014. 26(6): p. 883-97.
+        134.	Perez-Castillo, Y., et al., Toward the computer-aided discovery of FabH inhibitors. Do predictive QSAR models ensure high quality virtual screening performance? Mol Divers, 2014. 18(3): p. 637-54.
+        135.	Najem, C., et al., An unusual case of hematuria. Arthritis Care Res (Hoboken), 2014. 66(7): p. 1119-26.
+        136.	Munteanu, C.R., et al., LECTINPred: web Server that Uses Complex Networks of Protein Structure for Prediction of Lectins with Potential Use as Cancer Biomarkers or in Parasite Vaccine Design. Mol Inform, 2014. 33(4): p. 276-85.
+        137.	Martins Alho, M.A., et al., Antiprotozoan lead discovery by aligning dry and wet screening: prediction, synthesis, and biological assay of novel quinoxalinones. Bioorg Med Chem, 2014. 22(5): p. 1568-85.
+        138.	Martinez-Santiago, O., et al., Discrete Derivatives for Atom-Pairs as a Novel Graph-Theoretical Invariant for Generating New Molecular Descriptors: Orthogonality, Interpretation and QSARs/QSPRs on Benchmark Databases. Mol Inform, 2014. 33(5): p. 343-68.
+        139.	Martinez-Santiago, O., et al., Discrete Derivatives for Atom-Pairs as a Novel Graph-Theoretical Invariant for Generating New Molecular Descriptors: Orthogonality, Interpretation and QSARs/QSPRs on Benchmark Databases. Mol Inform, 2014. 33(5): p. 343-68.
+        140.	Luan, F., et al., Computer-aided nanotoxicology: assessing cytotoxicity of nanoparticles under diverse experimental conditions by using a novel QSTR-perturbation approach. Nanoscale, 2014. 6(18): p. 10623-30.
+        141.	Le-Thi-Thu, H., et al., A rational workflow for sequential virtual screening of chemical libraries on searching for new tyrosinase inhibitors. Curr Top Med Chem, 2014. 14(12): p. 1473-85.
+        142.	Kleandrova, V.V., et al., Computational tool for risk assessment of nanomaterials: novel QSTR-perturbation model for simultaneous prediction of ecotoxicity and cytotoxicity of uncoated and coated nanoparticles under multiple experimental conditions. Environ Sci Technol, 2014. 48(24): p. 14686-94.
+        143.	Kleandrova, V.V., et al., Computational ecotoxicology: simultaneous prediction of ecotoxic effects of nanoparticles under different experimental conditions. Environ Int, 2014. 73: p. 288-94.
+        144.	Ibanez-Escribano, A., et al., A sequential procedure for rapid and accurate identification of putative trichomonacidal agents. J Microbiol Methods, 2014. 105: p. 162-7.
+        145.	Haemer, M.A., et al., Addressing prediabetes in childhood obesity treatment programs: support from research and current practice. Child Obes, 2014. 10(4): p. 292-303.
+        146.	Gonzalez-Diaz, H., A. Speck-Planche, and M.N. Cordeiro, Editorial: Chemoinformatics in metabolomics, modeling chemical reactivity and ADMET processes part 1. Curr Drug Metab, 2014. 15(4): p. 345.
+        147.	Gonzalez-Diaz, H., A. Speck-Planche, and M.N. Cordeiro, Chemoinformatics in metabolomics, from molecular mechanics, dynamics, and docking to complex metabolic networks, part 2. Curr Drug Metab, 2014. 15(5): p. 489.
+        148.	Gonzalez-Diaz, H., L.G. Perez-Montoto, and F.M. Ubeira, Model for vaccine design by prediction of B-epitopes of IEDB given perturbations in peptide sequence, in vivo process, experimental techniques, and source or host organisms. J Immunol Res, 2014. 2014: p. 768515.
+        149.	Gonzalez-Diaz, H., et al., ANN multiscale model of anti-HIV drugs activity vs AIDS prevalence in the US at county level based on information indices of molecular graphs and social networks. J Chem Inf Model, 2014. 54(3): p. 744-55.
+        150.	Gonzalez-Diaz, H., et al., Matrix trace operators: from spectral moments of molecular graphs and complex networks to perturbations in synthetic reactions, micelle nanoparticles, and drug ADME processes. Curr Drug Metab, 2014. 15(4): p. 470-88.
+        151.	Garcia-Jacas, C.R., et al., N-linear algebraic maps for chemical structure codification: a suitable generalization for atom-pair approaches? Curr Drug Metab, 2014. 15(4): p. 441-69.
+        152.	Garcia-Jacas, C.R., et al., QuBiLS-MIDAS: a parallel free-software for molecular descriptors computation based on multilinear algebraic maps. J Comput Chem, 2014. 35(18): p. 1395-409.
+        153.	Garcia-Fuentes, M., H. Gonzalez-Diaz, and N. Csaba, Nanocarriers & drug delivery: rational design and applications. Curr Top Med Chem, 2014. 14(9): p. 1095-6.
+        154.	Fernandez-Lozano, C., et al., Markov mean properties for cell death-related protein classification. J Theor Biol, 2014. 349: p. 12-21.
+        155.	Estrada Espinosa, J.C., S.A. Martinez Ovalle, and C.K. Pereira Benavides, Dosimetric algorithm to reproduce isodose curves obtained from a LINAC. Comput Math Methods Med, 2014. 2014: p. 849505.
+        156.	Estrada, E., et al., Supplementing cryopreservation media with reduced glutathione increases fertility and prolificacy of sows inseminated with frozen-thawed boar semen. Andrology, 2014. 2(1): p. 88-99.
+        157.	Estrada, E. and J. Gomez-Gardenes, Communicability reveals a transition to coordinated behavior in multiplex networks. Phys Rev E Stat Nonlin Soft Matter Phys, 2014. 89(4): p. 042819.
+        158.	Estrada, E., et al., Children's Hospital Association consensus statements for comorbidities of childhood obesity. Child Obes, 2014. 10(4): p. 304-17.
+        159.	Estrada, E. and M. Benzi, Walk-based measure of balance in signed networks: detecting lack of balance in social networks. Phys Rev E Stat Nonlin Soft Matter Phys, 2014. 90(4): p. 042802.
+        160.	Duardo-Sanchez, A., et al., Modeling complex metabolic reactions, ecological systems, and financial and legal networks with MIANN models based on Markov-Wiener node descriptors. J Chem Inf Model, 2014. 54(1): p. 16-29.
+        161.	Casanola-Martin, G.M., et al., Tyrosinase enzyme: 1. An overview on a pharmacological target. Curr Top Med Chem, 2014. 14(12): p. 1494-501.
+        162.	Barigye, S.J., et al., Trends in information theory-based chemical structure codification. Mol Divers, 2014. 18(3): p. 673-86.
+        163.	Yeste, M., et al., Reduced glutathione and procaine hydrochloride protect the nucleoprotein structure of boar spermatozoa during freeze-thawing by stabilising disulfide bonds. Reprod Fertil Dev, 2013. 25(7): p. 1036-50.
+        164.	Yeste, M., et al., Good and bad freezability boar ejaculates differ in the integrity of nucleoprotein structure after freeze-thawing but not in ROS levels. Theriogenology, 2013. 79(6): p. 929-39.
+        165.	Yang, Y., et al., Early inhibition of MMP activity in ischemic rat brain promotes expression of tight junction proteins and angiogenesis during recovery. J Cereb Blood Flow Metab, 2013. 33(7): p. 1104-14.
+        166.	Tenorio-Borroto, E., et al., Entropy model for multiplex drug-target interaction endpoints of drug immunotoxicity. Curr Top Med Chem, 2013. 13(14): p. 1636-49.
+        167.	Sobarzo-Sanchez, E., et al., Synthetic oxoisoaporphine alkaloids: in vitro, in vivo and in silico assessment of antileishmanial activities. PLoS One, 2013. 8(10): p. e77560.
+        168.	Ruiz-Blanco, Y.B., et al., Global stability of protein folding from an empirical free energy function. J Theor Biol, 2013. 321: p. 44-53.
+        169.	Ruiz-Blanco, Y.B., et al., Global stability of protein folding from an empirical free energy function. J Theor Biol, 2013. 321: p. 44-53.
+        170.	Rivera, N., et al., In vivo genotoxicity and cytotoxicity assessment of a novel quinoxalinone with trichomonacide activity. J Appl Toxicol, 2013. 33(12): p. 1493-9.
+        171.	Prado-Prado, F., et al., Patents of bio-active compounds based on computer-aided drug discovery techniques. Front Biosci (Elite Ed), 2013. 5: p. 399-407.
+        172.	Pham-The, H., et al., The Use of Rule-Based and QSPR Approaches in ADME Profiling: A Case Study on Caco-2 Permeability. Mol Inform, 2013. 32(5-6): p. 459-79.
+        173.	Pham-The, H., et al., Provisional classification and in silico study of biopharmaceutical system based on caco-2 cell permeability and dose number. Mol Pharm, 2013. 10(6): p. 2445-61.
+        174.	Luan, F., et al., TOPS-MODE model of multiplexing neuroprotective effects of drugs and experimental-theoretic study of new 1,3-rasagiline derivatives potentially useful in neurodegenerative diseases. Bioorg Med Chem, 2013. 21(7): p. 1870-9.
+        175.	Han, P., et al., Reduction of nutrient contaminants into shallow eutrophic waters through vegetated treatment beds. Water Sci Technol, 2013. 68(6): p. 1280-7.
+        176.	Gonzalez-Diaz, H., et al., The Rucker-Markov invariants of complex Bio-Systems: applications in Parasitology and Neuroinformatics. Biosystems, 2013. 111(3): p. 199-207.
+        177.	Gonzalez-Diaz, H., et al., MIANN models in medicinal, physical and organic chemistry. Curr Top Med Chem, 2013. 13(5): p. 619-41.
+        178.	Gonzalez-Diaz, H., et al., General theory for multiple input-output perturbations in complex molecular systems. 1. Linear QSPR electronegativity models in physical, organic, and medicinal chemistry. Curr Top Med Chem, 2013. 13(14): p. 1713-41.
+        179.	Gonzalez-Diaz, H., Computational prediction of drug-target interactions in medicinal chemistry. Curr Top Med Chem, 2013. 13(14): p. 1619-21.
+        180.	Estrada, E. and E. Vargas-Estrada, How peer pressure shapes consensus, leadership, and innovations in social groups. Sci Rep, 2013. 3: p. 2905.
+        181.	Estrada, E., Communicability in temporal networks. Phys Rev E Stat Nonlin Soft Matter Phys, 2013. 88(4): p. 042811.
+        182.	Duardo-Sanchez, A. and H. Gonzalez-Diaz, Legal issues for chem-bioinformatics models. Front Biosci (Elite Ed), 2013. 5: p. 361-74.
+        183.	Castillo-Gonzalez, D., et al., FDA-approved drugs selected using virtual screening bind specifically to G-quadruplex DNA. Curr Pharm Des, 2013. 19(12): p. 2164-73.
+        184.	Brito-Sanchez, Y., et al., Comparative study to predict toxic modes of action of phenols from molecular structures. SAR QSAR Environ Res, 2013. 24(3): p. 235-51.
+        185.	Barigye, S.J., et al., Shannon's, mutual, conditional and joint entropy information indices: generalization of global indices defined from local vertex invariants. Curr Comput Aided Drug Des, 2013. 9(2): p. 164-83.
+        186.	Barigye, S.J., et al., Shannon's, mutual, conditional and joint entropy information indices: generalization of global indices defined from local vertex invariants. Curr Comput Aided Drug Des, 2013. 9(2): p. 164-83.
+        187.	Barigye, S.J., et al., Relations frequency hypermatrices in mutual, conditional and joint entropy-based information indices. J Comput Chem, 2013. 34(4): p. 259-74.
+        188.	Barigye, S.J., et al., Event-based criteria in GT-STAF information indices: theory, exploratory diversity analysis and QSPR applications. SAR QSAR Environ Res, 2013. 24(1): p. 3-34.
+        189.	Barigye, S.J., et al., Event-based criteria in GT-STAF information indices: theory, exploratory diversity analysis and QSPR applications. SAR QSAR Environ Res, 2013. 24(1): p. 3-34.
+        190.	Alvarez-Ginarte, Y.M., et al., Integration of ligand and structure-based virtual screening for identification of leading anabolic steroids. J Steroid Biochem Mol Biol, 2013. 138: p. 348-58.
+        191.	Alonso, N., et al., Model for high-throughput screening of multitarget drugs in chemical neurosciences: synthesis, assay, and theoretic study of rasagiline carbamates. ACS Chem Neurosci, 2013. 4(10): p. 1393-403.
+        192.	Vega, M.C., et al., Synthesis, biological evaluation and chemometric analysis of indazole derivatives. 1,2-Disubstituted 5-nitroindazolinones, new prototypes of antichagasic drug. Eur J Med Chem, 2012. 58: p. 214-27.
+        193.	Tenorio-Borroto, E., et al., Immunotoxicity, flow cytometry, and chemoinformatics: review, bibliometric analysis, and new QSAR model of drug effects over macrophages. Curr Top Med Chem, 2012. 12(16): p. 1815-33.
+        194.	Tenorio-Borroto, E., et al., ANN multiplexing model of drugs effect on macrophages; theoretical and flow cytometry study on the cytotoxicity of the anti-microbial drug G1 in spleen. Bioorg Med Chem, 2012. 20(20): p. 6181-94.
+        195.	Rivera-Borroto, O.M., et al., Dunn's index for cluster tendency assessment of pharmacological data sets. Can J Physiol Pharmacol, 2012. 90(4): p. 425-33.
+        196.	Riera-Fernandez, P., et al., New Markov-Shannon Entropy models to assess connectivity quality in complex networks: from molecular to cellular pathway, Parasite-Host, Neural, Industry, and Legal-Social networks. J Theor Biol, 2012. 293: p. 174-88.
+        197.	Riera-Fernandez, P., et al., From QSAR models of drugs to complex networks: state-of-art review and introduction of new Markov-spectral moments indices. Curr Top Med Chem, 2012. 12(8): p. 927-60.
+        198.	Prado-Prado, F., et al., 3D MI-DRAGON: new model for the reconstruction of US FDA drug- target network and theoretical-experimental studies of inhibitors of rasagiline derivatives for AChE. Curr Top Med Chem, 2012. 12(16): p. 1843-65.
+        199.	Perez-Castillo, Y., et al., GA(M)E-QSAR: a novel, fully automatic genetic-algorithm-(meta)-ensembles approach for binary classification in ligand-based drug design. J Chem Inf Model, 2012. 52(9): p. 2366-86.
+        200.	Morera, C., et al., Contralateral hearing aid use in cochlear implanted patients: multicenter study of bimodal benefit. Acta Otolaryngol, 2012. 132(10): p. 1084-94.
+        201.	Marrero-Ponce, Y., et al., Derivatives in discrete mathematics: a novel graph-theoretical invariant for generating new 2/3D molecular descriptors. I. Theory and QSPR application. J Comput Aided Mol Des, 2012. 26(11): p. 1229-46.
+        202.	Jacob, J.C., et al., Coronary artery dissection in Prader-Willi syndrome: case report and literature review. Can J Cardiol, 2012. 28(6): p. 759 e9-759 e11.
+        203.	Gonzalez-Diaz, H. and P. Riera-Fernandez, New Markov-autocorrelation indices for re-evaluation of links in chemical and biological complex networks used in metabolomics, parasitology, neurosciences, and epidemiology. J Chem Inf Model, 2012. 52(12): p. 3331-40.
+        204.	Gonzalez-Diaz, H., et al., LIBP-Pred: web server for lipid binding proteins using structural network parameters; PDB mining of human cancer biomarkers and drug targets in parasites and bacteria. Mol Biosyst, 2012. 8(3): p. 851-62.
+        205.	Gonzalez-Diaz, H., Editorial: QSAR/QSPR models as enabling technologies for drug & targets discovery in: medicinal chemistry, microbiology-parasitology, neurosciences, bioinformatics, proteomics and other biomedical sciences. Curr Top Med Chem, 2012. 12(8): p. 799-801.
+        206.	Estrada, E., Complex networks in the Euclidean space of communicability distances. Phys Rev E Stat Nonlin Soft Matter Phys, 2012. 85(6 Pt 2): p. 066122.
+        207.	Estrada, E., Complex biomolecular networks: challenges and opportunities. Brief Funct Genomics, 2012. 11(6): p. 417-9.
+        208.	Diaz-Molina, J.P., et al., Functional and oncological results of non-surgical vs surgical treatment in squamous cell carcinomas of the oropharynx. Acta Otorrinolaringol Esp, 2012. 63(5): p. 348-54.
+        209.	Castillo-Gonzalez, D., et al., Computational tools in the discovery of new G-quadruplex ligands with potential anticancer activity. Curr Top Med Chem, 2012. 12(24): p. 2843-56.
+        210.	Castillo-Garit, J.A., et al., Identification in silico and in vitro of novel trypanosomicidal drug-like compounds. Chem Biol Drug Des, 2012. 80(1): p. 38-45.
+        211.	Castillo-Garit, J.A., et al., A review of QSAR studies to discover new drug-like compounds actives against leishmaniasis and trypanosomiasis. Curr Top Med Chem, 2012. 12(8): p. 852-65.
+        212.	Cabrera-Perez, M.A., et al., QSPR in oral bioavailability: specificity or integrality? Mini Rev Med Chem, 2012. 12(6): p. 534-50.
+        213.	Aguiar-Pulido, V., et al., Naive Bayes QSDR classification based on spiral-graph Shannon entropies for protein biomarkers in human colon cancer. Mol Biosyst, 2012. 8(6): p. 1716-22.
+        214.	Saiz-Urra, L., et al., Combining molecular docking and QSAR studies for modelling the antigyrase activity of cyclothialidine derivatives. Eur J Med Chem, 2011. 46(7): p. 2736-47.
+        215.	Rivera-Borroto, O.M., et al., Comparison of combinatorial clustering methods on pharmacological data sets represented by machine learning-selected real molecular descriptors. J Chem Inf Model, 2011. 51(12): p. 3036-49.
+        216.	Rivera-Borroto, O.M., et al., Comparison of combinatorial clustering methods on pharmacological data sets represented by machine learning-selected real molecular descriptors. J Chem Inf Model, 2011. 51(12): p. 3036-49.
+        217.	Riera-Fernandez, P., et al., From chemical graphs in computer-aided drug design to general Markov-Galvez indices of drug-target, proteome, drug-parasitic disease, technological, and social-legal networks. Curr Comput Aided Drug Des, 2011. 7(4): p. 315-37.
+        218.	Rescigno, A., et al., Vanilloid derivatives as tyrosinase inhibitors driven by virtual screening-based QSAR models. Drug Test Anal, 2011. 3(3): p. 176-81.
+        219.	Prado-Prado, F., et al., 2D MI-DRAGON: a new predictor for protein-ligands interactions and theoretic-experimental studies of US FDA drug-target network, oxoisoaporphine inhibitors for MAO-A and human parasite proteins. Eur J Med Chem, 2011. 46(12): p. 5838-51.
+        220.	Prado-Prado, F., et al., Using entropy of drug and protein graphs to predict FDA drug-target network: theoretic-experimental study of MAO inhibitors and hemoglobin peptides from Fasciola hepatica. Eur J Med Chem, 2011. 46(4): p. 1074-94.
+        221.	Phulwani, P., et al., Hereditary hypophosphatemic rickets with hypercalciuria and nephrolithiasis-identification of a novel SLC34A3/NaPi-IIc mutation. Am J Med Genet A, 2011. 155A(3): p. 626-33.
+        222.	Pham The, H., et al., In Silico Prediction of Caco-2 Cell Permeability by a Classification QSAR Approach. Mol Inform, 2011. 30(4): p. 376-85.
+        223.	Perez-Castillo, Y., et al., Molecular dynamics and docking simulations as a proof of high flexibility in E. coli FabH and its relevance for accurate inhibitor modeling. J Comput Aided Mol Des, 2011. 25(4): p. 371-93.
+        224.	Moran, V.P., et al., Introduction of imatinib as first-line therapy for chronic myeloid leukemia in Cuba. MEDICC Rev, 2011. 13(1): p. 35-40.
+        225.	Marzaro, G., et al., Using the TOPS-MODE approach to fit multi-target QSAR models for tyrosine kinases inhibitors. Eur J Med Chem, 2011. 46(6): p. 2185-92.
+        226.	Marrero-Ponce, Y., et al., Discovery of novel anti-inflammatory drug-like compounds by aligning in silico and in vivo screening: the nitroindazolinone chemotype. Eur J Med Chem, 2011. 46(12): p. 5736-53.
+        227.	Le-Thi-Thu, H., et al., A Comparative Study of Nonlinear Machine Learning for the "In Silico" Depiction of Tyrosinase Inhibitory Activity from Molecular Structure. Mol Inform, 2011. 30(6-7): p. 527-37.
+        228.	Le-Thi-Thu, H., et al., Novel coumarin-based tyrosinase inhibitors discovered by OECD principles-validated QSAR approach from an enlarged, balanced database. Mol Divers, 2011. 15(2): p. 507-20.
+        229.	Grindrod, P., et al., Communicability across evolving networks. Phys Rev E Stat Nonlin Soft Matter Phys, 2011. 83(4 Pt 2): p. 046120.
+        230.	Gonzalez-Diaz, H., et al., NL MIND-BEST: a web server for ligands and proteins discovery--theoretic-experimental study of proteins of Giardia lamblia and new compounds active against Plasmodium falciparum. J Theor Biol, 2011. 276(1): p. 229-49.
+        231.	Gonzalez-Diaz, H., et al., MIND-BEST: Web server for drugs and target discovery; design, synthesis, and assay of MAO-B inhibitors and theoretical-experimental study of G3PDH protein from Trichomonas gallinae. J Proteome Res, 2011. 10(4): p. 1698-718.
+        232.	Gonzalez-Diaz, H., et al., MISS-Prot: web server for self/non-self discrimination of protein residue networks in parasites; theory and experiments in Fasciola peptides and Anisakis allergens. Mol Biosyst, 2011. 7(6): p. 1938-55.
+        233.	Gonzalez-Diaz, H., QSPR models for computer-aided drug design in microbiology, parasitology, and pharmacology. Curr Comput Aided Drug Des, 2011. 7(4): p. 228-30.
+        234.	Gonzalez, E.E., et al., Activity of topotecan given intravenously for 5 days every three weeks in patients with advanced non-small cell lung cancer pretreated with platinum and taxanes: a phase II study. Invest New Drugs, 2011. 29(6): p. 1459-64.
+        235.	Garcia, I., et al., First computational chemistry multi-target model for anti-Alzheimer, anti-parasitic, anti-fungi, and anti-bacterial activity of GSK-3 inhibitors in vitro, in vivo, and in different cellular lines. Mol Divers, 2011. 15(2): p. 561-7.
+        236.	Estrada, E., F. Kalala-Mutombo, and A. Valverde-Colmeiro, Epidemic spreading in networks with nonrandom long-range interactions. Phys Rev E Stat Nonlin Soft Matter Phys, 2011. 84(3 Pt 2): p. 036110.
+        237.	Estrada, E., Community detection based on network communicability. Chaos, 2011. 21(1): p. 016103.
+        238.	Estrada, E., Combinatorial study of degree assortativity in networks. Phys Rev E Stat Nonlin Soft Matter Phys, 2011. 84(4 Pt 2): p. 047101.
+        239.	Concu, R., et al., Review of computer-aided models for predicting collagen stability. Curr Comput Aided Drug Des, 2011. 7(4): p. 287-303.
+        240.	Cetina, L., et al., F18-FDG-PET/CT in the evaluation of patients with suspected recurrent or persistent locally advanced cervical carcinoma. Rev Invest Clin, 2011. 63(3): p. 227-35.
+        241.	Caumette, G., et al., Arsenic speciation in plankton organisms from contaminated lakes: transformations at the base of the freshwater food chain. Environ Sci Technol, 2011. 45(23): p. 9917-23.
+        242.	Castillo-Garit, J.A., et al., Ligand-based discovery of novel trypanosomicidal drug-like compounds: in silico identification and experimental support. Eur J Med Chem, 2011. 46(8): p. 3324-30.
+        243.	Alvarez-Ginarte, Y.M., et al., Anabolic and androgenic activities of 19-nor-testosterone steroids: QSAR study using quantum and physicochemical molecular descriptors. J Steroid Biochem Mol Biol, 2011. 126(1-2): p. 35-45.
+        244.	Al-Solaiman, Y., E. Estrada, and M. Allon, The spectrum of infections in catheter-dependent hemodialysis patients. Clin J Am Soc Nephrol, 2011. 6(9): p. 2247-52.
+        245.	Yang, Y., et al., Increased intranuclear matrix metalloproteinase activity in neurons interferes with oxidative DNA repair in focal cerebral ischemia. J Neurochem, 2010. 112(1): p. 134-49.
+        246.	Savitskaya, Y.A., et al., Circulating Natural IgM Antibodies Against Angiogenin in the Peripheral Blood Sera of Patients with Osteosarcoma as Candidate Biomarkers and Reporters of Tumorigenesis. Biomark Cancer, 2010. 2: p. 65-78.
+        247.	Sanders, M.R., et al., Flexing to aging: a children's hospital responds to a maturing workforce. J Pediatr, 2010. 157(2): p. 177-178 e1.
+        248.	Rodriguez-Soca, Y., et al., Trypano-PPI: a web server for prediction of unique targets in trypanosome proteome by using electrostatic parameters of protein-protein interactions. J Proteome Res, 2010. 9(2): p. 1182-90.
+        249.	Prado-Prado, F.J., et al., Unified QSAR & network-based computational chemistry approach to antimicrobials. II. Multiple distance and triadic census analysis of antiparasitic drugs complex networks. J Comput Chem, 2010. 31(1): p. 164-73.
+        250.	Prado-Prado, F.J., X. Garcia-Mera, and H. Gonzalez-Diaz, Multi-target spectral moment QSAR versus ANN for antiparasitic drugs against different parasite species. Bioorg Med Chem, 2010. 18(6): p. 2225-2231.
+        251.	Palomares-Alonso, F., et al., Two novel ternary albendazole-cyclodextrin-polymer systems: dissolution, bioavailability and efficacy against Taenia crassiceps cysts. Acta Trop, 2010. 113(1): p. 56-60.
+        252.	Ortega-Broche, S.E., et al., TOMOCOMD-CAMPS and protein bilinear indices--novel bio-macromolecular descriptors for protein research: I. Predicting protein stability effects of a complete set of alanine substitutions in the Arc repressor. FEBS J, 2010. 277(15): p. 3118-46.
+        253.	Ortega-Broche, S.E., et al., TOMOCOMD-CAMPS and protein bilinear indices--novel bio-macromolecular descriptors for protein research: I. Predicting protein stability effects of a complete set of alanine substitutions in the Arc repressor. FEBS J, 2010. 277(15): p. 3118-46.
+        254.	Muriel, C., et al., Impact of the incorporation of tyrosine kinase inhibitor agents on the treatment of patients with a diagnosis of advanced renal cell carcinoma: study based on experience at the Hospital Universitario Central de Asturias. Clin Transl Oncol, 2010. 12(8): p. 562-7.
+        255.	Marrero-Ponce, Y., et al., Bond-based linear indices of the non-stochastic and stochastic edge-adjacency matrix. 1. Theory and modeling of ChemPhys properties of organic molecules. Mol Divers, 2010. 14(4): p. 731-53.
+        256.	Marrero-Ponce, Y., et al., Ligand-based computer-aided discovery of tyrosinase inhibitors. Applications of the TOMOCOMD-CARDD method to the elucidation of new compounds. Curr Pharm Des, 2010. 16(24): p. 2601-24.
+        257.	Gonzalez-Diaz, H., et al., Predicting drugs and proteins in parasite infections with topological indices of complex networks: theoretical backgrounds, applications, and legal issues. Curr Pharm Des, 2010. 16(24): p. 2737-64.
+        258.	Gonzalez-Diaz, H., et al., Review of MARCH-INSIDE & complex networks prediction of drugs: ADMET, anti-parasite activity, metabolizing enzymes and cardiotoxicity proteome biomarkers. Curr Drug Metab, 2010. 11(4): p. 379-406.
+        259.	Gonzalez-Diaz, H., et al., QSAR for RNases and theoretic-experimental study of molecular diversity on peptide mass fingerprints of a new Leishmania infantum protein. Mol Divers, 2010. 14(2): p. 349-69.
+        260.	Gonzalez-Diaz, H., Network topological indices, drug metabolism, and distribution. Curr Drug Metab, 2010. 11(4): p. 283-4.
+        261.	Gonzalez-Diaz, H., QSAR and complex networks in pharmaceutical design, microbiology, parasitology, toxicology, cancer, and neurosciences. Curr Pharm Des, 2010. 16(24): p. 2598-600.
+        262.	Estrada, E., et al., Structural contributions of substrates to their binding to P-Glycoprotein. A TOPS-MODE approach. Curr Pharm Des, 2010. 16(24): p. 2676-709.
+        263.	Estrada, E., Generalized walks-based centrality measures for complex biological networks. J Theor Biol, 2010. 263(4): p. 556-65.
+        264.	Estrada, E., Universality in protein residue networks. Biophys J, 2010. 98(5): p. 890-900.
+        265.	Estrada, E., Randic index, irregularity and complex biomolecular networks. Acta Chim Slov, 2010. 57(3): p. 597-603.
+        266.	Estrada, E., Quantifying network heterogeneity. Phys Rev E Stat Nonlin Soft Matter Phys, 2010. 82(6 Pt 2): p. 066102.
+        267.	Concu, R., et al., Review of QSAR models for enzyme classes of drug targets: Theoretical background and applications in parasites, hosts, and other organisms. Curr Pharm Des, 2010. 16(24): p. 2710-23.
+        268.	Castillo-Garit, J.A., et al., Computational discovery of novel trypanosomicidal drug-like chemicals by using bond-based non-stochastic and stochastic quadratic maps and linear discriminant analysis. Eur J Pharm Sci, 2010. 39(1-3): p. 30-6.
+        269.	Castillo-Garit, J.A., et al., Computational discovery of novel trypanosomicidal drug-like chemicals by using bond-based non-stochastic and stochastic quadratic maps and linear discriminant analysis. Eur J Pharm Sci, 2010. 39(1-3): p. 30-6.
+        270.	Casanola-Martin, G.M., et al., Bond-based 2D quadratic fingerprints in QSAR studies: virtual and in vitro tyrosinase inhibitory activity elucidation. Chem Biol Drug Des, 2010. 76(6): p. 538-45.
+        271.	Anadon, A.M., et al., Diagnosing human anisakiasis: recombinant Ani s 1 and Ani s 7 allergens versus the UniCAP 100 fluorescence enzyme immunoassay. Clin Vaccine Immunol, 2010. 17(4): p. 496-502.
+        272.	Vina, D., et al., Alignment-free prediction of a drug-target complex network based on parameters of drug connectivity and protein sequence of receptors. Mol Pharm, 2009. 6(3): p. 825-35.
+        273.	Vilar, S., et al., A network-QSAR model for prediction of genetic-component biomarkers in human colorectal cancer. J Theor Biol, 2009. 261(3): p. 449-58.
+        274.	Taheri, S., et al., Spatiotemporal correlations between blood-brain barrier permeability and apparent diffusion coefficient in a rat model of ischemic stroke. PLoS One, 2009. 4(8): p. e6597.
+        275.	Sood, R., et al., Increased apparent diffusion coefficients on MRI linked with matrix metalloproteinases and edema in white matter after bilateral carotid artery occlusion in rats. J Cereb Blood Flow Metab, 2009. 29(2): p. 308-16.
+        276.	Prado-Prado, F.J., et al., Multi-target spectral moments for QSAR and Complex Networks study of antibacterial drugs. Eur J Med Chem, 2009. 44(11): p. 4516-21.
+        277.	Prado-Prado, F.J., et al., Unified QSAR approach to antimicrobials. 4. Multi-target QSAR modeling and comparative multi-distance study of the giant components of antiviral drug-drug complex networks. Bioorg Med Chem, 2009. 17(2): p. 569-75.
+        278.	Prado-Prado, F.J., et al., Multi-target spectral moment: QSAR for antiviral drugs vs. different viral species. Anal Chim Acta, 2009. 651(2): p. 159-64.
+        279.	Prado-Prado, F.J., et al., Multi-target spectral moment: QSAR for antifungal drugs vs. different fungi species. Eur J Med Chem, 2009. 44(10): p. 4051-6.
+        280.	Peterson, W.J., et al., Treatment of dialysis catheter-related Enterococcus bacteremia with an antibiotic lock: a quality improvement report. Am J Kidney Dis, 2009. 53(1): p. 107-11.
+        281.	Perez-Montoto, L.G., L. Santana, and H. Gonzalez-Diaz, Scoring function for DNA-drug docking of anticancer and antiparasitic compounds based on spectral moments of 2D lattice graphs for molecular dynamics trajectories. Eur J Med Chem, 2009. 44(11): p. 4461-9.
+        282.	Perez-Bello, A., et al., Alignment-free prediction of mycobacterial DNA promoters based on pseudo-folding lattice network or star-graph topological indices. J Theor Biol, 2009. 256(3): p. 458-66.
+        283.	Munteanu, C.R., et al., Complex network spectral moments for ATCUN motif DNA cleavage: first predictive study on proteins of human pathogen parasites. J Proteome Res, 2009. 8(11): p. 5219-28.
+        284.	Munteanu, C.R., et al., Multi-target QPDR classification model for human breast and colon cancer-related proteins using star graph topological indices. J Theor Biol, 2009. 257(2): p. 303-11.
+        285.	Marrero-Ponce, Y., et al., Nucleotide's bilinear indices: novel bio-macromolecular descriptors for bioinformatics studies of nucleic acids. I. Prediction of paromomycin's affinity constant with HIV-1 Psi-RNA packaging region. J Theor Biol, 2009. 259(2): p. 229-41.
+        286.	Marrero-Ponce, Y., et al., Nucleotide's bilinear indices: novel bio-macromolecular descriptors for bioinformatics studies of nucleic acids. I. Prediction of paromomycin's affinity constant with HIV-1 Psi-RNA packaging region. J Theor Biol, 2009. 259(2): p. 229-41.
+        287.	Gonzalez-Diaz, H., et al., Generalized lattice graphs for 2D-visualization of biological information. J Theor Biol, 2009. 261(1): p. 136-47.
+        288.	Garcia, I., et al., QSAR and complex network study of the chiral HMGR inhibitor structural diversity. Bioorg Med Chem, 2009. 17(1): p. 165-75.
+        289.	Estrada, E., Information mobility in complex networks. Phys Rev E Stat Nonlin Soft Matter Phys, 2009. 80(2 Pt 2): p. 026104.
+        290.	Concu, R., et al., Computational chemistry study of 3D-structure-function relationships for enzymes based on Markov models for protein electrostatic, HINT, and van der Waals potentials. J Comput Chem, 2009. 30(9): p. 1510-20.
+        291.	Concu, R., et al., 3D entropy and moments prediction of enzyme classes and experimental-theoretic study of peptide fingerprints in Leishmania parasites. Biochim Biophys Acta, 2009. 1794(12): p. 1784-94.
+        292.	Concu, R., et al., Prediction of enzyme classes from 3D structure: a general model and examples of experimental-theoretic scoring of peptide mass fingerprints of Leishmania proteins. J Proteome Res, 2009. 8(9): p. 4372-82.
+        293.	Castillo-Gonzalez, D., et al., Prediction of telomerase inhibitory activity for acridinic derivatives based on chemical structure. Eur J Med Chem, 2009. 44(12): p. 4826-40.
+        294.	Aguero-Chapin, G., et al., Alignment-free prediction of polygalacturonases with pseudofolding topological indices: experimental isolation from Coffea arabica and prediction of a new sequence. J Proteome Res, 2009. 8(4): p. 2122-8.
+        295.	Vilar, S., et al., QSAR model for alignment-free prediction of human breast cancer biomarkers based on electrostatic potentials of protein pseudofolding HP-lattice networks. J Comput Chem, 2008. 29(16): p. 2613-22.
+        296.	Sood, R.R., et al., Early beneficial effect of matrix metalloproteinase inhibition on blood-brain barrier permeability as measured by magnetic resonance imaging countered by impaired long-term recovery after stroke in rat brain. J Cereb Blood Flow Metab, 2008. 28(2): p. 431-8.
+        297.	Santana, L., et al., Quantitative structure-activity relationship and complex network approach to monoamine oxidase A and B inhibitors. J Med Chem, 2008. 51(21): p. 6740-51.
+        298.	Roldos, V., et al., Activity of a hydroxybibenzyl bryophyte constituent against Leishmania spp. and Trypanosoma cruzi: in silico, in vitro and in vivo activity studies. Eur J Med Chem, 2008. 43(9): p. 1797-807.
+        299.	Prado-Prado, F.J., et al., Unified QSAR approach to antimicrobials. Part 3: first multi-tasking QSAR model for input-coded prediction, structural back-projection, and complex networks clustering of antiprotozoal compounds. Bioorg Med Chem, 2008. 16(11): p. 5871-80.
+        300.	Munteanu, C.R., H. Gonzalez-Diaz, and A.L. Magalhaes, Enzymes/non-enzymes classification model complexity based on composition, sequence, 3D and topological indices. J Theor Biol, 2008. 254(2): p. 476-82.
+        301.	Munteanu, C.R., et al., Natural/random protein classification models based on star network topological indices. J Theor Biol, 2008. 254(4): p. 775-83.
+        302.	Morales Helguera, A., et al., Quantitative structure-carcinogenicity relationship for detecting structural alerts in nitroso compounds: species, rat; sex, female; route of administration, gavage. Chem Res Toxicol, 2008. 21(3): p. 633-42.
+        303.	Meneses-Marcel, A., et al., New antitrichomonal drug-like chemicals selected by bond (edge)-based TOMOCOMD-CARDD descriptors. J Biomol Screen, 2008. 13(8): p. 785-94.
+        304.	Marrero-Ponce, Y., et al., Bond-based linear indices in QSAR: computational discovery of novel anti-trichomonal compounds. J Comput Aided Mol Des, 2008. 22(8): p. 523-40.
+        305.	Ibarra-Velarde, F., et al., In silico fasciolicide activity of three experimental compounds in sheep. Ann N Y Acad Sci, 2008. 1149: p. 183-5.
+        306.	Gonzalez-Diaz, H. and F.J. Prado-Prado, Unified QSAR and network-based computational chemistry approach to antimicrobials, part 1: multispecies activity models for antifungals. J Comput Chem, 2008. 29(4): p. 656-67.
+        307.	Gonzalez-Diaz, H., F. Prado-Prado, and F.M. Ubeira, Predicting antimicrobial drugs and targets with the MARCH-INSIDE approach. Curr Top Med Chem, 2008. 8(18): p. 1676-90.
+        308.	Gonzalez-Diaz, H., et al., Proteomics, networks and connectivity indices. Proteomics, 2008. 8(4): p. 750-78.
+        309.	Gonzalez-Diaz, H., Quantitative studies on Structure-Activity and Structure-Property Relationships (QSAR/QSPR). Curr Top Med Chem, 2008. 8(18): p. 1554.
+        310.	Ferino, G., et al., Using spectral moments of spiral networks based on PSA/mass spectra outcomes to derive quantitative proteome-disease relationships (QPDRs) and predicting prostate cancer. Biochem Biophys Res Commun, 2008. 372(2): p. 320-5.
+        311.	Estrada, E.J., et al., Combined treatment of intrapancreatic autologous bone marrow stem cells and hyperbaric oxygen in type 2 diabetes mellitus. Cell Transplant, 2008. 17(12): p. 1295-304.
+        312.	Estrada, E., D.J. Higham, and N. Hatano, Communicability and multipartite structures in complex networks at negative absolute temperatures. Phys Rev E Stat Nonlin Soft Matter Phys, 2008. 78(2 Pt 2): p. 026102.
+        313.	Estrada, E. and N. Hatano, Communicability in complex networks. Phys Rev E Stat Nonlin Soft Matter Phys, 2008. 77(3 Pt 2): p. 036111.
+        314.	Estrada, E. and O. Bodin, Using network centrality measures to manage landscape connectivity. Ecol Appl, 2008. 18(7): p. 1810-25.
+        315.	Estrada, E., How the parts organize in the whole? A top-down view of molecular descriptors and properties for QSAR and drug design. Mini Rev Med Chem, 2008. 8(3): p. 213-21.
+        316.	Estrada, E., Quantum-chemical foundations of the topological substructural molecular design. J Phys Chem A, 2008. 112(23): p. 5208-17.
+        317.	Esteban, E., et al., Pulmonary toxicity in patients treated with gemcitabine plus vinorelbine or docetaxel for advanced non-small cell lung cancer: outcome data on a randomized phase II study. Invest New Drugs, 2008. 26(1): p. 67-74.
+        318.	Ebrahimi, F., et al., Automatic sleep stage classification based on EEG signals by using neural networks and wavelet packet coefficients. Conf Proc IEEE Eng Med Biol Soc, 2008. 2008: p. 1151-4.
+        319.	Dea-Ayuela, M.A., et al., HP-Lattice QSAR for dynein proteins: experimental proteomics (2D-electrophoresis, mass spectrometry) and theoretic study of a Leishmania infantum sequence. Bioorg Med Chem, 2008. 16(16): p. 7770-6.
+        320.	Cruz-Monteagudo, M., et al., Quantitative Proteome-Property Relationships (QPPRs). Part 1: finding biomarkers of organic drugs with mean Markov connectivity indices of spiral networks of blood mass spectra. Bioorg Med Chem, 2008. 16(22): p. 9684-93.
+        321.	Cruz-Monteagudo, M., et al., 3D-MEDNEs: an alternative "in silico" technique for chemical research in toxicology. 2. quantitative proteome-toxicity relationships (QPTR) based on mass spectrum spiral entropy. Chem Res Toxicol, 2008. 21(3): p. 619-32.
+        322.	Castillo-Garit, J.A., et al., Bond-based 3D-chiral linear indices: theory and QSAR applications to central chirality codification. J Comput Chem, 2008. 29(15): p. 2500-12.
+        323.	Castillo-Garit, J.A., et al., Estimation of ADME properties in drug discovery: predicting Caco-2 cell permeability using atom-based stochastic and non-stochastic linear indices. J Pharm Sci, 2008. 97(5): p. 1946-76.
+        324.	Castillo-Garit, J.A., et al., A novel approach to predict aquatic toxicity from molecular structure. Chemosphere, 2008. 73(3): p. 415-27.
+        325.	Casanola-Martin, G.M., et al., Atom- and bond-based 2D TOMOCOMD-CARDD approach and ligand-based virtual screening for the drug discovery of new tyrosinase inhibitors. J Biomol Screen, 2008. 13(10): p. 1014-24.
+        326.	Alvarez-Ginarte, Y.M., et al., Applying pattern recognition methods plus quantum and physico-chemical molecular descriptors to analyze the anabolic activity of structurally diverse steroids. J Comput Chem, 2008. 29(3): p. 317-33.
+        327.	Alvarez-Ginarte, Y.M., et al., Chemometric and chemoinformatic analyses of anabolic and androgenic activities of testosterone and dihydrotestosterone analogues. Bioorg Med Chem, 2008. 16(12): p. 6448-59.
+        328.	Aguero-Chapin, G., et al., MMM-QSAR recognition of ribonucleases without alignment: comparison with an HMM model and isolation from Schizosaccharomyces pombe, prediction, and experimental assay of a new sequence. J Chem Inf Model, 2008. 48(2): p. 434-48.
+        329.	Aguero-Chapin, G., et al., Comparative study of topological indices of macro/supramolecular RNA complex networks. J Chem Inf Model, 2008. 48(11): p. 2265-77.
+        330.	Yang, Y., et al., Matrix metalloproteinase-mediated disruption of tight junction proteins in cerebral vessels is reversed by synthetic matrix metalloproteinase inhibitor in focal ischemia in rat. J Cereb Blood Flow Metab, 2007. 27(4): p. 697-709.
+        331.	Sood, R., et al., Quantitative evaluation of the effect of propylene glycol on BBB permeability. J Magn Reson Imaging, 2007. 25(1): p. 39-47.
+        332.	Ruiz-Marcial, C., et al., Antiproliferative, cytotoxic and antitumour activity of coumarins isolated from Calophyllum brasiliense. J Pharm Pharmacol, 2007. 59(5): p. 719-25.
+        333.	Rosenberg, G.A., E.Y. Estrada, and S. Mobashery, Effect of synthetic matrix metalloproteinase inhibitors on lipopolysaccharide-induced blood-brain barrier opening in rodents: Differences in response based on strains and solvents. Brain Res, 2007. 1133(1): p. 186-92.
+        334.	Prado-Prado, F.J., et al., Unified QSAR approach to antimicrobials. Part 2: predicting activity against more than 90 different species in order to halt antibacterial resistance. Bioorg Med Chem, 2007. 15(2): p. 897-902.
+        335.	Maya, I.D., et al., Treatment of dialysis catheter-related Staphylococcus aureus bacteremia with an antibiotic lock: a quality improvement report. Am J Kidney Dis, 2007. 50(2): p. 289-95.
+        336.	Marrero-Ponce, Y., et al., Bond-based 2D TOMOCOMD-CARDD approach for drug discovery: aiding decision-making in 'in silico' selection of new lead tyrosinase inhibitors. J Comput Aided Mol Des, 2007. 21(4): p. 167-88.
+        337.	Marrero-Ponce, Y., et al., Prediction of tyrosinase inhibition activity using atom-based bilinear indices. ChemMedChem, 2007. 2(4): p. 449-78.
+        338.	Gonzalez-Diaz, H., et al., Medicinal chemistry and bioinformatics--current trends in drugs discovery with networks topological indices. Curr Top Med Chem, 2007. 7(10): p. 1015-29.
+        339.	Gonzalez-Diaz, H., et al., On the applicability of QSAR for recognition of miRNA bioorganic structures at early stages of organism and cell development: embryo and stem cells. Bioorg Med Chem, 2007. 15(7): p. 2544-50.
+        340.	Gonzalez-Diaz, H., et al., A model for the recognition of protein kinases based on the entropy of 3D van der Waals interactions. J Proteome Res, 2007. 6(2): p. 904-8.
+        341.	Gonzalez-Diaz, H., et al., Computational chemistry approach to protein kinase recognition using 3D stochastic van der Waals spectral moments. J Comput Chem, 2007. 28(6): p. 1042-8.
+        342.	Gonzalez-Diaz, H., et al., Computational chemistry comparison of stable/nonstable protein mutants classification models based on 3D and topological indices. J Comput Chem, 2007. 28(12): p. 1990-5.
+        343.	Gonzalez-Diaz, H., et al., QSAR study of anticoccidial activity for diverse chemical compounds: prediction and experimental assay of trans-2-(2-nitrovinyl)furan. Bioorg Med Chem, 2007. 15(2): p. 962-8.
+        344.	Gonzalez-Diaz, H., et al., ANN-QSAR model for selection of anticancer leads from structurally heterogeneous series of compounds. Eur J Med Chem, 2007. 42(5): p. 580-5.
+        345.	Gonzalez-Diaz, H., et al., 2D-RNA-coupling numbers: a new computational chemistry approach to link secondary structure topology with biological function. J Comput Chem, 2007. 28(6): p. 1049-56.
+        346.	Estrada, E., et al., Ethnobotany in the Cumbres de Monterrey National Park, Nuevo Leon, Mexico. J Ethnobiol Ethnomed, 2007. 3: p. 8.
+        347.	Estrada, E. and A.R. Matamala, Generalized topological indices. Modeling gas-phase rate coefficients of atmospheric relevance. J Chem Inf Model, 2007. 47(3): p. 794-804.
+        348.	Estrada, E., Food webs robustness to biodiversity loss: the roles of connectance, expansibility and degree distribution. J Theor Biol, 2007. 244(2): p. 296-307.
+        349.	Estrada, E., Point scattering: a new geometric invariant with applications from (nano)clusters to biomolecules. J Comput Chem, 2007. 28(4): p. 767-77.
+        350.	Estrada, E., Topological structural classes of complex networks. Phys Rev E Stat Nonlin Soft Matter Phys, 2007. 75(1 Pt 2): p. 016103.
+        351.	Estrada, E., Tight-binding "dihedral orbitals" approach to the degree of folding of macromolecular chains. J Phys Chem B, 2007. 111(48): p. 13611-8.
+        352.	Esteban, E., et al., Cisplatin plus gemcitabine with or without vinorelbine as induction chemotherapy prior to radical locoregional treatment for patients with stage III non-small-cell lung cancer (NSCLC): results of a prospective randomized study. Lung Cancer, 2007. 55(2): p. 173-80.
+        353.	Ebrahimi, F., et al., Assessment of Itakura Distance as a valuable feature for computer-aided classification of sleep stages. Conf Proc IEEE Eng Med Biol Soc, 2007. 2007: p. 3300-3.
+        354.	Cruz-Monteagudo, M., et al., Computational chemistry development of a unified free energy Markov model for the distribution of 1300 chemicals to 38 different environmental or biological systems. J Comput Chem, 2007. 28(11): p. 1909-23.
+        355.	Castillo-Garit, J.A., et al., Atom-based stochastic and non-stochastic 3D-chiral bilinear indices and their applications to central chirality codification. J Mol Graph Model, 2007. 26(1): p. 32-47.
+        356.	Casanola-Martin, G.M., et al., TOMOCOMD-CARDD descriptors-based virtual screening of tyrosinase inhibitors: evaluation of different classification model combinations using bond-based linear indices. Bioorg Med Chem, 2007. 15(3): p. 1483-503.
+        357.	Casanola-Martin, G.M., et al., Dragon method for finding novel tyrosinase inhibitors: Biosilico identification and experimental in vitro assays. Eur J Med Chem, 2007. 42(11-12): p. 1370-81.
+        358.	Candelario-Jalil, E., et al., Cyclooxygenase inhibition limits blood-brain barrier disruption following intracerebral injection of tumor necrosis factor-alpha in the rat. J Pharmacol Exp Ther, 2007. 323(2): p. 488-98.
+        359.	Vega, M.C., et al., New ligand-based approach for the discovery of antitrypanosomal compounds. Bioorg Med Chem Lett, 2006. 16(7): p. 1898-904.
+        360.	Santana, L., et al., A QSAR model for in silico screening of MAO-A inhibitors. Prediction, synthesis, and biological assay of novel coumarins. J Med Chem, 2006. 49(3): p. 1149-56.
+        361.	Pisco, L., et al., Synthesis of compounds with antiproliferative activity as analogues of prenylated natural products existing in Brazilian propolis. Eur J Med Chem, 2006. 41(3): p. 401-7.
+        362.	Morales, A.H., M.A. Cabrera Perez, and M.P. Gonzalez, A radial-distribution-function approach for predicting rodent carcinogenicity. J Mol Model, 2006. 12(6): p. 769-80.
+        363.	Montero-Torres, A., et al., Non-stochastic quadratic fingerprints and LDA-based QSAR models in hit and lead generation through virtual screening: theoretical and experimental assessment of a promising method for the discovery of new antimalarial compounds. Eur J Med Chem, 2006. 41(4): p. 483-93.
+        364.	Marrero-Ponce, Y., et al., Bond-based global and local (bond, group and bond-type) quadratic indices and their applications to computer-aided molecular design. 1. QSPR studies of diverse sets of organic chemicals. J Comput Aided Mol Des, 2006. 20(10-11): p. 685-701.
+        365.	Marrero-Ponce, Y., et al., Predicting antitrichomonal activity: a computational screening using atom-based bilinear indices and experimental proofs. Bioorg Med Chem, 2006. 14(19): p. 6502-24.
+        366.	Marrero-Ponce, Y., et al., Predicting antitrichomonal activity: a computational screening using atom-based bilinear indices and experimental proofs. Bioorg Med Chem, 2006. 14(19): p. 6502-24.
+        367.	Marrero-Ponce, Y., et al., Non-stochastic and stochastic linear indices of the molecular pseudograph's atom-adjacency matrix: a novel approach for computational in silico screening and "rational" selection of new lead antibacterial agents. J Mol Model, 2006. 12(3): p. 255-71.
+        368.	Gurney, K.J., E.Y. Estrada, and G.A. Rosenberg, Blood-brain barrier disruption by stromelysin-1 facilitates neutrophil infiltration in neuroinflammation. Neurobiol Dis, 2006. 23(1): p. 87-96.
+        369.	Gonzalez-Diaz, H., et al., Stochastic entropy QSAR for the in silico discovery of anticancer compounds: prediction, synthesis, and in vitro assay of new purine carbanucleosides. Bioorg Med Chem, 2006. 14(4): p. 1095-107.
+        370.	Gonzalez-Diaz, H., A. Sanchez-Gonzalez, and Y. Gonzalez-Diaz, 3D-QSAR study for DNA cleavage proteins with a potential anti-tumor ATCUN-like motif. J Inorg Biochem, 2006. 100(7): p. 1290-7.
+        371.	Gonzalez-Diaz, H., et al., Unify QSAR approach to antimicrobials. Part 1: predicting antifungal activity against different species. Bioorg Med Chem, 2006. 14(17): p. 5973-80.
+        372.	Gonzalez-Diaz, H., et al., QSAR study for mycobacterial promoters with low sequence homology. Bioorg Med Chem Lett, 2006. 16(3): p. 547-53.
+        373.	Estrada, E., E. Uriarte, and S. Vilar, Effect of protein backbone folding on the stability of protein-ligand complexes. J Proteome Res, 2006. 5(1): p. 105-11.
+        374.	Estrada, E., et al., An integrated in silico analysis of drug-binding to human serum albumin. J Chem Inf Model, 2006. 46(6): p. 2709-24.
+        375.	Estrada, E. and Y. Simon-Manso, Rational design and first principles studies toward the discovery of a small and versatile proton sponge. Angew Chem Int Ed Engl, 2006. 45(11): p. 1719-21.
+        376.	Estrada, E., et al., EOG and EMG: two important switches in automatic sleep stage classification. Conf Proc IEEE Eng Med Biol Soc, 2006. 1: p. 2458-61.
+        377.	Estrada, E. and E. Molina, Automatic extraction of structural alerts for predicting chromosome aberrations of organic compounds. J Mol Graph Model, 2006. 25(3): p. 275-88.
+        378.	Estrada, E., G.A. Diaz, and E.J. Delgado, Predicting infinite dilution activity coefficients of organic compounds in water by quantum-connectivity descriptors. J Comput Aided Mol Des, 2006. 20(9): p. 539-48.
+        379.	Estrada, E., Virtual identification of essential proteins within the protein interaction network of yeast. Proteomics, 2006. 6(1): p. 35-40.
+        380.	Estrada, E., Protein bipartivity and essentiality in the yeast protein-protein interaction network. J Proteome Res, 2006. 5(9): p. 2177-84.
+        381.	Esteban, E., et al., Gemcitabine and vinorelbine (GV) versus cisplatin, gemcitabine and vinorelbine (CGV) as first-line treatment in advanced non small cell lung cancer: results of a prospective randomized phase II study. Invest New Drugs, 2006. 24(3): p. 241-8.
+        382.	Cruz-Monteagudo, M., H. Gonzalez-Diaz, and E. Uriarte, Simple stochastic fingerprints towards mathematical modeling in biology and medicine 2. Unifying Markov model for drugs side effects. Bull Math Biol, 2006. 68(7): p. 1527-54.
+        383.	Cruz-Monteagudo, M., et al., Simple stochastic fingerprints towards mathematical modeling in biology and medicine. 3. Ocular irritability classification model. Bull Math Biol, 2006. 68(7): p. 1555-72.
+        384.	Castillo-Garit, J.A., Y. Marrero-Ponce, and F. Torrens, Atom-based 3D-chiral quadratic indices. Part 2: prediction of the corticosteroid-binding globulinbinding affinity of the 31 benchmark steroids data set. Bioorg Med Chem, 2006. 14(7): p. 2398-408.
+        385.	Casanola-Martin, G.M., et al., New tyrosinase inhibitors selected by atomic linear indices-based classification models. Bioorg Med Chem Lett, 2006. 16(2): p. 324-30.
+        386.	Caceres, D.C., et al., [Burden of rotavirus-related disease among children under five, Colombia, 2004]. Rev Panam Salud Publica, 2006. 20(1): p. 9-21.
+        387.	Aguero-Chapin, G., et al., Novel 2D maps and coupling numbers for protein sequences. The first QSAR study of polygalacturonases; isolation and prediction of a novel sequence from Psidium guajava L. FEBS Lett, 2006. 580(3): p. 723-30.
+        388.	Vilar, S., et al., In silico studies toward the discovery of new anti-HIV nucleoside compounds through the use of TOPS-MODE and 2D/3D connectivity indices. 2. Purine derivatives. J Chem Inf Model, 2005. 45(2): p. 502-14.
+        389.	Saiz-Urra, L., H. Gonzalez-Diaz, and E. Uriarte, Proteins Markovian 3D-QSAR with spherically-truncated average electrostatic potentials. Bioorg Med Chem, 2005. 13(11): p. 3641-7.
+        390.	Runge, V.M., et al., Subchronic toxicity of the gadolinium chelates. Acad Radiol, 2005. 12 Suppl 1: p. S6-9.
+        391.	Randic, M. and E. Estrada, Order from chaos: observing hormesis at the proteome level. J Proteome Res, 2005. 4(6): p. 2133-6.
+        392.	Morera, C., et al., Advantages of binaural hearing provided through bimodal stimulation via a cochlear implant and a conventional hearing aid: a 6-month comparative study. Acta Otolaryngol, 2005. 125(6): p. 596-606.
+        393.	Montero-Torres, A., et al., A novel non-stochastic quadratic fingerprints-based approach for the 'in silico' discovery of new antitrypanosomal compounds. Bioorg Med Chem, 2005. 13(22): p. 6264-75.
+        394.	Meneses-Marcel, A., et al., A linear discrimination analysis based virtual screening of trichomonacidal lead-like compounds: outcomes of in silico studies supported by experimental results. Bioorg Med Chem Lett, 2005. 15(17): p. 3838-43.
+        395.	Matamala, A.R. and E. Estrada, Simplex optimization of generalized topological index (GTI-simplex): a unified approach to optimize QSPR models. J Phys Chem A, 2005. 109(43): p. 9890-5.
+        396.	Marrero-Ponce, Y., et al., Non-stochastic and stochastic linear indices of the 'molecular pseudograph's atom adjacency matrix': application to 'in silico' studies for the rational discovery of new antimalarial compounds. Bioorg Med Chem, 2005. 13(4): p. 1293-304.
+        397.	Marrero-Ponce, Y., et al., Atom, atom-type, and total nonstochastic and stochastic quadratic fingerprints: a promising approach for modeling of antibacterial activity. Bioorg Med Chem, 2005. 13(8): p. 2881-99.
+        398.	Marrero-Ponce, Y., et al., Protein linear indices of the 'macromolecular pseudograph alpha-carbon atom adjacency matrix' in bioinformatics. Part 1: prediction of protein stability effects of a complete set of alanine substitutions in Arc repressor. Bioorg Med Chem, 2005. 13(8): p. 3003-15.
+        399.	Marrero-Ponce, Y., et al., A computer-based approach to the rational discovery of new trichomonacidal drugs by atom-type linear indices. Curr Drug Discov Technol, 2005. 2(4): p. 245-65.
+        400.	Marrero-Ponce, Y., et al., Ligand-based virtual screening and in silico design of new antimalarial compounds using nonstochastic and stochastic total and atom-type quadratic maps. J Chem Inf Model, 2005. 45(4): p. 1082-100.
+        401.	Marrero-Ponce, Y., et al., Ligand-based virtual screening and in silico design of new antimalarial compounds using nonstochastic and stochastic total and atom-type quadratic maps. J Chem Inf Model, 2005. 45(4): p. 1082-100.
+        402.	Marrero-Ponce, Y., et al., Atom, atom-type and total molecular linear indices as a promising approach for bioorganic and medicinal chemistry: theoretical and experimental assessment of a novel method for virtual screening and rational design of new lead anthelmintic. Bioorg Med Chem, 2005. 13(4): p. 1005-20.
+        403.	Marrero-Ponce, Y. and J.A. Castillo-Garit, 3D-chiral atom, atom-type, and total non-stochastic and stochastic molecular linear indices and their applications to central chirality codification. J Comput Aided Mol Des, 2005. 19(6): p. 369-83.
+        404.	Marrero Ponce, Y., J.A. Castillo Garit, and D. Nodarse, Linear indices of the 'macromolecular graph's nucleotides adjacency matrix' as a promising approach for bioinformatics studies. Part 1: prediction of paromomycin's affinity constant with HIV-1 psi-RNA packaging region. Bioorg Med Chem, 2005. 13(10): p. 3397-404.
+        405.	Manrique, M., et al., Speech perception with the ACE and the SPEAK speech coding strategies for children implanted with the Nucleus cochlear implant. Int J Pediatr Otorhinolaryngol, 2005. 69(12): p. 1667-74.
+        406.	Helguera, A.M., et al., A topological substructural approach applied to the computational prediction of rodent carcinogenicity. Bioorg Med Chem, 2005. 13(7): p. 2477-88.
+        407.	Helguera, A.M., et al., A topological substructural approach applied to the computational prediction of rodent carcinogenicity. Bioorg Med Chem, 2005. 13(7): p. 2477-88.
+        408.	Gonzalez-Diaz, H., E. Uriarte, and R. Ramos de Armas, Predicting stability of Arc repressor mutants with protein stochastic moments. Bioorg Med Chem, 2005. 13(2): p. 323-31.
+        409.	Gonzalez-Diaz, H. and E. Uriarte, Biopolymer stochastic moments. I. Modeling human rhinovirus cellular recognition with protein surface electrostatic moments. Biopolymers, 2005. 77(5): p. 296-303.
+        410.	Gonzalez-Diaz, H. and E. Uriarte, Proteins QSAR with Markov average electrostatic potentials. Bioorg Med Chem Lett, 2005. 15(22): p. 5088-94.
+        411.	Gonzalez-Diaz, H., et al., Markovian chemicals "in silico" design (MARCH-INSIDE), a promising approach for computer-aided molecular design III: 2.5D indices for the discovery of antibacterials. J Mol Model, 2005. 11(2): p. 116-23.
+        412.	Gonzalez-Diaz, H., et al., 3D QSAR Markov model for drug-induced eosinophilia--theoretical prediction and preliminary experimental assay of the antimicrobial drug G1. Bioorg Med Chem, 2005. 13(5): p. 1523-30.
+        413.	Gonzalez-Diaz, H., R. Molina, and E. Uriarte, Recognition of stable protein mutants with 3D stochastic average electrostatic potentials. FEBS Lett, 2005. 579(20): p. 4297-301.
+        414.	Gonzalez-Diaz, H., et al., QSAR for anti-RNA-virus activity, synthesis, and assay of anti-RSV carbonucleosides given a unified representation of spectral moments, quadratic, and topologic indices. Bioorg Med Chem Lett, 2005. 15(6): p. 1651-7.
+        415.	Gonzalez-Diaz, H., et al., Predicting multiple drugs side effects with a general drug-target interaction thermodynamic Markov model. Bioorg Med Chem, 2005. 13(4): p. 1119-29.
+        416.	Gonzalez-Diaz, H., et al., 2D RNA-QSAR: assigning ACC oxidase family membership with stochastic molecular descriptors; isolation and prediction of a sequence from Psidium guajava L. Bioorg Med Chem Lett, 2005. 15(11): p. 2932-7.
+        417.	Gonzalez-Diaz, H., et al., Unified Markov thermodynamics based on stochastic forms to classify drugs considering molecular structure, partition system, and biological species: distribution of the antimicrobial G1 on rat tissues. Bioorg Med Chem Lett, 2005. 15(3): p. 551-7.
+        418.	Gia, O., et al., Design, synthesis and photobiological properties of 3,4-cyclopentenepsoralens. Bioorg Med Chem, 2005. 13(3): p. 809-17.
+        419.	Estrada, E. and E. Uriarte, Folding degrees of azurins and pseudoazurins. Implications for structure and function. Comput Biol Chem, 2005. 29(5): p. 345-53.
+        420.	Estrada, E. and J.A. Rodriguez-Velazquez, Subgraph centrality in complex networks. Phys Rev E Stat Nonlin Soft Matter Phys, 2005. 71(5 Pt 2): p. 056103.
+        421.	Estrada, E. and J.A. Rodriguez-Velazquez, Spectral measures of bipartivity in complex networks. Phys Rev E Stat Nonlin Soft Matter Phys, 2005. 72(4 Pt 2): p. 046105.
+        422.	Estrada, E., et al., Itakura Distance: A Useful Similarity Measure between EEG and EOG Signals in Computer-aided Classification of Sleep Stages. Conf Proc IEEE Eng Med Biol Soc, 2005. 2: p. 1189-92.
+        423.	Cruz-Monteagudo, M. and H. Gonzalez-Diaz, Unified drug-target interaction thermodynamic Markov model using stochastic entropies to predict multiple drugs side effects. Eur J Med Chem, 2005. 40(10): p. 1030-41.
+        424.	Caceres, D.C., et al., [Acute diarrheal disease: a public health challenge in Colombia]. Rev Panam Salud Publica, 2005. 17(1): p. 6-14.
+        425.	Yigit, S., et al., Diabetic ketoacidosis secondary to growth hormone treatment in a boy with Prader-Willi syndrome and steatohepatitis. J Pediatr Endocrinol Metab, 2004. 17(3): p. 361-4.
+        426.	Whelan, M.J., E. Estrada, and R. van Egmond, A modelling assessment of the atmospheric fate of volatile methyl siloxanes and their reaction products. Chemosphere, 2004. 57(10): p. 1427-37.
+        427.	Sosted, H., et al., Ranking of hair dye substances according to predicted sensitization potency: quantitative structure-activity relationships. Contact Dermatitis, 2004. 51(5-6): p. 241-54.
+        428.	Ramos de Armas, R., et al., Markovian Backbone Negentropies: Molecular descriptors for protein research. I. Predicting protein stability in Arc repressor mutants. Proteins, 2004. 56(4): p. 715-23.
+        429.	Ramos de Armas, R., et al., Stochastic-based descriptors studying peptides biological properties: modeling the bitter tasting threshold of dipeptides. Bioorg Med Chem, 2004. 12(18): p. 4815-22.
+        430.	Moxley, G., et al., Premenopausal sexual dimorphism in lipopolysaccharide-stimulated production and secretion of tumor necrosis factor. J Rheumatol, 2004. 31(4): p. 686-94.
+        431.	Marrero-Ponce, Y., et al., TOMOCOMD-CARDD, a novel approach for computer-aided 'rational' drug design: I. Theoretical and experimental assessment of a promising method for computational screening and in silico design of new anthelmintic compounds. J Comput Aided Mol Des, 2004. 18(10): p. 615-34.
+        432.	Marrero-Ponce, Y., et al., TOMOCOMD-CARDD, a novel approach for computer-aided 'rational' drug design: I. Theoretical and experimental assessment of a promising method for computational screening and in silico design of new anthelmintic compounds. J Comput Aided Mol Des, 2004. 18(10): p. 615-34.
+        433.	Marrero-Ponce, Y., Linear indices of the "molecular pseudograph's atom adjacency matrix": definition, significance-interpretation, and application to QSAR analysis of flavone derivatives as HIV-1 integrase inhibitors. J Chem Inf Comput Sci, 2004. 44(6): p. 2010-26.
+        434.	Marrero Ponce, Y., et al., A new topological descriptors based model for predicting intestinal epithelial transport of drugs in Caco-2 cell culture. J Pharm Pharm Sci, 2004. 7(2): p. 186-99.
+        435.	Marrero Ponce, Y., et al., A new topological descriptors based model for predicting intestinal epithelial transport of drugs in Caco-2 cell culture. J Pharm Pharm Sci, 2004. 7(2): p. 186-99.
+        436.	Marrero Ponce, Y., et al., A new topological descriptors based model for predicting intestinal epithelial transport of drugs in Caco-2 cell culture. J Pharm Pharm Sci, 2004. 7(2): p. 186-99.
+        437.	Gonzalez-Diaz, H., R. Molina, and E. Uriarte, Markov entropy backbone electrostatic descriptors for predicting proteins biological activity. Bioorg Med Chem Lett, 2004. 14(18): p. 4691-5.
+        438.	Estrada, E., J.A. Quincoces, and G. Patlewicz, Creating molecular diversity from antioxidants in Brazilian propolis. Combination of TOPS-MODE QSAR and virtual structure generation. Mol Divers, 2004. 8(1): p. 21-33.
+        439.	Estrada, E., G. Patlewicz, and Y. Gutierrez, From knowledge generation to knowledge archive. A general strategy using TOPS-MODE with DEREK to formulate new alerts for skin sensitization. J Chem Inf Comput Sci, 2004. 44(2): p. 688-98.
+        440.	Estrada, E., et al., EEG feature extraction for classification of sleep stages. Conf Proc IEEE Eng Med Biol Soc, 2004. 1: p. 196-9.
+        441.	Estrada, E., et al., Quantum-connectivity descriptors in modeling solubility of environmentally important organic compounds. J Comput Chem, 2004. 25(14): p. 1787-96.
+        442.	Estrada, E., Characterization of the amino acid contribution to the folding degree of proteins. Proteins, 2004. 54(4): p. 727-37.
+        443.	Estrada, E., A protein folding degree measure and its dependence on crystal packing, protein size, secondary structure, and domain structural class. J Chem Inf Comput Sci, 2004. 44(4): p. 1238-50.
+        444.	Chatlapalli, S., et al., Accurate derivation of heart rate variability signal for detection of sleep disordered breathing in children. Conf Proc IEEE Eng Med Biol Soc, 2004. 1: p. 538-41.
+        445.	Cabrera Perez, M.A. and M.B. Sanz, In silico prediction of central nervous system activity of compounds. Identification of potential pharmacophores by the TOPS-MODE approach. Bioorg Med Chem, 2004. 12(22): p. 5833-43.
+        446.	Sanchez, R., et al., Activity of weekly irinotecan (CPT-11) in patients with advanced non-small cell lung cancer pretreated with platinum and taxanes. Invest New Drugs, 2003. 21(4): p. 459-63.
+        447.	Ruiz-Arguelles, G.J., et al., Decreased transfusion requirements in patients given stem cell allografts using a non-myeloablative conditioning regimen: a single institution experience. Hematology, 2003. 8(3): p. 151-4.
+        448.	Perez Gonzalez, M., et al., TOPS-MODE based QSARs derived from heterogeneous series of compounds. Applications to the design of new herbicides. J Chem Inf Comput Sci, 2003. 43(4): p. 1192-9.
+        449.	Lee, J.H., et al., Circulating resistin levels are not associated with obesity or insulin resistance in humans and are not regulated by fasting or leptin administration: cross-sectional and interventional studies in normal, insulin-resistant, and diabetic subjects. J Clin Endocrinol Metab, 2003. 88(10): p. 4848-56.
+        450.	Estrada, E., et al., Quantitative structure-toxicity relationships using TOPS-MODE. 3. Structural factors influencing the permeability of commercial solvents through living human skin. SAR QSAR Environ Res, 2003. 14(2): p. 145-63.
+        451.	Estrada, E., et al., Computer-aided knowledge generation for understanding skin sensitization mechanisms: the TOPS-MODE approach. Chem Res Toxicol, 2003. 16(10): p. 1226-35.
+        452.	Estrada, E. and H. Gonzalez, What are the limits of applicability for graph theoretic descriptors in QSPR/QSAR? Modeling dipole moments of aromatic compounds with TOPS-MODE descriptors. J Chem Inf Comput Sci, 2003. 43(1): p. 75-84.
+        453.	Estrada, E. and D. Avnir, Continuous symmetry numbers and entropy. J Am Chem Soc, 2003. 125(14): p. 4368-75.
+        454.	Estrada, E., Application of a novel graph-theoretic folding degree index to the study of steroid-DB3 antibody binding affinity. Comput Biol Chem, 2003. 27(3): p. 305-13.
+        455.	Esteban, E., et al., Combination of docetaxel, epirubicin and vinorelbine administered every 2 weeks as first-line therapy in patients with metastatic breast cancer: a dose-finding study. Breast Cancer Res Treat, 2003. 80(3): p. 257-65.
+        456.	Esteban, E., et al., Prospective randomised phase II study of docetaxel versus paclitaxel administered weekly in patients with non-small-cell lung cancer previously treated with platinum-based chemotherapy. Ann Oncol, 2003. 14(11): p. 1640-7.
+        457.	Cabrera Perez, M.A., et al., A topological-substructural molecular design (TOPS-MODE) approach to determining pharmacokinetics and pharmacological properties of 6-fluoroquinolone derivatives. Eur J Pharm Biopharm, 2003. 56(2): p. 197-206.
+        458.	Yigit, S. and E. Estrada, Recurrent necrobiosis lipoidica diabeticorum associated with venous insufficiency in an adolescent with poorly controlled type 2 diabetes mellitus. J Pediatr, 2002. 141(2): p. 280-2.
+        459.	Wallace, J.A., et al., Tissue inhibitor of metalloproteinase-3 is associated with neuronal death in reperfusion injury. J Cereb Blood Flow Metab, 2002. 22(11): p. 1303-10.
+        460.	Perdomo-Lopez, I., et al., Effect of cyclodextrins on the solubility and antimycotic activity of sertaconazole: experimental and computational studies. J Pharm Sci, 2002. 91(11): p. 2408-15.
+        461.	Moxley, G., et al., Sexual dimorphism in innate immunity. Arthritis Rheum, 2002. 46(1): p. 250-8.
+        462.	Gonzalez Diaz, H., et al., Markovian chemicals "in silico" design (MARCH-INSIDE), a promising approach for computer aided molecular design II: experimental and theoretical assessment of a novel method for virtual screening of fasciolicides. J Mol Model, 2002. 8(8): p. 237-45.
+        463.	Gomez-Almaguer, D., et al., Role of bone marrow examination in staging Hodgkin's disease: experience in Mexico. Clin Lab Haematol, 2002. 24(4): p. 221-3.
+        464.	Estrada, E.G., et al., Dedifferentiated chondrosarcoma with a noncartilaginous component mimicking a conventional giant cell tumor of bone. Ann Diagn Pathol, 2002. 6(3): p. 159-63.
+        465.	Estrada, E., et al., In silico studies toward the discovery of new anti-HIV nucleoside compounds with the use of TOPS-MODE and 2D/3D connectivity indices. 1. Pyrimidyl derivatives. J Chem Inf Comput Sci, 2002. 42(5): p. 1194-203.
+        466.	Estrada, E., Characterization of the folding degree of proteins. Bioinformatics, 2002. 18(5): p. 697-704.
+        467.	Esteban, E., et al., Phase I/II study of gemcitabine and vinorelbine plus cisplatin in non-small cell lung cancer. Invest New Drugs, 2002. 20(3): p. 317-26.
+        468.	Esteban, E., et al., Phase I/II study of gemcitabine plus vinorelbine in non-small cell lung cancer. Invest New Drugs, 2002. 20(1): p. 73-82.
+        469.	Echezarreta-Lopez, M.M., et al., Utility of nuclear magnetic resonance spectroscopy to characterize the structure of dexamethasone sodium phosphate inclusion complexes with cyclodextrins in solution and to analyze potential competitive effects. J Pharm Sci, 2002. 91(6): p. 1536-47.
+        470.	Cabrera Perez, M.A., et al., A novel approach to determining physicochemical and absorption properties of 6-fluoroquinolone derivatives: experimental assessment. Eur J Pharm Biopharm, 2002. 53(3): p. 317-25.
+        471.	Cabrera Perez, M.A., et al., A novel approach to determining physicochemical and absorption properties of 6-fluoroquinolone derivatives: experimental assessment. Eur J Pharm Biopharm, 2002. 53(3): p. 317-25.
+        472.	Ruiz-Arguelles, G.J., et al., Are there "Attenuated" Forms of Evans Syndrome? Hematology, 2001. 6(6): p. 429-32.
+        473.	Rosenberg, G.A., et al., Immunohistochemistry of matrix metalloproteinases in reperfusion injury to rat brain: activation of MMP-9 linked to stromelysin-1 and microglia in cell cultures. Brain Res, 2001. 893(1-2): p. 104-12.
+        474.	Pose-Vilarnovo, B., et al., Improvement of water solubility of sulfamethizole through its complexation with beta- and hydroxypropyl-beta-cyclodextrin. Characterization of the interaction in solution and in solid state. Eur J Pharm Sci, 2001. 13(3): p. 325-31.
+        475.	Gasparovic, C., et al., Magnetic resonance lipid signals in rat brain after experimental stroke correlate with neutral lipid accumulation. Neurosci Lett, 2001. 301(2): p. 87-90.
+        476.	Estrada, E. and E. Uriarte, Recent advances on the role of topological indices in drug discovery research. Curr Med Chem, 2001. 8(13): p. 1573-88.
+        477.	Estrada, E. and E. Uriarte, Quantitative structure--toxicity relationships using TOPS-MODE. 1. Nitrobenzene toxicity to Tetrahymena pyriformis. SAR QSAR Environ Res, 2001. 12(3): p. 309-24.
+        478.	Estrada, E., I. Perdomo-Lopez, and J.J. Torres-Labandeira, Combination of 2D-, 3D-connectivity and quantum chemical descriptors in QSPR. Complexation of alpha- and beta-cyclodextrin with benzene derivatives. J Chem Inf Comput Sci, 2001. 41(6): p. 1561-8.
+        479.	Estrada, E., E. Molina, and E. Uriarte, Quantitative structure-toxicity relationships using TOPS-MODE. 2. Neurotoxicity of a non-congeneric series of solvents. SAR QSAR Environ Res, 2001. 12(5): p. 445-59.
+        480.	Estrada, E., E. Molina, and I. Perdomo-Lopez, Can 3D structural parameters be predicted from 2D (topological) molecular descriptors? J Chem Inf Comput Sci, 2001. 41(4): p. 1015-21.
+        481.	Estrada, E. and E. Molina, 3D connectivity indices in QSPR/QSAR studies. J Chem Inf Comput Sci, 2001. 41(3): p. 791-7.
+        482.	Estrada, E. and E. Molina, Novel local (fragment-based) topological molecular descriptors for QSpr/QSAR and molecular design. J Mol Graph Model, 2001. 20(1): p. 54-64.
+        483.	Estrada, E., et al., A novel approach for the virtual screening and rational design of anticancer compounds. J Med Chem, 2000. 43(10): p. 1975-85.
+        484.	Estrada, E., I. Perdomo-Lopez, and J.J. Torres-Labandeira, Molecular modeling (MM2 and PM3) and experimental (NMR and thermal analysis) studies on the inclusion complex of salbutamol and beta-cyclodextrin. J Org Chem, 2000. 65(25): p. 8510-7.
+        485.	Estrada, E. and A. Pena, In silico studies for the rational discovery of anticonvulsant compounds. Bioorg Med Chem, 2000. 8(12): p. 2755-70.
+        486.	Estrada, E., Y. Gutierrez, and H. Gonzalez, Modeling diamagnetic and magnetooptic properties of organic compounds with the TOSS-MODE approach. J Chem Inf Comput Sci, 2000. 40(6): p. 1386-99.
+        487.	Estrada, E., A computer-based approach to describe the 13C NMR chemical shifts of alkanes by the generalized spectral moments of iterated line graphs. Comput Chem, 2000. 24(2): p. 193-201.
+        488.	Estrada, E., On the topological sub-structural molecular design (TOSS-MODE) in QSPR/QSAR and drug design research. SAR QSAR Environ Res, 2000. 11(1): p. 55-73.
+        489.	Estrada, E. and Y. Gutierrez, Modeling chromatographic parameters by a novel graph theoretical sub-structural approach. J Chromatogr A, 1999. 858(2): p. 187-99.
+        490.	Estaban, E., et al., Phase III trial of cyclophosphamide, epirubicin, fluorouracil (CEF) versus cyclophosphamide, mitoxantrone, fluorouracil (CNF) in women with metastatic breast cancer. Breast Cancer Res Treat, 1999. 58(2): p. 141-50.
+        491.	Corona, M., E. Estrada, and M. Zurita, Differential expression of mitochondrial genes between queens and workers during caste determination in the honeybee Apis mellifera. J Exp Biol, 1999. 202(Pt 8): p. 929-38.
+        492.	Rosenberg, G.A., E.Y. Estrada, and J.E. Dencoff, Matrix metalloproteinases and TIMPs are associated with blood-brain barrier opening after reperfusion in rat brain. Stroke, 1998. 29(10): p. 2189-95.
+        493.	Estrada, E., A. Pena, and R. Garcia-Domenech, Designing sedative/hypnotic compounds from a novel substructural graph-theoretical approach. J Comput Aided Mol Des, 1998. 12(6): p. 583-95.
+        494.	Estrada, E., Structure-mutagenicity relationships in 2-furylethylene derivatives. A molecular orbital study of the role of nitro groups. Mutat Res, 1998. 420(1-3): p. 67-75.
+        495.	Armao, D., et al., Neutral proteases and disruption of the blood-brain barrier in rat. Brain Res, 1997. 767(2): p. 259-64.
+        496.	Estrada, E., et al., Phosphorylation of yeast plasma membrane H+-ATPase by casein kinase I. J Biol Chem, 1996. 271(50): p. 32064-72.
+        497.	Rosenberg, G.A., et al., Tumor necrosis factor-alpha-induced gelatinase B causes delayed opening of the blood-brain barrier: an expanded therapeutic window. Brain Res, 1995. 703(1-2): p. 151-5.
+        498.	Rosenberg, G.A. and E.Y. Estrada, Atrial natriuretic peptide blocks hemorrhagic brain edema after 4-hour delay in rats. Stroke, 1995. 26(5): p. 874-7.
+        499.	Pelaez, I., et al., Phase II study of mitomycin C plus 5-fluorouracil in patients with refractory ovarian cancer. Eur J Cancer, 1994. 30A(8): p. 1206-7.
+        500.	Rosenberg, G.A., et al., Bacterial collagenase disrupts extracellular matrix and opens blood-brain barrier in rat. Neurosci Lett, 1993. 160(1): p. 117-9.
+        501.	Meier, P.P., et al., Breastfeeding support services in the neonatal intensive-care unit. J Obstet Gynecol Neonatal Nurs, 1993. 22(4): p. 338-47.
+        502.	Esteban, E., et al., Phase II study of oral ftorafur and uracil in patients with advanced renal cell carcinoma. Eur J Cancer, 1993. 29A(9): p. 1354.
+        503.	Rosenberg, G.A., et al., Arginine vasopressin V1-antagonist and atrial natriuretic peptide reduce hemorrhagic brain edema in rats. Stroke, 1992. 23(12): p. 1767-73; discussion 1773-4.
+        504.	Rosenberg, G.A., et al., TIMP-2 reduces proteolytic opening of blood-brain barrier by type IV collagenase. Brain Res, 1992. 576(2): p. 203-7.
+        505.	Pang, S., et al., Normal and elevated 3 alpha-androstanediol glucuronide concentrations in women with various causes of hirsutism and its correlation with degree of hirsutism and androgen levels. J Clin Endocrinol Metab, 1992. 75(1): p. 243-8.
+        506.	Palacio, I., et al., Negative phase II study with carboplatin and 5-fluorouracil in advanced breast cancer. Eur J Cancer, 1992. 28(1): p. 242.
+        </p>
+
+</div>
+<script>
+        
+    </script>
+</body>
+</html>

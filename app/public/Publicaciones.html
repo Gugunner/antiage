@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">  
+    <link rel="icon" href="dc3.png" type="image/png">  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>White Book</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap">
+    <!-- Estilos para dispositivos móviles -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (max-width: 768px)">
+    <!-- Estilos para pantallas de PC -->
+    <link rel="stylesheet" href="estilo_informeM.css?v=1.9&_=${new Date().getTime()}" media="only screen and (min-width: 769px)">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    
+
+    <!-- Metadatos Open Graph -->
+    <meta property="og:title" content="YOU TOMORROW">
+    <meta property="og:description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta property="og:image" content="https://drive.google.com/file/d/1ZZI3G6Fit_kovvVZolrvchtXQQDrnWYI/view?usp=sharing">
+    <meta property="og:url" content="https://ytomorrow.com/">
+    <meta property="og:type" content="website">
+
+    <!-- Otros metadatos -->
+    <meta name="description" content="Ofrecemos un estudio en profundidad de las propiedades genéticas de nuestros participantes.">
+    <meta name="keywords" content="you, YOU TOMORROW, TOMORROW, TOMORR, TOM, web">
+
+    <style>
+
+   body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 17px;
+    line-height: 1.4;
+    margin: 20px;
+    font-weight: 500; /* Grosor medio de la negrita */
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1, h2, h3 {
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+h1 {
+    font-size: 24px;
+}
+
+h2 {
+    font-size: 20px;
+}
+
+h3 {
+    font-size: 18px;
+}
+
+p {
+    margin-bottom: 12px;
+    font-size: 18px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.section {
+    margin-bottom: 30px;
+    color: #4a4a4a; /* Gris oscuro elegante */
+}
+
+.chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: white;
+    width: 100%;
+}
+
+.chart-row {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+    width: 50%; /* Ajusta el ancho para que se adapte al contenido */
+}
+
+.chart-box {
+    background: linear-gradient(135deg, #42a5f5, #1e88e5);
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 12px;
+    text-align: center;
+    font-size: 18px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    min-width: 150px; /* Asegura que las tarjetas tengan un ancho mínimo */
+    max-width: 300px; /* Limita el ancho máximo para tarjetas largas */
+    word-wrap: break-word; /* Permite que el texto se ajuste dentro de la tarjeta */
+    flex: 1; /* Permite que las tarjetas se expandan uniformemente */
+}
+
+.chart-box:hover {
+    transform: scale(1.05);
+}
+
+.chart-box.ceo {
+    background: linear-gradient(135deg, #ff6f61, #e53935);
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.chart-box::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    transform: rotate(45deg);
+}
+
+.chart-box:hover::before {
+    opacity: 1;
+}
+
+.chart-box.ceo::before {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.connector {
+    width: 2px;
+    height: 20px;
+    background-color: #1b3a7a;
+    margin: 0 auto;
+}
+
+.horizontal-connector {
+    height: 2px;
+    width: 100%;
+    background-color: #1b3a7a;
+}
+
+.horizontal-connector.long {
+    width: 50%;
+}
+
+.chart-box i {
+    margin-right: 8px;
+    font-size: 20px;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+  }
+  
+  table, th, td {
+    border: 1px solid #ddd;
+  }
+
+  th, td {
+    padding: 12px;
+    text-align: center;
+  }
+
+  th {
+    background-color: #1b5e20;
+    color: #1b5e20;
+    font-weight: bold;
+  }
+
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  tr:hover {
+    background-color: #ddd;
+  }
+
+  caption {
+    caption-side: top;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+    </style>
+
+</head>
+<body>
+  
+    
+<div class="container">
+
+<!-- Publicaciones -->
+    <h2 style="border-bottom: 2px solid #1b5e20;">
+        <i class="fas fa-book" style="margin-right: 10px; color: #1b5e20;"></i>Publicaciones
+    </h2>
+    <ul>
+        <li>Barrios M.A. Release of Tolfenamic Acid From Film Coated Granules Containig Different Fillers. Acta Pharmaceutica Fennica. 1989. 98, 123-129 <a href="http://embase.periodicos.saude.gov.br/search/results" target="_blank">http://embase.periodicos.saude.gov.br/search/results</a>. Index Scopus, Embase</li>
+        <li>Barrios M.A. Release of Tolfenamic Acid From Film Coated Granules Containig different Fillers. Acta Pharmaceutica Fennica. 1988. 97 (3) 141-154 (Libro de Resúmenes del 9th Finnish Drug Research Meeting) Index Scopus, Embase.</li>
+        <li>Perdomo, I.; Iraizoz, A.; Rodríguez, G. Barrios M.A. Escalado industrial y utilización del principio activo zeolítico ZZ: Antiséptico de espectro amplio. Rev. CNIC (1995).</li>
+        <li>Iraizoz, A. Barrios M.A. Tabletas de clorhidrato de clorpromacina de acción controlada. Matrices hidrofílicas. Rev. Cubana de Farmacia. (1995) Cubaciencias, Periódica, Ulrich's, LILACS</li>
+        <li>Perdomo, I.; Iraizoz, A.; Rodríguez, G. Barrios M.A. Escalado industrial y utilización del principio activo zeolítico ZZ: Antiséptico de espectro amplio. Rev. CNIC. Vol 26. No. Esp. (1995): Index en. REDALyC. LATINDEX y PERIÓDICA.</li>
+        <li>Perdomo, I.; Iraizoz, A.; Rodríguez, G. Barrios, M.A Medicamento antiséptico elaborado a partir de una zeolita natural modificada. Crema ZZ. Rev. Cubana de Farmacia. (1995).</li>
+        <li>Perdomo, I.; Iraizoz, A.; Rodríguez, G.; Barrios, M.A. Métodos analíticos para el PAZ-ZZ.- Aplicación en formas farmacéuticas. Rev. CNIC. (1995) Index en. REDALyC. LATINDEX y PERIÓDICA.</li>
+        <li>Iraizoz, A. Barrios M.A. Tabletas de clorhidrato de clorpromacina de acción controlada. Matrices hidrofílicas. Rev. Cubana de Farmacia (1995)</li>
+        <li>Barrios M.A. Iraizoz A. Rodríguez G.; ENTEREX: anti-diarrheocal drug based on purified clinoptilolite. Zeolites. 19; 441-448 Elsevier Inc. 1997 U.S.A</li>
+        <li>Perdomo I.; Rodríguez G.; Iraizoz A.; Barrios, M.A.; Morales, M. ¨Study for the obtaining, characterization and evaluation of an active zeoilte-based product with antimicrobic effect based on the cuban natural zeolite¨. Proceedings Congreso Mundial de Farmacia FIP ´99, Barcelona, España, 5-10 de sep. 1999. P. 127-132.-</li>
+        <li>Héctor, M. Perdomo, I. Barrios, M.A.; Iraizoz, A.; Validación de un método de análisis para el control de la calidad de las tabletas que contienen PAZ-MZ. Rev.Cub. de Farmacia. Vol 34. Suplemento Especial. 2000. Cubaciencias, Periódica, Ulrich's, LILACS</li>
+        <li>Maradiaga L.R., Sagastume R., Iraizoz A., Barrios Ma.A., González H.Ma. Utilización de la sangre bovina en la elaboración de cápsulas para el tratamiento del signo anémico. Revista Cubana de Farmacia Vol.34, 186-190, 2000.</li>
+        <li>Héctor, M. Perdomo, I. Barrios, M.A.; Iraizoz, A ; Princpio Activo Zeolítico CZ. Estudio Preliminar para el desarrollo de un medicamento. Rev. Cub. De Farmacia. Vol. 34. Suplemento Especial. 2000. Cubaciencias, Periódica, Ulrich's, LILACS</li>
+        <li>Barrios, Ma.A.; Viamontes, A.J.; Perdomo, I.; Iraizoz, A.; Rodríguez, G.; García, O.; García, G.; Capiro , B. “Diseño tecnológico de un semisólido utilizando una zeolita modificada para su empleo en mucosas”. Rev. Cubana de Farmacia; Vol. 35 Suplemento Especial 2001.p.86-89. Cubaciencias, Periódica, Ulrich's, LILACS</li>
+        <li>Gra.G., Barrios Ma.A., Blanco A., Morales J., Rodríguez G. Paz-Cz Estudio Preliminar Para El Desarrollo De Un Medicamento. Rev. Cub.Farmacia Vol.34 Suplemento Especial , Junio 2000 pág. 159-160 Cubaciencias, Periódica, Ulrich's, LILACS</li>
+        <li>Gra G.; Barrios M.A.; Condiciones experimentales para la liberación de Ca de una matriz zeolítica. Revista Cubana de Farmacia Vol. 36 Suplemento Especial No1 ISSN 0034-7515. 2002. D Cubaciencias, Periódica, Ulrich's, LILACS</li>
+        <li>Barrios M.A.; Iraizoz A.; Diseño de un sistema de dispersión sólida con polímeros para el Albendazol. Revista Cubana de Farmacia Vol. 36 Suplemento Especial No1 ISSN 0034-7515. 2002. D Cubaciencias, Periódica, Ulrich's, LILACS</li>
+        <li>Iraizoz A.; Barrios M.A.; Estudio comparativo de lactosas de compresión a diferentes concentraciones de tres proveedores. Revista Cubana de Farmacia Vol. 36 Suplemento Especial No1 ISSN 0034-7515. 2002.D Cubaciencias, Periódica, Ulrich's, LILACS</li>
+        <li>Fernández S.A.; Gra G.; Barrios M.A.; Castiñeira Díaz; “Estabilidad del Inyectable fosfato de disopiramida (13 mg/mL)”. Rev. Cub. De Farmacia. Vol 37 No. 2 Mayo- Agosto 2003 Cubaciencias, Periódica, Ulrich's, LILACS</li>
+        <li>Gra.G.; Fernández S.A.; Castiñeira M.; Barrios M.A. “Validación de los métodos analíticos empleados con el estudio del inyectable de fosfato de disopiramida (13 mg/mL). Rev. Cub. De Farmacia. Vol 37 No. 2 Mayo- Agosto 2003 Cubaciencias, Periódica, Ulrich's, LILACS</li>
+        <li>Diplomado de Tecnología y Control Tecnológico de los Medicamentos. Una opción de superación”. Barrios Álvarez, Ma. Aurora; Iraizoz Colarte Antonio. Rev. Cubana Farm 2004; 38 (Supl 1): 1 – 6, Cubaciencias, Periódica, Ulrich's, LILACS</li>
+        <li>“Estudio comparativo de tres tipos de celulosa microcristalina y su influencia sobre las propiedades farmacotécnicas de tabletas” Aguilar Cruz, Lidia; Iraizoz Colarte, Antonio; Barrios Alvarez, María Aurora Rev. Cubana Farm 2004; 38 (Supl 1): 152 – 159. Cubaciencias, Periódica, Ulrich's, LILACS</li>
+        <li>Fuentes G. Barrios M. A. Iraizoz A. Rivera A. (2005) Antiacid capacity of varius zeolitic actives principles Microporous and Mesoporous Materials 38 No.2-3</li>
+        <li>Gerardo Rodríguez-Fuentes, Aramis Rivera Denis, María A. Barrios Álvarez, Antonio Iraizoz Colarte; Antacid drug based on purified natural clinoptilolite. Microporous and Mesopourus Materials. Ed Elsevier. 94 (2006) 200-207. Indice de impacto. 3.35</li>
+        <li>Martha Botet García, Caridad Margarita García Peña, Mirtha Castiñeira Díaz, María Aurora Barrios, Caridad Rodríguez Delgado y Vivian Martínez Espinosa; Desarrollo tecnológico y estudio de estabilidad del colirio de idoxiuridina 0,1 %; Technological development and study of 0,1 % Idoxuridine (eyedrops); Rev. Cub. De Farmacia, Vol 41; No. 2. Mayo-Agosto 2007. Index: Cubaciencias, Periódica, Ulrich's, LILACS</li>
+        <li>Herrera Santi, María Teresa; García Peña, Caridad Margarita; Barrios, María Aurora; Martínez Espinosa, Vivian. Estabilidad de las gotas orales de picosulfato de sodio. Revista Cubana de Farmacia. V.42 n.2 Ciudad de la Habana Mayo-Ago. 2008. Cubaciencias, Periódica, Ulrich's, LILACS</li>
+        <li>Anna Karelia Collado Coello; Martha Gómez Carril; Odalys María Moreno López; Caridad Margarita García Peña; Alicia Lagarto Parra; María Aurora Barrios; Desarrollo tecnológico de un antiviral de amplio espectro para administración parenteral: ribavirina 100 mg/mL Revista Cubana de Farmacia. 2010; 44(3) Cubaciencias, Periódica, Ulrich's, LILACS</li>
+        <li>Collado Coello, Anna Karelia; Moreno López, Odalys Maria; García Peña, Caridad Margarita; Gómez Carril, Martha; Barrios, María Aurora; Begué David, Marisleydi; Validación del método analítico para el control de la calidad y estudio de estabilidad de ribavirina inyectable 100 mg/mL Rev Cubana Farm v.44 n.4 Ciudad de la Habana oct.-dic. 2010 Cubaciencias, Periódica, Ulrich's, LILACS.</li>
+        <li>Iraizoz Barrios, A; Iraizoz Colarte, A.; Bataille, B. Barrios M.A.; Castanedo, N.; Incremento de la solubilidad de un derivado del furano utilizando la técnica de secado por atomización. Revista Cubana de Farmacia. Vol. 46, No. 2, 2012 (abril-junio). Cubaciencias, Periódica, Ulrich's, LILACS.</li>
+        <li>Barrios M.A. Iraizoz A. Utilización del alcohol cetílico en la preparación de formulaciones sólidas de acción prolongada. (Revista Cubana de Farmacia). 1985</li>
+        <li>Rodríguez, G; Barrios, M.A.; Iraizoz, A. Un nuevo producto de origen natural para disminuir los niveles de colesterol en sangre. Rev. "Resumed".(1993)</li>
+        <li>Iraizoz A. Barrios M.A. Fernández S.; Hemoascorbín: una nueva variante en el tratamiento de la anemia. Memorias 4ta Conferencia Internacional sobre Ciencia y Tecnología de los alimentos. Sección 8. 39-41. La Habana. Cuba. 1994.</li>
+        <li>Iraizoz A.; Barrios M.A. Fernández S. Posibilidades del Ferrohemín en cápsulas en el tratamiento de la anemia. Memorias 4ta Conferencia Internacional sobre Ciencia y Tecnología de los Alimentos. Sección 8. 51-53.1994.</li>
+        <li>Barrios M.A. Iraizoz A. Rodríguez G .Neutacid: nuevo medicamento antiácido de origen natural. Rev. Fac. de química. ref. 049 del Comité de redactores. (UADY). Méjico. (1995).</li>
+        <li>Barrios M.A. Iraizoz A. Rodríguez G. Perdomo I.; Enterex: Antidiarreico inespecífico elaborado a partir de zeolita natural purificada. Rev. Fac. de Ingeniería Química. No.27. Abril. 23-28. Universidad autónoma de Yucatán. México. 1995.</li>
+        <li>Perdomo I. Iraizoz A. Barrios M.A. Rodríguez G. Medicamento antiséptico elaborado a partir de una zeolita natural modificada. Tabletas vaginales. Rev. Fac. de Química.. ref. 048 del Comité de redactores. Universidad Autónoma de Yucatán. México.(1995).</li>
+        <li>Perdomo I. Iraizoz A. Barrios M.A. Rodríguez G Utilización del PAZ ZZ en la elaboración de medicamentos. Memorias del Congreso "Tamices Moleculares". Caracas. 1996 Venezuela. Programa para el desarrollo. Agosto 1996.</li>
+        <li>Rodriguez G. Barrios M.A. Iraizoz A. Perdomo I.; Obtención de un producto zeolítico para la producción de medicamentos. Actas del taller venezolano sobre tamices moleculares. Subprograma V, CYTED. Editores Francisco Machado y Carmen M. López, Caracas, Venezuela, Agosto de 1997. P. 135-138.</li>
+        <li>Rodríguez, G.; Barrios, M. A.; Iraizoz, A. Caracterización de una zeolita natural purificada para su utilización en la industria farmacéutica.. Actas del taller venezolano sobre tamices moleculares. Subprograma V, CYTED. Editores Francisco Machado y Carmen M. López, Caracas, Venezuela, Agosto de 1997. P. 139-143.</li>
+        <li>Rodriguez G. Barrios M.A. Iraizoz A. Perdomo I Aplicaciones no catalíticas de las zeolitas. Actas del taller venezolano sobre tamices moleculares. Subprograma V, CYTED. Editores Francisco Machado y Carmen M. López, Caracas, Venezuela, Agosto de 1997. P.13-19.</li>
+        <li>Rodriguez G. Barrios M.A. Iraizoz A. Perdomo I Pharmacological action of modified natural clinoptilolite. Abstract Book, 5th. 258-260 International Conference of natural zeolite. Napoles, Italia, 1997. P 258-260.</li>
+    </ul>
+
+
+</div>
+
+</body>
+</html>
