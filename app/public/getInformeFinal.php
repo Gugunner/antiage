@@ -13,7 +13,7 @@ try {
     $cliente = $stmt->fetch(PDO::FETCH_ASSOC);
 
     if ($cliente) {
-        echo json_encode(['informe_final' => $cliente['informe_final']]);
+        echo json_encode(['informe_final' => BASEURL . $cliente['informe_final']]);
     } else {
         echo json_encode(['error' => 'No se encontró el cliente con el ID proporcionado.']);
     }
