@@ -13,11 +13,15 @@ const DISEASE_FOOD_CONSUMPTION_TABLE_URL = "getDiseaseFoodConsumptionTable.php"
 //Always start with "exclude" property before checking the other foods
 categories = [EXCLUDE,ABUNDANT,MODERATE];
 
+document.addEventListener('DOMContentLoaded', function () {
+    __getMedicalReportFoodRelationship();
+});
+
 /**
  * Populates the consumption food section in a medical report by processing
  * each disease and its level of consumption allowed.
  */
-async function getMedicalReportFoodRelationship() {
+async function __getMedicalReportFoodRelationship() {
     const urlParams = new URLSearchParams(window.location.search);
     const id = urlParams.get('id');
     complexDiseases = await __getClientDiseasesPdf(COMPLEX_URL +`?id=${id}`);
