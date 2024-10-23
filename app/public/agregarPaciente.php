@@ -39,16 +39,17 @@ try {
     // Obtener el ID del paciente recién insertado
     $cliente_id = $pdo->lastInsertId();
 
-    // Si el campo informe_final está vacío, generar la URL con el ID recién insertado
-    if (empty($informe_final)) {
-        $base_url = "https://antiageg.com/informefinal.html";
-        $informe_final = $base_url . "?id=" . $cliente_id;
+    //TODO: Deprecated method do not use, delete for future releases
+    //// Si el campo informe_final está vacío, generar la URL con el ID recién insertado
+    // if (empty($informe_final)) {
+    //     $base_url = BASEURL ."informefinal.php";
+    //     $informe_final = $base_url . "?id=" . $cliente_id;
 
-        // Actualizar el campo informe_final con la URL generada
-        $sql = "UPDATE clientes SET informe_final = :informe_final WHERE id = :id";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute([':informe_final' => $informe_final, ':id' => $cliente_id]);
-    }
+    //     // Actualizar el campo informe_final con la URL generada
+    //     $sql = "UPDATE clientes SET informe_final = :informe_final WHERE id = :id";
+    //     $stmt = $pdo->prepare($sql);
+    //     $stmt->execute([':informe_final' => $informe_final, ':id' => $cliente_id]);
+    // }
 
     // Manejar la subida de archivos PDF
     function subirPDFs($pdo, $cliente_id) {
