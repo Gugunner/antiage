@@ -55,7 +55,7 @@ services:
     depends_on:
       - db
     environment:
-      - PMA_HOST=db
+      - PMA_HOST=${PMA_HOST}
 
 volumes:
   mysqldata:
