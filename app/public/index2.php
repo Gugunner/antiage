@@ -95,12 +95,12 @@ $usuariosPermitidos = [ 'cesar', 'liosnelcue'];
 <body>
     <div class="header">YOU TOMORROW</div>
 
-    <a href="white_book.php" class="button button-strand">
+    <a href="white_book/presentation/white_book.php" class="button button-strand">
         <i class="fas fa-wind"></i>White Book
     </a>
 
    <div class="">
-    <a href="white_book (5).html" class="button button-strand">
+    <a href="white_book/presentation/white_book (5).html" class="button button-strand">
         <i class="fas fa-wind"></i> White Book Public
     </a>
 </div>
